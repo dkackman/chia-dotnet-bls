@@ -15,14 +15,14 @@ public class Fq(BigInteger Q, BigInteger value) : IField<Fq>
     public virtual Fq FromBytes(BigInteger Q, byte[] bytes)
     {
         if (bytes.Length != 48) throw new ArgumentOutOfRangeException(nameof(bytes));
-        return new Fq(Q, ByteUtils.BytesToBigInt(bytes, Endian.Big));
+        return new Fq(Q, bytes.BytesToBigInt(Endian.Big));
     }
-    public virtual Fq FromHex(BigInteger Q, string hex) => Nil.FromBytes(Q, ByteUtils.FromHex(hex));
+    public virtual Fq FromHex(BigInteger Q, string hex) => Nil.FromBytes(Q, hex.FromHex());
     public virtual Fq FromFq(BigInteger Q, Fq fq) => fq; // ?
     public virtual Fq Clone() => new(Q, Value);
-    public virtual byte[] ToBytes() => ByteUtils.BigIntToBytes(Value, 48, Endian.Big);
+    public virtual byte[] ToBytes() => Value.BigIntToBytes(48, Endian.Big);
     public virtual bool ToBool() => true;
-    public virtual string ToHex() => ByteUtils.ToHex(ToBytes());
+    public virtual string ToHex() => ToBytes().ToHex();
     public override string ToString()
     {
         string hex = Value.ToString("x"); // Lowercase "x" for lowercase hexadecimal

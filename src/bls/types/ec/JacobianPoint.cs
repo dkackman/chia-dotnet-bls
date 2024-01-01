@@ -72,7 +72,7 @@ public class JacobianPoint
     {
         ec ??= Constants.DefaultEc;
 
-        return FromBytes(ByteUtils.FromHex(hex), isExtension, ec);
+        return FromBytes(hex.FromHex(), isExtension, ec);
     }
 
     public static JacobianPoint GenerateG1() => new AffinePoint(Constants.DefaultEc.Gx, Constants.DefaultEc.Gy, false, Constants.DefaultEc).ToJacobian();
@@ -107,15 +107,15 @@ public class JacobianPoint
 
     public static JacobianPoint FromBytesG2(byte[] bytes, bool isExtension = true) => FromBytes(bytes, isExtension, Constants.DefaultEcTwist);
 
-    public static JacobianPoint FromHexG1(string hex, bool isExtension = false) => FromBytesG1(ByteUtils.FromHex(hex), isExtension);
+    public static JacobianPoint FromHexG1(string hex, bool isExtension = false) => FromBytesG1(hex.FromHex(), isExtension);
 
-    public static JacobianPoint FromHexG2(string hex, bool isExtension = true) => FromBytesG2(ByteUtils.FromHex(hex), isExtension);
+    public static JacobianPoint FromHexG2(string hex, bool isExtension = true) => FromBytesG2(hex.FromHex(), isExtension);
 
     public bool IsOnCurve() => IsInfinity || ToAffine().IsOnCurve();
 
     public bool IsValid() => IsOnCurve() && Multiply(Ec.N).Equals(X is Fq ? InfinityG1() : InfinityG2());
 
-    public int GetFingerprint() => ByteUtils.BytesToInt(Hmac.Hash256(ToBytes()).Take(4).ToArray(), Endian.Big);
+    public int GetFingerprint() => Hmac.Hash256(ToBytes()).Take(4).ToArray().BytesToInt(Endian.Big);
 
     public AffinePoint ToAffine()
     {
@@ -149,7 +149,7 @@ public class JacobianPoint
         return output;
     }
 
-    public string ToHex() => ByteUtils.ToHex(ToBytes());
+    public string ToHex() => ToBytes().ToHex();
 
     public override string ToString() => $"JacobianPoint(x={X}, y={Y}, z={Z}, i={IsInfinity})";
 

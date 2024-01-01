@@ -12,13 +12,13 @@ public enum Endian
 
 public static partial class ByteUtils
 {
-    public static string Flip(string binary) => new(binary.Select(c => c == '0' ? '1' : '0').ToArray());
+    public static int Flip(this string binary) => Convert.ToInt32(new string(binary.Select(c => c == '0' ? '1' : '0').ToArray()), 2);
 
-    public static int IntBitLength(int value) => Math.Abs(value).ToString("2").Length;
+    public static int IntBitLength(this int value) => Math.Abs(value).ToString("2").Length;
 
-    public static int BigIntBitLength(BigInteger value) => (value < 0 ? -value : value).ToString("2").Length;
+    public static int BigIntBitLength(this BigInteger value) => (value < 0 ? -value : value).ToString("2").Length;
 
-    public static IEnumerable<int> BigIntToBits(BigInteger i)
+    public static IEnumerable<int> BigIntToBits(this BigInteger i)
     {
         var bits = new List<int>();
         while (i != 0)
@@ -30,7 +30,7 @@ public static partial class ByteUtils
         return bits;
     }
 
-    public static IEnumerable<int> IntToBits(int i)
+    public static IEnumerable<int> IntToBits(this int i)
     {
         var bits = new List<int>();
         while (i != 0)
@@ -47,7 +47,7 @@ public static partial class ByteUtils
                              .Select(x => Convert.ToByte(value.Substring(x, 2), 16))
                              .ToArray();
 
-    public static byte[] IntToBytes(int value, int size, Endian endian, bool signed = false)
+    public static byte[] IntToBytes(this int value, int size, Endian endian, bool signed = false)
     {
         if (value < 0 && !signed)
             throw new Exception("Cannot convert negative number to unsigned.");
@@ -56,7 +56,7 @@ public static partial class ByteUtils
         var binary = Convert.ToString(Math.Abs(value), 2).PadLeft(size * 8, '0');
         if (value < 0)
         {
-            binary = Convert.ToString(Convert.ToInt32(Flip(binary), 2) + 1, 2).PadLeft(size * 8, '0');
+            binary = Convert.ToString(binary.Flip() + 1, 2).PadLeft(size * 8, '0');
         }
         var bytes = MyRegex().Matches(binary).Select(match => Convert.ToByte(match.Value, 2)).ToArray();
         if (endian == Endian.Little)
@@ -64,7 +64,7 @@ public static partial class ByteUtils
         return bytes;
     }
 
-    public static int BytesToInt(byte[] bytes, Endian endian, bool signed = false)
+    public static int BytesToInt(this byte[] bytes, Endian endian, bool signed = false)
     {
         if (bytes.Length == 0)
             return 0;
@@ -75,25 +75,25 @@ public static partial class ByteUtils
             binary += Convert.ToString(byteVal, 2).PadLeft(8, '0');
         if (sign == "1" && signed)
         {
-            binary = Convert.ToString(Convert.ToInt32(Flip(binary), 2) + 1, 2).PadLeft(bytes.Length * 8, '0');
+            binary = Convert.ToString(binary.Flip() + 1, 2).PadLeft(bytes.Length * 8, '0');
         }
         var result = Convert.ToInt32(binary, 2);
         return sign == "1" && signed ? -result : result;
     }
 
-    public static byte[] EncodeInt(int value)
+    public static byte[] EncodeInt(this int value)
     {
         if (value == 0)
             return ""u8.ToArray();
-        var length = (IntBitLength(value) + 8) >> 3;
-        var bytes = IntToBytes(value, length, Endian.Big, true);
+        var length = (value.IntBitLength() + 8) >> 3;
+        var bytes = value.IntToBytes(length, Endian.Big, true);
         while (bytes.Length > 1 && bytes[0] == ((bytes[1] & 0x80) != 0 ? (byte)0xff : (byte)0))
             bytes = bytes.Skip(1).ToArray();
         return bytes;
     }
 
-    public static int DecodeInt(byte[] bytes) => BytesToInt(bytes, Endian.Big, true);
-    public static byte[] BigIntToBytes(BigInteger value, int size, Endian endian, bool signed = false)
+    public static int DecodeInt(this byte[] bytes) => bytes.BytesToInt(Endian.Big, true);
+    public static byte[] BigIntToBytes(this BigInteger value, int size, Endian endian, bool signed = false)
     {
         if (value < 0 && !signed)
             throw new Exception("Cannot convert negative number to unsigned.");
@@ -106,17 +106,17 @@ public static partial class ByteUtils
 
     public static BigInteger BytesToBigInt(this byte[] bytes, Endian endian, bool signed = false) => new BigInteger(bytes, !signed, endian == Endian.Big);
 
-    public static byte[] EncodeBigInt(BigInteger value)
+    public static byte[] EncodeBigInt(this BigInteger value)
     {
         if (value == 0) return ""u8.ToArray();
-        var length = (BigIntBitLength(value) + 8) >> 3;
+        var length = (value.BigIntBitLength() + 8) >> 3;
         var bytes = BigIntToBytes(value, length, Endian.Big, true);
         while (bytes.Length > 1 && bytes[0] == ((bytes[1] & 0x80) != 0 ? (byte)0xff : (byte)0))
             bytes = bytes.Skip(1).ToArray();
         return bytes;
     }
 
-    public static BigInteger DecodeBigInt(byte[] bytes) => BytesToBigInt(bytes, Endian.Big, true);
+    public static BigInteger DecodeBigInt(this byte[] bytes) => BytesToBigInt(bytes, Endian.Big, true);
 
     public static byte[] ConcatBytes(params byte[][] lists)
     {
@@ -130,9 +130,9 @@ public static partial class ByteUtils
 
     public static bool BytesEqual(byte[] a, byte[] b) => a.Length == b.Length && !a.Where((t, i) => b[i] != t).Any();
 
-    public static string ToHex(byte[] bytes) => BitConverter.ToString(bytes).Replace("-", "").ToLower();
+    public static string ToHex(this byte[] bytes) => BitConverter.ToString(bytes).Replace("-", "").ToLower();
 
-    public static byte[] FromHex(string hex)
+    public static byte[] FromHex(this string hex)
     {
         if (hex.Length % 2 != 0)
             throw new ArgumentException("Invalid hex string");

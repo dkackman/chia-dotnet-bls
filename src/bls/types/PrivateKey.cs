@@ -16,7 +16,7 @@ public class PrivateKey
         Value = value;
     }
     public static PrivateKey FromBytes(byte[] bytes) => new(ModMath.Mod(bytes.BytesToBigInt(Endian.Big), Constants.DefaultEc.N));
-    public static PrivateKey FromHex(string hex) => FromBytes(ByteUtils.FromHex(hex));
+    public static PrivateKey FromHex(string hex) => FromBytes(hex.FromHex());
     public static PrivateKey FromSeed(byte[] seed)
     {
         const int length = 48;
@@ -34,8 +34,8 @@ public class PrivateKey
     }
 
     public JacobianPoint GetG1() => JacobianPoint.GenerateG1().Multiply(Value);
-    public byte[] ToBytes() => ByteUtils.BigIntToBytes(Value, Size, Endian.Big);
-    public string ToHex() => ByteUtils.ToHex(ToBytes());
+    public byte[] ToBytes() => Value.BigIntToBytes(Size, Endian.Big);
+    public string ToHex() => ToBytes().ToHex();
     public override string ToString() => $"PrivateKey(0x{ToHex()})";
     public bool Equals(PrivateKey value) => Value == value.Value;
 }

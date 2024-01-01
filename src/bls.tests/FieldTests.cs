@@ -69,7 +69,7 @@ public class FieldsTests
         Fq b2 = new(BigInteger.Parse("172487123095712930573140951348"), BigInteger.Parse("3432984572394572309458723045723849"));
         Fq2 c2 = new(BigInteger.Parse("172487123095712930573140951348"), a2, b2);
 
-        Assert.True(!b2.Equals(c2));
+        Assert.False(b2.Equals(c2));
     }
 
     [Fact]

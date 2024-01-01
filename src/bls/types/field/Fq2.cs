@@ -98,7 +98,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
         return new Fq2(Q, [x0, x1]);
     }
 
-    public override Fq FromHex(BigInteger Q, string hex) => FromBytes(Q, ByteUtils.FromHex(hex));
+    public override Fq FromHex(BigInteger Q, string hex) => FromBytes(Q, hex.FromHex());
 
     public override Fq FromFq(BigInteger Q, Fq fq)
     {
@@ -132,7 +132,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
 
     public override bool ToBool() => Elements.All(element => element.ToBool());
 
-    public override string ToHex() => ByteUtils.ToHex(ToBytes());
+    public override string ToHex() => ToBytes().ToHex();
 
     public override string ToString() => $"Fq{Extension}({string.Join(", ", Elements.ToList())})";
 
