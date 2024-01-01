@@ -177,10 +177,10 @@ public class Fq(BigInteger Q, BigInteger value) : IField<Fq>
         // which works if both l & r are of equal sizes
         // if one is bigger than i think this is more of a set operation
         // and not strict equality
-        if (value is Fq2) // this works for Fq2 derived types
-        {
-            return value.EqualTo(this);
-        }
+        // if (value is Fq2) // this works for Fq2 derived types
+        // {
+        //     return value.EqualTo(this);
+        // }
 
         return Value == value.Value && Q == value.Q;
     }
