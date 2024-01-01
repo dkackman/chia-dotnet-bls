@@ -1,0 +1,12 @@
+{
+  "cSpell.words": [
+    "Basefield",
+    "coeff",
+    "coeffs",
+    "Frob",
+    "Frobenius",
+    "Hkdf",
+    "Mult"
+  ],
+  "dotnet-test-explorer.testProjectPath": "**/*tests.@(csproj|vbproj|fsproj)"
+}
