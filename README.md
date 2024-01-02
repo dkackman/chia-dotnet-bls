@@ -2,6 +2,8 @@
 
 .NET BLS Library
 
+[![.NET](https://github.com/dkackman/chia-dotnet-bls/actions/workflows/dotnet.yml/badge.svg)](https://github.com/dkackman/chia-dotnet-bls/actions/workflows/dotnet.yml)
+
 ## Introduction
 
 Very much a work in progress but the goal is to provide a .NET library for chia BLS signatures. This is a direct port of the [chia bls typescript library](https://github.com/Chia-Network/node-chia-bls).
