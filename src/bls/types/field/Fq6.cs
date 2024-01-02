@@ -9,16 +9,10 @@ public class Fq6 : Fq2
     public override int Extension { get; } = 6;
 
     public Fq6(BigInteger Q, Fq2 x, Fq2 y, Fq2 z)
-        : base(Q, [x, y, z])
-    {
-        Root = new Fq2(Q, Fq.Nil.One(Q), Fq.Nil.One(Q));
-    }
+        : base(Q, [x, y, z]) => Root = new Fq2(Q, Fq.Nil.One(Q), Fq.Nil.One(Q));
 
     protected Fq6(BigInteger Q, Fq[] elements)
-        : base(Q, elements)
-    {
-        Root = new Fq2(Q, Fq.Nil.One(Q), Fq.Nil.One(Q));
-    }
+        : base(Q, elements) => Root = new Fq2(Q, Fq.Nil.One(Q), Fq.Nil.One(Q));
 
     public override Fq Construct(BigInteger Q, Fq[] elements) => new Fq6(Q, (Fq2)elements[0], (Fq2)elements[1], (Fq2)elements[2]);
 

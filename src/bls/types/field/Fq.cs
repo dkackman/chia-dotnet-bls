@@ -7,8 +7,8 @@ public class Fq(BigInteger Q, BigInteger value) : IField<Fq>
     public static readonly Fq Nil = new(1, 0);
 
     public virtual int Extension { get; } = 1;
-    public BigInteger Value { get; private set; } = ModMath.Mod(value, Q); // wrap around is not need in c#
-    public virtual BigInteger Q { get; protected set; } = Q;
+    public BigInteger Value { get; } = ModMath.Mod(value, Q); // wrap around is not need in c#
+    public BigInteger Q { get; } = Q;
 
     public virtual Fq Zero(BigInteger Q) => new(Q, 0);
     public virtual Fq One(BigInteger Q) => new(Q, 1);
@@ -28,7 +28,7 @@ public class Fq(BigInteger Q, BigInteger value) : IField<Fq>
         string hex = Value.ToString("x"); // Lowercase "x" for lowercase hexadecimal
         hex = hex.Length % 2 == 0 && hex.StartsWith("0") ? hex.Substring(1) : hex;
         return hex.Length > 10
-            ? $"Fq(0x{hex.Substring(0, 5)}..{hex.Substring(hex.Length - 5)})"
+            ? $"Fq(0x{hex[..5]}..{hex[^5..]})"
             : $"Fq(0x{hex})";
     }
     public virtual Fq Negate() => new(Q, -Value);
@@ -170,20 +170,7 @@ public class Fq(BigInteger Q, BigInteger value) : IField<Fq>
     }
 
     public virtual bool EqualTo(BigInteger value) => false;  // the typescript returns false if value is a bigint
-    public virtual bool EqualTo(Fq value)
-    {
-        // this is in the typescript code
-        // if value is Fq2 or derived from Fq2, then we need to use the Fq2 equal
-        // which works if both l & r are of equal sizes
-        // if one is bigger than i think this is more of a set operation
-        // and not strict equality
-        // if (value is Fq2) // this works for Fq2 derived types
-        // {
-        //     return value.EqualTo(this);
-        // }
-
-        return Value == value.Value && Q == value.Q;
-    }
+    public virtual bool EqualTo(Fq value) => Value == value.Value && Q == value.Q;
 
     public virtual Fq Subtract(BigInteger value) => AddTo(-value);
     public virtual Fq Subtract(Fq value) => AddTo(value.Negate());

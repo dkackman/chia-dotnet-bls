@@ -49,7 +49,7 @@ public interface IField<T> : IField where T : IField<T>
 
 public interface IFieldExt<T> : IField<T> where T : IField<T>
 {
-    T Root { get; set; }
+    T Root { get; }
     T[] Elements { get; }
     T Construct(BigInteger Q, T[] elements);
     T ModSqrt();

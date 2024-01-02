@@ -5,10 +5,10 @@ namespace chia.dotnet.bls;
 
 public class AffinePoint
 {
-    public Fq X { get; set; }
-    public Fq Y { get; set; }
-    public bool IsInfinity { get; set; }
-    public EC Ec { get; set; }
+    public Fq X { get; }
+    public Fq Y { get; }
+    public bool IsInfinity { get; }
+    public EC Ec { get; }
 
     public AffinePoint(Fq x, Fq y, bool isInfinity, EC? ec = null)
     {
@@ -19,10 +19,7 @@ public class AffinePoint
         IsInfinity = isInfinity;
     }
 
-    public bool IsOnCurve()
-    {
-        return IsInfinity || Y.Multiply(Y).Equals(X.Multiply(X).Multiply(X).Add(Ec.A.Multiply(X)).Add(Ec.B));
-    }
+    public bool IsOnCurve => IsInfinity || Y.Multiply(Y).Equals(X.Multiply(X).Multiply(X).Add(Ec.A.Multiply(X)).Add(Ec.B));
 
     public JacobianPoint ToJacobian() => new(X, Y, X.One(Ec.Q), IsInfinity, Ec);
 
@@ -31,6 +28,7 @@ public class AffinePoint
         var f = (Fq12)Fq12.Nil.One(Ec.Q);
         var wsq = new Fq12(Ec.Q, (Fq6)f.Root, (Fq6)Fq6.Nil.Zero(Ec.Q));
         var wcu = new Fq12(Ec.Q, (Fq6)Fq6.Nil.Zero(Ec.Q), (Fq6)f.Root);
+
         return new AffinePoint(X.Multiply(wsq), Y.Multiply(wcu), false, Ec);
     }
 
@@ -39,6 +37,7 @@ public class AffinePoint
         var f = (Fq12)Fq12.Nil.One(Ec.Q);
         var wsq = new Fq12(Ec.Q, (Fq6)f.Root, (Fq6)Fq6.Nil.Zero(Ec.Q));
         var wcu = new Fq12(Ec.Q, (Fq6)Fq6.Nil.Zero(Ec.Q), (Fq6)f.Root);
+
         return new AffinePoint(X.Divide(wsq), Y.Divide(wcu), false, Ec);
     }
 
@@ -48,19 +47,24 @@ public class AffinePoint
         var s = left.Divide(Y.Multiply(new Fq(Ec.Q, 2)));
         var newX = s.Multiply(s).Subtract(X).Subtract(X);
         var newY = s.Multiply(X.Subtract(newX)).Subtract(Y);
+
         return new AffinePoint(newX, newY, false, Ec);
     }
 
     public AffinePoint Add(AffinePoint value)
     {
-        Debug.Assert(IsOnCurve());
-        Debug.Assert(value.IsOnCurve());
-        if (IsInfinity) return value;
-        else if (value.IsInfinity) return this;
-        else if (Equals(value)) return Double();
+        Debug.Assert(IsOnCurve);
+        Debug.Assert(value.IsOnCurve);
+        if (IsInfinity)
+            return value;
+        if (value.IsInfinity)
+            return this;
+        if (Equals(value))
+            return Double();
         var s = value.Y.Subtract(Y).Divide(value.X.Subtract(X));
         var newX = s.Multiply(s).Subtract(X).Subtract(value.X);
         var newY = s.Multiply(X.Subtract(newX)).Subtract(Y);
+
         return new(newX, newY, false, Ec);
     }
 
@@ -75,8 +79,5 @@ public class AffinePoint
 
     public AffinePoint Clone() => new(X.Clone(), Y.Clone(), IsInfinity, Ec);
 
-    public override string ToString()
-    {
-        return $"AffinePoint(x={X}, y={Y}, i={IsInfinity})";
-    }
+    public override string ToString() => $"AffinePoint(x={X}, y={Y}, i={IsInfinity})";
 }

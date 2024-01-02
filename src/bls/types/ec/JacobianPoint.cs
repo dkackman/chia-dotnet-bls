@@ -111,7 +111,7 @@ public class JacobianPoint
 
     public static JacobianPoint FromHexG2(string hex, bool isExtension = true) => FromBytesG2(hex.FromHex(), isExtension);
 
-    public bool IsOnCurve() => IsInfinity || ToAffine().IsOnCurve();
+    public bool IsOnCurve() => IsInfinity || ToAffine().IsOnCurve;
 
     public bool IsValid() => IsOnCurve() && Multiply(Ec.N).Equals(X is Fq ? InfinityG1() : InfinityG2());
 

@@ -6,6 +6,7 @@
     "Frob",
     "Frobenius",
     "Hkdf",
+    "hmac",
     "Mult"
   ],
   "dotnet-test-explorer.testProjectPath": "**/*tests.@(csproj|vbproj|fsproj)"

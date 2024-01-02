@@ -6,22 +6,19 @@ public class Fq2 : Fq, IFieldExt<Fq>
 {
     public static readonly new Fq2 Nil = new(BigInteger.One, [Fq.Nil, Fq.Nil]);
 
-    public Fq Root { get; set; }
-    public Fq[] Elements { get; set; }
-    public Fq Basefield { get; set; }
+    public Fq Root { get; protected set; }
+    public Fq[] Elements { get; }
+    public Fq Basefield { get; }
 
     public override int Extension { get; } = 2;
-
-    public override BigInteger Q { get; protected set; }
 
     // used by derived classes that have more than 2 elements
     protected Fq2(BigInteger q, Fq[] elements)
         : base(q, 0)
     {
-        Q = q;
         Elements = elements;
         Basefield = Elements.Length > 0 ? Elements[0] : throw new InvalidOperationException("Elements must not be empty.");
-        Root = new Fq(Q, -1);
+        Root = new Fq(q, -1);
     }
 
     public Fq2(BigInteger q, Fq x, Fq y)
@@ -110,7 +107,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
             elements.Add(i == 0 ? y : z);
 
         var result = Construct(Q, [.. elements]);
-        ((IFieldExt<Fq>)result).Root = new Fq(Q, BigInteger.MinusOne);
+        ((Fq2)result).Root = new Fq(Q, BigInteger.MinusOne);
 
         return result;
     }
