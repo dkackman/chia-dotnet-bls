@@ -158,13 +158,6 @@ public class Fq2 : Fq, IFieldExt<Fq>
                 }
 
                 var frobCoeff = FrobCoeffsClass.GetFrobCoeff(Extension, i, index) ?? throw new InvalidOperationException("Frobenius coefficient not found.");
-                if (Extension == 12 && i == 1 && index == 1)
-                {
-                    var s = $"{Extension},{i},{index}: {frobCoeff.ToHex()}";
-                    Console.WriteLine($"{Extension},{i},{index}: {frobCoeff.ToHex()}");
-                    Console.WriteLine("");
-                }
-
                 return element.QiPower(i).Multiply(frobCoeff);
             }).ToArray()
         );
