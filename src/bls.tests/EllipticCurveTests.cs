@@ -8,6 +8,12 @@ public class EllipticCurveTests
     private readonly JacobianPoint g = JacobianPoint.GenerateG1();
     private readonly JacobianPoint g2 = JacobianPoint.GenerateG2();
     private readonly BigInteger q = Constants.Q;
+    private readonly JacobianPoint s;
+
+    public EllipticCurveTests()
+    {
+        s = g2.Add(g2);
+    }
 
     [Fact]
     public void G1IsOnCurve()
@@ -45,5 +51,26 @@ public class EllipticCurveTests
     public void G2IsOnCurve()
     {
         Assert.True(g2.IsOnCurve());
+    }
+    [Fact]
+    public void UntwistIdentity()
+    {
+        Assert.True(s.ToAffine().Twist().Untwist().Equals(s.ToAffine()));
+    }
+
+    [Fact]
+    public void MultiplicationWithoutTwistIdentity()
+    {
+        Assert.True(
+            s.ToAffine().Twist().Multiply(5).Untwist().Equals(s.Multiply(5).ToAffine())
+        );
+    }
+
+    [Fact]
+    public void MultiplicationWithTwistIdentity()
+    {
+        Assert.True(
+            s.ToAffine().Twist().Multiply(5).Equals(s.Multiply(5).ToAffine().Twist())
+        );
     }
 }
