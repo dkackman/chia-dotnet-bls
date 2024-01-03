@@ -26,8 +26,8 @@ public class Fq2 : Fq, IFieldExt<Fq>
     {
     }
 
-    public virtual Fq Construct(BigInteger Q, Fq[] elements) => new Fq2(Q, [elements[0], elements[1]]);
-    public Fq ConstructWithRoot(BigInteger Q, Fq[] elements) => ((IFieldExt<Fq>)Construct(Q, elements)).WithRoot(Root);
+    public virtual Fq Construct(BigInteger q, Fq[] elements) => new Fq2(q, [elements[0], elements[1]]);
+    public Fq ConstructWithRoot(BigInteger q, Fq[] elements) => ((IFieldExt<Fq>)Construct(q, elements)).WithRoot(Root);
 
     public Fq WithRoot(Fq root)
     {
@@ -35,7 +35,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
         return this;
     }
 
-    public override Fq FromBytes(BigInteger Q, byte[] bytes)
+    public override Fq FromBytes(BigInteger q, byte[] bytes)
     {
         var length = Extension * 48;
         if (bytes.Length != length)
@@ -54,9 +54,9 @@ public class Fq2 : Fq, IFieldExt<Fq>
         }
 
         elements.Reverse();
-        var constructedElements = elements.Select(elementBytes => Basefield.FromBytes(Q, elementBytes)).ToList();
+        var constructedElements = elements.Select(elementBytes => Basefield.FromBytes(q, elementBytes)).ToList();
 
-        return Construct(Q, [.. constructedElements]);
+        return Construct(q, [.. constructedElements]);
     }
 
     public override Fq Inverse()
@@ -95,25 +95,25 @@ public class Fq2 : Fq, IFieldExt<Fq>
         return new Fq2(Q, [x0, x1]);
     }
 
-    public override Fq FromHex(BigInteger Q, string hex) => FromBytes(Q, hex.FromHex());
+    public override Fq FromHex(BigInteger q, string hex) => FromBytes(q, hex.FromHex());
 
-    public override Fq FromFq(BigInteger Q, Fq fq)
+    public override Fq FromFq(BigInteger q, Fq fq)
     {
-        var y = Basefield.FromFq(Q, fq);
-        var z = Basefield.Zero(Q);
+        var y = Basefield.FromFq(q, fq);
+        var z = Basefield.Zero(q);
         var elements = new List<Fq>();
 
         for (int i = 0; i < Elements.Length; i++)
             elements.Add(i == 0 ? y : z);
 
-        var result = Construct(Q, [.. elements]);
-        ((Fq2)result).Root = new Fq(Q, BigInteger.MinusOne);
+        var result = Construct(q, [.. elements]);
+        ((Fq2)result).Root = new Fq(q, BigInteger.MinusOne);
 
         return result;
     }
 
-    public override Fq Zero(BigInteger Q) => FromFq(Q, new Fq(Q, 0));
-    public override Fq One(BigInteger Q) => FromFq(Q, new Fq(Q, 1));
+    public override Fq Zero(BigInteger q) => FromFq(q, new Fq(q, 0));
+    public override Fq One(BigInteger q) => FromFq(q, new Fq(q, 1));
 
     public override Fq Clone() => ConstructWithRoot(Q, Elements.Select(element => element.Clone()).ToArray());
 

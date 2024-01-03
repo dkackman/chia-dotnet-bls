@@ -2,23 +2,23 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public class Fq(BigInteger Q, BigInteger value) : IField<Fq>
+public class Fq(BigInteger q, BigInteger value) : IField<Fq>
 {
     public static readonly Fq Nil = new(1, 0);
 
     public virtual int Extension { get; } = 1;
-    public BigInteger Value { get; } = ModMath.Mod(value, Q); // wrap around is not need in c#
-    public BigInteger Q { get; } = Q;
+    public BigInteger Value { get; } = ModMath.Mod(value, q); // wrap around is not need in c#
+    public BigInteger Q { get; } = q;
 
-    public virtual Fq Zero(BigInteger Q) => new(Q, 0);
-    public virtual Fq One(BigInteger Q) => new(Q, 1);
-    public virtual Fq FromBytes(BigInteger Q, byte[] bytes)
+    public virtual Fq Zero(BigInteger q) => new(q, 0);
+    public virtual Fq One(BigInteger q) => new(q, 1);
+    public virtual Fq FromBytes(BigInteger q, byte[] bytes)
     {
         if (bytes.Length != 48) throw new ArgumentOutOfRangeException(nameof(bytes));
-        return new Fq(Q, bytes.BytesToBigInt(Endian.Big));
+        return new Fq(q, bytes.BytesToBigInt(Endian.Big));
     }
-    public virtual Fq FromHex(BigInteger Q, string hex) => Nil.FromBytes(Q, hex.FromHex());
-    public virtual Fq FromFq(BigInteger Q, Fq fq) => fq; // ?
+    public virtual Fq FromHex(BigInteger q, string hex) => Nil.FromBytes(q, hex.FromHex());
+    public virtual Fq FromFq(BigInteger q, Fq fq) => fq; // ?
     public virtual Fq Clone() => new(Q, Value);
     public virtual byte[] ToBytes() => Value.BigIntToBytes(48, Endian.Big);
     public virtual bool ToBool() => true;

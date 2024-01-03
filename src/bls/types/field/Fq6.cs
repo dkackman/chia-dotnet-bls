@@ -8,18 +8,18 @@ public class Fq6 : Fq2
 
     public override int Extension { get; } = 6;
 
-    public Fq6(BigInteger Q, Fq2 x, Fq2 y, Fq2 z)
-        : base(Q, [x, y, z]) => Root = new Fq2(Q, Fq.Nil.One(Q), Fq.Nil.One(Q));
+    public Fq6(BigInteger q, Fq2 x, Fq2 y, Fq2 z)
+        : base(q, [x, y, z]) => Root = new Fq2(q, Fq.Nil.One(q), Fq.Nil.One(q));
 
-    protected Fq6(BigInteger Q, Fq[] elements)
-        : base(Q, elements) => Root = new Fq2(Q, Fq.Nil.One(Q), Fq.Nil.One(Q));
+    protected Fq6(BigInteger q, Fq[] elements)
+        : base(q, elements) => Root = new Fq2(q, Fq.Nil.One(q), Fq.Nil.One(q));
 
-    public override Fq Construct(BigInteger Q, Fq[] elements) => new Fq6(Q, (Fq2)elements[0], (Fq2)elements[1], (Fq2)elements[2]);
+    public override Fq Construct(BigInteger q, Fq[] elements) => new Fq6(q, (Fq2)elements[0], (Fq2)elements[1], (Fq2)elements[2]);
 
-    public override Fq FromFq(BigInteger Q, Fq fq)
+    public override Fq FromFq(BigInteger q, Fq fq)
     {
-        var result = base.FromFq(Q, fq);
-        ((Fq6)result).Root = new Fq2(Q, Fq.Nil.One(Q), Fq.Nil.One(Q));
+        var result = base.FromFq(q, fq);
+        ((Fq6)result).Root = new Fq2(q, Fq.Nil.One(q), Fq.Nil.One(q));
         return result;
     }
 
