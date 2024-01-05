@@ -52,6 +52,7 @@ public class EllipticCurveTests
     {
         Assert.True(g2.IsOnCurve());
     }
+
     [Fact]
     public void UntwistIdentity()
     {

@@ -218,7 +218,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
         // use the wider type to do the math
         if (value.Extension > Extension)
         {
-            return value.AddTo(this);
+            return value.MultiplyWith(this);
         }
 
         var elements = Elements.Select(_ => Basefield.Zero(Q)).ToArray();
