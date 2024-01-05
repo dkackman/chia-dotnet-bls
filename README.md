@@ -17,7 +17,7 @@ Code and passing unit tests for:
 - [x] JacobianPoint
 - [x] PrivateKey
 - [ ] AugSchemeMPL
-- [ ] BasicSchemeMPL
+- [x] BasicSchemeMPL
 - [ ] PopSchemeMPL
 ___
 
