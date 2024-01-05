@@ -84,7 +84,7 @@ public class EllipticCurveTests
     [Fact]
     public void G2DoubleSameAsAddition()
     {
-        Assert.True(g2.Add(g2).Equals(g2.Multiply(new BigInteger(2))));
+        Assert.True(g2.Add(g2).Equals(g2.Multiply(2)));
     }
 
     [Fact]
@@ -92,7 +92,36 @@ public class EllipticCurveTests
     {
         Assert.True(
             g2.Multiply(new BigInteger(5))
-            .Equals(g2.Multiply(new BigInteger(2)).Add(g2.Multiply(new BigInteger(2))).Add(g2))
+            .Equals(g2.Multiply(2).Add(g2.Multiply(2)).Add(g2))
         );
+    }
+
+    [Fact]
+    public void YForX()
+    {
+        var y = EcMethods.YForX(g2.X, Constants.DefaultEcTwist);
+        Assert.True(y.Equals(g2.Y) || y.Negate().Equals(g2.Y));
+    }
+
+    [Fact]
+    public void BackAndForth()
+    {
+        var g_j = JacobianPoint.GenerateG1();
+        Assert.True(g_j.ToAffine().ToJacobian().Equals(g_j));
+    }
+
+    [Fact]
+    public void MultiplicationOrder()
+    {
+        var g_j = JacobianPoint.GenerateG1();
+        Assert.True(g_j.Multiply(2).ToAffine().Equals(g_j.ToAffine().Multiply(2)));
+    }
+
+    [Fact]
+    public void AdditionOrderAndIdentity()
+    {
+        var g2_j = JacobianPoint.GenerateG2();
+        var g2_j2 = JacobianPoint.GenerateG2().Multiply(2);
+        Assert.True(g2_j.Add(g2_j2).ToAffine().Equals(g2_j.ToAffine().Multiply(3)));
     }
 }
