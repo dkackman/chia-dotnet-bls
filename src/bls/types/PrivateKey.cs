@@ -1,11 +1,12 @@
 using System.Numerics;
 using System.Diagnostics;
-using System.Text;
 
 namespace chia.dotnet.bls;
 
 public class PrivateKey
 {
+    public const byte Length = 48;
+
     public const int Size = 32;
 
     public readonly BigInteger Value;
@@ -19,9 +20,7 @@ public class PrivateKey
     public static PrivateKey FromHex(string hex) => FromBytes(hex.FromHex());
     public static PrivateKey FromSeed(byte[] seed)
     {
-        const int length = 48;
-        var okm = Hkdf.ExtractExpand(length, [.. seed, .. new byte[] { 0 }], "BLS-SIG-KEYGEN-SALT-".ToBytes(), [0, (byte)length]);
-
+        var okm = Hkdf.ExtractExpand(Length, [.. seed, .. new byte[] { 0 }], "BLS-SIG-KEYGEN-SALT-".ToBytes(), [0, Length]);
         return new PrivateKey(ModMath.Mod(okm.BytesToBigInt(Endian.Big), Constants.DefaultEc.N));
     }
     public static PrivateKey FromBigInt(BigInteger value) => new(ModMath.Mod(value, Constants.DefaultEc.N));
@@ -30,7 +29,6 @@ public class PrivateKey
         var aggregate = privateKeys.Aggregate(BigInteger.Zero, (acc, privateKey) => acc + privateKey.Value);
         return new PrivateKey(ModMath.Mod(aggregate, Constants.DefaultEc.N));
     }
-
     public JacobianPoint GetG1() => JacobianPoint.GenerateG1().Multiply(Value);
     public byte[] ToBytes() => Value.BigIntToBytes(Size, Endian.Big);
     public string ToHex() => ToBytes().ToHex();

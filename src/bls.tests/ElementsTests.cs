@@ -6,18 +6,25 @@ namespace bls.tests;
 
 public class ElementsTests
 {
-    private BigInteger i1 = new byte[] { 1, 2 }.BytesToBigInt(Endian.Big);
-    private BigInteger i2 = new byte[] { 3, 1, 4, 1, 5, 9 }.BytesToBigInt(Endian.Big);
-    private BigInteger b1;
-    private BigInteger b2;
-    private JacobianPoint g1 = JacobianPoint.GenerateG1();
-    private JacobianPoint g2 = JacobianPoint.GenerateG2();
-    private JacobianPoint u1 = JacobianPoint.InfinityG1();
-    private JacobianPoint u2 = JacobianPoint.InfinityG2();
-    private JacobianPoint x1;
-    private JacobianPoint x2;
-    private JacobianPoint y1;
-    private JacobianPoint y2;
+    private readonly BigInteger i1 = new byte[] { 1, 2 }.BytesToBigInt(Endian.Big);
+    private readonly BigInteger i2 = new byte[] { 3, 1, 4, 1, 5, 9 }.BytesToBigInt(Endian.Big);
+    private readonly BigInteger b1;
+    private readonly BigInteger b2;
+    private readonly JacobianPoint g1 = JacobianPoint.GenerateG1();
+    private readonly JacobianPoint g2 = JacobianPoint.GenerateG2();
+    private readonly JacobianPoint u1 = JacobianPoint.InfinityG1();
+    private readonly JacobianPoint u2 = JacobianPoint.InfinityG2();
+    private readonly JacobianPoint x1;
+    private readonly JacobianPoint x2;
+    private readonly JacobianPoint y1;
+    private readonly JacobianPoint y2;
+
+    private readonly Fq12 pair;
+    private readonly BigInteger sk;
+    private readonly JacobianPoint pk;
+    private readonly JacobianPoint Hm;
+    private readonly JacobianPoint sig;
+
 
     public ElementsTests()
     {
@@ -28,6 +35,13 @@ public class ElementsTests
         x2 = g1.Multiply(b2);
         y1 = g2.Multiply(b1);
         y2 = g2.Multiply(b2);
+        pair = Pairing.AtePairing(x1, y1);
+        sk = BigInteger.Parse("728934712938472938472398074");
+        pk = g1.Multiply(sk);
+        Hm = y2
+            .Multiply(BigInteger.Parse("12371928312"))
+            .Add(y2.Multiply(BigInteger.Parse("12903812903891023")));
+        sig = Hm.Multiply(sk);
     }
 
     [Fact]
@@ -86,5 +100,28 @@ public class ElementsTests
         Assert.False(new_y1.Equals(copy2));
     }
 
-    // TODO atePairing tests
+    [Fact]
+    public void AteInequalityX()
+    {
+        Assert.False(pair.Equals(Pairing.AtePairing(x2, y1)));
+    }
+
+    [Fact]
+    public void AteInequalityY()
+    {
+        Assert.False(pair.Equals(Pairing.AtePairing(x1, y2)));
+    }
+
+    [Fact]
+    public void AteCloneEquality()
+    {
+        var copy3 = pair.Clone();
+        Assert.True(pair.Equals(copy3));
+    }
+
+    [Fact]
+    public void AteEquality()
+    {
+        Assert.True(Pairing.AtePairing(g1, sig).Equals(Pairing.AtePairing(pk, Hm)));
+    }
 }

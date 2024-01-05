@@ -20,7 +20,7 @@ public static partial class ByteUtils
 
     public static int BigIntBitLength(this BigInteger value) => (value < 0 ? -value : value).ToString("2").Length;
 
-    public static IEnumerable<int> BigIntToBits(this BigInteger i)
+    public static List<int> BigIntToBits(this BigInteger i)
     {
         var bits = new List<int>();
         while (i != 0)
