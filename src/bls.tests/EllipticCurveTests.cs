@@ -48,12 +48,6 @@ public class EllipticCurveTests
     }
 
     [Fact]
-    public void G2IsOnCurve()
-    {
-        Assert.True(g2.IsOnCurve());
-    }
-
-    [Fact]
     public void UntwistIdentity()
     {
         Assert.True(s.ToAffine().Twist().Untwist().Equals(s.ToAffine()));
@@ -72,6 +66,33 @@ public class EllipticCurveTests
     {
         Assert.True(
             s.ToAffine().Twist().Multiply(5).Equals(s.Multiply(5).ToAffine().Twist())
+        );
+    }
+
+    [Fact]
+    public void DoubleOnCurve()
+    {
+        Assert.True(s.IsOnCurve());
+    }
+
+    [Fact]
+    public void G2IsOnCurve()
+    {
+        Assert.True(g2.IsOnCurve());
+    }
+
+    [Fact]
+    public void G2DoubleSameAsAddition()
+    {
+        Assert.True(g2.Add(g2).Equals(g2.Multiply(new BigInteger(2))));
+    }
+
+    [Fact]
+    public void G2FiveMultiplicationAndAddition()
+    {
+        Assert.True(
+            g2.Multiply(new BigInteger(5))
+            .Equals(g2.Multiply(new BigInteger(2)).Add(g2.Multiply(new BigInteger(2))).Add(g2))
         );
     }
 }
