@@ -11,7 +11,14 @@ Very much a work in progress but the goal is to provide a .NET library for chia 
 
 Check out the unit tests to see where progress is at.
 
-At the moment it has passing unit tests for the core `Field` objects and coefficients. The next step is to write more tests for `PrivateKey` and `JacobianPoint`, and then finish off the BLS computations.
+Code and passing unit tests for:
+- [x] Field types (`Fq, Fq2, fq6, Fq12` and related associated types and constants)
+- [x] AffinePoint
+- [x] JacobianPoint
+- [x] PrivateKey
+- [ ] AugSchemeMPL
+- [ ] BasicSchemeMPL
+- [ ] PopSchemeMPL
 ___
 
 _chia and its logo are the registered trademark or trademark of Chia Network, Inc. in the United States and worldwide._
