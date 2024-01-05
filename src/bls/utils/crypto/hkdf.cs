@@ -1,5 +1,7 @@
 using System.Security.Cryptography;
 
+namespace chia.dotnet.bls;
+
 public static class Hkdf
 {
     public const int BlockSize = 32;

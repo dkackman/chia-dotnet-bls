@@ -1,6 +1,4 @@
 using System.Numerics;
-using System.Globalization;
-
 using chia.dotnet.bls;
 
 namespace bls.tests;

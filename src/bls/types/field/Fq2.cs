@@ -154,7 +154,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
                     return element.QiPower(i);
                 }
 
-                var frobCoeff = FrobCoeffsClass.GetFrobCoeff(Extension, i, index) ?? throw new InvalidOperationException("Frobenius coefficient not found.");
+                var frobCoeff = Constants.GetFrobCoeff(Extension, i, index) ?? throw new InvalidOperationException("Frobenius coefficient not found.");
                 return element.QiPower(i).Multiply(frobCoeff);
             }).ToArray()
         );

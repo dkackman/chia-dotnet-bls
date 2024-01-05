@@ -1,4 +1,3 @@
-
 using System.Numerics;
 using chia.dotnet.bls;
 

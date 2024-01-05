@@ -1,10 +1,12 @@
-namespace bls.tests
+using chia.dotnet.bls;
+
+namespace bls.tests;
+
+public class HkdfTests
 {
-    public class HkdfTests
-    {
-        public static TheoryData<string, string, string, string, string, int> TestData =>
-            new()
-            {
+    public static TheoryData<string, string, string, string, string, int> TestData =>
+        new()
+        {
                 {
                     "0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
                     "000102030405060708090a0b0c",
@@ -37,25 +39,25 @@ namespace bls.tests
                     "8faabea85fc0c64e7ca86217cdc6dcdc88551c3244d56719e630a3521063082c46455c2fd5483811f9520a748f0099c1dfcfa52c54e1c22b5cdf70efb0f3c676",
                     64
                 },
-            };
+        };
 
-        [Theory]
-        [MemberData(nameof(TestData))]
-        public void TestHkdf(string ikm, string salt, string info, string prkExpected, string okmExpected, int length)
-        {
-            byte[] saltBytes = Convert.FromHexString(salt);
-            byte[] ikmBytes = Convert.FromHexString(ikm);
-            byte[] infoBytes = Convert.FromHexString(info);
-            byte[] prkExpectedBytes = Convert.FromHexString(prkExpected);
-            byte[] okmExpectedBytes = Convert.FromHexString(okmExpected);
+    [Theory]
+    [MemberData(nameof(TestData))]
+    public void TestHkdf(string ikm, string salt, string info, string prkExpected, string okmExpected, int length)
+    {
+        byte[] saltBytes = Convert.FromHexString(salt);
+        byte[] ikmBytes = Convert.FromHexString(ikm);
+        byte[] infoBytes = Convert.FromHexString(info);
+        byte[] prkExpectedBytes = Convert.FromHexString(prkExpected);
+        byte[] okmExpectedBytes = Convert.FromHexString(okmExpected);
 
-            byte[] prk = Hkdf.Extract(saltBytes, ikmBytes);
-            byte[] okm = Hkdf.Expand(length, prk, infoBytes);
+        byte[] prk = Hkdf.Extract(saltBytes, ikmBytes);
+        byte[] okm = Hkdf.Expand(length, prk, infoBytes);
 
-            Assert.Equal(32, prkExpectedBytes.Length);
-            Assert.Equal(length, okmExpectedBytes.Length);
-            Assert.Equal(prk, prkExpectedBytes);
-            Assert.Equal(okm, okmExpectedBytes);
-        }
+        Assert.Equal(32, prkExpectedBytes.Length);
+        Assert.Equal(length, okmExpectedBytes.Length);
+        Assert.Equal(prk, prkExpectedBytes);
+        Assert.Equal(okm, okmExpectedBytes);
     }
 }
+
