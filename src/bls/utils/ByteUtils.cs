@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Numerics;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace chia.dotnet.bls;
 
@@ -12,6 +13,7 @@ public enum Endian
 
 public static partial class ByteUtils
 {
+    public static byte[] ToBytes(this string value) => Encoding.UTF8.GetBytes(value);
     public static int Flip(this string binary) => Convert.ToInt32(new string(binary.Select(c => c == '0' ? '1' : '0').ToArray()), 2);
 
     public static int IntBitLength(this int value) => Math.Abs(value).ToString("2").Length;

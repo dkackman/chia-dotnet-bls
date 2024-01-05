@@ -20,10 +20,8 @@ public class PrivateKey
     public static PrivateKey FromSeed(byte[] seed)
     {
         const int length = 48;
-        var okm = Hkdf.ExtractExpand(length, [.. seed, .. new byte[] { 0 }], Encoding.UTF8.GetBytes("BLS-SIG-KEYGEN-SALT-"), [0, (byte)length]);
+        var okm = Hkdf.ExtractExpand(length, [.. seed, .. new byte[] { 0 }], "BLS-SIG-KEYGEN-SALT-".ToBytes(), [0, (byte)length]);
 
-        var okmBigInt = okm.BytesToBigInt(Endian.Big);
-        var mod = ModMath.Mod(okmBigInt, Constants.DefaultEc.N);
         return new PrivateKey(ModMath.Mod(okm.BytesToBigInt(Endian.Big), Constants.DefaultEc.N));
     }
     public static PrivateKey FromBigInt(BigInteger value) => new(ModMath.Mod(value, Constants.DefaultEc.N));
