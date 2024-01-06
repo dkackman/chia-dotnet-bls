@@ -10,6 +10,7 @@
     "Lamport",
     "Mult",
     "Osswu",
+    "Pyecc",
     "ress"
   ],
   "dotnet-test-explorer.testProjectPath": "**/*tests.@(csproj|vbproj|fsproj)"
