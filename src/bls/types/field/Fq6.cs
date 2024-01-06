@@ -20,6 +20,7 @@ public class Fq6 : Fq2
     {
         var result = base.FromFq(q, fq);
         ((Fq6)result).Root = new Fq2(q, Fq.Nil.One(q), Fq.Nil.One(q));
+        
         return result;
     }
 
@@ -50,6 +51,7 @@ public class Fq6 : Fq2
         var a = Elements[0];
         var b = Elements[1];
         var c = Elements[2];
+
         return new Fq6(Q, (Fq2)c.Multiply(Root), (Fq2)a, (Fq2)b);
     }
 }

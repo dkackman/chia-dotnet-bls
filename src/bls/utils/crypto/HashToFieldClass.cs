@@ -7,7 +7,9 @@ internal static class HashToFieldClass
     public static byte[] I2OSP(BigInteger value, int length)
     {
         if (value < 0 || value >= BigInteger.One << (8 * length))
+        {
             throw new Exception($"Bad I2OSP call: value={value}, length={length}.");
+        }
 
         var bytes = new byte[length];
         for (int i = length - 1; i >= 0; i--)
@@ -15,6 +17,7 @@ internal static class HashToFieldClass
             bytes[i] = (byte)(value & 0xff);
             value >>= 8;
         }
+        
         return bytes;
     }
 
@@ -26,6 +29,7 @@ internal static class HashToFieldClass
             result <<= 8;
             result += octet;
         }
+
         return result;
     }
 
@@ -35,7 +39,9 @@ internal static class HashToFieldClass
     {
         var ell = (length + hash.ByteSize - 1) / hash.ByteSize;
         if (ell > 255)
+        {
             throw new Exception($"Bad expandMessageXmd call: ell={ell} out of range.");
+        }
 
         byte[] dst_prime = [.. dst, .. I2OSP(dst.Length, 1)];
         var Z_pad = I2OSP(0, hash.BlockSize);
@@ -61,6 +67,7 @@ internal static class HashToFieldClass
     {
         byte[] dst_prime = [.. dst, .. I2OSP(dst.Length, 1)];
         byte[] message_prime = [.. message, .. I2OSP(length, 2), .. dst_prime];
+
         return hash.Convert(message_prime).Take(length).ToArray();
     }
 
@@ -80,6 +87,7 @@ internal static class HashToFieldClass
             }
             uValues.Add(eValues);
         }
+
         return uValues;
     }
     public static List<List<BigInteger>> Hp(byte[] message, int count, byte[] dst) => HashToField(message, count, dst, Constants.Q, 1, 64, ExpandMessageXmd, HashInfo.Sha256);

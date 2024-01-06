@@ -17,6 +17,7 @@ public class Fq12 : Fq6
     {
         var result = base.FromFq(q, fq);
         ((Fq12)result).Root = new Fq6(q, (Fq2)Fq2.Nil.Zero(q), (Fq2)Fq2.Nil.One(q), (Fq2)Fq2.Nil.Zero(q));
+        
         return result;
     }
 
@@ -28,6 +29,7 @@ public class Fq12 : Fq6
             .Multiply(a)
             .Subtract(((Fq6)b.Multiply(b)).MulByNonResidue())
             .Inverse();
+
         return new Fq12(Q, (Fq6)a.Multiply(factor), (Fq6)b.Negate().Multiply(factor));
     }
 }

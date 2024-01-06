@@ -7,14 +7,18 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
     public static readonly Fq Nil = new(1, 0);
 
     public virtual int Extension { get; } = 1;
-    public BigInteger Value { get; } = ModMath.Mod(value, q); // wrap around is not need in c#
+    public BigInteger Value { get; } = ModMath.Mod(value, q);
     public BigInteger Q { get; } = q;
 
     public virtual Fq Zero(BigInteger q) => new(q, 0);
     public virtual Fq One(BigInteger q) => new(q, 1);
     public virtual Fq FromBytes(BigInteger q, byte[] bytes)
     {
-        if (bytes.Length != 48) throw new ArgumentOutOfRangeException(nameof(bytes));
+        if (bytes.Length != 48)
+        {
+            throw new ArgumentOutOfRangeException(nameof(bytes));
+        }
+
         return new Fq(q, bytes.BytesToBigInt(Endian.Big));
     }
     public virtual Fq FromHex(BigInteger q, string hex) => Nil.FromBytes(q, hex.FromHex());
@@ -41,6 +45,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
                    y1 = 1;
         BigInteger a = Q;
         BigInteger b = Value;
+
         while (a != 0)
         {
             BigInteger q = b / a;
@@ -54,6 +59,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
             y0 = y1;
             y1 = temp_y0 - q * y1;
         }
+
         return new Fq(Q, x0);
     }
 
@@ -116,6 +122,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
                 break;
             }
         }
+
         BigInteger M = S;
         BigInteger c = ModMath.ModPow(z, q, Q);
         BigInteger t = ModMath.ModPow(Value, q, Q);
@@ -123,10 +130,14 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
         while (true)
         {
             if (t == 0)
+            {
                 return new Fq(Q, 0);
+            }
 
             if (t == 1)
+            {
                 return new Fq(Q, R);
+            }
 
             BigInteger i = 0;
             BigInteger f = t;
@@ -135,6 +146,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
                 f = ModMath.Mod(f * f, Q);
                 i++;
             }
+
             BigInteger b = ModMath.ModPow(c, ModMath.ModPow(2, M - i - 1, Q), Q);
             M = i;
             c = ModMath.Mod(b * b, Q);
@@ -153,6 +165,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
         {
             return value.AddTo(this);
         }
+
         return new(Q, Value + value.Value);
     }
 
@@ -166,6 +179,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
         {
             return value.MultiplyWith(this);
         }
+
         return new(Q, Value * value.Value);
     }
 

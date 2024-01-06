@@ -6,6 +6,7 @@ internal static class HdKeysClass
     {
         int length = 48;
         byte[] okm = Hkdf.ExtractExpand(length, [.. seed, .. new byte[] { 0 }], "BLS-SIG-KEYGEN-SALT-".ToBytes(), [0, (byte)length]);
+        
         return new PrivateKey(ModMath.Mod(ByteUtils.BytesToBigInt(okm, Endian.Big), Constants.DefaultEc.N));
     }
 
@@ -29,6 +30,7 @@ internal static class HdKeysClass
         {
             lamportPk.AddRange(Hmac.Hash256(lamport1.Skip(i * 32).Take(32).ToArray()));
         }
+
         return Hmac.Hash256([.. lamportPk]);
     }
 

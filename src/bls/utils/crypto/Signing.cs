@@ -26,7 +26,9 @@ internal static class Signing
     public static JacobianPoint CoreAggregateMpl(IEnumerable<JacobianPoint> signatures)
     {
         if (!signatures.Any())
+        {
             throw new Exception("Must aggregate at least 1 signature.");
+        }
 
         var aggregate = signatures.First();
         Debug.Assert(aggregate.IsValid());
@@ -45,6 +47,7 @@ internal static class Signing
         {
             return false;
         }
+
         if (!signature.IsValid())
         {
             return false;
@@ -58,7 +61,7 @@ internal static class Signing
             {
                 return false;
             }
-            
+
             qs.Add(OptSwu2MapClass.G2Map(ms[i], dst));
             ps.Add(pks[i]);
         }

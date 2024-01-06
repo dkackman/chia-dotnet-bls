@@ -29,6 +29,7 @@ internal static class OptSwu2MapClass
         var temp2 = gx0_num.Multiply(temp1);
         temp1 = temp1.Multiply(temp2).Multiply(gx0_den);
         var sqrtCandidate = temp2.Multiply(temp1.Pow((BigInteger.Pow(Constants.Q, 2) - 9) / 16));
+        
         foreach (var root in Constants.rootsOfUnity)
         {
             var y0 = (Fq2)sqrtCandidate.Multiply(root);
@@ -49,6 +50,7 @@ internal static class OptSwu2MapClass
                 );
             }
         }
+
         var x1_num = Constants.xi_2.Multiply(t.Pow(2)).Multiply(x0_num);
         var x1_den = x0_den;
         var gx1_num = Constants.xi_2.Pow(3).Multiply(t.Pow(6)).Multiply(gx0_num);

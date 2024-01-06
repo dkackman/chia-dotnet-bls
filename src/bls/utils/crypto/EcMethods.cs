@@ -12,7 +12,9 @@ internal static class EcMethods
         var u = x.Multiply(x).Multiply(x).Add(ec.A.Multiply(x)).Add(ec.B);
         var y = u.ModSqrt();
         if (y.Equals(0) || !new AffinePoint(x, y, false, ec).IsOnCurve)
+        {
             throw new Exception("No y for point x.");
+        }
 
         return y;
     }
@@ -20,12 +22,21 @@ internal static class EcMethods
     public static JacobianPoint ScalarMultJacobian(BigInteger value, JacobianPoint point, EC? ec = null)
     {
         ec ??= Constants.DefaultEc;
+
         var result = new JacobianPoint(point.X.One(ec.Q), point.X.One(ec.Q), point.X.Zero(ec.Q), true, ec);
-        if (point.IsInfinity || ModMath.Mod(value, ec.Q) == 0) return result;
+        if (point.IsInfinity || ModMath.Mod(value, ec.Q) == 0)
+        {
+            return result;
+        }
+
         var addend = point;
         while (value > 0)
         {
-            if ((value & 1) == 1) result = result.Add(addend);
+            if ((value & 1) == 1)
+            {
+                result = result.Add(addend);
+            }
+            
             addend = addend.Add(addend);
             value >>= 1;
         }
@@ -85,6 +96,7 @@ internal static class EcMethods
     public static bool SignFq(Fq element, EC? ec = null)
     {
         ec ??= Constants.DefaultEc;
+
         return element.GreaterThan(new Fq(ec.Q, (ec.Q - 1) / 2));
     }
 

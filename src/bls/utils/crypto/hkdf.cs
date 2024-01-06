@@ -26,8 +26,12 @@ internal static class Hkdf
             Array.Copy(temp, 0, okm, bytesWritten, toWrite);
             bytesWritten += toWrite;
         }
-        if (bytesWritten != length) 
+
+        if (bytesWritten != length)
+        {
             throw new Exception("Bytes written does not match length");
+        }
+
         return okm;
     }
 

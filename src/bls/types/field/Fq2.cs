@@ -64,6 +64,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
         var a = Elements[0];
         var b = Elements[1];
         var factor = a.Multiply(a).Add(b.Multiply(b)).Inverse();
+
         return new Fq2(Q, [a.Multiply(factor), b.Negate().Multiply(factor)]);
     }
 
@@ -73,21 +74,26 @@ public class Fq2 : Fq, IFieldExt<Fq>
         var a1 = Elements[1];
 
         if (a1.Equals(Basefield.One(Q)))
+        {
             return FromFq(Q, a0.ModSqrt());
+        }
 
         var alpha = a0.Pow(2).Add(a1.Pow(2));
         var gamma = alpha.Pow((Q - 1) / 2);
 
         if (new Fq(Q, -1).Equals(gamma))
+        {
             throw new Exception("No sqrt exists.");
+        }
 
         alpha = alpha.ModSqrt();
         var delta = a0.Add(alpha).Multiply(new Fq(Q, 2).Inverse());
-
         gamma = delta.Pow((Q - 1) / 2);
 
         if (gamma.Equals(new Fq(Q, -1)))
+        {
             delta = a0.Subtract(alpha).Multiply(new Fq(Q, 2).Inverse());
+        }
 
         var x0 = delta.ModSqrt();
         var x1 = a1.Multiply(new Fq(Q, 2).Multiply(x0).Inverse());
@@ -101,10 +107,12 @@ public class Fq2 : Fq, IFieldExt<Fq>
     {
         var y = Basefield.FromFq(q, fq);
         var z = Basefield.Zero(q);
-        var elements = new List<Fq>();
 
+        var elements = new List<Fq>();
         for (int i = 0; i < Elements.Length; i++)
+        {
             elements.Add(i == 0 ? y : z);
+        }
 
         var result = Construct(q, [.. elements]);
         ((Fq2)result).Root = new Fq(q, BigInteger.MinusOne);
@@ -124,6 +132,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
         {
             bytes.AddRange(Elements[i].ToBytes());
         }
+
         return [.. bytes];
     }
 
@@ -138,12 +147,16 @@ public class Fq2 : Fq, IFieldExt<Fq>
     public override Fq QiPower(int i)
     {
         if (Q != Constants.Q)
+        {
             throw new InvalidDataException("Invalid Q in QiPower.");
+        }
 
         i %= Extension;
 
         if (i == 0)
+        {
             return this;
+        }
 
         return ConstructWithRoot(
             Q,
@@ -169,7 +182,10 @@ public class Fq2 : Fq, IFieldExt<Fq>
         while (exponent != 0)
         {
             if ((exponent & 1) == 1)
+            {
                 result = result.Multiply(baseField);
+            }
+
             baseField = (Fq2)baseField.Multiply(baseField);
             exponent >>= 1;
         }
@@ -261,6 +277,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
     {
         var a = Elements[0];
         var b = Elements[1];
+
         return new Fq2(Q, a.Subtract(b), a.Add(b));
     }
 
@@ -295,10 +312,15 @@ public class Fq2 : Fq, IFieldExt<Fq>
             var a = Elements[i];
             var b = valueElements[i];
             if (a.LessThan(b))
+            {
                 return true;
+            }
             else if (a.GreaterThan(b))
+            {
                 return false;
+            }
         }
+        
         return false;
     }
 
@@ -310,10 +332,15 @@ public class Fq2 : Fq, IFieldExt<Fq>
             var a = Elements[i];
             var b = valueElements[i];
             if (a.GreaterThan(b))
+            {
                 return true;
+            }
             else if (a.LessThan(b))
+            {
                 return false;
+            }
         }
+
         return false;
     }
 
