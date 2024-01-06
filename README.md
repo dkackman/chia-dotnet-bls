@@ -9,7 +9,7 @@
 
 This is a direct port of the [chia bls typescript library](https://github.com/Chia-Network/node-chia-bls). Codingh style and naming have been converted to C# conventions but otherwise it is very similar in API.
 
-All of the unit tests from the original project have been proted and pass. 
+All of the unit tests from the original project have been ported and pass. 
 
 ___
 
