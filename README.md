@@ -6,8 +6,6 @@
 [![CodeQL](https://github.com/dkackman/chia-dotnet-bls/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/dkackman/chia-dotnet-bls/actions/workflows/github-code-scanning/codeql)
 [![Nuget](https://img.shields.io/nuget/dt/chia.dotnet.bls)](https://www.nuget.org/packages/chia.dotnet.bls/)
 
-
-
 ## Introduction
 
 This is a direct port of the [chia bls typescript library](https://github.com/Chia-Network/node-chia-bls). Codingh style and naming have been converted to C# conventions but otherwise it is very similar in API.
