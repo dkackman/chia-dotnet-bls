@@ -4,7 +4,8 @@
 
 [![.NET](https://github.com/dkackman/chia-dotnet-bls/actions/workflows/dotnet.yml/badge.svg)](https://github.com/dkackman/chia-dotnet-bls/actions/workflows/dotnet.yml)
 [![CodeQL](https://github.com/dkackman/chia-dotnet-bls/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/dkackman/chia-dotnet-bls/actions/workflows/github-code-scanning/codeql)
-![Nuget](https://img.shields.io/nuget/dt/chia.dotnet.bls%20)
+[![Nuget](https://img.shields.io/nuget/dt/chia.dotnet.bls%20)](![Nuget](https://img.shields.io/nuget/dt/chia.dotnet.bls%20)
+
 
 
 ## Introduction
