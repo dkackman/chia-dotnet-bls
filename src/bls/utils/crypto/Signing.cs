@@ -40,7 +40,7 @@ public static class Signing
 
     public static bool CoreAggregateVerify(JacobianPoint[] pks, byte[][] ms, JacobianPoint signature, byte[] dst)
     {
-        if (pks.Length != ms.Length || !pks.Any())
+        if (pks.Length != ms.Length || pks.Length == 0)
         {
             return false;
         }

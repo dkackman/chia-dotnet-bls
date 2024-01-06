@@ -1,5 +1,5 @@
-using System.Numerics;
 using chia.dotnet.bls;
+using System.Numerics;
 
 namespace bls.tests;
 

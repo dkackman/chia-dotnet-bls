@@ -26,7 +26,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
     public override string ToString()
     {
         string hex = Value.ToString("x"); // Lowercase "x" for lowercase hexadecimal
-        hex = hex.Length % 2 == 0 && hex.StartsWith("0") ? hex.Substring(1) : hex;
+        hex = hex.Length % 2 == 0 && hex.StartsWith('0') ? hex[1..] : hex;
         return hex.Length > 10
             ? $"Fq(0x{hex[..5]}..{hex[^5..]})"
             : $"Fq(0x{hex})";

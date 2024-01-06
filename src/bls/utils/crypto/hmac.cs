@@ -6,11 +6,7 @@ public static class Hmac
 {
     public const int HmacBlockSize = 64;
 
-    public static byte[] Hash256(byte[] message)
-    {
-        using var sha256 = SHA256.Create();
-        return sha256.ComputeHash(message);
-    }
+    public static byte[] Hash256(byte[] message) => SHA256.HashData(message);
 
     public static byte[] Hash512(byte[] message)
     {

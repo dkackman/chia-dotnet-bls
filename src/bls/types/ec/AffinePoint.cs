@@ -1,5 +1,5 @@
-using System.Numerics;
 using System.Diagnostics;
+using System.Numerics;
 
 namespace chia.dotnet.bls;
 
