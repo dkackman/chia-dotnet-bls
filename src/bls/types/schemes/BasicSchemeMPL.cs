@@ -8,12 +8,15 @@ public static class BasicSchemeMPL
 
     public static bool Verify(JacobianPoint publicKey, byte[] message, JacobianPoint signature) => Signing.CoreVerifyMpl(publicKey, message, signature, Constants.BasicSchemeDst);
 
-    public static JacobianPoint Aggregate(List<JacobianPoint> signatures) => Signing.CoreAggregateMpl(signatures);
+    public static JacobianPoint Aggregate(JacobianPoint[] signatures) => Signing.CoreAggregateMpl(signatures);
 
-    public static bool AggregateVerify(List<JacobianPoint> publicKeys, List<byte[]> messages, JacobianPoint signature)
+    public static bool AggregateVerify(JacobianPoint[] publicKeys, byte[][] messages, JacobianPoint signature)
     {
-        if (publicKeys.Count != messages.Count || publicKeys.Count == 0)
+        if (publicKeys.Length != messages.Length || publicKeys.Length == 0)
+        {
             return false;
+        }
+
         foreach (var message in messages)
         {
             foreach (var match in messages)
@@ -22,6 +25,7 @@ public static class BasicSchemeMPL
                     return false;
             }
         }
+
         return Signing.CoreAggregateVerify(publicKeys, messages, signature, Constants.BasicSchemeDst);
     }
 
