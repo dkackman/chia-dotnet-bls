@@ -16,9 +16,11 @@ Code and passing unit tests for:
 - [x] AffinePoint
 - [x] JacobianPoint
 - [x] PrivateKey
-- [ ] AugSchemeMPL
+- [x] AugSchemeMPL
 - [x] BasicSchemeMPL
-- [ ] PopSchemeMPL
+- [x] PopSchemeMPL
+- [ ] Readme Unit tests
+- [ ] Invalid vector unit tests
 ___
 
 _chia and its logo are the registered trademark or trademark of Chia Network, Inc. in the United States and worldwide._
