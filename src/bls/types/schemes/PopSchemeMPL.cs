@@ -8,7 +8,7 @@ public static class PopSchemeMPL
 
     public static bool Verify(JacobianPoint publicKey, byte[] message, JacobianPoint signature) => Signing.CoreVerifyMpl(publicKey, message, signature, Constants.PopSchemeDst);
 
-    public static JacobianPoint Aggregate(List<JacobianPoint> signatures) => Signing.CoreAggregateMpl(signatures);
+    public static JacobianPoint Aggregate(JacobianPoint[] signatures) => Signing.CoreAggregateMpl(signatures);
 
     public static bool AggregateVerify(JacobianPoint[] publicKeys, byte[][] messages, JacobianPoint signature)
     {
@@ -57,9 +57,9 @@ public static class PopSchemeMPL
         return pairingResult.Equals(one);
     }
 
-    public static bool FastAggregateVerify(List<JacobianPoint> publicKeys, byte[] message, JacobianPoint signature)
+    public static bool FastAggregateVerify(JacobianPoint[] publicKeys, byte[] message, JacobianPoint signature)
     {
-        if (publicKeys.Count == 0)
+        if (publicKeys.Length == 0)
         {
             return false;
         }

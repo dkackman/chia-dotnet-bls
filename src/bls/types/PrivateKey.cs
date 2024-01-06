@@ -24,7 +24,7 @@ public class PrivateKey
         return new PrivateKey(ModMath.Mod(okm.BytesToBigInt(Endian.Big), Constants.DefaultEc.N));
     }
     public static PrivateKey FromBigInt(BigInteger value) => new(ModMath.Mod(value, Constants.DefaultEc.N));
-    public static PrivateKey Aggregate(List<PrivateKey> privateKeys)
+    public static PrivateKey Aggregate(PrivateKey[] privateKeys)
     {
         var aggregate = privateKeys.Aggregate(BigInteger.Zero, (acc, privateKey) => acc + privateKey.Value);
         return new PrivateKey(ModMath.Mod(aggregate, Constants.DefaultEc.N));

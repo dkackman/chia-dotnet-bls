@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 
 namespace chia.dotnet.bls;
 
-public static class Hkdf
+internal static class Hkdf
 {
     public const int BlockSize = 32;
 
@@ -26,7 +26,8 @@ public static class Hkdf
             Array.Copy(temp, 0, okm, bytesWritten, toWrite);
             bytesWritten += toWrite;
         }
-        if (bytesWritten != length) throw new Exception("Bytes written does not match length");
+        if (bytesWritten != length) 
+            throw new Exception("Bytes written does not match length");
         return okm;
     }
 

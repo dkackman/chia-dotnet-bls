@@ -3,7 +3,7 @@ using System.Numerics;
 namespace chia.dotnet.bls;
 
 // incase we need to pass these around without knowing T
-public interface IField
+internal interface IField
 {
     BigInteger Q { get; }
     int Extension { get; }
@@ -14,7 +14,7 @@ public interface IField
     bool Equals(BigInteger value);
 }
 
-public interface IField<T> : IField where T : IField<T>
+internal interface IField<T> : IField where T : IField<T>
 {
     T Zero(BigInteger Q);
     T One(BigInteger Q);
@@ -46,7 +46,7 @@ public interface IField<T> : IField where T : IField<T>
     bool GreaterThanOrEqual(T value);
 }
 
-public interface IFieldExt<T> : IField<T> where T : IField<T>
+internal interface IFieldExt<T> : IField<T> where T : IField<T>
 {
     T Root { get; }
     T[] Elements { get; }

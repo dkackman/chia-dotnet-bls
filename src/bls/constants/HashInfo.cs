@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 
 namespace chia.dotnet.bls;
 
-public class HashInfo
+internal class HashInfo
 {
     public int ByteSize { get; init; } = 32;
     public int BlockSize { get; init; } = 64;

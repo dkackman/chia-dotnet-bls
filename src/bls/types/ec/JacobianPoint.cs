@@ -30,19 +30,25 @@ public class JacobianPoint
         ec ??= Constants.DefaultEc;
         if (isExtension)
         {
-            if (bytes.Length != 96) throw new Exception("Expected 96 bytes.");
+            if (bytes.Length != 96)
+                throw new Exception("Expected 96 bytes.");
         }
         else
         {
-            if (bytes.Length != 48) throw new Exception("Expected 48 bytes.");
+            if (bytes.Length != 48)
+                throw new Exception("Expected 48 bytes.");
         }
+
         var mByte = bytes[0] & 0xe0;
         if (sourceArray.Contains(mByte))
             throw new Exception("Invalid first three bits.");
+
         var compressed = (mByte & 0x80) != 0;
         var infinity = (mByte & 0x40) != 0;
         var signed = (mByte & 0x20) != 0;
-        if (!compressed) throw new Exception("Compression bit must be 1.");
+        if (!compressed)
+            throw new Exception("Compression bit must be 1.");
+
         bytes[0] &= 0x1f;
 
         var nil = isExtension ? Fq2.Nil : Fq.Nil;
@@ -51,6 +57,7 @@ public class JacobianPoint
         {
             if (bytes.Any(b => b != 0))
                 throw new Exception("Point at infinity, but found non-zero byte.");
+
             return new AffinePoint(
                 nil.Zero(ec.Q),
                 nil.Zero(ec.Q),
@@ -64,13 +71,13 @@ public class JacobianPoint
             ? EcMethods.SignFq2((Fq2)yValue, ec)
             : EcMethods.SignFq(yValue, ec);
         var y = sign == signed ? yValue : yValue.Negate();
+
         return new AffinePoint(x, y, false, ec).ToJacobian();
     }
 
     public static JacobianPoint FromHex(string hex, bool isExtension, EC? ec = null)
     {
         ec ??= Constants.DefaultEc;
-
         return FromBytes(hex.FromHex(), isExtension, ec);
     }
 
@@ -143,6 +150,7 @@ public class JacobianPoint
             bytes.AddRange(new byte[output.Length - 1]);
             return [.. bytes];
         }
+
         var sign = point.Y is Fq2 fq ? EcMethods.SignFq2(fq, Ec) : EcMethods.SignFq(point.Y, Ec);
         output[0] |= (byte)(sign ? 0xa0 : 0x80);
         return output;
@@ -155,13 +163,16 @@ public class JacobianPoint
     public JacobianPoint Double()
     {
         if (IsInfinity || Y.Equals(X.Zero(Ec.Q)))
+        {
             return new JacobianPoint(
-                X.One(Ec.Q),
-                X.One(Ec.Q),
-                X.Zero(Ec.Q),
-                true,
-                Ec
-            );
+                      X.One(Ec.Q),
+                      X.One(Ec.Q),
+                      X.Zero(Ec.Q),
+                      true,
+                      Ec
+                  );
+        }
+
         var S = X.Multiply(Y).Multiply(Y).Multiply(new Fq(Ec.Q, 4));
         var Z_sq = Z.Multiply(Z);
         var Z_4th = Z_sq.Multiply(Z_sq);
@@ -186,8 +197,14 @@ public class JacobianPoint
 
     public JacobianPoint Add(JacobianPoint value)
     {
-        if (IsInfinity) return value;
-        else if (value.IsInfinity) return this;
+        if (IsInfinity)
+        {
+            return value;
+        }
+        if (value.IsInfinity)
+        {
+            return this;
+        }
         var U1 = X.Multiply(value.Z.Pow(2));
         var U2 = value.X.Multiply(Z.Pow(2));
         var S1 = Y.Multiply(value.Z.Pow(3));
@@ -204,7 +221,10 @@ public class JacobianPoint
                     Ec
                 );
             }
-            else return Double();
+            else
+            {
+                return Double();
+            }
         }
         var H = U2.Subtract(U1);
         var R = S2.Subtract(S1);

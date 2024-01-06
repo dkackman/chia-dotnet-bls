@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public static class EcMethods
+internal static class EcMethods
 {
     public static Fq YForX(Fq x, EC? ec = null)
     {
@@ -41,7 +41,10 @@ public static class EcMethods
         var mapValues = new Fq2[4];
         int maxOrd = mapCoeffs[0].Length;
         foreach (var coeffs in mapCoeffs.Skip(1))
+        {
             maxOrd = Math.Max(maxOrd, coeffs.Length);
+        }
+
         var zPows = new Fq2[maxOrd];
         zPows[0] = (Fq2)z.Pow(0);
         zPows[1] = (Fq2)z.Pow(2);
@@ -51,6 +54,7 @@ public static class EcMethods
             Debug.Assert(zPows[1] != null);
             zPows[i] = (Fq2)zPows[i - 1].Multiply(zPows[1]);
         }
+
         for (int i = 0; i < mapCoeffs.Length; i++)
         {
             var coeffsZ = mapCoeffs[i].Reverse().Select((item, j) => item.Multiply(zPows[j])).ToArray();
@@ -62,6 +66,7 @@ public static class EcMethods
             }
             mapValues[i] = (Fq2)temp;
         }
+
         Debug.Assert(mapCoeffs[1].Length + 1 == mapCoeffs[0].Length);
         Debug.Assert(zPows[1] != null);
         Debug.Assert(mapValues[1] != null);
@@ -80,7 +85,6 @@ public static class EcMethods
     public static bool SignFq(Fq element, EC? ec = null)
     {
         ec ??= Constants.DefaultEc;
-
         return element.GreaterThan(new Fq(ec.Q, (ec.Q - 1) / 2));
     }
 
@@ -89,7 +93,9 @@ public static class EcMethods
         ec ??= Constants.DefaultEcTwist;
 
         if (element.Elements[1].Equals(new Fq(ec.Q, 0)))
+        {
             return SignFq(element.Elements[0]);
+        }
 
         return element.Elements[1].GreaterThan(new Fq(ec.Q, (ec.Q - 1) / 2));
     }

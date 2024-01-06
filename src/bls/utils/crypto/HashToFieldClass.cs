@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public static class HashToFieldClass
+internal static class HashToFieldClass
 {
     public static byte[] I2OSP(BigInteger value, int length)
     {

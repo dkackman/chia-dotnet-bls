@@ -20,7 +20,7 @@ public static partial class ByteUtils
 
     public static int BigIntBitLength(this BigInteger value) => (value < 0 ? -value : value).ToString("2").Length;
 
-    public static List<long> BigIntToBits(this BigInteger i)
+    public static long[] BigIntToBits(this BigInteger i)
     {
         var bits = new List<long>();
         while (i != 0)
@@ -29,7 +29,7 @@ public static partial class ByteUtils
             i /= 2;
         }
         bits.Reverse();
-        return bits;
+        return [.. bits];
     }
 
     public static IEnumerable<long> IntToBits(this long i)
@@ -74,7 +74,10 @@ public static partial class ByteUtils
     public static long BytesToInt(this byte[] bytes, Endian endian, bool signed = false)
     {
         if (bytes.Length == 0)
+        {
             return 0;
+        }
+
         var sign = Convert.ToString(bytes[endian == Endian.Little ? bytes.Length - 1 : 0], 2).PadLeft(8, '0')[0].ToString();
         var byteList = endian == Endian.Little ? bytes.Reverse().ToArray() : bytes;
         var binary = "";
@@ -88,6 +91,7 @@ public static partial class ByteUtils
             binary = Convert.ToString(binary.Flip() + 1, 2).PadLeft(bytes.Length * 8, '0');
         }
         var result = Convert.ToInt64(binary, 2);
+
         return sign == "1" && signed ? -result : result;
     }
 
@@ -112,12 +116,14 @@ public static partial class ByteUtils
     {
         if (value < 0 && !signed)
             throw new Exception("Cannot convert negative number to unsigned.");
+
         var binary = value.ToBinaryString(size * 8);
         var bytes = MyRegex().Matches(binary).Select(match => Convert.ToByte(match.Value, 2)).ToArray();
         if (endian == Endian.Little)
         {
             Array.Reverse(bytes);
         }
+
         return bytes.Select(b => b).ToArray();
     }
 
@@ -125,13 +131,18 @@ public static partial class ByteUtils
 
     public static byte[] EncodeBigInt(this BigInteger value)
     {
-        if (value == 0) return ""u8.ToArray();
+        if (value == 0)
+        {
+            return ""u8.ToArray();
+        }
+
         var length = (value.BigIntBitLength() + 8) >> 3;
         var bytes = BigIntToBytes(value, length, Endian.Big, true);
         while (bytes.Length > 1 && bytes[0] == ((bytes[1] & 0x80) != 0 ? (byte)0xff : (byte)0))
         {
             bytes = bytes.Skip(1).ToArray();
         }
+
         return bytes;
     }
 
@@ -144,6 +155,7 @@ public static partial class ByteUtils
         {
             bytes.AddRange(list);
         }
+
         return [.. bytes];
     }
 

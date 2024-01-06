@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace chia.dotnet.bls;
 
-public static class Signing
+internal static class Signing
 {
     public static JacobianPoint CoreSignMpl(PrivateKey sk, byte[] message, byte[] dst) => OptSwu2MapClass.G2Map(message, dst).Multiply(sk.Value);
 
@@ -12,6 +12,7 @@ public static class Signing
         {
             return false;
         }
+
         var q = OptSwu2MapClass.G2Map(message, dst);
         var one = Fq12.Nil.One(Constants.DefaultEc.Q);
         var pairingResult = Pairing.AtePairingMulti(
@@ -57,6 +58,7 @@ public static class Signing
             {
                 return false;
             }
+            
             qs.Add(OptSwu2MapClass.G2Map(ms[i], dst));
             ps.Add(pks[i]);
         }

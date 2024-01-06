@@ -4,13 +4,14 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public static class OptSwu2MapClass
+internal static class OptSwu2MapClass
 {
     public static BigInteger Sgn0(Fq2 x)
     {
         var sign0 = ModMath.Mod(x.Elements[0].Value, 2) == 1;
         var zero0 = x.Elements[0].Value == 0;
         var sign1 = ModMath.Mod(x.Elements[1].Value, 2) == 1;
+
         return sign0 || (zero0 && sign1) ? 1 : 0;
     }
 
@@ -34,7 +35,9 @@ public static class OptSwu2MapClass
             if (y0.Pow(2).Multiply(gx0_den).Equals(gx0_num))
             {
                 if (Sgn0(y0) != Sgn0(t))
+                {
                     y0 = (Fq2)y0.Negate();
+                }
 
                 Debug.Assert(Sgn0(y0) == Sgn0(t));
                 return new JacobianPoint(
@@ -57,7 +60,9 @@ public static class OptSwu2MapClass
             if (y1.Pow(2).Multiply(gx1_den).Equals(gx1_num))
             {
                 if (Sgn0(y1) != Sgn0(t))
+                {
                     y1 = (Fq2)y1.Negate();
+                }
 
                 Debug.Assert(Sgn0(y1) == Sgn0(t));
                 return new JacobianPoint(
@@ -69,6 +74,7 @@ public static class OptSwu2MapClass
                 );
             }
         }
+
         throw new Exception("Bad osswu2Help.");
     }
 
@@ -82,6 +88,7 @@ public static class OptSwu2MapClass
             var Pp2 = Iso3(Osswu2Help(t2));
             Pp = Pp.Add(Pp2);
         }
+
         return Pp.Multiply(Constants.HEff);
     }
 
@@ -92,6 +99,7 @@ public static class OptSwu2MapClass
             var items = hh.Select(value => new Fq(Constants.Q, value)).ToList();
             return new Fq2(Constants.Q, items[0], items[1]);
         }).ToList();
+        
         return OptSwu2Map(elements[0], elements[1]);
     }
 }

@@ -10,9 +10,9 @@ public static partial class Constants
 
     public static readonly List<Fq2> rootsOfUnity =
     [
-        new(Constants.Q, new Fq(Constants.Q, 1), new Fq(Constants.Q, 0)),
-        new(Constants.Q, new Fq(Constants.Q, 0), new Fq(Constants.Q, 1)),
-        new(Constants.Q, new Fq(Constants.Q, rv1), new Fq(Constants.Q, rv1)),
-        new(Constants.Q, new Fq(Constants.Q, rv1), new Fq(Constants.Q, Constants.Q - rv1)),
+        new(Q, new Fq(Q, 1), new Fq(Q, 0)),
+        new(Q, new Fq(Q, 0), new Fq(Q, 1)),
+        new(Q, new Fq(Q, rv1), new Fq(Q, rv1)),
+        new(Q, new Fq(Q, rv1), new Fq(Q, Q - rv1)),
     ];
 }

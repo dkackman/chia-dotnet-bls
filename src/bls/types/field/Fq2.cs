@@ -138,7 +138,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
     public override Fq QiPower(int i)
     {
         if (Q != Constants.Q)
-            throw new OperatorError("Invalid Q in QiPower.");
+            throw new InvalidDataException("Invalid Q in QiPower.");
 
         i %= Extension;
 

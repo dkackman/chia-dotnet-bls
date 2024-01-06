@@ -160,7 +160,7 @@ public class ReadmeTests
     [Fact]
     public void PopSchemeMPLFastAggregateVerifyTest()
     {
-        var pkList = new List<JacobianPoint> { pk1, pk2, pk3 };
+        JacobianPoint[] pkList = [pk1, pk2, pk3];
         Assert.True(PopSchemeMPL.FastAggregateVerify(pkList, message, popSigAgg));
     }
 

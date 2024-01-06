@@ -1,6 +1,6 @@
 namespace chia.dotnet.bls;
 
-public static class HdKeysClass
+internal static class HdKeysClass
 {
     public static PrivateKey KeyGen(byte[] seed)
     {

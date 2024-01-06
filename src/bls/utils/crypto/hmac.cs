@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 
 namespace chia.dotnet.bls;
 
-public static class Hmac
+internal static class Hmac
 {
     public const int HmacBlockSize = 64;
 
@@ -23,17 +23,26 @@ public static class Hmac
 
     public static byte[] Hmac256(byte[] message, byte[] k)
     {
-        if (k.Length > HmacBlockSize) k = Hash256(k);
+        if (k.Length > HmacBlockSize)
+        {
+            k = Hash256(k);
+        }
         while (k.Length < HmacBlockSize)
+        {
             Array.Resize(ref k, k.Length + 1);
+        }
 
         var kopad = new byte[HmacBlockSize];
         for (int i = 0; i < HmacBlockSize; i++)
+        {
             kopad[i] = (byte)(k[i] ^ 0x5c);
+        }
 
         var kipad = new byte[HmacBlockSize];
         for (int i = 0; i < HmacBlockSize; i++)
+        {
             kipad[i] = (byte)(k[i] ^ 0x36);
+        }
 
         var kipadAndMessage = new byte[kipad.Length + message.Length];
         Array.Copy(kipad, 0, kipadAndMessage, 0, kipad.Length);

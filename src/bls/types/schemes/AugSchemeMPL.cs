@@ -13,7 +13,7 @@ public static class AugSchemeMPL
     public static bool Verify(JacobianPoint publicKey, byte[] message, JacobianPoint signature)
         => Signing.CoreVerifyMpl(publicKey, [.. publicKey.ToBytes(), .. message], signature, Constants.AugSchemeDst);
 
-    public static JacobianPoint Aggregate(List<JacobianPoint> signatures) => Signing.CoreAggregateMpl(signatures);
+    public static JacobianPoint Aggregate(JacobianPoint[] signatures) => Signing.CoreAggregateMpl(signatures);
 
     public static bool AggregateVerify(JacobianPoint[] publicKeys, byte[][] messages, JacobianPoint signature)
     {

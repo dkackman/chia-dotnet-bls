@@ -3,7 +3,7 @@ using System.Text;
 
 namespace chia.dotnet.bls;
 
-public static class BigIntegerExtensions
+internal static class BigIntegerExtensions
 {
     public static string ToBinaryString(this BigInteger bigInt, int size)
     {
