@@ -12,7 +12,7 @@ Very much a work in progress but the goal is to provide a .NET library for chia 
 Check out the unit tests to see where progress is at.
 
 Code and passing unit tests for:
-- [x] Field types (`Fq, Fq2, fq6, Fq12` and related associated types and constants)
+- [x] Field types (`Fq, Fq2, fq6, Fq12` and associated types and constants)
 - [x] AffinePoint
 - [x] JacobianPoint
 - [x] PrivateKey
