@@ -22,13 +22,13 @@ public static class Hmac
         Array.Copy(message, messageWithOne, message.Length);
         messageWithOne[^1] = 1;
 
-        return Hash256(messageWithZero).Concat(Hash256(messageWithOne)).ToArray();
+        return [.. Hash256(messageWithZero), .. Hash256(messageWithOne)];
     }
 
     public static byte[] Hmac256(byte[] message, byte[] k)
     {
         if (k.Length > HmacBlockSize) k = Hash256(k);
-        while (k.Length < HmacBlockSize) 
+        while (k.Length < HmacBlockSize)
             Array.Resize(ref k, k.Length + 1);
 
         var kopad = new byte[HmacBlockSize];

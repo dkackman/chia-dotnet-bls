@@ -61,6 +61,6 @@ public static class Signing
             ps.Add(pks[i]);
         }
 
-        return Fq12.Nil.One(Constants.DefaultEc.Q).Equals(Pairing.AtePairingMulti(ps.ToArray(), qs.ToArray()));
+        return Fq12.Nil.One(Constants.DefaultEc.Q).Equals(Pairing.AtePairingMulti([.. ps], [.. qs]));
     }
 }

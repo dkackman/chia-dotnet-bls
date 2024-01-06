@@ -40,12 +40,12 @@ public static class HashToFieldClass
         byte[] dst_prime = [.. dst, .. I2OSP(dst.Length, 1)];
         var Z_pad = I2OSP(0, hash.BlockSize);
         var lib_str = I2OSP(length, 2);
-        var b_0 = hash.Convert(Z_pad.Concat(message).Concat(lib_str).Concat(I2OSP(0, 1)).Concat(dst_prime).ToArray());
+        var b_0 = hash.Convert([.. Z_pad, .. message, .. lib_str, .. I2OSP(0, 1), .. dst_prime]);
 
         List<byte[]> bValues = [hash.Convert([.. b_0, .. I2OSP(1, 1), .. dst_prime])];
         for (int i = 1; i <= ell; i++)
         {
-            bValues.Add(hash.Convert(BytesXor(b_0, bValues[i - 1]).Concat(I2OSP(i + 1, 1)).Concat(dst_prime).ToArray()));
+            bValues.Add(hash.Convert([.. BytesXor(b_0, bValues[i - 1]), .. I2OSP(i + 1, 1), .. dst_prime]));
         }
 
         List<byte> pseudoRandomBytes = [];

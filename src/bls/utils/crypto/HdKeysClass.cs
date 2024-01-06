@@ -5,7 +5,7 @@ public static class HdKeysClass
     public static PrivateKey KeyGen(byte[] seed)
     {
         int length = 48;
-        byte[] okm = Hkdf.ExtractExpand(length, seed.Concat(new byte[] { 0 }).ToArray(), "BLS-SIG-KEYGEN-SALT-".ToBytes(), [0, (byte)length]);
+        byte[] okm = Hkdf.ExtractExpand(length, [.. seed, .. new byte[] { 0 }], "BLS-SIG-KEYGEN-SALT-".ToBytes(), [0, (byte)length]);
         return new PrivateKey(ModMath.Mod(ByteUtils.BytesToBigInt(okm, Endian.Big), Constants.DefaultEc.N));
     }
 
