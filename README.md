@@ -20,7 +20,7 @@ Code and passing unit tests for:
 - [x] BasicSchemeMPL
 - [x] PopSchemeMPL
 - [ ] Readme Unit tests
-- [ ] Invalid vector unit tests
+
 ___
 
 _chia and its logo are the registered trademark or trademark of Chia Network, Inc. in the United States and worldwide._
