@@ -9,7 +9,8 @@
     "hmac",
     "Lamport",
     "Mult",
-    "Osswu"
+    "Osswu",
+    "ress"
   ],
   "dotnet-test-explorer.testProjectPath": "**/*tests.@(csproj|vbproj|fsproj)"
 }
