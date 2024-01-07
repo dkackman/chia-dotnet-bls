@@ -19,19 +19,28 @@ internal static class HdKeysClass
         byte[] notIkm = ikm.Select(e => (byte)(e ^ 0xff)).ToArray();
         byte[] lamport0 = IkmToLamportSk(ikm, salt);
         byte[] lamport1 = IkmToLamportSk(notIkm, salt);
-        List<byte> lamportPk = [];
 
+        // Assuming Hmac.Hash256 returns a 32-byte array
+        int hashSize = 32;
+        int totalLamportSize = 255 * hashSize * 2; // 255 hashes for lamport0 and 255 for lamport1
+        byte[] lamportPk = new byte[totalLamportSize];
+
+        int offset = 0;
         for (int i = 0; i < 255; i++)
         {
-            lamportPk.AddRange(Hmac.Hash256(lamport0.Skip(i * 32).Take(32).ToArray()));
+            byte[] hash = Hmac.Hash256(lamport0.Skip(i * 32).Take(32).ToArray());
+            Array.Copy(hash, 0, lamportPk, offset, hashSize);
+            offset += hashSize;
         }
 
         for (int i = 0; i < 255; i++)
         {
-            lamportPk.AddRange(Hmac.Hash256(lamport1.Skip(i * 32).Take(32).ToArray()));
+            byte[] hash = Hmac.Hash256(lamport1.Skip(i * 32).Take(32).ToArray());
+            Array.Copy(hash, 0, lamportPk, offset, hashSize);
+            offset += hashSize;
         }
 
-        return Hmac.Hash256([.. lamportPk]);
+        return Hmac.Hash256(lamportPk);
     }
 
     public static PrivateKey DeriveChildSk(PrivateKey parentSk, long index) => KeyGen(ParentSkToLamportPk(parentSk, index));

@@ -20,27 +20,15 @@ public static partial class ByteUtils
 
     public static int BigIntBitLength(this BigInteger value) => (value < 0 ? -value : value).ToString("2").Length;
 
-    public static long[] BigIntToBits(this BigInteger i)
+    public static long[] ToBits(this BigInteger i)
     {
-        var bits = new List<long>();
-        while (i != 0)
+        int size = i == 0 ? 1 : (int)Math.Floor(BigInteger.Log(i, 2)) + 1;
+        long[] bits = new long[size];
+        for (int index = size - 1; index >= 0; index--)
         {
-            bits.Add((long)ModMath.Mod(i, 2));
+            bits[index] = (long)ModMath.Mod(i, 2);
             i /= 2;
         }
-        bits.Reverse();
-        return [.. bits];
-    }
-
-    public static IEnumerable<long> IntToBits(this long i)
-    {
-        var bits = new List<long>();
-        while (i != 0)
-        {
-            bits.Add(i % 2);
-            i /= 2;
-        }
-        bits.Reverse();
         return bits;
     }
 
@@ -71,47 +59,49 @@ public static partial class ByteUtils
         return bytes;
     }
 
-    public static long BytesToInt(this byte[] bytes, Endian endian, bool signed = false)
+    public static long ToInt(this byte[] bytes, Endian endian, bool signed = false)
     {
         if (bytes.Length == 0)
         {
             return 0;
         }
 
-        var sign = Convert.ToString(bytes[endian == Endian.Little ? bytes.Length - 1 : 0], 2).PadLeft(8, '0')[0].ToString();
-        var byteList = endian == Endian.Little ? bytes.Reverse().ToArray() : bytes;
-        var binary = "";
-        foreach (var byteVal in byteList)
+        // Ensure the byte array is not longer than 8 bytes, as it won't fit in a long.
+        if (bytes.Length > 8)
         {
-            binary += Convert.ToString(byteVal, 2).PadLeft(8, '0');
+            throw new ArgumentException("Byte array too long to convert to a long.");
         }
 
-        if (sign == "1" && signed)
-        {
-            binary = Convert.ToString(binary.Flip() + 1, 2).PadLeft(bytes.Length * 8, '0');
-        }
-        var result = Convert.ToInt64(binary, 2);
+        long result = 0;
+        bool isLittleEndian = BitConverter.IsLittleEndian;
 
-        return sign == "1" && signed ? -result : result;
+        // Adjust the byte order based on endianness.
+        if ((isLittleEndian && endian == Endian.Big) || (!isLittleEndian && endian == Endian.Little))
+        {
+            Array.Reverse(bytes);
+        }
+
+        // Combine the bytes into a long value.
+        foreach (var byteValue in bytes)
+        {
+            result = (result << 8) | byteValue;
+        }
+
+        // Handle signed conversion.
+        if (signed && (bytes[0] & 0x80) != 0)
+        {
+            // If the number is negative, fill the leftmost bits with 1's for correct two's complement representation.
+            for (int i = bytes.Length; i < 8; i++)
+            {
+                result |= (long)0xFF << (i * 8);
+            }
+        }
+
+        return result;
     }
 
-    public static byte[] EncodeInt(this long value)
-    {
-        if (value == 0)
-        {
-            return ""u8.ToArray();
-        }
-
-        var length = (value.IntBitLength() + 8) >> 3;
-        var bytes = value.IntToBytes(length, Endian.Big, true);
-        while (bytes.Length > 1 && bytes[0] == ((bytes[1] & 0x80) != 0 ? (byte)0xff : (byte)0))
-        {
-            bytes = bytes.Skip(1).ToArray();
-        }
-        return bytes;
-    }
-
-    public static long DecodeInt(this byte[] bytes) => bytes.BytesToInt(Endian.Big, true);
+    public static byte[] EncodeInt(this long value) => BitConverter.GetBytes(value);
+    public static long DecodeInt(this byte[] bytes) => bytes.ToInt(Endian.Big, true);
     public static byte[] BigIntToBytes(this BigInteger value, int size, Endian endian, bool signed = false)
     {
         if (value < 0 && !signed)
@@ -124,7 +114,7 @@ public static partial class ByteUtils
             Array.Reverse(bytes);
         }
 
-        return bytes.Select(b => b).ToArray();
+        return bytes;
     }
 
     public static BigInteger BytesToBigInt(this byte[] bytes, Endian endian, bool signed = false) => new(bytes, !signed, endian == Endian.Big);
@@ -148,15 +138,27 @@ public static partial class ByteUtils
 
     public static BigInteger DecodeBigInt(this byte[] bytes) => BytesToBigInt(bytes, Endian.Big, true);
 
-    public static byte[] ConcatBytes(params byte[][] lists)
+    public static byte[] ConcatBytes(params byte[][] arrays)
     {
-        List<byte> bytes = [];
-        foreach (var list in lists)
+        // Calculate the total size needed
+        int totalSize = 0;
+        foreach (var array in arrays)
         {
-            bytes.AddRange(list);
+            totalSize += array.Length;
         }
 
-        return [.. bytes];
+        // Allocate the array
+        byte[] bytes = new byte[totalSize];
+
+        // Fill the array
+        int offset = 0;
+        foreach (var array in arrays)
+        {
+            Array.Copy(array, 0, bytes, offset, array.Length);
+            offset += array.Length;
+        }
+
+        return bytes;
     }
 
     public static bool BytesEqual(byte[] a, byte[] b) => a.Length == b.Length && !a.Where((t, i) => b[i] != t).Any();

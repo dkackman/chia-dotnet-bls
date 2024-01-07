@@ -121,7 +121,7 @@ public class JacobianPoint
 
     public bool IsValid() => IsOnCurve() && Multiply(Ec.N).Equals(X is Fq ? InfinityG1() : InfinityG2());
 
-    public long GetFingerprint() => Hmac.Hash256(ToBytes()).Take(4).ToArray().BytesToInt(Endian.Big);
+    public long GetFingerprint() => Hmac.Hash256(ToBytes()).Take(4).ToArray().ToInt(Endian.Big);
 
     public AffinePoint ToAffine()
     {
@@ -144,17 +144,20 @@ public class JacobianPoint
     {
         var point = ToAffine();
         var output = point.X.ToBytes();
+
         if (point.IsInfinity)
         {
-            var bytes = new List<byte> { 0xc0 };
-            bytes.AddRange(new byte[output.Length - 1]);
-            return [.. bytes];
+            var bytes = new byte[output.Length];
+            bytes[0] = 0xc0;  // Set the first byte to 0xc0
+                              // The rest of the bytes are already initialized to 0 by default
+            return bytes;
         }
 
         var sign = point.Y is Fq2 fq ? EcMethods.SignFq2(fq, Ec) : EcMethods.SignFq(point.Y, Ec);
         output[0] |= (byte)(sign ? 0xa0 : 0x80);
         return output;
     }
+
 
     public string ToHex() => ToBytes().ToHex();
 

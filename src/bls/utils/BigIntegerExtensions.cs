@@ -7,74 +7,71 @@ internal static class BigIntegerExtensions
 {
     public static string ToBinaryString(this BigInteger bigInt, int size)
     {
-        // Check if the number is negative
         var isNegative = bigInt.Sign < 0;
 
         // Convert BigInteger to its absolute byte array representation
         var byteArray = BigInteger.Abs(bigInt).ToByteArray();
-        var binaryStringBuilder = new StringBuilder(size);
 
-        // Convert to binary and append to StringBuilder
+        // Reverse the byte array for big-endian representation
+        Array.Reverse(byteArray);
+
+        var binaryStringBuilder = new StringBuilder();
+
+        // Convert each byte to its binary representation and append
         foreach (var b in byteArray)
         {
-            binaryStringBuilder.Insert(0, Convert.ToString(b, 2).PadLeft(8, '0'));
+            binaryStringBuilder.Append(Convert.ToString(b, 2).PadLeft(8, '0'));
         }
 
-        var binaryString = binaryStringBuilder.ToString();
+        var binaryString = binaryStringBuilder.ToString().TrimStart('0');
 
-        // If negative, apply two's complement
+        // Adjusting for two's complement if the number is negative
         if (isNegative)
         {
-            binaryString = ApplyTwosComplement(binaryString);
+            binaryString = InvertBitsAndAddOne(binaryString, size);
+        }
+        else
+        {
+            binaryString = binaryString.PadLeft(size, '0');
         }
 
-        // Adjust the string length based on the specified size
+        // Ensuring the binary string is of the specified size
         if (binaryString.Length > size)
         {
-            binaryString = binaryString.Substring(binaryString.Length - size);
-        }
-        else if (binaryString.Length < size)
-        {
-            var padChar = isNegative ? '1' : '0';
-            binaryString = binaryString.PadLeft(size, padChar);
+            binaryString = binaryString[^size..];
         }
 
         return binaryString;
     }
 
-    static string ApplyTwosComplement(string binaryString)
+    private static string InvertBitsAndAddOne(string binaryString, int size)
     {
-        // Invert the bits
-        var invertedArray = binaryString.Select(c => c == '0' ? '1' : '0').ToArray();
+        var invertedString = new StringBuilder(size);
 
-        // Convert to BigInteger and add 1 to get the two's complement
-        var invertedBigInt = new BigInteger(ConvertToByteArray(new string(invertedArray))) + 1;
-
-        // Convert back to binary string
-        return invertedBigInt.ToString("D");
-    }
-
-    static byte[] ConvertToByteArray(string str)
-    {
-        var byteArray = new byte[(str.Length + 7) / 8];
-        var byteIndex = 0;
-        var bitIndex = 0;
-
-        for (var i = str.Length - 1; i >= 0; i--)
+        // Inverting the bits
+        foreach (var c in binaryString)
         {
-            if (str[i] == '1')
-            {
-                byteArray[byteIndex] |= (byte)(1 << bitIndex);
-            }
+            invertedString.Append(c == '0' ? '1' : '0');
+        }
 
-            bitIndex++;
-            if (bitIndex == 8)
+        // Padding to the left if necessary
+        invertedString.Insert(0, new string('1', size - invertedString.Length));
+
+        // Adding one to the inverted binary string
+        var carry = true;
+        for (int i = size - 1; i >= 0 && carry; i--)
+        {
+            if (invertedString[i] == '1')
             {
-                bitIndex = 0;
-                byteIndex++;
+                invertedString[i] = '0';
+            }
+            else
+            {
+                invertedString[i] = '1';
+                carry = false;
             }
         }
 
-        return byteArray;
+        return invertedString.ToString();
     }
 }

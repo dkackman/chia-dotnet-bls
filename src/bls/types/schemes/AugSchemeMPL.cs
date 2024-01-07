@@ -22,14 +22,25 @@ public static class AugSchemeMPL
             return false;
         }
 
-        List<byte[]> mPrimes = [];
+        byte[][] mPrimes = new byte[publicKeys.Length][];
         for (int i = 0; i < publicKeys.Length; i++)
         {
-            mPrimes.Add([.. publicKeys[i].ToBytes(), .. messages[i]]);
+            byte[] publicKeyBytes = publicKeys[i].ToBytes();
+            byte[] message = messages[i];
+
+            // Create a new array to hold the concatenation
+            mPrimes[i] = new byte[publicKeyBytes.Length + message.Length];
+
+            // Copy the public key bytes
+            Array.Copy(publicKeyBytes, 0, mPrimes[i], 0, publicKeyBytes.Length);
+
+            // Copy the message bytes
+            Array.Copy(message, 0, mPrimes[i], publicKeyBytes.Length, message.Length);
         }
 
-        return Signing.CoreAggregateVerify(publicKeys, [.. mPrimes], signature, Constants.AugSchemeDst);
+        return Signing.CoreAggregateVerify(publicKeys, mPrimes, signature, Constants.AugSchemeDst);
     }
+
 
     public static PrivateKey DeriveChildSk(PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSk(privateKey, index);
 

@@ -53,19 +53,21 @@ internal static class Signing
             return false;
         }
 
-        var qs = new List<JacobianPoint> { signature };
-        var ps = new List<JacobianPoint> { JacobianPoint.GenerateG1().Negate() };
-        for (var i = 0; i < pks.Length; i++)
+        JacobianPoint[] qs = new JacobianPoint[pks.Length + 1];
+        JacobianPoint[] ps = new JacobianPoint[pks.Length + 1];
+        qs[0] = signature;
+        ps[0] = JacobianPoint.GenerateG1().Negate();
+        for (var i = 1; i < pks.Length + 1; i++)
         {
-            if (!pks[i].IsValid())
+            if (!pks[i - 1].IsValid())
             {
                 return false;
             }
 
-            qs.Add(OptSwu2MapClass.G2Map(ms[i], dst));
-            ps.Add(pks[i]);
+            qs[i] = OptSwu2MapClass.G2Map(ms[i - 1], dst);
+            ps[i] = pks[i - 1];
         }
 
-        return Fq12.Nil.One(Constants.DefaultEc.Q).Equals(Pairing.AtePairingMulti([.. ps], [.. qs]));
+        return Fq12.Nil.One(Constants.DefaultEc.Q).Equals(Pairing.AtePairingMulti(ps, qs));
     }
 }

@@ -44,19 +44,19 @@ public class Fq2 : Fq, IFieldExt<Fq>
         }
 
         var embeddedSize = 48 * (Extension / Elements.Length);
-        List<byte[]> elements = [];
+        byte[][] elements = new byte[Elements.Length][];
 
         for (var i = 0; i < Elements.Length; i++)
         {
             var elementBytes = new byte[embeddedSize];
             Array.Copy(bytes, i * embeddedSize, elementBytes, 0, embeddedSize);
-            elements.Add(elementBytes);
+            elements[i] = elementBytes;
         }
 
-        elements.Reverse();
-        var constructedElements = elements.Select(elementBytes => Basefield.FromBytes(q, elementBytes)).ToList();
+        elements = elements.Reverse().ToArray();
+        var constructedElements = elements.Select(elementBytes => Basefield.FromBytes(q, elementBytes)).ToArray();
 
-        return Construct(q, [.. constructedElements]);
+        return Construct(q, constructedElements);
     }
 
     public override Fq Inverse()
@@ -108,13 +108,13 @@ public class Fq2 : Fq, IFieldExt<Fq>
         var y = Basefield.FromFq(q, fq);
         var z = Basefield.Zero(q);
 
-        var elements = new List<Fq>();
+        Fq[] elements = new Fq[Elements.Length];
         for (int i = 0; i < Elements.Length; i++)
         {
-            elements.Add(i == 0 ? y : z);
+            elements[i] = i == 0 ? y : z;
         }
 
-        var result = Construct(q, [.. elements]);
+        var result = Construct(q, elements);
         ((Fq2)result).Root = new Fq(q, BigInteger.MinusOne);
 
         return result;
@@ -127,13 +127,26 @@ public class Fq2 : Fq, IFieldExt<Fq>
 
     public override byte[] ToBytes()
     {
-        var bytes = new List<byte>();
-        for (int i = Elements.Length - 1; i >= 0; i--)
+        // Calculate total size needed
+        int totalSize = 0;
+        foreach (var element in Elements)
         {
-            bytes.AddRange(Elements[i].ToBytes());
+            totalSize += element.ToBytes().Length;
         }
 
-        return [.. bytes];
+        // Allocate the array
+        byte[] bytes = new byte[totalSize];
+
+        // Fill the array
+        int offset = 0;
+        for (int i = Elements.Length - 1; i >= 0; i--)
+        {
+            var elementBytes = Elements[i].ToBytes();
+            Array.Copy(elementBytes, 0, bytes, offset, elementBytes.Length);
+            offset += elementBytes.Length;
+        }
+
+        return bytes;
     }
 
     public override bool ToBool() => Elements.All(element => element.ToBool());
