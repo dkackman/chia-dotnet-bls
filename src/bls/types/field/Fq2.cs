@@ -26,7 +26,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
     {
     }
 
-    public virtual Fq Construct(BigInteger q, Fq[] elements) => new Fq2(q, [elements[0], elements[1]]);
+    public virtual Fq Construct(BigInteger q, Fq[] elements) => new Fq2(q, elements);
     public Fq ConstructWithRoot(BigInteger q, Fq[] elements) => ((IFieldExt<Fq>)Construct(q, elements)).WithRoot(Root);
 
     public Fq WithRoot(Fq root)
