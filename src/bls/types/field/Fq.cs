@@ -7,7 +7,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
     public static readonly Fq Nil = new(1, 0);
 
     public virtual int Extension { get; } = 1;
-    public BigInteger Value { get; } = ModMath.Mod(value, q);
+    public BigInteger Value { get; } = value % q;
     public BigInteger Q { get; } = q;
 
     public virtual Fq Zero(BigInteger q) => new(q, 0);
@@ -83,7 +83,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
             return new Fq(Q, 0);
         }
 
-        if (ModMath.ModPow(Value, (Q - 1) / 2, Q) != 1)
+        if (BigInteger.ModPow(Value, (Q - 1) / 2, Q) != 1)
         {
             throw new Exception("No sqrt exists.");
         }
@@ -92,7 +92,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
         {
             return new Fq(
                 Q,
-                ModMath.ModPow(Value, (Q + 1) / 4, Q)
+                BigInteger.ModPow(Value, (Q + 1) / 4, Q)
             );
         }
 
@@ -100,7 +100,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
         {
             return new Fq(
                 Q,
-                ModMath.ModPow(Value, (Q + 3) / 8, Q)
+                BigInteger.ModPow(Value, (Q + 3) / 8, Q)
             );
         }
 
@@ -115,7 +115,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
         BigInteger z = 0;
         for (BigInteger i = 0; i < Q; i++)
         {
-            BigInteger euler = ModMath.ModPow(i, (Q - 1) / 2, Q);
+            BigInteger euler = BigInteger.ModPow(i, (Q - 1) / 2, Q);
             if (euler == ModMath.Mod(-1, Q))
             {
                 z = i;
@@ -124,9 +124,9 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
         }
 
         BigInteger M = S;
-        BigInteger c = ModMath.ModPow(z, q, Q);
-        BigInteger t = ModMath.ModPow(Value, q, Q);
-        BigInteger R = ModMath.ModPow(Value, (q + 1) / 2, Q);
+        BigInteger c = BigInteger.ModPow(z, q, Q);
+        BigInteger t = BigInteger.ModPow(Value, q, Q);
+        BigInteger R = BigInteger.ModPow(Value, (q + 1) / 2, Q);
         while (true)
         {
             if (t == 0)
@@ -147,7 +147,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
                 i++;
             }
 
-            BigInteger b = ModMath.ModPow(c, ModMath.ModPow(2, M - i - 1, Q), Q);
+            BigInteger b = BigInteger.ModPow(c, BigInteger.ModPow(2, M - i - 1, Q), Q);
             M = i;
             c = ModMath.Mod(b * b, Q);
             t = ModMath.Mod(t * c, Q);
