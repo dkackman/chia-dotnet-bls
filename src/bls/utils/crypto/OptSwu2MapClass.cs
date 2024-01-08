@@ -29,7 +29,7 @@ internal static class OptSwu2MapClass
         var temp2 = gx0_num.Multiply(temp1);
         temp1 = temp1.Multiply(temp2).Multiply(gx0_den);
         var sqrtCandidate = temp2.Multiply(temp1.Pow((BigInteger.Pow(Constants.Q, 2) - 9) / 16));
-        
+
         foreach (var root in Constants.rootsOfUnity)
         {
             var y0 = (Fq2)sqrtCandidate.Multiply(root);
@@ -98,10 +98,10 @@ internal static class OptSwu2MapClass
     {
         var elements = HashToFieldClass.Hp2(alpha, 2, dst).Select(hh =>
         {
-            var items = hh.Select(value => new Fq(Constants.Q, value)).ToList();
+            var items = hh.Select(value => new Fq(Constants.Q, value)).ToArray();
             return new Fq2(Constants.Q, items[0], items[1]);
-        }).ToList();
-        
+        }).ToArray();
+
         return OptSwu2Map(elements[0], elements[1]);
     }
 }

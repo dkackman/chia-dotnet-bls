@@ -23,17 +23,19 @@ internal static class Signing
         return pairingResult.Equals(one);
     }
 
-    public static JacobianPoint CoreAggregateMpl(IEnumerable<JacobianPoint> signatures)
+    public static JacobianPoint CoreAggregateMpl(JacobianPoint[] signatures)
     {
-        if (!signatures.Any())
+        if (signatures.Length == 0)
         {
             throw new Exception("Must aggregate at least 1 signature.");
         }
 
-        var aggregate = signatures.First();
+        var aggregate = signatures[0];
         Debug.Assert(aggregate.IsValid());
-        foreach (var signature in signatures.Skip(1))
+
+        for (int i = 1; i < signatures.Length; i++)
         {
+            var signature = signatures[i];
             Debug.Assert(signature.IsValid());
             aggregate = aggregate.Add(signature);
         }
@@ -53,8 +55,11 @@ internal static class Signing
             return false;
         }
 
-        var qs = new List<JacobianPoint> { signature };
-        var ps = new List<JacobianPoint> { JacobianPoint.GenerateG1().Negate() };
+        var qs = new JacobianPoint[pks.Length + 1];
+        var ps = new JacobianPoint[pks.Length + 1];
+        qs[0] = signature;
+        ps[0] = JacobianPoint.GenerateG1().Negate();
+
         for (var i = 0; i < pks.Length; i++)
         {
             if (!pks[i].IsValid())
@@ -62,10 +67,10 @@ internal static class Signing
                 return false;
             }
 
-            qs.Add(OptSwu2MapClass.G2Map(ms[i], dst));
-            ps.Add(pks[i]);
+            qs[i + 1] = OptSwu2MapClass.G2Map(ms[i], dst);
+            ps[i + 1] = pks[i];
         }
 
-        return Fq12.Nil.One(Constants.DefaultEc.Q).Equals(Pairing.AtePairingMulti([.. ps], [.. qs]));
+        return Fq12.Nil.One(Constants.DefaultEc.Q).Equals(Pairing.AtePairingMulti(ps, qs));
     }
 }

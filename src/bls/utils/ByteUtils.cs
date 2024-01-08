@@ -1,7 +1,6 @@
 using System.Globalization;
 using System.Numerics;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace chia.dotnet.bls;
 
@@ -14,8 +13,6 @@ public enum Endian
 public static partial class ByteUtils
 {
     public static byte[] ToBytes(this string value) => Encoding.UTF8.GetBytes(value);
-
-    public static int BigIntBitLength(this BigInteger value) => (value < 0 ? -value : value).ToString("2").Length;
 
     public static byte[] BigIntToBits(this BigInteger i)
     {
@@ -127,23 +124,6 @@ public static partial class ByteUtils
     }
 
     public static BigInteger BytesToBigInt(this byte[] bytes, Endian endian, bool signed = false) => new(bytes, !signed, endian == Endian.Big);
-
-    public static byte[] EncodeBigInt(this BigInteger value)
-    {
-        if (value == 0)
-        {
-            return ""u8.ToArray();
-        }
-
-        var length = (value.BigIntBitLength() + 8) >> 3;
-        var bytes = BigIntToBytes(value, length, Endian.Big, true);
-        while (bytes.Length > 1 && bytes[0] == ((bytes[1] & 0x80) != 0 ? (byte)0xff : (byte)0))
-        {
-            bytes = bytes.Skip(1).ToArray();
-        }
-
-        return bytes;
-    }
 
     public static bool BytesEqual(byte[] a, byte[] b) => a.Length == b.Length && !a.Where((t, i) => b[i] != t).Any();
 

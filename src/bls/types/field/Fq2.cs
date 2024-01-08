@@ -44,17 +44,18 @@ public class Fq2 : Fq, IFieldExt<Fq>
         }
 
         var embeddedSize = 48 * (Extension / Elements.Length);
-        List<byte[]> elements = [];
+        var elements = new byte[Elements.Length][];
 
         for (var i = 0; i < Elements.Length; i++)
         {
             var elementBytes = new byte[embeddedSize];
             Array.Copy(bytes, i * embeddedSize, elementBytes, 0, embeddedSize);
-            elements.Add(elementBytes);
+            elements[i] = elementBytes;
         }
 
-        elements.Reverse();
-        var constructedElements = elements.Select(elementBytes => Basefield.FromBytes(q, elementBytes)).ToList();
+        Array.Reverse(elements);
+
+        var constructedElements = elements.Select(elementBytes => Basefield.FromBytes(q, elementBytes));
 
         return Construct(q, [.. constructedElements]);
     }
@@ -320,7 +321,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
                 return false;
             }
         }
-        
+
         return false;
     }
 
