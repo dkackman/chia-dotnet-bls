@@ -7,7 +7,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
     public static readonly Fq Nil = new(1, 0);
 
     public virtual int Extension { get; } = 1;
-    public BigInteger Value { get; } = value % q;
+    public BigInteger Value { get; } = ModMath.Mod(value, q);
     public BigInteger Q { get; } = q;
 
     public virtual Fq Zero(BigInteger q) => new(q, 0);
