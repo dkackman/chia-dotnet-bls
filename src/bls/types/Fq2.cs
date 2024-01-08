@@ -238,7 +238,12 @@ public class Fq2 : Fq, IFieldExt<Fq>
             return value.MultiplyWith(this);
         }
 
-        var elements = Elements.Select(_ => Basefield.Zero(Q)).ToArray();
+        var elements = new Fq[Elements.Length];
+        var zfq = Basefield.Zero(Q);
+        for (int i = 0; i < Elements.Length; i++)
+        {
+            elements[i] = zfq;
+        }
         for (int i = 0; i < Elements.Length; i++)
         {
             var x = Elements[i];
