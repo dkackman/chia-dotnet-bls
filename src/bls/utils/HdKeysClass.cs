@@ -2,11 +2,15 @@ namespace chia.dotnet.bls;
 
 internal static class HdKeysClass
 {
+    private static readonly byte[] _saltBytes = "BLS-SIG-KEYGEN-SALT-".ToBytes();
+    private const byte keyLength = 48;
+    private static readonly byte[] info = [0, keyLength];
+
     public static PrivateKey KeyGen(byte[] seed)
     {
-        int length = 48;
-        byte[] okm = Hkdf.ExtractExpand(length, [.. seed, .. new byte[] { 0 }], "BLS-SIG-KEYGEN-SALT-".ToBytes(), [0, (byte)length]);
-        
+        Array.Resize(ref seed, seed.Length + 1);
+        var okm = Hkdf.ExtractExpand(keyLength, seed, _saltBytes, info);
+
         return new PrivateKey(ModMath.Mod(ByteUtils.BytesToBigInt(okm, Endian.Big), Constants.DefaultEc.N));
     }
 
