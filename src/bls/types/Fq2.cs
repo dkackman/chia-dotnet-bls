@@ -87,19 +87,21 @@ public class Fq2 : Fq, IFieldExt<Fq>
             throw new Exception("No sqrt exists.");
         }
 
+        var two = new Fq(Q, 2);
+        var inverseTwo = two.Inverse();
         alpha = alpha.ModSqrt();
-        var delta = a0.Add(alpha).Multiply(new Fq(Q, 2).Inverse());
+        var delta = a0.Add(alpha).Multiply(inverseTwo);
         gamma = delta.Pow((Q - 1) / 2);
 
         if (gamma.Equals(new Fq(Q, -1)))
         {
-            delta = a0.Subtract(alpha).Multiply(new Fq(Q, 2).Inverse());
+            delta = a0.Subtract(alpha).Multiply(inverseTwo);
         }
 
         var x0 = delta.ModSqrt();
-        var x1 = a1.Multiply(new Fq(Q, 2).Multiply(x0).Inverse());
+        var x1 = a1.Multiply(two.Multiply(x0).Inverse());
 
-        return new Fq2(Q, [x0, x1]);
+        return new Fq2(Q, x0, x1);
     }
 
     public override Fq FromHex(BigInteger q, string hex) => FromBytes(q, hex.FromHex());

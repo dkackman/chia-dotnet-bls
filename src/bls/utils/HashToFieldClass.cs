@@ -46,6 +46,7 @@ internal static class HashToFieldClass
         }
     }
 
+    // this method is a performance hotspot so it has optimizations
     public static byte[] ExpandMessageXmd(byte[] message, byte[] dst, int length, HashInfo hash)
     {
         var ell = (length + hash.ByteSize - 1) / hash.ByteSize;
@@ -100,7 +101,7 @@ internal static class HashToFieldClass
             // Use ConcatenateArrays to concatenate xorResult, I2OSP(i + 1, 1), and dst_prime
             byte[] currentSegmentInput = ByteUtils.ConcatenateArrays(xorResult.ToArray(), I2OSP(i + 1, 1), dst_prime);
             var currentSegment = hash.Convert(currentSegmentInput);
-            
+
             Array.Copy(currentSegment, 0, bValues, i * hash.ByteSize, hash.ByteSize);
         }
 
@@ -112,14 +113,6 @@ internal static class HashToFieldClass
         }
 
         return bValues;
-    }
-
-    public static byte[] ExpandMessageXof(byte[] message, byte[] dst, int length, HashInfo hash)
-    {
-        byte[] dst_prime = [.. dst, .. I2OSP(dst.Length, 1)];
-        byte[] message_prime = [.. message, .. I2OSP(length, 2), .. dst_prime];
-
-        return hash.Convert(message_prime).Take(length).ToArray();
     }
 
     public static BigInteger[][] HashToField(byte[] message, int count, byte[] dst, BigInteger modulus, int degree, int byteLength, Func<byte[], byte[], int, HashInfo, byte[]> expand, HashInfo hash)
@@ -141,8 +134,6 @@ internal static class HashToFieldClass
 
         return uValues;
     }
-
-    public static BigInteger[][] Hp(byte[] message, int count, byte[] dst) => HashToField(message, count, dst, Constants.Q, 1, 64, ExpandMessageXmd, HashInfo.Sha256);
 
     public static BigInteger[][] Hp2(byte[] message, int count, byte[] dst) => HashToField(message, count, dst, Constants.Q, 2, 64, ExpandMessageXmd, HashInfo.Sha256);
 }

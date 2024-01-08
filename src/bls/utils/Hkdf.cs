@@ -17,12 +17,20 @@ internal static class Hkdf
         var blocks = (int)Math.Ceiling((double)length / BlockSize);
         var bytesWritten = 0;
         var okm = new byte[length];
-        var temp = Array.Empty<byte>();
+        var temp = Extract(prk, ByteUtils.ConcatenateArrays(info, [1]));
         for (var i = 1; i <= blocks; i++)
         {
-            temp = Extract(prk, i == 1 ? [.. info, .. new byte[] { 1 }] : [.. temp, .. info, .. new byte[] { (byte)i }]);
+            if (i > 1)
+            {
+                temp = Extract(prk, ByteUtils.ConcatenateArrays(temp, info, [(byte)i]));
+            }
+
             var toWrite = length - bytesWritten;
-            if (toWrite > BlockSize) toWrite = BlockSize;
+            if (toWrite > BlockSize)
+            {
+                toWrite = BlockSize;
+            }
+            
             Array.Copy(temp, 0, okm, bytesWritten, toWrite);
             bytesWritten += toWrite;
         }

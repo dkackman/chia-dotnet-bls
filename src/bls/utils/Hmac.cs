@@ -8,6 +8,15 @@ internal static class Hmac
 
     public static byte[] Hash256(byte[] message) => SHA256.HashData(message);
 
+    public static byte[] Hash256(ArraySegment<byte> messageSegment)
+    {
+        // Convert the ArraySegment to a ReadOnlySpan
+        ReadOnlySpan<byte> messageSpan = messageSegment.AsSpan();
+
+        // Hash the span
+        return SHA256.HashData(messageSpan);
+    }
+    
     public static byte[] Hash512(byte[] message)
     {
         var messageWithZero = new byte[message.Length + 1];
@@ -18,7 +27,7 @@ internal static class Hmac
         Array.Copy(message, messageWithOne, message.Length);
         messageWithOne[^1] = 1;
 
-        return [.. Hash256(messageWithZero), .. Hash256(messageWithOne)];
+        return ByteUtils.ConcatenateArrays(Hash256(messageWithZero), Hash256(messageWithOne));
     }
 
     public static byte[] Hmac256(byte[] message, byte[] k)
@@ -48,6 +57,6 @@ internal static class Hmac
         Array.Copy(kipad, 0, kipadAndMessage, 0, kipad.Length);
         Array.Copy(message, 0, kipadAndMessage, kipad.Length, message.Length);
 
-        return Hash256([.. kopad, .. Hash256(kipadAndMessage)]);
+        return Hash256(ByteUtils.ConcatenateArrays(kopad, Hash256(kipadAndMessage)));
     }
 }

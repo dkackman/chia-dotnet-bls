@@ -67,14 +67,33 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
 
     public virtual Fq Pow(BigInteger exponent)
     {
-        return exponent == 0
-            ? new Fq(Q, 1)
-            : exponent == 1
-            ? new Fq(Q, Value)
-            : ModMath.Mod(exponent, 2) == 0
-            ? new Fq(Q, Value * Value).Pow(exponent / 2)
-            : new Fq(Q, Value * Value).Pow(exponent / 2).Multiply(this);
+        if (exponent == 0)
+        {
+            return new Fq(Q, 1);
+        }
+
+        if (exponent == 1)
+        {
+            return new Fq(Q, Value);
+        }
+
+        Fq result = new(Q, 1);
+        Fq baseValue = this;
+
+        while (exponent > 0)
+        {
+            if (ModMath.Mod(exponent, 2) == 1)
+            {
+                result = result.Multiply(baseValue);
+            }
+
+            baseValue = new Fq(Q, baseValue.Value * baseValue.Value);
+            exponent /= 2;
+        }
+
+        return result;
     }
+
 
     public virtual Fq ModSqrt()
     {

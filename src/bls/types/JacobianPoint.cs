@@ -10,6 +10,15 @@ public class JacobianPoint
     public Fq Z;
     public bool IsInfinity;
     public EC Ec;
+
+    // these are precomputed for performance
+    private readonly Fq zero;
+    private readonly Fq one;
+    private readonly Fq two;
+    private readonly Fq three;
+    private readonly Fq four;
+    private readonly Fq eight;
+
     private static readonly int[] sourceArray = [0x20, 0x60, 0xe0];
 
     public JacobianPoint(Fq x, Fq y, Fq z, bool isInfinity, EC? ec = null)
@@ -23,6 +32,13 @@ public class JacobianPoint
         Z = z;
         IsInfinity = isInfinity;
         Ec = ec;
+
+        zero = X.Zero(Ec.Q);
+        one = X.One(Ec.Q);
+        two = new Fq(Ec.Q, 2);
+        three = new Fq(Ec.Q, 3);
+        four = new Fq(Ec.Q, 4);
+        eight = new Fq(Ec.Q, 8);
     }
 
     public static JacobianPoint FromBytes(byte[] bytes, bool isExtension, EC? ec = null)
@@ -90,11 +106,12 @@ public class JacobianPoint
     public static JacobianPoint InfinityG1(bool isExtension = false)
     {
         var nil = isExtension ? Fq2.Nil : Fq.Nil;
-        
+
+        Fq x = nil.Zero(Constants.DefaultEc.Q);
         return new JacobianPoint(
-            nil.Zero(Constants.DefaultEc.Q),
-            nil.Zero(Constants.DefaultEc.Q),
-            nil.Zero(Constants.DefaultEc.Q),
+            x,
+            x,
+            x,
             true,
             Constants.DefaultEc
         );
@@ -103,10 +120,11 @@ public class JacobianPoint
     public static JacobianPoint InfinityG2(bool isExtension = true)
     {
         var nil = isExtension ? Fq2.Nil : Fq.Nil;
+        var x = nil.Zero(Constants.DefaultEcTwist.Q);
         return new JacobianPoint(
-            nil.Zero(Constants.DefaultEcTwist.Q),
-            nil.Zero(Constants.DefaultEcTwist.Q),
-            nil.Zero(Constants.DefaultEcTwist.Q),
+            x,
+            x,
+            x,
             true,
             Constants.DefaultEcTwist
         );
@@ -130,7 +148,7 @@ public class JacobianPoint
     {
         return IsInfinity
             ? new AffinePoint(
-                X.Zero(Ec.Q),
+                zero,
                 Y.Zero(Ec.Q),
                 true,
                 Ec
@@ -158,41 +176,37 @@ public class JacobianPoint
         output[0] |= (byte)(sign ? 0xa0 : 0x80);
         return output;
     }
-    
+
     public string ToHex() => ToBytes().ToHex();
 
     public override string ToString() => $"JacobianPoint(x={X}, y={Y}, z={Z}, i={IsInfinity})";
 
     public JacobianPoint Double()
     {
-        if (IsInfinity || Y.Equals(X.Zero(Ec.Q)))
+        if (IsInfinity || Y.Equals(zero))
         {
             return new JacobianPoint(
-                      X.One(Ec.Q),
-                      X.One(Ec.Q),
-                      X.Zero(Ec.Q),
+                      one,
+                      one,
+                      zero,
                       true,
                       Ec
                   );
         }
 
-        var S = X.Multiply(Y).Multiply(Y).Multiply(new Fq(Ec.Q, 4));
+        var S = X.Multiply(Y).Multiply(Y).Multiply(four);
         var Z_sq = Z.Multiply(Z);
         var Z_4th = Z_sq.Multiply(Z_sq);
         var Y_sq = Y.Multiply(Y);
         var Y_4th = Y_sq.Multiply(Y_sq);
-        var M = X.Multiply(X).Multiply(new Fq(Ec.Q, 3)).Add(Ec.A.Multiply(Z_4th));
-        var X_p = M.Multiply(M).Subtract(S.Multiply(new Fq(Ec.Q, 2)));
-        var Y_p = M.Multiply(S.Subtract(X_p)).Subtract(Y_4th.Multiply(new Fq(Ec.Q, 8)));
-        var Z_p = Y.Multiply(Z).Multiply(new Fq(Ec.Q, 2));
+        var threeXsq = X.Multiply(X).Multiply(three);
+        var M = threeXsq.Add(Ec.A.Multiply(Z_4th));
+        var twoS = S.Multiply(two);
+        var X_p = M.Multiply(M).Subtract(twoS);
+        var Y_p = M.Multiply(S.Subtract(X_p)).Subtract(Y_4th.Multiply(eight));
+        var Z_p = Y.Multiply(Z).Multiply(two);
 
-        return new JacobianPoint(
-            X_p,
-            Y_p,
-            Z_p,
-            false,
-            Ec
-        );
+        return new JacobianPoint(X_p, Y_p, Z_p, false, Ec);
     }
 
     public JacobianPoint Negate() => ToAffine().Negate().ToJacobian();
@@ -209,18 +223,22 @@ public class JacobianPoint
             return this;
         }
 
-        var U1 = X.Multiply(value.Z.Pow(2));
-        var U2 = value.X.Multiply(Z.Pow(2));
-        var S1 = Y.Multiply(value.Z.Pow(3));
-        var S2 = value.Y.Multiply(Z.Pow(3));
+        var Z1_sq = Z.Pow(2);
+        var Z2_sq = value.Z.Pow(2);
+
+        var U1 = X.Multiply(Z2_sq);
+        var U2 = value.X.Multiply(Z1_sq);
+        var S1 = Y.Multiply(value.Z).Multiply(Z2_sq);
+        var S2 = value.Y.Multiply(Z).Multiply(Z1_sq);
+
         if (U1.Equals(U2))
         {
             if (!S1.Equals(S2))
             {
                 return new JacobianPoint(
-                    X.One(Ec.Q),
-                    X.One(Ec.Q),
-                    X.Zero(Ec.Q),
+                    one,
+                    one,
+                    zero,
                     true,
                     Ec
                 );
@@ -232,21 +250,15 @@ public class JacobianPoint
         var H = U2.Subtract(U1);
         var R = S2.Subtract(S1);
         var H_sq = H.Multiply(H);
+        var U1H_sq = U1.Multiply(H_sq);
         var H_cu = H.Multiply(H_sq);
-        var X3 = R.Multiply(R)
-            .Subtract(H_cu)
-            .Subtract(U1.Multiply(H_sq).Multiply(new Fq(Ec.Q, 2)));
-        var Y3 = R.Multiply(U1.Multiply(H_sq).Subtract(X3)).Subtract(S1.Multiply(H_cu));
+        var X3 = R.Multiply(R).Subtract(H_cu).Subtract(U1H_sq.Multiply(two));
+        var Y3 = R.Multiply(U1H_sq.Subtract(X3)).Subtract(S1.Multiply(H_cu));
         var Z3 = H.Multiply(Z).Multiply(value.Z);
 
-        return new JacobianPoint(
-            X3,
-            Y3,
-            Z3,
-            false,
-            Ec
-        );
+        return new JacobianPoint(X3, Y3, Z3, false, Ec);
     }
+
 
     public JacobianPoint Multiply(Fq value) => EcMethods.ScalarMultJacobian(value.Value, this, Ec);
     public JacobianPoint Multiply(BigInteger value) => EcMethods.ScalarMultJacobian(value, this, Ec);
