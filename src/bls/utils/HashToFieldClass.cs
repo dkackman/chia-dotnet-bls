@@ -17,11 +17,11 @@ internal static class HashToFieldClass
             bytes[i] = (byte)(value & 0xff);
             value >>= 8;
         }
-        
+
         return bytes;
     }
 
-    public static BigInteger OS2IP(IEnumerable<byte> octets)
+    private static BigInteger OS2IP(IEnumerable<byte> octets)
     {
         BigInteger result = 0;
         foreach (var octet in octets)
@@ -33,7 +33,18 @@ internal static class HashToFieldClass
         return result;
     }
 
-    public static byte[] BytesXor(byte[] a, byte[] b) => a.Zip(b, (x, y) => (byte)(x ^ y)).ToArray();
+    private static void BytesXor(Span<byte> a, Span<byte> b, Span<byte> result)
+    {
+        if (a.Length != b.Length)
+        {
+            throw new ArgumentException("Input spans must have the same length.");
+        }
+
+        for (int i = 0; i < a.Length; i++)
+        {
+            result[i] = (byte)(a[i] ^ b[i]);
+        }
+    }
 
     public static byte[] ExpandMessageXmd(byte[] message, byte[] dst, int length, HashInfo hash)
     {
@@ -43,24 +54,64 @@ internal static class HashToFieldClass
             throw new Exception($"Bad expandMessageXmd call: ell={ell} out of range.");
         }
 
-        byte[] dst_prime = [.. dst, .. I2OSP(dst.Length, 1)];
-        var Z_pad = I2OSP(0, hash.BlockSize);
-        var lib_str = I2OSP(length, 2);
-        var b_0 = hash.Convert([.. Z_pad, .. message, .. lib_str, .. I2OSP(0, 1), .. dst_prime]);
+        // Preallocate buffer for dst_prime
+        byte[] dst_prime = new byte[dst.Length + 1];
+        dst.CopyTo(dst_prime, 0);
+        dst_prime[dst.Length] = (byte)dst.Length; // Assuming I2OSP returns a single byte for length
 
-        List<byte[]> bValues = [hash.Convert([.. b_0, .. I2OSP(1, 1), .. dst_prime])];
-        for (int i = 1; i <= ell; i++)
+        // Preallocate buffer for Z_pad, lib_str, and single byte values
+        byte[] Z_pad = I2OSP(0, hash.BlockSize);
+        byte[] lib_str = I2OSP(length, 2);
+        byte[] zeroByte = I2OSP(0, 1);
+
+        // Calculate the total size needed for the concatenated data
+        int totalSize = Z_pad.Length + message.Length + lib_str.Length + zeroByte.Length + dst_prime.Length;
+        byte[] concatenated = new byte[totalSize];
+
+        // Copy the data into the preallocated buffer
+        int offset = 0;
+        Array.Copy(Z_pad, 0, concatenated, offset, Z_pad.Length);
+        offset += Z_pad.Length;
+        Array.Copy(message, 0, concatenated, offset, message.Length);
+        offset += message.Length;
+        Array.Copy(lib_str, 0, concatenated, offset, lib_str.Length);
+        offset += lib_str.Length;
+        Array.Copy(zeroByte, 0, concatenated, offset, zeroByte.Length);
+        offset += zeroByte.Length;
+        Array.Copy(dst_prime, 0, concatenated, offset, dst_prime.Length);
+
+        // Now use the concatenated array for hash conversion
+        byte[] b_0 = hash.Convert(concatenated);
+
+        byte[] bValues = new byte[ell * hash.ByteSize];
+
+        byte[] concatBuffer = ByteUtils.ConcatenateArrays(b_0, I2OSP(1, 1), dst_prime);
+
+        // Use the concatenated array for hash conversion
+        var firstHash = hash.Convert(concatBuffer);
+        firstHash.CopyTo(bValues, 0);
+
+        Span<byte> xorResult = stackalloc byte[hash.ByteSize]; // Assuming hash.ByteSize is small enough for stack allocation
+        for (int i = 1; i < ell; i++)
         {
-            bValues.Add(hash.Convert([.. BytesXor(b_0, bValues[i - 1]), .. I2OSP(i + 1, 1), .. dst_prime]));
+            var previousSegment = new Span<byte>(bValues, (i - 1) * hash.ByteSize, hash.ByteSize);
+            BytesXor(b_0, previousSegment, xorResult);
+
+            // Use ConcatenateArrays to concatenate xorResult, I2OSP(i + 1, 1), and dst_prime
+            byte[] currentSegmentInput = ByteUtils.ConcatenateArrays(xorResult.ToArray(), I2OSP(i + 1, 1), dst_prime);
+            var currentSegment = hash.Convert(currentSegmentInput);
+            
+            Array.Copy(currentSegment, 0, bValues, i * hash.ByteSize, hash.ByteSize);
         }
 
-        List<byte> pseudoRandomBytes = [];
-        foreach (var item in bValues)
+        if (bValues.Length > length)
         {
-            pseudoRandomBytes.AddRange(item);
+            byte[] result = new byte[length];
+            Array.Copy(bValues, result, length);
+            return result;
         }
 
-        return pseudoRandomBytes.Take(length).ToArray();
+        return bValues;
     }
 
     public static byte[] ExpandMessageXof(byte[] message, byte[] dst, int length, HashInfo hash)

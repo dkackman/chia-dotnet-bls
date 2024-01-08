@@ -143,4 +143,27 @@ public static partial class ByteUtils
 
         return bytes;
     }
+
+    public static byte[] ConcatenateArrays(params byte[][] arrays)
+    {
+        // Calculate the total size for concatenation
+        int totalSize = 0;
+        foreach (var array in arrays)
+        {
+            totalSize += array.Length;
+        }
+
+        // Preallocate a buffer for the concatenated data
+        byte[] concatBuffer = new byte[totalSize];
+
+        // Copy each array into concatBuffer
+        int offset = 0;
+        foreach (var array in arrays)
+        {
+            Array.Copy(array, 0, concatBuffer, offset, array.Length);
+            offset += array.Length;
+        }
+
+        return concatBuffer;
+    }
 }
