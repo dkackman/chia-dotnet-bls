@@ -109,13 +109,13 @@ public class Fq2 : Fq, IFieldExt<Fq>
         var y = Basefield.FromFq(q, fq);
         var z = Basefield.Zero(q);
 
-        var elements = new List<Fq>();
+        var elements = new Fq[Elements.Length];
         for (int i = 0; i < Elements.Length; i++)
         {
-            elements.Add(i == 0 ? y : z);
+            elements[i] = i == 0 ? y : z;
         }
 
-        var result = Construct(q, [.. elements]);
+        var result = Construct(q, elements);
         ((Fq2)result).Root = new Fq(q, BigInteger.MinusOne);
 
         return result;

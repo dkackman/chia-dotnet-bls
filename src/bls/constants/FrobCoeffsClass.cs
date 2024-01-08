@@ -5,7 +5,7 @@ namespace chia.dotnet.bls;
 
 public static partial class Constants
 {
-    public static readonly IReadOnlyDictionary<string, Fq> FrobCoeffs = new Dictionary<string, Fq>
+    private static readonly IReadOnlyDictionary<string, Fq> FrobCoeffs = new Dictionary<string, Fq>
     {
         // Add entries here, similar to your TypeScript code
         ["2,1,1"] = new Fq(Constants.Q, -1),
@@ -247,8 +247,7 @@ public static partial class Constants
 
     public static Fq? GetFrobCoeff(int extension, int i, int index)
     {
-        string key = $"{extension},{i},{index}";
-        if (FrobCoeffs.TryGetValue(key, out Fq? value))
+        if (FrobCoeffs.TryGetValue($"{extension},{i},{index}", out Fq? value))
         {
             return value;
         }
