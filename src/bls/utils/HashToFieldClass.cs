@@ -21,7 +21,7 @@ internal static class HashToFieldClass
         return bytes;
     }
 
-    public static BigInteger OS2IP(byte[] octets)
+    public static BigInteger OS2IP(IEnumerable<byte> octets)
     {
         BigInteger result = 0;
         foreach (var octet in octets)
@@ -71,26 +71,27 @@ internal static class HashToFieldClass
         return hash.Convert(message_prime).Take(length).ToArray();
     }
 
-    public static List<List<BigInteger>> HashToField(byte[] message, int count, byte[] dst, BigInteger modulus, int degree, int byteLength, Func<byte[], byte[], int, HashInfo, byte[]> expand, HashInfo hash)
+    public static BigInteger[][] HashToField(byte[] message, int count, byte[] dst, BigInteger modulus, int degree, int byteLength, Func<byte[], byte[], int, HashInfo, byte[]> expand, HashInfo hash)
     {
         var lengthInBytes = count * degree * byteLength;
         var pseudoRandomBytes = expand(message, dst, lengthInBytes, hash);
-        List<List<BigInteger>> uValues = [];
+        BigInteger[][] uValues = new BigInteger[count][];
         for (var i = 0; i < count; i++)
         {
-            List<BigInteger> eValues = [];
+            BigInteger[] eValues = new BigInteger[degree];
             for (var j = 0; j < degree; j++)
             {
                 var elmOffset = byteLength * (j + i * degree);
-                var tv = pseudoRandomBytes.Skip(elmOffset).Take(byteLength).ToArray();
-                eValues.Add(OS2IP(tv) % modulus);
+                var tv = new ArraySegment<byte>(pseudoRandomBytes, elmOffset, byteLength);
+                eValues[j] = OS2IP(tv) % modulus;
             }
-            uValues.Add(eValues);
+            uValues[i] = eValues;
         }
 
         return uValues;
     }
-    public static List<List<BigInteger>> Hp(byte[] message, int count, byte[] dst) => HashToField(message, count, dst, Constants.Q, 1, 64, ExpandMessageXmd, HashInfo.Sha256);
 
-    public static List<List<BigInteger>> Hp2(byte[] message, int count, byte[] dst) => HashToField(message, count, dst, Constants.Q, 2, 64, ExpandMessageXmd, HashInfo.Sha256);
+    public static BigInteger[][] Hp(byte[] message, int count, byte[] dst) => HashToField(message, count, dst, Constants.Q, 1, 64, ExpandMessageXmd, HashInfo.Sha256);
+
+    public static BigInteger[][] Hp2(byte[] message, int count, byte[] dst) => HashToField(message, count, dst, Constants.Q, 2, 64, ExpandMessageXmd, HashInfo.Sha256);
 }

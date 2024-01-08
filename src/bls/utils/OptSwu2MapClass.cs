@@ -96,11 +96,19 @@ internal static class OptSwu2MapClass
 
     public static JacobianPoint G2Map(byte[] alpha, byte[] dst)
     {
-        var elements = HashToFieldClass.Hp2(alpha, 2, dst).Select(hh =>
+        var hashResult = HashToFieldClass.Hp2(alpha, 2, dst);
+        var elements = new Fq2[hashResult.Length];
+
+        int index = 0;
+        foreach (var hh in hashResult)
         {
-            var items = hh.Select(value => new Fq(Constants.Q, value)).ToArray();
-            return new Fq2(Constants.Q, items[0], items[1]);
-        }).ToArray();
+            var items = new Fq[hh.Length];
+            for (int i = 0; i < hh.Length; i++)
+            {
+                items[i] = new Fq(Constants.Q, hh[i]);
+            }
+            elements[index++] = new Fq2(Constants.Q, items[0], items[1]);
+        }
 
         return OptSwu2Map(elements[0], elements[1]);
     }

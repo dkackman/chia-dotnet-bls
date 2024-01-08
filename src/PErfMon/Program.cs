@@ -1,16 +1,21 @@
-﻿using chia.dotnet.bls;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
+﻿using System.Diagnostics;
+using chia.dotnet.bls;
 
 public static class Program
-
 {
     public static void Main(string[] args)
     {
-        var sk = AugSchemeMPL.KeyGen(seed);
-        var pk = sk.GetG1();
-        var signature = AugSchemeMPL.Sign(sk, message);
+        var stopwatch = Stopwatch.StartNew();
 
-        Console.WriteLine(signature);
+        for (var i = 0; i < 100; i++)
+        {
+            var sk = AugSchemeMPL.KeyGen(seed);
+            var pk = sk.GetG1();
+            var signature = AugSchemeMPL.Sign(sk, message);
+        }
+
+        stopwatch.Stop();
+        Console.WriteLine($"Elapsed time: {stopwatch.ElapsedMilliseconds} ms");
     }
 
     private static readonly byte[] message = [1, 2, 3, 4, 5];
