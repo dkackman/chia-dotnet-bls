@@ -5,19 +5,16 @@ namespace chia.dotnet.bls;
 
 public class JacobianPoint
 {
-    public Fq X;
-    public Fq Y;
-    public Fq Z;
-    public bool IsInfinity;
-    public EC Ec;
+    public Fq X { get; }
+    public Fq Y { get; }
+    public Fq Z { get; }
+    public bool IsInfinity { get; }
+    public EC Ec { get; }
 
     // these are precomputed for performance
     private readonly Fq zero;
     private readonly Fq one;
     private readonly Fq two;
-    private readonly Fq three;
-    private readonly Fq four;
-    private readonly Fq eight;
 
     private static readonly int[] sourceArray = [0x20, 0x60, 0xe0];
 
@@ -36,9 +33,6 @@ public class JacobianPoint
         zero = X.Zero(Ec.Q);
         one = X.One(Ec.Q);
         two = new Fq(Ec.Q, 2);
-        three = new Fq(Ec.Q, 3);
-        four = new Fq(Ec.Q, 4);
-        eight = new Fq(Ec.Q, 8);
     }
 
     public static JacobianPoint FromBytes(byte[] bytes, bool isExtension, EC? ec = null)
@@ -193,6 +187,9 @@ public class JacobianPoint
                       Ec
                   );
         }
+        var three = new Fq(Ec.Q, 3);
+        var four = new Fq(Ec.Q, 4);
+        var eight = new Fq(Ec.Q, 8);
 
         var S = X.Multiply(Y).Multiply(Y).Multiply(four);
         var Z_sq = Z.Multiply(Z);

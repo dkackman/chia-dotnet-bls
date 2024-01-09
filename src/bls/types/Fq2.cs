@@ -43,12 +43,12 @@ public class Fq2 : Fq, IFieldExt<Fq>
         }
 
         var embeddedSize = 48 * (Extension / Elements.Length);
-        Fq[] constructedElements = new Fq[Elements.Length];
+        var constructedElements = new Fq[Elements.Length];
 
         for (var i = 0; i < Elements.Length; i++)
         {
             // Directly extract and convert each element, avoiding extra array allocations
-            byte[] elementBytes = new byte[embeddedSize];
+            var elementBytes = new byte[embeddedSize];
             Array.Copy(bytes, i * embeddedSize, elementBytes, 0, embeddedSize);
             constructedElements[Elements.Length - 1 - i] = Basefield.FromBytes(q, elementBytes);
         }
@@ -76,9 +76,10 @@ public class Fq2 : Fq, IFieldExt<Fq>
         }
 
         var alpha = a0.Pow(2).Add(a1.Pow(2));
-        var gamma = alpha.Pow((Q - 1) / 2);
-
-        if (new Fq(Q, -1).Equals(gamma))
+        var qMinusOneDivideTwo = (Q - 1) / 2;
+        var gamma = alpha.Pow(qMinusOneDivideTwo);
+        var FqMinus1 = new Fq(Q, -1);
+        if (FqMinus1.Equals(gamma))
         {
             throw new Exception("No sqrt exists.");
         }
@@ -87,9 +88,9 @@ public class Fq2 : Fq, IFieldExt<Fq>
         var inverseTwo = two.Inverse();
         alpha = alpha.ModSqrt();
         var delta = a0.Add(alpha).Multiply(inverseTwo);
-        gamma = delta.Pow((Q - 1) / 2);
+        gamma = delta.Pow(qMinusOneDivideTwo);
 
-        if (gamma.Equals(new Fq(Q, -1)))
+        if (gamma.Equals(FqMinus1))
         {
             delta = a0.Subtract(alpha).Multiply(inverseTwo);
         }
@@ -113,7 +114,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
         elements[0] = y;
 
         // Fill the rest of the elements with zero
-        for (int i = 1; i < Elements.Length; i++)
+        for (var i = 1; i < Elements.Length; i++)
         {
             elements[i] = z;
         }
@@ -129,9 +130,9 @@ public class Fq2 : Fq, IFieldExt<Fq>
 
     public override Fq Clone()
     {
-        Fq[] clonedElements = new Fq[Elements.Length];
+        var clonedElements = new Fq[Elements.Length];
 
-        for (int i = 0; i < Elements.Length; i++)
+        for (var i = 0; i < Elements.Length; i++)
         {
             clonedElements[i] = Elements[i].Clone();
         }
@@ -142,12 +143,12 @@ public class Fq2 : Fq, IFieldExt<Fq>
     public override byte[] ToBytes()
     {
         // Calculate the total size needed
-        int totalSize = Elements.Sum(element => element.ToBytes().Length);
-        byte[] bytes = new byte[totalSize];
+        var totalSize = Elements.Sum(element => element.ToBytes().Length);
+        var bytes = new byte[totalSize];
 
         // Copy each element's bytes into the array
-        int offset = 0;
-        for (int i = Elements.Length - 1; i >= 0; i--)
+        var offset = 0;
+        for (var i = Elements.Length - 1; i >= 0; i--)
         {
             var elementBytes = Elements[i].ToBytes();
             Array.Copy(elementBytes, 0, bytes, offset, elementBytes.Length);
@@ -166,9 +167,9 @@ public class Fq2 : Fq, IFieldExt<Fq>
 
     public override Fq Negate()
     {
-        Fq[] negatedElements = new Fq[Elements.Length];
+        var negatedElements = new Fq[Elements.Length];
 
-        for (int i = 0; i < Elements.Length; i++)
+        for (var i = 0; i < Elements.Length; i++)
         {
             negatedElements[i] = Elements[i].Negate();
         }
@@ -190,8 +191,8 @@ public class Fq2 : Fq, IFieldExt<Fq>
             return this;
         }
 
-        Fq[] newElements = new Fq[Elements.Length];
-        for (int index = 0; index < Elements.Length; index++)
+        var newElements = new Fq[Elements.Length];
+        for (var index = 0; index < Elements.Length; index++)
         {
             if (index == 0)
             {
@@ -234,20 +235,21 @@ public class Fq2 : Fq, IFieldExt<Fq>
             return value.AddTo(this);
         }
 
-        Fq[] newElements = new Fq[Elements.Length];
+        var newElements = new Fq[Elements.Length];
 
         if (value is IFieldExt<Fq> ext)
         {
-            for (int i = 0; i < Elements.Length; i++)
+            var basefieldZero = Basefield.Zero(Q);
+            for (var i = 0; i < Elements.Length; i++)
             {
-                newElements[i] = Elements[i].Add(i < ext.Elements.Length ? ext.Elements[i] : Basefield.Zero(Q));
+                newElements[i] = Elements[i].Add(i < ext.Elements.Length ? ext.Elements[i] : basefieldZero);
             }
         }
         else
         {
             // Add value to the first element and copy the rest as-is
             newElements[0] = Elements[0].Add(value);
-            for (int i = 1; i < Elements.Length; i++)
+            for (var i = 1; i < Elements.Length; i++)
             {
                 newElements[i] = Elements[i];
             }
@@ -260,13 +262,13 @@ public class Fq2 : Fq, IFieldExt<Fq>
     public override Fq AddTo(BigInteger value)
     {
         // Assuming Elements array is not empty and its length is known.
-        Fq[] newElements = new Fq[Elements.Length];
+        var newElements = new Fq[Elements.Length];
 
         // Directly add value to the first element
         newElements[0] = Elements[0].Add(value);
 
         // Copy the remaining elements as they are
-        for (int i = 1; i < Elements.Length; i++)
+        for (var i = 1; i < Elements.Length; i++)
         {
             newElements[i] = Elements[i];
         }
@@ -285,19 +287,19 @@ public class Fq2 : Fq, IFieldExt<Fq>
 
         var elements = new Fq[Elements.Length];
         var zfq = Basefield.Zero(Q);
-        for (int i = 0; i < Elements.Length; i++)
+        for (var i = 0; i < Elements.Length; i++)
         {
             elements[i] = zfq;
         }
 
-        for (int i = 0; i < Elements.Length; i++)
+        for (var i = 0; i < Elements.Length; i++)
         {
             var x = Elements[i];
             if (x.ToBool())
             {
                 if (value is IFieldExt<Fq> ext && value.Extension == Extension)
                 {
-                    for (int j = 0; j < ext.Elements.Length; j++)
+                    for (var j = 0; j < ext.Elements.Length; j++)
                     {
                         var y = ext.Elements[j];
                         if (y.ToBool())
@@ -335,7 +337,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
 
     public override Fq MultiplyWith(BigInteger value)
     {
-        Fq[] newElements = new Fq[Elements.Length];
+        var newElements = new Fq[Elements.Length];
         for (int i = 0; i < Elements.Length; i++)
         {
             newElements[i] = Elements[i].Multiply(value);

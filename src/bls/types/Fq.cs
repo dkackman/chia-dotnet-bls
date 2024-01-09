@@ -43,16 +43,16 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
                    x1 = 0,
                    y0 = 0,
                    y1 = 1;
-        BigInteger a = Q;
-        BigInteger b = Value;
+        var a = Q;
+        var b = Value;
 
         while (a != 0)
         {
-            BigInteger q = b / a;
-            BigInteger tempB = b;
+            var q = b / a;
+            var tempB = b;
             b = a;
             a = ModMath.Mod(tempB, a);
-            BigInteger temp_x0 = x0;
+            var temp_x0 = x0;
             x0 = x1;
             x1 = temp_x0 - q * x1;
             BigInteger temp_y0 = y0;
@@ -102,7 +102,8 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
             return new Fq(Q, 0);
         }
 
-        if (BigInteger.ModPow(Value, (Q - 1) / 2, Q) != 1)
+        var qMinusOneDivideTwo = (Q - 1) / 2;
+        if (BigInteger.ModPow(Value, qMinusOneDivideTwo, Q) != 1)
         {
             throw new Exception("No sqrt exists.");
         }
@@ -123,8 +124,8 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
             );
         }
 
-        BigInteger S = 0;
-        BigInteger q = Q - 1;
+        var S = BigInteger.Zero;
+        var q = Q - 1;
         while (ModMath.Mod(q, 2) == 0)
         {
             q /= 2;
@@ -132,20 +133,21 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
         }
 
         BigInteger z = 0;
+        var minusOneModQ = ModMath.Mod(-1, Q);
         for (BigInteger i = 0; i < Q; i++)
         {
-            BigInteger euler = BigInteger.ModPow(i, (Q - 1) / 2, Q);
-            if (euler == ModMath.Mod(-1, Q))
+            var euler = BigInteger.ModPow(i, qMinusOneDivideTwo, Q);
+            if (euler == minusOneModQ)
             {
                 z = i;
                 break;
             }
         }
 
-        BigInteger M = S;
-        BigInteger c = BigInteger.ModPow(z, q, Q);
-        BigInteger t = BigInteger.ModPow(Value, q, Q);
-        BigInteger R = BigInteger.ModPow(Value, (q + 1) / 2, Q);
+        var M = S;
+        var c = BigInteger.ModPow(z, q, Q);
+        var t = BigInteger.ModPow(Value, q, Q);
+        var R = BigInteger.ModPow(Value, (q + 1) / 2, Q);
         while (true)
         {
             if (t == 0)
@@ -159,14 +161,14 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
             }
 
             BigInteger i = 0;
-            BigInteger f = t;
+            var f = t;
             while (f != 1)
             {
                 f = ModMath.Mod(f * f, Q);
                 i++;
             }
 
-            BigInteger b = BigInteger.ModPow(c, BigInteger.ModPow(2, M - i - 1, Q), Q);
+            var b = BigInteger.ModPow(c, BigInteger.ModPow(2, M - i - 1, Q), Q);
             M = i;
             c = ModMath.Mod(b * b, Q);
             t = ModMath.Mod(t * c, Q);
