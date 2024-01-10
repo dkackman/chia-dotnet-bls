@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public class Fq2 : Fq, IFieldExt<Fq>
+public class Fq2 : Fq
 {
     public static readonly new Fq2 Nil = new(BigInteger.One, [Fq.Nil, Fq.Nil]);
 
@@ -26,7 +26,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
     }
 
     public virtual Fq Construct(BigInteger q, Fq[] elements) => new Fq2(q, elements);
-    public Fq ConstructWithRoot(BigInteger q, Fq[] elements) => ((IFieldExt<Fq>)Construct(q, elements)).WithRoot(Root);
+    public Fq ConstructWithRoot(BigInteger q, Fq[] elements) => ((Fq2)Construct(q, elements)).WithRoot(Root);
 
     public Fq WithRoot(Fq root)
     {
@@ -237,7 +237,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
 
         var newElements = new Fq[Elements.Length];
 
-        if (value is IFieldExt<Fq> ext)
+        if (value is Fq2 ext)
         {
             var basefieldZero = Basefield.Zero(Q);
             for (var i = 0; i < Elements.Length; i++)
@@ -296,7 +296,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
             var x = Elements[i];
             if (x.ToBool())
             {
-                if (value is IFieldExt<Fq> ext && value.Extension == Extension)
+                if (value is Fq2 ext && value.Extension == Extension)
                 {
                     for (var j = 0; j < ext.Elements.Length; j++)
                     {
@@ -352,7 +352,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
 
     public override bool EqualTo(Fq value)
     {
-        if (value is IFieldExt<Fq> fieldExtValue)
+        if (value is Fq2 fieldExtValue)
         {
             if (value.GetType() == GetType())
             {
@@ -418,7 +418,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
     }
     public override bool LessThan(Fq value)
     {
-        var valueElements = ((IFieldExt<Fq>)value).Elements;
+        var valueElements = ((Fq2)value).Elements;
         for (int i = Elements.Length - 1; i >= 0; i--)
         {
             var a = Elements[i];
@@ -439,7 +439,7 @@ public class Fq2 : Fq, IFieldExt<Fq>
 
     public override bool GreaterThan(Fq value)
     {
-        var valueElements = ((IFieldExt<Fq>)value).Elements;
+        var valueElements = ((Fq2)value).Elements;
         for (int i = Elements.Length - 1; i >= 0; i--)
         {
             var a = Elements[i];

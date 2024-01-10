@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public class Fq(BigInteger q, BigInteger value) : IField<Fq>
+public class Fq(BigInteger q, BigInteger value)
 {
     public static readonly Fq Nil = new(1, 0);
 
@@ -22,7 +22,7 @@ public class Fq(BigInteger q, BigInteger value) : IField<Fq>
         return new Fq(q, bytes.BytesToBigInt(Endian.Big));
     }
     public virtual Fq FromHex(BigInteger q, string hex) => Nil.FromBytes(q, hex.FromHex());
-    public virtual Fq FromFq(BigInteger q, Fq fq) => fq; // ?
+    public virtual Fq FromFq(BigInteger q, Fq fq) => fq;
     public virtual Fq Clone() => new(Q, Value);
     public virtual byte[] ToBytes() => Value.BigIntToBytes(48, Endian.Big);
     public virtual bool ToBool() => true;
