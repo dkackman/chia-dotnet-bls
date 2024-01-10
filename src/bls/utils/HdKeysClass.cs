@@ -23,7 +23,7 @@ internal static class HdKeysClass
 
         // Optimized notIkm calculation
         byte[] notIkm = new byte[ikm.Length];
-        for (int i = 0; i < ikm.Length; i++)
+        for (var i = 0; i < ikm.Length; i++)
         {
             notIkm[i] = (byte)(ikm[i] ^ 0xff);
         }
@@ -35,13 +35,13 @@ internal static class HdKeysClass
         byte[] lamportPk = new byte[255 * 32 * 2]; // Assuming Hmac.Hash256 returns 32 bytes
 
         // Use Span<byte> for slicing
-        for (int i = 0; i < 255; i++)
+        for (var i = 0; i < 255; i++)
         {
             var hash = Hmac.Hash256(new ArraySegment<byte>(lamport0, i * 32, 32));
             Array.Copy(hash, 0, lamportPk, i * 32, 32);
         }
 
-        for (int i = 0; i < 255; i++)
+        for (var i = 0; i < 255; i++)
         {
             var hash = Hmac.Hash256(new ArraySegment<byte>(lamport1, i * 32, 32));
             Array.Copy(hash, 0, lamportPk, (255 + i) * 32, 32);

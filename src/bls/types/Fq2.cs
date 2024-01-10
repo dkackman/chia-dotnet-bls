@@ -276,7 +276,6 @@ public class Fq2 : Fq, IFieldExt<Fq>
         return ConstructWithRoot(Q, newElements);
     }
 
-
     public override Fq MultiplyWith(Fq value)
     {
         // use the wider type to do the math

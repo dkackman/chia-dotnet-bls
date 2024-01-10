@@ -23,7 +23,8 @@ internal static class EcMethods
     {
         ec ??= Constants.DefaultEc;
 
-        var result = new JacobianPoint(point.X.One(ec.Q), point.X.One(ec.Q), point.X.Zero(ec.Q), true, ec);
+        var pointXOne = point.X.One(ec.Q);
+        var result = new JacobianPoint(pointXOne, pointXOne, point.X.Zero(ec.Q), true, ec);
         if (point.IsInfinity || ModMath.Mod(value, ec.Q) == 0)
         {
             return result;
@@ -36,7 +37,7 @@ internal static class EcMethods
             {
                 result = result.Add(addend);
             }
-            
+
             addend = addend.Add(addend);
             value >>= 1;
         }
@@ -50,7 +51,7 @@ internal static class EcMethods
         var y = P.Y;
         var z = P.Z;
         var mapValues = new Fq2[4];
-        int maxOrd = mapCoeffs[0].Length;
+        var maxOrd = mapCoeffs[0].Length;
         foreach (var coeffs in mapCoeffs.Skip(1))
         {
             maxOrd = Math.Max(maxOrd, coeffs.Length);
@@ -59,23 +60,29 @@ internal static class EcMethods
         var zPows = new Fq2[maxOrd];
         zPows[0] = (Fq2)z.Pow(0);
         zPows[1] = (Fq2)z.Pow(2);
-        for (int i = 2; i < zPows.Length; i++)
+        for (var i = 2; i < zPows.Length; i++)
         {
             Debug.Assert(zPows[i - 1] != null);
             Debug.Assert(zPows[1] != null);
             zPows[i] = (Fq2)zPows[i - 1].Multiply(zPows[1]);
         }
 
-        for (int i = 0; i < mapCoeffs.Length; i++)
+        for (var i = 0; i < mapCoeffs.Length; i++)
         {
-            var coeffsZ = mapCoeffs[i].Reverse().Select((item, j) => item.Multiply(zPows[j])).ToArray();
-            var temp = coeffsZ[0];
-            foreach (var coeff in coeffsZ.Skip(1))
+            var length = mapCoeffs[i].Length;
+            var coeffsZ = new Fq2[length];
+            for (var j = 0; j < length; j++)
             {
-                temp = temp.Multiply(x);
-                temp = temp.Add(coeff);
+                coeffsZ[j] = (Fq2)mapCoeffs[i][length - j - 1].Multiply(zPows[j]);
             }
-            mapValues[i] = (Fq2)temp;
+
+            var temp = coeffsZ[0];
+            for (var j = 1; j < coeffsZ.Length; j++)
+            {
+                temp = (Fq2)temp.Multiply(x);
+                temp = (Fq2)temp.Add(coeffsZ[j]);
+            }
+            mapValues[i] = temp;
         }
 
         Debug.Assert(mapCoeffs[1].Length + 1 == mapCoeffs[0].Length);

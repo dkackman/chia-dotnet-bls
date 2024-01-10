@@ -99,11 +99,11 @@ internal static class OptSwu2MapClass
         var hashResult = HashToFieldClass.Hp2(alpha, 2, dst);
         var elements = new Fq2[hashResult.Length];
 
-        int index = 0;
+        var index = 0;
         foreach (var hh in hashResult)
         {
             var items = new Fq[hh.Length];
-            for (int i = 0; i < hh.Length; i++)
+            for (var i = 0; i < hh.Length; i++)
             {
                 items[i] = new Fq(Constants.Q, hh[i]);
             }

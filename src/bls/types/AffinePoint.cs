@@ -25,18 +25,20 @@ public class AffinePoint
 
     public AffinePoint Twist()
     {
-        var f = (Fq12)Fq12.Nil.One(Ec.Q);
-        var wsq = new Fq12(Ec.Q, (Fq6)f.Root, (Fq6)Fq6.Nil.Zero(Ec.Q));
-        var wcu = new Fq12(Ec.Q, (Fq6)Fq6.Nil.Zero(Ec.Q), (Fq6)f.Root);
+        var one = (Fq12)Fq12.Nil.One(Ec.Q);
+        var zero = (Fq6)Fq6.Nil.Zero(Ec.Q);
+        var wsq = new Fq12(Ec.Q, (Fq6)one.Root, zero);
+        var wcu = new Fq12(Ec.Q, zero, (Fq6)one.Root);
 
         return new AffinePoint(X.Multiply(wsq), Y.Multiply(wcu), false, Ec);
     }
 
     public AffinePoint Untwist()
     {
-        var f = (Fq12)Fq12.Nil.One(Ec.Q);
-        var wsq = new Fq12(Ec.Q, (Fq6)f.Root, (Fq6)Fq6.Nil.Zero(Ec.Q));
-        var wcu = new Fq12(Ec.Q, (Fq6)Fq6.Nil.Zero(Ec.Q), (Fq6)f.Root);
+        var one = (Fq12)Fq12.Nil.One(Ec.Q);
+        var zero = (Fq6)Fq6.Nil.Zero(Ec.Q);
+        var wsq = new Fq12(Ec.Q, (Fq6)one.Root, zero);
+        var wcu = new Fq12(Ec.Q, zero, (Fq6)one.Root);
 
         return new AffinePoint(X.Divide(wsq), Y.Divide(wcu), false, Ec);
     }

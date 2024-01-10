@@ -12,7 +12,7 @@ internal static class HashToFieldClass
         }
 
         var bytes = new byte[length];
-        for (int i = length - 1; i >= 0; i--)
+        for (var i = length - 1; i >= 0; i--)
         {
             bytes[i] = (byte)(value & 0xff);
             value >>= 8;
@@ -40,7 +40,7 @@ internal static class HashToFieldClass
             throw new ArgumentException("Input spans must have the same length.");
         }
 
-        for (int i = 0; i < a.Length; i++)
+        for (var i = 0; i < a.Length; i++)
         {
             result[i] = (byte)(a[i] ^ b[i]);
         }
@@ -93,7 +93,7 @@ internal static class HashToFieldClass
         firstHash.CopyTo(bValues, 0);
 
         Span<byte> xorResult = stackalloc byte[hash.ByteSize]; // Assuming hash.ByteSize is small enough for stack allocation
-        for (int i = 1; i < ell; i++)
+        for (var i = 1; i < ell; i++)
         {
             var previousSegment = new Span<byte>(bValues, (i - 1) * hash.ByteSize, hash.ByteSize);
             BytesXor(b_0, previousSegment, xorResult);
@@ -107,7 +107,7 @@ internal static class HashToFieldClass
 
         if (bValues.Length > length)
         {
-            byte[] result = new byte[length];
+            var result = new byte[length];
             Array.Copy(bValues, result, length);
             return result;
         }
@@ -122,7 +122,7 @@ internal static class HashToFieldClass
         BigInteger[][] uValues = new BigInteger[count][];
         for (var i = 0; i < count; i++)
         {
-            BigInteger[] eValues = new BigInteger[degree];
+            var eValues = new BigInteger[degree];
             for (var j = 0; j < degree; j++)
             {
                 var elmOffset = byteLength * (j + i * degree);
