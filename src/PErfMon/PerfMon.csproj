@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\bls.tests\bls.tests.csproj" />
+    <PackageReference Include="dotnetstandard-bip39" Version="1.0.2" />
+
   </ItemGroup>
 
 </Project>
