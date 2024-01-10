@@ -18,7 +18,7 @@ public static partial class Constants
     public static readonly BigInteger ev4 =
         BigInteger.Parse("0aa404866706722864480885d68ad0ccac1967c7544b447873cc37e0181271e006df72162a3d3e0287bf597fbf7f8fc1", NumberStyles.HexNumber);
 
-    public static readonly List<Fq2> etas =
+    public static readonly IEnumerable<Fq2> etas =
     [
         new Fq2(Q, new Fq(Q, ev1), new Fq(Q, ev2)),
         new Fq2(Q, new Fq(Q, Q - ev2), new Fq(Q, ev1)),

@@ -36,10 +36,16 @@ public static partial class ByteUtils
         return bits;
     }
 
-    public static byte[] HexStringToByteArray(this string value) => Enumerable.Range(0, value.Length)
-                             .Where(x => x % 2 == 0)
-                             .Select(x => Convert.ToByte(value.Substring(x, 2), 16))
-                             .ToArray();
+    public static byte[] HexStringToByteArray(this string hex)
+    {
+        int length = hex.Length;
+        byte[] bytes = new byte[length / 2];
+        for (int i = 0; i < length; i += 2)
+        {
+            bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+        }
+        return bytes;
+    }
 
     public static byte[] IntToBytes(this long value, int size, Endian endian, bool signed = false)
     {

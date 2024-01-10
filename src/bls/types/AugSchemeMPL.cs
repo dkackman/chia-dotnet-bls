@@ -7,28 +7,29 @@ public static class AugSchemeMPL
     public static JacobianPoint Sign(PrivateKey privateKey, byte[] message)
     {
         var publicKey = privateKey.GetG1();
-        return Signing.CoreSignMpl(privateKey, [.. publicKey.ToBytes(), .. message], Constants.AugSchemeDst);
+        return Signing.CoreSignMpl(privateKey, ByteUtils.ConcatenateArrays(publicKey.ToBytes(), message), Constants.AugSchemeDst);
     }
 
     public static bool Verify(JacobianPoint publicKey, byte[] message, JacobianPoint signature)
-        => Signing.CoreVerifyMpl(publicKey, [.. publicKey.ToBytes(), .. message], signature, Constants.AugSchemeDst);
+        => Signing.CoreVerifyMpl(publicKey, ByteUtils.ConcatenateArrays(publicKey.ToBytes(), message), signature, Constants.AugSchemeDst);
 
     public static JacobianPoint Aggregate(JacobianPoint[] signatures) => Signing.CoreAggregateMpl(signatures);
 
     public static bool AggregateVerify(JacobianPoint[] publicKeys, byte[][] messages, JacobianPoint signature)
     {
-        if (publicKeys.Length != messages.Length || publicKeys.Length == 0)
+        int length = publicKeys.Length;
+        if (length != messages.Length || length == 0)
         {
             return false;
         }
 
-        List<byte[]> mPrimes = [];
-        for (int i = 0; i < publicKeys.Length; i++)
+        var mPrimes = new byte[length][];
+        for (int i = 0; i < length; i++)
         {
-            mPrimes.Add([.. publicKeys[i].ToBytes(), .. messages[i]]);
+            mPrimes[i] = ByteUtils.ConcatenateArrays(publicKeys[i].ToBytes(), messages[i]);
         }
 
-        return Signing.CoreAggregateVerify(publicKeys, [.. mPrimes], signature, Constants.AugSchemeDst);
+        return Signing.CoreAggregateVerify(publicKeys, mPrimes, signature, Constants.AugSchemeDst);
     }
 
     public static PrivateKey DeriveChildSk(PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSk(privateKey, index);

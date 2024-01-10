@@ -20,7 +20,7 @@ public class PrivateKey
     public static PrivateKey FromHex(string hex) => FromBytes(hex.FromHex());
     public static PrivateKey FromSeed(byte[] seed)
     {
-        var okm = Hkdf.ExtractExpand(Length, [.. seed, .. new byte[] { 0 }], "BLS-SIG-KEYGEN-SALT-".ToBytes(), [0, Length]);
+        var okm = Hkdf.ExtractExpand(Length, ByteUtils.ConcatenateArrays(seed, [0]), "BLS-SIG-KEYGEN-SALT-".ToBytes(), [0, Length]);
         return new PrivateKey(ModMath.Mod(okm.BytesToBigInt(Endian.Big), Constants.DefaultEc.N));
     }
     public static PrivateKey FromBigInt(BigInteger value) => new(ModMath.Mod(value, Constants.DefaultEc.N));
