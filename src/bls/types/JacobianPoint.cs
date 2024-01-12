@@ -18,6 +18,14 @@ public class JacobianPoint
 
     private static readonly int[] sourceArray = [0x20, 0x60, 0xe0];
 
+    /// <summary>
+    /// Represents a point in Jacobian coordinates on an elliptic curve.
+    /// </summary>
+    /// <param name="x">The x-coordinate of the point.</param>
+    /// <param name="y">The y-coordinate of the point.</param>
+    /// <param name="z">The z-coordinate of the point.</param>
+    /// <param name="isInfinity">A flag indicating whether the point is at infinity.</param>
+    /// <param name="ec">The elliptic curve associated with the point (optional).</param>
     public JacobianPoint(Fq x, Fq y, Fq z, bool isInfinity, EC? ec = null)
     {
         ec ??= Constants.DefaultEc;

@@ -140,9 +140,8 @@ public class Fq2 : Fq
         return ConstructWithRoot(Q, clonedElements);
     }
 
-    public override byte[] ToBytes()
+    private byte[] ToBytesInternal()
     {
-        // Calculate the total size needed
         var totalSize = Elements.Sum(element => element.ToBytes().Length);
         var bytes = new byte[totalSize];
 
@@ -158,10 +157,13 @@ public class Fq2 : Fq
         return bytes;
     }
 
-
     public override bool ToBool() => Elements.All(element => element.ToBool());
 
-    public override string ToHex() => ToBytes().ToHex();
+    private byte[]? _bytes;
+    public override byte[] ToBytes() => _bytes ??= ToBytesInternal();
+
+    private string? _hex;
+    public override string ToHex() => _hex ??= ToBytes().ToHex();
 
     public override string ToString() => ToHex();
 
@@ -224,6 +226,7 @@ public class Fq2 : Fq
             baseField = (Fq2)baseField.Multiply(baseField);
             exponent >>= 1;
         }
+        
         return result;
     }
 

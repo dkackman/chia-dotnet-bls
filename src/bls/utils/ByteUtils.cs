@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Numerics;
 using System.Text;
 
@@ -25,13 +24,12 @@ public static partial class ByteUtils
 
         var bits = new byte[bitCount];
 
-        for (var j = 0; j < bitCount; j++)
+        // go backwards to avoid the need to reverse
+        for (var j = bitCount - 1; j >= 0; j--)
         {
             bits[j] = (byte)(i & 1); // Extract the least significant bit
             i >>= 1; // Shift right to get the next bit
         }
-
-        Array.Reverse(bits); // Reverse the array to get the bits in the correct order
 
         return bits;
     }
@@ -42,7 +40,7 @@ public static partial class ByteUtils
         var bytes = new byte[length / 2];
         for (var i = 0; i < length; i += 2)
         {
-            bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            bytes[i / 2] = (byte)((GetHexVal(hex[i]) << 4) + GetHexVal(hex[i + 1]));
         }
         return bytes;
     }
@@ -123,7 +121,7 @@ public static partial class ByteUtils
         return bytes;
     }
 
-    static BigInteger ApplyTwosComplement(BigInteger value, int sizeInBits)
+    private static BigInteger ApplyTwosComplement(BigInteger value, int sizeInBits)
     {
         var maxValue = BigInteger.Pow(2, sizeInBits) - 1;
         return maxValue - value + 1;
@@ -131,9 +129,33 @@ public static partial class ByteUtils
 
     public static BigInteger BytesToBigInt(this byte[] bytes, Endian endian, bool signed = false) => new(bytes, !signed, endian == Endian.Big);
 
-    public static bool BytesEqual(byte[] a, byte[] b) => a.Length == b.Length && !a.Where((t, i) => b[i] != t).Any();
+    public static bool BytesEqual(byte[] a, byte[] b)
+    {
+        if (a.Length != b.Length)
+        {
+            return false;
+        }
 
-    public static string ToHex(this byte[] bytes) => BitConverter.ToString(bytes).Replace("-", "").ToLower();
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (a[i] != b[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static string ToHex(this byte[] bytes)
+    {
+        var hex = new StringBuilder(bytes.Length * 2);
+        foreach (byte b in bytes)
+        {
+            hex.AppendFormat("{0:x2}", b);
+        }
+        return hex.ToString();
+    }
 
     public static byte[] FromHex(this string hex)
     {
@@ -143,12 +165,14 @@ public static partial class ByteUtils
         var bytes = new byte[hex.Length / 2];
         for (var i = 0; i < bytes.Length; i++)
         {
-            var byteValue = hex.Substring(i * 2, 2);
-            bytes[i] = byte.Parse(byteValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+            bytes[i] = (byte)((GetHexVal(hex[i * 2]) << 4) + GetHexVal(hex[i * 2 + 1]));
         }
 
         return bytes;
     }
+
+    private static int GetHexVal(int val) => val - (val < 58 ? 48 : (val < 97 ? 55 : 87));
+
     public static byte[] ConcatenateArrays(params byte[][] arrays)
     {
         // Preallocate a buffer for the concatenated data

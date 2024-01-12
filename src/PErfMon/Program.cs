@@ -6,8 +6,9 @@ public static class Program
 {
     public static void Main(string[] args)
     {
+        var iterations = 1000;
+
         var stopwatch = Stopwatch.StartNew();
-        var iterations = 100;
 
         Tests.Derive(iterations);
 
