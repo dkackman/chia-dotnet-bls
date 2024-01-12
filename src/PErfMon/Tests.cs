@@ -6,7 +6,7 @@ namespace PerfMon;
 
 internal class Tests
 {
-    public static void Derive()
+    public static void Derive(int count)
     {
         const string MNEMONIC = "flip advice pumpkin price wreck simple lucky bicycle fun lesson warm couple hover legend pass bachelor curve primary hurt wrist pigeon menu order injury";
         var bip39 = new BIP39();
@@ -19,14 +19,18 @@ internal class Tests
         intermediateKey = AugSchemeMPL.DeriveChildSkUnhardened(privateKey, 2);
 
 
-        for (var i = 0; i < 1000; i++)
+        for (var i = 0; i < count; i++)
         {
             AugSchemeMPL.DeriveChildSkUnhardened(intermediateKey, i);
         }
     }
-    public static void GenerateAndSign()
+
+    public static void GenerateAndSign(int count)
     {
-        var sk = AugSchemeMPL.KeyGen(seed);
+        for (var i = 0; i < count; i++)
+        {
+            var sk = AugSchemeMPL.KeyGen(seed);
+        }
         //var signature = AugSchemeMPL.Sign(sk, message);
     }
 

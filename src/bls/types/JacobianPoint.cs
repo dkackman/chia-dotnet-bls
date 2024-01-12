@@ -173,7 +173,7 @@ public class JacobianPoint
 
     public string ToHex() => ToBytes().ToHex();
 
-    public override string ToString() => $"JacobianPoint(x={X}, y={Y}, z={Z}, i={IsInfinity})";
+    public override string ToString() => ToHex();
 
     public JacobianPoint Double()
     {

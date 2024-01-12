@@ -1,10 +1,11 @@
+using System.Numerics;
 using chia.dotnet.bls;
 
 namespace bls.tests;
 
 public class KeyDerivationTests
 {
-    [Theory(Skip = "not worky")]
+    [Theory(Skip = "Not implemented yet")]
     [InlineData(0, "b0c8cf08fdbe7fdb7bb1795740153b944c32364b100c372a05833554cb97794563b096cb5f57bfa09f38d7aebb48704e")]
     [InlineData(1, "8b1b92da63fdf8c4b53349da2fdd84685303587653f1a 75826a56a97ea50b86ca8a0fbf6a5d6605c70b6be324bc59c85")]
     [InlineData(2, "a472c01f0b32457aea348ef0493e1d394445df528e0d4139056ba6b4eb57eed593732c830acd897dab502f119d1ae2ff")]
@@ -26,12 +27,10 @@ public class KeyDerivationTests
         var sk = PrivateKey.FromHex("6bb19282e27bc6e7e397fb19efc2627a412410fdfd13bf14f4ce5bfdce084c71");
         var pk = sk.GetG1();
         var intermediate = pk.DerivePublicKeyPath([12381, 8444, 2]);
+        var key = AugSchemeMPL.DeriveChildPkUnhardened(intermediate, index);
+        var syntheticKey = key.CalculateSyntheticPublicKey(KeyDerivation.DEFAULT_HIDDEN_PUZZLE_HASH);
+        var syntheticKeyHex = syntheticKey.ToHex();
 
-        var key = intermediate.DerivePublicKey(index);
-        var offset = key.CalculateSyntheticOffset(KeyDerivation.DEFAULT_HIDDEN_PUZZLE_HASH);
-
-        var offsetBytes = offset.ToByteArray();
-
-        Assert.Equal(hexKey, offsetBytes.ToHex());
+        Assert.Equal(hexKey, syntheticKeyHex);
     }
 }

@@ -9,12 +9,9 @@ public static class Program
         var stopwatch = Stopwatch.StartNew();
         var iterations = 100;
 
-        //for (var i = 0; i < iterations; i++)
-        {
-            Tests.Derive();
-        }
+        Tests.Derive(iterations);
 
         stopwatch.Stop();
-        Console.WriteLine($"GenerateAndSign {iterations} times in {stopwatch.ElapsedMilliseconds} ms");
+        Console.WriteLine($"Derive {iterations} times in {stopwatch.ElapsedMilliseconds} ms");
     }
 }

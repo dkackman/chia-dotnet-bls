@@ -9,6 +9,13 @@ public static class KeyDerivation
 
     private static readonly BigInteger groupOrder = BigInteger.Parse("073eda753299d7d483339d80809a1d80553bda402fffe5bfeffffffff00000001", NumberStyles.AllowHexSpecifier);
 
+    public static JacobianPoint CalculateSyntheticPublicKey(this JacobianPoint publicKey, byte[] hiddenPuzzleHash)
+    {
+        var syntheticOffset = CalculateSyntheticOffset(publicKey, hiddenPuzzleHash);
+        var privateKeyToAdd = PrivateKey.FromBytes(syntheticOffset.BigIntToBytes(32, Endian.Big));
+        return publicKey.Add(privateKeyToAdd.GetG1());
+    }
+
     public static PrivateKey CalculateSyntheticPrivateKey(this PrivateKey privateKey, byte[] hiddenPuzzleHash)
     {
         var privateExponent = privateKey.ToBytes().BytesToBigInt(Endian.Big);

@@ -21,11 +21,11 @@ public static partial class ByteUtils
             throw new ArgumentException("Input must be a non-negative BigInteger.");
         }
 
-        int bitCount = (int)BigInteger.Log2(i) + 1; // Calculate the number of bits needed
+        var bitCount = (int)BigInteger.Log2(i) + 1; // Calculate the number of bits needed
 
-        byte[] bits = new byte[bitCount];
+        var bits = new byte[bitCount];
 
-        for (int j = 0; j < bitCount; j++)
+        for (var j = 0; j < bitCount; j++)
         {
             bits[j] = (byte)(i & 1); // Extract the least significant bit
             i >>= 1; // Shift right to get the next bit
@@ -38,9 +38,9 @@ public static partial class ByteUtils
 
     public static byte[] HexStringToByteArray(this string hex)
     {
-        int length = hex.Length;
-        byte[] bytes = new byte[length / 2];
-        for (int i = 0; i < length; i += 2)
+        var length = hex.Length;
+        var bytes = new byte[length / 2];
+        for (var i = 0; i < length; i += 2)
         {
             bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
         }
@@ -54,9 +54,9 @@ public static partial class ByteUtils
         if (value != Math.Floor((double)value))
             throw new Exception("Cannot convert floating point number.");
 
-        byte[] bytes = new byte[size];
+        var bytes = new byte[size];
 
-        for (int i = size - 1; i >= 0; i--)
+        for (var i = size - 1; i >= 0; i--)
         {
             bytes[i] = (byte)(value & 0xFF);
             value >>= 8;
@@ -84,7 +84,7 @@ public static partial class ByteUtils
 
         long result = 0;
 
-        for (int i = 0; i < bytes.Length; i++)
+        for (var i = 0; i < bytes.Length; i++)
         {
             result |= (long)bytes[i] << (i * 8);
         }
@@ -109,7 +109,7 @@ public static partial class ByteUtils
 
         var bytes = new byte[size];
 
-        for (int i = size - 1; i >= 0; i--)
+        for (var i = size - 1; i >= 0; i--)
         {
             bytes[i] = (byte)(value & 0xFF);
             value >>= 8;
@@ -149,21 +149,13 @@ public static partial class ByteUtils
 
         return bytes;
     }
-
     public static byte[] ConcatenateArrays(params byte[][] arrays)
     {
-        // Calculate the total size for concatenation
-        int totalSize = 0;
-        foreach (var array in arrays)
-        {
-            totalSize += array.Length;
-        }
-
         // Preallocate a buffer for the concatenated data
-        byte[] concatBuffer = new byte[totalSize];
+        var concatBuffer = new byte[arrays.Sum(a => a.Length)];
 
         // Copy each array into concatBuffer
-        int offset = 0;
+        var offset = 0;
         foreach (var array in arrays)
         {
             Array.Copy(array, 0, concatBuffer, offset, array.Length);

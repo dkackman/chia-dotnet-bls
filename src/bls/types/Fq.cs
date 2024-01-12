@@ -27,14 +27,8 @@ public class Fq(BigInteger q, BigInteger value)
     public virtual byte[] ToBytes() => Value.BigIntToBytes(48, Endian.Big);
     public virtual bool ToBool() => true;
     public virtual string ToHex() => ToBytes().ToHex();
-    public override string ToString()
-    {
-        string hex = Value.ToString("x"); // Lowercase "x" for lowercase hexadecimal
-        hex = hex.Length % 2 == 0 && hex.StartsWith('0') ? hex[1..] : hex;
-        return hex.Length > 10
-            ? $"Fq(0x{hex[..5]}..{hex[^5..]})"
-            : $"Fq(0x{hex})";
-    }
+    public override string ToString() => ToHex();
+
     public virtual Fq Negate() => new(Q, -Value);
 
     public virtual Fq Inverse()

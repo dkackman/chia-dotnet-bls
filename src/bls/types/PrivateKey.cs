@@ -32,6 +32,6 @@ public class PrivateKey
     public JacobianPoint GetG1() => JacobianPoint.GenerateG1().Multiply(Value);
     public byte[] ToBytes() => Value.BigIntToBytes(Size, Endian.Big);
     public string ToHex() => ToBytes().ToHex();
-    public override string ToString() => $"PrivateKey(0x{ToHex()})";
+    public override string ToString() => ToHex();
     public bool Equals(PrivateKey value) => Value == value.Value;
 }

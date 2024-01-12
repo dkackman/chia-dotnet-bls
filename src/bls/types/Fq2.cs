@@ -163,7 +163,7 @@ public class Fq2 : Fq
 
     public override string ToHex() => ToBytes().ToHex();
 
-    public override string ToString() => $"Fq{Extension}({string.Join(", ", Elements.ToList())})";
+    public override string ToString() => ToHex();
 
     public override Fq Negate()
     {
