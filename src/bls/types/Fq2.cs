@@ -230,12 +230,12 @@ public class Fq2 : Fq
         return result;
     }
 
-    public override Fq AddTo(Fq value)
+    public override Fq Add(Fq value)
     {
         // Use the wider type to do the math
         if (value.Extension > Extension)
         {
-            return value.AddTo(this);
+            return value.Add(this);
         }
 
         var newElements = new Fq[Elements.Length];
@@ -262,7 +262,7 @@ public class Fq2 : Fq
     }
 
 
-    public override Fq AddTo(BigInteger value)
+    public override Fq Add(BigInteger value)
     {
         // Assuming Elements array is not empty and its length is known.
         var newElements = new Fq[Elements.Length];
@@ -279,12 +279,12 @@ public class Fq2 : Fq
         return ConstructWithRoot(Q, newElements);
     }
 
-    public override Fq MultiplyWith(Fq value)
+    public override Fq Multiply(Fq value)
     {
         // use the wider type to do the math
         if (value.Extension > Extension)
         {
-            return value.MultiplyWith(this);
+            return value.Multiply(this);
         }
 
         var elements = new Fq[Elements.Length];
@@ -337,7 +337,7 @@ public class Fq2 : Fq
         return new Fq2(Q, a.Subtract(b), a.Add(b));
     }
 
-    public override Fq MultiplyWith(BigInteger value)
+    public override Fq Multiply(BigInteger value)
     {
         var newElements = new Fq[Elements.Length];
         for (int i = 0; i < Elements.Length; i++)
@@ -348,12 +348,12 @@ public class Fq2 : Fq
         return ConstructWithRoot(Q, newElements);
     }
 
-    public override Fq Subtract(BigInteger value) => AddTo(-value);
-    public override Fq Subtract(Fq value) => AddTo(value.Negate());
-    public override Fq Divide(BigInteger value) => MultiplyWith(~value);
-    public override Fq Divide(Fq value) => MultiplyWith(value.Inverse());
+    public override Fq Subtract(BigInteger value) => Add(-value);
+    public override Fq Subtract(Fq value) => Add(value.Negate());
+    public override Fq Divide(BigInteger value) => Multiply(~value);
+    public override Fq Divide(Fq value) => Multiply(value.Inverse());
 
-    public override bool EqualTo(Fq value)
+    public override bool Equals(Fq value)
     {
         if (value is Fq2 fieldExtValue)
         {
@@ -364,7 +364,7 @@ public class Fq2 : Fq
                     return false;
                 }
 
-                for (int i = 0; i < Elements.Length; i++)
+                for (var i = 0; i < Elements.Length; i++)
                 {
                     if (!Elements[i].Equals(fieldExtValue.Elements[i]))
                     {
@@ -383,7 +383,7 @@ public class Fq2 : Fq
                 }
 
                 var zeroQ = Root.Zero(Q);
-                for (int i = 1; i < Elements.Length; i++)
+                for (var i = 1; i < Elements.Length; i++)
                 {
                     if (!Elements[i].Equals(zeroQ))
                     {
@@ -395,11 +395,11 @@ public class Fq2 : Fq
             }
         }
 
-        return value.EqualTo(this);
+        return value.Equals(this);
     }
 
 
-    public override bool EqualTo(BigInteger value)
+    public override bool Equals(BigInteger value)
     {
         // Check if the first element is equal to the value
         if (!Elements[0].Equals(value))
@@ -409,7 +409,7 @@ public class Fq2 : Fq
 
         var zeroQ = Root.Zero(Q);
         // Check if all other elements are zero
-        for (int i = 1; i < Elements.Length; i++)
+        for (var i = 1; i < Elements.Length; i++)
         {
             if (!Elements[i].Equals(zeroQ))
             {
@@ -422,7 +422,7 @@ public class Fq2 : Fq
     public override bool LessThan(Fq value)
     {
         var valueElements = ((Fq2)value).Elements;
-        for (int i = Elements.Length - 1; i >= 0; i--)
+        for (var i = Elements.Length - 1; i >= 0; i--)
         {
             var a = Elements[i];
             var b = valueElements[i];
@@ -443,7 +443,7 @@ public class Fq2 : Fq
     public override bool GreaterThan(Fq value)
     {
         var valueElements = ((Fq2)value).Elements;
-        for (int i = Elements.Length - 1; i >= 0; i--)
+        for (var i = Elements.Length - 1; i >= 0; i--)
         {
             var a = Elements[i];
             var b = valueElements[i];
@@ -463,10 +463,4 @@ public class Fq2 : Fq
 
     public override bool LessThanOrEqual(Fq value) => LessThan(value) || Equals(value);
     public override bool GreaterThanOrEqual(Fq value) => GreaterThan(value) || Equals(value);
-    public override Fq Add(BigInteger value) => AddTo(value);
-    public override Fq Add(Fq value) => AddTo(value);
-    public override Fq Multiply(BigInteger value) => MultiplyWith(value);
-    public override Fq Multiply(Fq value) => MultiplyWith(value);
-    public override bool Equals(BigInteger value) => EqualTo(value);
-    public override bool Equals(Fq value) => EqualTo(value);
 }

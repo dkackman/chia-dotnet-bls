@@ -24,10 +24,13 @@ public class Fq(BigInteger q, BigInteger value)
     public virtual Fq FromHex(BigInteger q, string hex) => Nil.FromBytes(q, hex.FromHex());
     public virtual Fq FromFq(BigInteger q, Fq fq) => fq;
     public virtual Fq Clone() => new(Q, Value);
-    public virtual byte[] ToBytes() => Value.BigIntToBytes(48, Endian.Big);
-    public virtual bool ToBool() => true;
-    public virtual string ToHex() => ToBytes().ToHex();
+
+    private byte[]? bytes;
+    public virtual byte[] ToBytes() => bytes ??= Value.BigIntToBytes(48, Endian.Big);
+    private string? hex;
+    public virtual string ToHex() => hex ??= ToBytes().ToHex();
     public override string ToString() => ToHex();
+    public virtual bool ToBool() => true;
 
     public virtual Fq Negate() => new(Q, -Value);
 
@@ -68,10 +71,10 @@ public class Fq(BigInteger q, BigInteger value)
 
         if (exponent == 1)
         {
-            return new Fq(Q, Value);
+            return this;
         }
 
-        Fq result = new(Q, 1);
+        Fq result = new Fq(Q, 1);
         Fq baseValue = this;
 
         while (exponent > 0)
@@ -87,7 +90,6 @@ public class Fq(BigInteger q, BigInteger value)
 
         return result;
     }
-
 
     public virtual Fq ModSqrt()
     {
@@ -170,55 +172,46 @@ public class Fq(BigInteger q, BigInteger value)
         }
     }
 
-    public virtual Fq AddTo(BigInteger value) => new(Q, Value + value);
-    public virtual Fq AddTo(Fq value)
+    public virtual Fq Add(BigInteger value) => new(Q, Value + value);
+    public virtual Fq Add(Fq value)
     {
         // if value is Fq2 or derived from Fq2, then we need to use the Fq2 add
         // which works since addition is transitive
         // this has the effect of also ensuring that the return is the wider type
         if (value is Fq2) // this works for Fq2 derived types
         {
-            return value.AddTo(this);
+            return value.Add(this);
         }
 
         return new(Q, Value + value.Value);
     }
 
-    public virtual Fq MultiplyWith(BigInteger value) => new(Q, Value * value);
-    public virtual Fq MultiplyWith(Fq value)
+    public virtual Fq Multiply(BigInteger value) => new(Q, Value * value);
+    public virtual Fq Multiply(Fq value)
     {
         // if value is Fq2 or derived from Fq2, then we need to use the Fq2 multiply
         // which works since multiplication is transitive
         // this has the effect of also ensuring that the return is the wider type
         if (value is Fq2) // this works for Fq2 derived types
         {
-            return value.MultiplyWith(this);
+            return value.Multiply(this);
         }
 
         return new(Q, Value * value.Value);
     }
 
-    public virtual bool EqualTo(BigInteger value) => false;  // the typescript returns false if value is a bigint
-    public virtual bool EqualTo(Fq value) => Value == value.Value && Q == value.Q;
+    public virtual bool Equals(BigInteger value) => false;  // the typescript returns false if value is a bigint
+    public virtual bool Equals(Fq value) => Value == value.Value && Q == value.Q;
 
-    public virtual Fq Subtract(BigInteger value) => AddTo(-value);
-    public virtual Fq Subtract(Fq value) => AddTo(value.Negate());
+    public virtual Fq Subtract(BigInteger value) => Add(-value);
+    public virtual Fq Subtract(Fq value) => Add(value.Negate());
 
-    public virtual Fq Divide(BigInteger value) => MultiplyWith(new Fq(Q, value).Inverse());
-    public virtual Fq Divide(Fq value) => MultiplyWith(value.Inverse());
+    public virtual Fq Divide(BigInteger value) => Multiply(new Fq(Q, value).Inverse());
+    public virtual Fq Divide(Fq value) => Multiply(value.Inverse());
 
     public virtual bool LessThan(Fq value) => Value < value.Value;
     public virtual bool GreaterThan(Fq value) => Value > value.Value;
 
-    public virtual bool LessThanOrEqual(Fq value) => LessThan(value) || EqualTo(value);
-    public virtual bool GreaterThanOrEqual(Fq value) => GreaterThan(value) || EqualTo(value);
-
-    public virtual Fq Add(BigInteger value) => AddTo(value);
-    public virtual Fq Add(Fq value) => AddTo(value);
-
-    public virtual Fq Multiply(BigInteger value) => MultiplyWith(value);
-    public virtual Fq Multiply(Fq value) => MultiplyWith(value);
-
-    public virtual bool Equals(BigInteger value) => EqualTo(value);
-    public virtual bool Equals(Fq value) => EqualTo(value);
+    public virtual bool LessThanOrEqual(Fq value) => LessThan(value) || Equals(value);
+    public virtual bool GreaterThanOrEqual(Fq value) => GreaterThan(value) || Equals(value);
 }

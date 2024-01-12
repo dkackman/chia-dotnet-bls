@@ -163,7 +163,10 @@ public class JacobianPoint
             );
     }
 
-    public byte[] ToBytes()
+    private byte[]? bytes;
+    public byte[] ToBytes() => bytes ??= ToBytesInternal();
+
+    private byte[] ToBytesInternal()
     {
         var point = ToAffine();
         var output = point.X.ToBytes();
@@ -179,7 +182,8 @@ public class JacobianPoint
         return output;
     }
 
-    public string ToHex() => ToBytes().ToHex();
+    private string? hex;
+    public string ToHex() => hex ??= ToBytes().ToHex();
 
     public override string ToString() => ToHex();
 
