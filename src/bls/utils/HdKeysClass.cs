@@ -2,14 +2,13 @@ namespace chia.dotnet.bls;
 
 internal static class HdKeysClass
 {
-    private static readonly byte[] _saltBytes = "BLS-SIG-KEYGEN-SALT-".ToBytes();
     private const byte keyLength = 48;
     private static readonly byte[] info = [0, keyLength];
 
     public static PrivateKey KeyGen(byte[] seed)
     {
         Array.Resize(ref seed, seed.Length + 1);
-        var okm = Hkdf.ExtractExpand(keyLength, seed, _saltBytes, info);
+        var okm = Hkdf.ExtractExpand(keyLength, seed, Constants.SignatureKeygenSalt, info);
 
         return new PrivateKey(ModMath.Mod(ByteUtils.BytesToBigInt(okm, Endian.Big), Constants.DefaultEc.N));
     }
@@ -56,6 +55,7 @@ internal static class HdKeysClass
     {
         var bytes = ByteUtils.ConcatenateArrays(parentSk.GetG1().ToBytes(), ByteUtils.IntToBytes(index, 4, Endian.Big));
         byte[] hash = Hmac.Hash256(bytes);
+
         return PrivateKey.Aggregate([PrivateKey.FromBytes(hash), parentSk]);
     }
 
@@ -63,6 +63,7 @@ internal static class HdKeysClass
     {
         var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), ByteUtils.IntToBytes(index, 4, Endian.Big));
         byte[] hash = Hmac.Hash256(bytes);
+
         return parentPk.Add(JacobianPoint.GenerateG1().Multiply(PrivateKey.FromBytes(hash).Value));
     }
 
@@ -70,6 +71,7 @@ internal static class HdKeysClass
     {
         var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), ByteUtils.IntToBytes(index, 4, Endian.Big));
         byte[] hash = Hmac.Hash256(bytes);
+        
         return parentPk.Add(JacobianPoint.GenerateG2().Multiply(PrivateKey.FromBytes(hash).Value));
     }
 }

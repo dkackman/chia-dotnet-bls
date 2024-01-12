@@ -3,6 +3,9 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
+/// <summary>
+/// Represents a point in Jacobian coordinates on an elliptic curve.
+/// </summary>
 public class JacobianPoint
 {
     public Fq X { get; }
@@ -10,11 +13,6 @@ public class JacobianPoint
     public Fq Z { get; }
     public bool IsInfinity { get; }
     public EC Ec { get; }
-
-    // these are precomputed for performance
-    private readonly Fq zero;
-    private readonly Fq one;
-    private readonly Fq two;
 
     private static readonly int[] sourceArray = [0x20, 0x60, 0xe0];
 
@@ -37,10 +35,6 @@ public class JacobianPoint
         Z = z;
         IsInfinity = isInfinity;
         Ec = ec;
-
-        zero = X.Zero(Ec.Q);
-        one = X.One(Ec.Q);
-        two = new Fq(Ec.Q, 2);
     }
 
     public static JacobianPoint FromBytes(byte[] bytes, bool isExtension, EC? ec = null)
@@ -84,6 +78,7 @@ public class JacobianPoint
                 ec
             ).ToJacobian();
         }
+
         var x = nil.FromBytes(ec.Q, bytes);
         var yValue = EcMethods.YForX(x, ec);
         var sign = isExtension
@@ -123,6 +118,7 @@ public class JacobianPoint
     {
         var nil = isExtension ? Fq2.Nil : Fq.Nil;
         var x = nil.Zero(Constants.DefaultEcTwist.Q);
+
         return new JacobianPoint(
             x,
             x,
@@ -150,7 +146,7 @@ public class JacobianPoint
     {
         return IsInfinity
             ? new AffinePoint(
-                zero,
+                X.Zero(Ec.Q),
                 Y.Zero(Ec.Q),
                 true,
                 Ec
@@ -179,6 +175,7 @@ public class JacobianPoint
 
         var sign = point.Y is Fq2 fq ? EcMethods.SignFq2(fq, Ec) : EcMethods.SignFq(point.Y, Ec);
         output[0] |= (byte)(sign ? 0xa0 : 0x80);
+
         return output;
     }
 
@@ -189,6 +186,8 @@ public class JacobianPoint
 
     public JacobianPoint Double()
     {
+        var zero = X.Zero(Ec.Q);
+        var one = X.One(Ec.Q);
         if (IsInfinity || Y.Equals(zero))
         {
             return new JacobianPoint(
@@ -199,6 +198,8 @@ public class JacobianPoint
                       Ec
                   );
         }
+
+        var two = new Fq(Ec.Q, 2);
         var three = new Fq(Ec.Q, 3);
         var four = new Fq(Ec.Q, 4);
         var eight = new Fq(Ec.Q, 8);
@@ -244,6 +245,9 @@ public class JacobianPoint
         {
             if (!S1.Equals(S2))
             {
+                var zero = X.Zero(Ec.Q);
+                var one = X.One(Ec.Q);
+
                 return new JacobianPoint(
                     one,
                     one,
@@ -256,6 +260,7 @@ public class JacobianPoint
             return Double();
         }
 
+        var two = new Fq(Ec.Q, 2);
         var H = U2.Subtract(U1);
         var R = S2.Subtract(S1);
         var H_sq = H.Multiply(H);
@@ -273,14 +278,11 @@ public class JacobianPoint
     public JacobianPoint Multiply(BigInteger value) => EcMethods.ScalarMultJacobian(value, this, Ec);
     public bool Equals(JacobianPoint value) => ToAffine().Equals(value.ToAffine());
 
-    public JacobianPoint Clone()
-    {
-        return new JacobianPoint(
+    public JacobianPoint Clone() => new(
             X.Clone(),
             Y.Clone(),
             Z.Clone(),
             IsInfinity,
             Ec
         );
-    }
 }

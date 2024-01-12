@@ -13,6 +13,7 @@ public class AffinePoint
     public AffinePoint(Fq x, Fq y, bool isInfinity, EC? ec = null)
     {
         Ec = ec ?? Constants.DefaultEc;
+
         Debug.Assert(x.GetType() == y.GetType());
         X = x;
         Y = y;
@@ -57,18 +58,22 @@ public class AffinePoint
     {
         Debug.Assert(IsOnCurve);
         Debug.Assert(value.IsOnCurve);
+
         if (IsInfinity)
         {
             return value;
         }
+        
         if (value.IsInfinity)
         {
             return this;
         }
+
         if (Equals(value))
         {
             return Double();
         }
+
         var s = value.Y.Subtract(Y).Divide(value.X.Subtract(X));
         var newX = s.Multiply(s).Subtract(X).Subtract(value.X);
         var newY = s.Multiply(X.Subtract(newX)).Subtract(Y);

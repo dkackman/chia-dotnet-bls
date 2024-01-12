@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Numerics;
 using System.Text;
 
@@ -15,10 +16,7 @@ public static partial class ByteUtils
 
     public static byte[] BigIntToBits(this BigInteger i)
     {
-        if (i.Sign < 0)
-        {
-            throw new ArgumentException("Input must be a non-negative BigInteger.");
-        }
+        Debug.Assert(i.Sign >= 0);
 
         var bitCount = (int)BigInteger.Log2(i) + 1; // Calculate the number of bits needed
 
@@ -42,15 +40,14 @@ public static partial class ByteUtils
         {
             bytes[i / 2] = (byte)((GetHexVal(hex[i]) << 4) + GetHexVal(hex[i + 1]));
         }
+
         return bytes;
     }
 
     public static byte[] IntToBytes(this long value, int size, Endian endian, bool signed = false)
     {
-        if (value < 0 && !signed)
-            throw new Exception("Cannot convert negative number to unsigned.");
-        if (value != Math.Floor((double)value))
-            throw new Exception("Cannot convert floating point number.");
+        Debug.Assert(!(value < 0 && !signed));
+        Debug.Assert(value == Math.Floor((double)value));
 
         var bytes = new byte[size];
 
@@ -75,16 +72,22 @@ public static partial class ByteUtils
             return 0;
         }
 
+        long result = 0;
+        int shift = 0;
+
         if (endian == Endian.Little)
         {
-            Array.Reverse(bytes);
+            for (int i = 0; i < bytes.Length; i++, shift += 8)
+            {
+                result |= (long)bytes[i] << shift;
+            }
         }
-
-        long result = 0;
-
-        for (var i = 0; i < bytes.Length; i++)
+        else
         {
-            result |= (long)bytes[i] << (i * 8);
+            for (int i = bytes.Length - 1; i >= 0; i--, shift += 8)
+            {
+                result |= (long)bytes[i] << shift;
+            }
         }
 
         if (signed && (bytes[^1] & 0x80) != 0)
@@ -97,34 +100,28 @@ public static partial class ByteUtils
 
     public static byte[] BigIntToBytes(this BigInteger value, int size, Endian endian, bool signed = false)
     {
-        if (value < 0)
-        {
-            if (!signed)
-                throw new Exception("Cannot convert negative number to unsigned.");
+        Debug.Assert(!(value < 0 && !signed));
 
-            value = ApplyTwosComplement(value, size * 8);
-        }
+        byte[] fullBytes = value.ToByteArray();
 
-        var bytes = new byte[size];
+        Debug.Assert(fullBytes.Length <= size);
 
-        for (var i = size - 1; i >= 0; i--)
-        {
-            bytes[i] = (byte)(value & 0xFF);
-            value >>= 8;
-        }
+        byte[] result = new byte[size];
 
         if (endian == Endian.Little)
         {
-            Array.Reverse(bytes);
+            Array.Copy(fullBytes, result, fullBytes.Length);
+        }
+        else
+        {
+            // Copy bytes in reverse order for Big Endian
+            for (int i = 0; i < fullBytes.Length; i++)
+            {
+                result[size - 1 - i] = fullBytes[i];
+            }
         }
 
-        return bytes;
-    }
-
-    private static BigInteger ApplyTwosComplement(BigInteger value, int sizeInBits)
-    {
-        var maxValue = BigInteger.Pow(2, sizeInBits) - 1;
-        return maxValue - value + 1;
+        return result;
     }
 
     public static BigInteger BytesToBigInt(this byte[] bytes, Endian endian, bool signed = false) => new(bytes, !signed, endian == Endian.Big);
@@ -159,8 +156,7 @@ public static partial class ByteUtils
 
     public static byte[] FromHex(this string hex)
     {
-        if (hex.Length % 2 != 0)
-            throw new ArgumentException("Invalid hex string");
+        Debug.Assert(hex.Length % 2 == 0);
 
         var bytes = new byte[hex.Length / 2];
         for (var i = 0; i < bytes.Length; i++)
