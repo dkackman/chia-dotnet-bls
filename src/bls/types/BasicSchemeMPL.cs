@@ -1,6 +1,6 @@
 namespace chia.dotnet.bls;
 
-public static class BasicSchemeMPL
+internal static class BasicSchemeMPL
 {
     public static PrivateKey KeyGen(byte[] seed) => HdKeysClass.KeyGen(seed);
 

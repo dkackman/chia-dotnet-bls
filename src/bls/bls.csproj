@@ -23,6 +23,7 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageIcon>chia-leaf-logo-384x384.png</PackageIcon>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

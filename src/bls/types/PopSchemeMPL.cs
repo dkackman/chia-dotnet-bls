@@ -1,6 +1,6 @@
 namespace chia.dotnet.bls;
 
-public static class PopSchemeMPL
+internal static class PopSchemeMPL
 {
     public static PrivateKey KeyGen(byte[] seed) => HdKeysClass.KeyGen(seed);
 

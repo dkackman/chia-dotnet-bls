@@ -3,6 +3,7 @@
     "Basefield",
     "coeff",
     "coeffs",
+    "dotnetstandard",
     "Frob",
     "Frobenius",
     "Hkdf",
