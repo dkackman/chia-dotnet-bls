@@ -87,11 +87,13 @@
         <article data-uid="">
 <h1 id="getting-started">Getting Started</h1>
 
+<h2 id="installation">Installation</h2>
+<p>Install the <a href="https://www.nuget.org/packages/chia-dotnet-bls/">nuget package</a></p>
+<pre><code class="lang-bash">dotnet add package chia-dotnet-bls
+</code></pre>
 <h2 id="sign-and-verify-a-message">Sign and Verify a Message</h2>
 <pre><code class="lang-csharp">using chia.dotnet.bls;
-
-// https://www.nuget.org/packages/dotnetstandard-bip39/
-using dotnetstandard_bip39;
+using dotnetstandard_bip39; // https://www.nuget.org/packages/dotnetstandard-bip39/
 
 const string MNEMONIC = &quot;abandon abandon abandon&quot;;
 const string MESSAGE = &quot;hello world&quot;;
@@ -101,13 +103,12 @@ var bip39 = new BIP39();
 var seed = bip39.MnemonicToSeedHex(MNEMONIC, &quot;&quot;).HexStringToByteArray();
 var sk = PrivateKey.FromSeed(seed);
 
-// sign a message
-var messageBytes = MESSAGE.ToBytes();
-var signature = sk.Sign(messageBytes);
+// sign the message
+var signature = sk.Sign(MESSAGE);
 
 // verify the signature
 var pk = sk.GetG1();
-var result = pk.Verify(messageBytes, signature);
+var result = pk.Verify(MESSAGE, signature);
 
 Console.WriteLine($&quot;Signature is valid: {result}&quot;);
 </code></pre>

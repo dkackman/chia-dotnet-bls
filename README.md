@@ -10,15 +10,18 @@
 
 This is a direct port of the [chia bls typescript library](https://github.com/Chia-Network/node-chia-bls). Coding style and naming have been converted to C# conventions but otherwise it is very similar in API.
 
-All of the unit tests from the original project have been ported and pass.
+## See Also
+
+- [Documentation](https://dkackman.github.io/chia-dotnet-bls/)
+- [chia-blockchain](https://chia.net)
+- [chia-dotnet](https://www.nuget.org/packages/chia-dotnet/)
+- [dotnetstandard-bip39](https://www.nuget.org/packages/dotnetstandard-bip39/)
 
 ## Example Usage
 
 ```csharp
 using chia.dotnet.bls;
-
-// https://www.nuget.org/packages/dotnetstandard-bip39/
-using dotnetstandard_bip39;
+using dotnetstandard_bip39; // https://www.nuget.org/packages/dotnetstandard-bip39/
 
 const string MNEMONIC = "abandon abandon abandon";
 const string MESSAGE = "hello world";

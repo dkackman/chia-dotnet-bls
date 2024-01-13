@@ -12,12 +12,12 @@
     <AssemblyName>chia-dotnet-bls</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <PackageProjectUrl>https://github.com/dkackman/chia-dotnet-bls</PackageProjectUrl>
+    <PackageProjectUrl>https://dkackman.github.io/chia-dotnet-bls/</PackageProjectUrl>
     <Authors>dkackman</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.0</Version>
-    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <Version>1.0.1</Version>
+    <PackageReleaseNotes>Version 1.0.0 Chia BLS and key deriviation</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <IncludeSymbols>True</IncludeSymbols>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>

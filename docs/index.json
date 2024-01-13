@@ -52,7 +52,7 @@
   "docs/getting-started.html": {
     "href": "docs/getting-started.html",
     "title": "Getting Started | chia-dotnet-bls",
-    "keywords": "Getting Started Sign and Verify a Message using chia.dotnet.bls; // https://www.nuget.org/packages/dotnetstandard-bip39/ using dotnetstandard_bip39; const string MNEMONIC = \"abandon abandon abandon\"; const string MESSAGE = \"hello world\"; // create a secret key from a mnemonic var bip39 = new BIP39(); var seed = bip39.MnemonicToSeedHex(MNEMONIC, \"\").HexStringToByteArray(); var sk = PrivateKey.FromSeed(seed); // sign a message var messageBytes = MESSAGE.ToBytes(); var signature = sk.Sign(messageBytes); // verify the signature var pk = sk.GetG1(); var result = pk.Verify(messageBytes, signature); Console.WriteLine($\"Signature is valid: {result}\");"
+    "keywords": "Getting Started Installation Install the nuget package dotnet add package chia-dotnet-bls Sign and Verify a Message using chia.dotnet.bls; using dotnetstandard_bip39; // https://www.nuget.org/packages/dotnetstandard-bip39/ const string MNEMONIC = \"abandon abandon abandon\"; const string MESSAGE = \"hello world\"; // create a secret key from a mnemonic var bip39 = new BIP39(); var seed = bip39.MnemonicToSeedHex(MNEMONIC, \"\").HexStringToByteArray(); var sk = PrivateKey.FromSeed(seed); // sign the message var signature = sk.Sign(MESSAGE); // verify the signature var pk = sk.GetG1(); var result = pk.Verify(MESSAGE, signature); Console.WriteLine($\"Signature is valid: {result}\");"
   },
   "docs/introduction.html": {
     "href": "docs/introduction.html",
@@ -62,6 +62,6 @@
   "index.html": {
     "href": "index.html",
     "title": "Welcome to chia-dotnet-bls | chia-dotnet-bls",
-    "keywords": "Welcome to chia-dotnet-bls This is a native .NET implementation of the BLS signature library and also includes key derivation from the node chia wallet library. chia and its logo are the registered trademark or trademark of Chia Network, Inc. in the United States and worldwide."
+    "keywords": "Welcome to chia-dotnet-bls This is a native .NET implementation of the BLS signature library and also includes key derivation from the node chia wallet library. See also Introduction chia-blockchain chia-dotnet dotnetstandard-bip39 chia and its logo are the registered trademark or trademark of Chia Network, Inc. in the United States and worldwide."
   }
 }
