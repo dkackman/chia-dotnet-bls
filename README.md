@@ -8,6 +8,8 @@
 
 ## Introduction
 
+Many thanks to [Rigidity](https://github.com/Rigidity) who's code this is a direct port of and and helped immensely along the way.
+
 This is a direct port of the [chia bls typescript library](https://github.com/Chia-Network/node-chia-bls). Coding style and naming have been converted to C# conventions but otherwise it is very similar in API.
 
 ## See Also
