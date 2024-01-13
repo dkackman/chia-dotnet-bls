@@ -34,7 +34,7 @@ bld/
 
 # docfx output folders
 _site/
-api/
+docfx/api/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
