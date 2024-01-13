@@ -10,13 +10,13 @@
     <RepositoryUrl>https://github.com/dkackman/chia-dotnet-bls</RepositoryUrl>
     <PackageTags>chia; xch; bls</PackageTags>
     <AssemblyName>chia-dotnet-bls</AssemblyName>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <FileVersion>0.1.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
     <PackageProjectUrl>https://github.com/dkackman/chia-dotnet-bls</PackageProjectUrl>
     <Authors>dkackman</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>0.9.0</Version>
+    <Version>1.0.0</Version>
     <PackageReleaseNotes>First release</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <IncludeSymbols>True</IncludeSymbols>
