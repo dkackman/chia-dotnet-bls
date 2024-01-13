@@ -1,0 +1,1494 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: chia.dotnet.bls
+  name: chia.dotnet.bls
+  href: api/chia.dotnet.bls.html
+  commentId: N:chia.dotnet.bls
+  fullName: chia.dotnet.bls
+  nameWithType: chia.dotnet.bls
+- uid: chia.dotnet.bls.AffinePoint
+  name: AffinePoint
+  href: api/chia.dotnet.bls.AffinePoint.html
+  commentId: T:chia.dotnet.bls.AffinePoint
+  fullName: chia.dotnet.bls.AffinePoint
+  nameWithType: AffinePoint
+- uid: chia.dotnet.bls.AffinePoint.Add(chia.dotnet.bls.AffinePoint)
+  name: Add(AffinePoint)
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Add_chia_dotnet_bls_AffinePoint_
+  commentId: M:chia.dotnet.bls.AffinePoint.Add(chia.dotnet.bls.AffinePoint)
+  fullName: chia.dotnet.bls.AffinePoint.Add(chia.dotnet.bls.AffinePoint)
+  nameWithType: AffinePoint.Add(AffinePoint)
+- uid: chia.dotnet.bls.AffinePoint.Add*
+  name: Add
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Add_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.Add
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.Add
+  nameWithType: AffinePoint.Add
+- uid: chia.dotnet.bls.AffinePoint.Clone
+  name: Clone()
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Clone
+  commentId: M:chia.dotnet.bls.AffinePoint.Clone
+  fullName: chia.dotnet.bls.AffinePoint.Clone()
+  nameWithType: AffinePoint.Clone()
+- uid: chia.dotnet.bls.AffinePoint.Clone*
+  name: Clone
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Clone_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.Clone
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.Clone
+  nameWithType: AffinePoint.Clone
+- uid: chia.dotnet.bls.AffinePoint.Double
+  name: Double()
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Double
+  commentId: M:chia.dotnet.bls.AffinePoint.Double
+  fullName: chia.dotnet.bls.AffinePoint.Double()
+  nameWithType: AffinePoint.Double()
+- uid: chia.dotnet.bls.AffinePoint.Double*
+  name: Double
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Double_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.Double
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.Double
+  nameWithType: AffinePoint.Double
+- uid: chia.dotnet.bls.AffinePoint.Equals(chia.dotnet.bls.AffinePoint)
+  name: Equals(AffinePoint)
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Equals_chia_dotnet_bls_AffinePoint_
+  commentId: M:chia.dotnet.bls.AffinePoint.Equals(chia.dotnet.bls.AffinePoint)
+  fullName: chia.dotnet.bls.AffinePoint.Equals(chia.dotnet.bls.AffinePoint)
+  nameWithType: AffinePoint.Equals(AffinePoint)
+- uid: chia.dotnet.bls.AffinePoint.Equals*
+  name: Equals
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Equals_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.Equals
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.Equals
+  nameWithType: AffinePoint.Equals
+- uid: chia.dotnet.bls.AffinePoint.IsInfinity
+  name: IsInfinity
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_IsInfinity
+  commentId: P:chia.dotnet.bls.AffinePoint.IsInfinity
+  fullName: chia.dotnet.bls.AffinePoint.IsInfinity
+  nameWithType: AffinePoint.IsInfinity
+- uid: chia.dotnet.bls.AffinePoint.IsInfinity*
+  name: IsInfinity
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_IsInfinity_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.IsInfinity
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.IsInfinity
+  nameWithType: AffinePoint.IsInfinity
+- uid: chia.dotnet.bls.AffinePoint.IsOnCurve
+  name: IsOnCurve
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_IsOnCurve
+  commentId: P:chia.dotnet.bls.AffinePoint.IsOnCurve
+  fullName: chia.dotnet.bls.AffinePoint.IsOnCurve
+  nameWithType: AffinePoint.IsOnCurve
+- uid: chia.dotnet.bls.AffinePoint.IsOnCurve*
+  name: IsOnCurve
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_IsOnCurve_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.IsOnCurve
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.IsOnCurve
+  nameWithType: AffinePoint.IsOnCurve
+- uid: chia.dotnet.bls.AffinePoint.Multiply(System.Numerics.BigInteger)
+  name: Multiply(BigInteger)
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Multiply_System_Numerics_BigInteger_
+  commentId: M:chia.dotnet.bls.AffinePoint.Multiply(System.Numerics.BigInteger)
+  fullName: chia.dotnet.bls.AffinePoint.Multiply(System.Numerics.BigInteger)
+  nameWithType: AffinePoint.Multiply(BigInteger)
+- uid: chia.dotnet.bls.AffinePoint.Multiply*
+  name: Multiply
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Multiply_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.Multiply
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.Multiply
+  nameWithType: AffinePoint.Multiply
+- uid: chia.dotnet.bls.AffinePoint.Negate
+  name: Negate()
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Negate
+  commentId: M:chia.dotnet.bls.AffinePoint.Negate
+  fullName: chia.dotnet.bls.AffinePoint.Negate()
+  nameWithType: AffinePoint.Negate()
+- uid: chia.dotnet.bls.AffinePoint.Negate*
+  name: Negate
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Negate_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.Negate
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.Negate
+  nameWithType: AffinePoint.Negate
+- uid: chia.dotnet.bls.AffinePoint.Subtract(chia.dotnet.bls.AffinePoint)
+  name: Subtract(AffinePoint)
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Subtract_chia_dotnet_bls_AffinePoint_
+  commentId: M:chia.dotnet.bls.AffinePoint.Subtract(chia.dotnet.bls.AffinePoint)
+  fullName: chia.dotnet.bls.AffinePoint.Subtract(chia.dotnet.bls.AffinePoint)
+  nameWithType: AffinePoint.Subtract(AffinePoint)
+- uid: chia.dotnet.bls.AffinePoint.Subtract*
+  name: Subtract
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Subtract_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.Subtract
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.Subtract
+  nameWithType: AffinePoint.Subtract
+- uid: chia.dotnet.bls.AffinePoint.ToJacobian
+  name: ToJacobian()
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_ToJacobian
+  commentId: M:chia.dotnet.bls.AffinePoint.ToJacobian
+  fullName: chia.dotnet.bls.AffinePoint.ToJacobian()
+  nameWithType: AffinePoint.ToJacobian()
+- uid: chia.dotnet.bls.AffinePoint.ToJacobian*
+  name: ToJacobian
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_ToJacobian_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.ToJacobian
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.ToJacobian
+  nameWithType: AffinePoint.ToJacobian
+- uid: chia.dotnet.bls.AffinePoint.ToString
+  name: ToString()
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_ToString
+  commentId: M:chia.dotnet.bls.AffinePoint.ToString
+  fullName: chia.dotnet.bls.AffinePoint.ToString()
+  nameWithType: AffinePoint.ToString()
+- uid: chia.dotnet.bls.AffinePoint.ToString*
+  name: ToString
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_ToString_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.ToString
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.ToString
+  nameWithType: AffinePoint.ToString
+- uid: chia.dotnet.bls.AffinePoint.Twist
+  name: Twist()
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Twist
+  commentId: M:chia.dotnet.bls.AffinePoint.Twist
+  fullName: chia.dotnet.bls.AffinePoint.Twist()
+  nameWithType: AffinePoint.Twist()
+- uid: chia.dotnet.bls.AffinePoint.Twist*
+  name: Twist
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Twist_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.Twist
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.Twist
+  nameWithType: AffinePoint.Twist
+- uid: chia.dotnet.bls.AffinePoint.Untwist
+  name: Untwist()
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Untwist
+  commentId: M:chia.dotnet.bls.AffinePoint.Untwist
+  fullName: chia.dotnet.bls.AffinePoint.Untwist()
+  nameWithType: AffinePoint.Untwist()
+- uid: chia.dotnet.bls.AffinePoint.Untwist*
+  name: Untwist
+  href: api/chia.dotnet.bls.AffinePoint.html#chia_dotnet_bls_AffinePoint_Untwist_
+  commentId: Overload:chia.dotnet.bls.AffinePoint.Untwist
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AffinePoint.Untwist
+  nameWithType: AffinePoint.Untwist
+- uid: chia.dotnet.bls.AugSchemeMPL
+  name: AugSchemeMPL
+  href: api/chia.dotnet.bls.AugSchemeMPL.html
+  commentId: T:chia.dotnet.bls.AugSchemeMPL
+  fullName: chia.dotnet.bls.AugSchemeMPL
+  nameWithType: AugSchemeMPL
+- uid: chia.dotnet.bls.AugSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint[])
+  name: Aggregate(JacobianPoint[])
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_Aggregate_chia_dotnet_bls_JacobianPoint___
+  commentId: M:chia.dotnet.bls.AugSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint[])
+  name.vb: Aggregate(JacobianPoint())
+  fullName: chia.dotnet.bls.AugSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint[])
+  fullName.vb: chia.dotnet.bls.AugSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint())
+  nameWithType: AugSchemeMPL.Aggregate(JacobianPoint[])
+  nameWithType.vb: AugSchemeMPL.Aggregate(JacobianPoint())
+- uid: chia.dotnet.bls.AugSchemeMPL.Aggregate*
+  name: Aggregate
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_Aggregate_
+  commentId: Overload:chia.dotnet.bls.AugSchemeMPL.Aggregate
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AugSchemeMPL.Aggregate
+  nameWithType: AugSchemeMPL.Aggregate
+- uid: chia.dotnet.bls.AugSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint[],System.Byte[][],chia.dotnet.bls.JacobianPoint)
+  name: AggregateVerify(JacobianPoint[], byte[][], JacobianPoint)
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_AggregateVerify_chia_dotnet_bls_JacobianPoint___System_Byte_____chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.AugSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint[],System.Byte[][],chia.dotnet.bls.JacobianPoint)
+  name.vb: AggregateVerify(JacobianPoint(), Byte()(), JacobianPoint)
+  fullName: chia.dotnet.bls.AugSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint[], byte[][], chia.dotnet.bls.JacobianPoint)
+  fullName.vb: chia.dotnet.bls.AugSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint(), Byte()(), chia.dotnet.bls.JacobianPoint)
+  nameWithType: AugSchemeMPL.AggregateVerify(JacobianPoint[], byte[][], JacobianPoint)
+  nameWithType.vb: AugSchemeMPL.AggregateVerify(JacobianPoint(), Byte()(), JacobianPoint)
+- uid: chia.dotnet.bls.AugSchemeMPL.AggregateVerify*
+  name: AggregateVerify
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_AggregateVerify_
+  commentId: Overload:chia.dotnet.bls.AugSchemeMPL.AggregateVerify
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AugSchemeMPL.AggregateVerify
+  nameWithType: AugSchemeMPL.AggregateVerify
+- uid: chia.dotnet.bls.AugSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint,System.Int64)
+  name: DeriveChildPkUnhardened(JacobianPoint, long)
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_DeriveChildPkUnhardened_chia_dotnet_bls_JacobianPoint_System_Int64_
+  commentId: M:chia.dotnet.bls.AugSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint,System.Int64)
+  name.vb: DeriveChildPkUnhardened(JacobianPoint, Long)
+  fullName: chia.dotnet.bls.AugSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint, long)
+  fullName.vb: chia.dotnet.bls.AugSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint, Long)
+  nameWithType: AugSchemeMPL.DeriveChildPkUnhardened(JacobianPoint, long)
+  nameWithType.vb: AugSchemeMPL.DeriveChildPkUnhardened(JacobianPoint, Long)
+- uid: chia.dotnet.bls.AugSchemeMPL.DeriveChildPkUnhardened*
+  name: DeriveChildPkUnhardened
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_DeriveChildPkUnhardened_
+  commentId: Overload:chia.dotnet.bls.AugSchemeMPL.DeriveChildPkUnhardened
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AugSchemeMPL.DeriveChildPkUnhardened
+  nameWithType: AugSchemeMPL.DeriveChildPkUnhardened
+- uid: chia.dotnet.bls.AugSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey,System.Int64)
+  name: DeriveChildSk(PrivateKey, long)
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_DeriveChildSk_chia_dotnet_bls_PrivateKey_System_Int64_
+  commentId: M:chia.dotnet.bls.AugSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey,System.Int64)
+  name.vb: DeriveChildSk(PrivateKey, Long)
+  fullName: chia.dotnet.bls.AugSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey, long)
+  fullName.vb: chia.dotnet.bls.AugSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey, Long)
+  nameWithType: AugSchemeMPL.DeriveChildSk(PrivateKey, long)
+  nameWithType.vb: AugSchemeMPL.DeriveChildSk(PrivateKey, Long)
+- uid: chia.dotnet.bls.AugSchemeMPL.DeriveChildSk*
+  name: DeriveChildSk
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_DeriveChildSk_
+  commentId: Overload:chia.dotnet.bls.AugSchemeMPL.DeriveChildSk
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AugSchemeMPL.DeriveChildSk
+  nameWithType: AugSchemeMPL.DeriveChildSk
+- uid: chia.dotnet.bls.AugSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey,System.Int64)
+  name: DeriveChildSkUnhardened(PrivateKey, long)
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_DeriveChildSkUnhardened_chia_dotnet_bls_PrivateKey_System_Int64_
+  commentId: M:chia.dotnet.bls.AugSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey,System.Int64)
+  name.vb: DeriveChildSkUnhardened(PrivateKey, Long)
+  fullName: chia.dotnet.bls.AugSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey, long)
+  fullName.vb: chia.dotnet.bls.AugSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey, Long)
+  nameWithType: AugSchemeMPL.DeriveChildSkUnhardened(PrivateKey, long)
+  nameWithType.vb: AugSchemeMPL.DeriveChildSkUnhardened(PrivateKey, Long)
+- uid: chia.dotnet.bls.AugSchemeMPL.DeriveChildSkUnhardened*
+  name: DeriveChildSkUnhardened
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_DeriveChildSkUnhardened_
+  commentId: Overload:chia.dotnet.bls.AugSchemeMPL.DeriveChildSkUnhardened
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AugSchemeMPL.DeriveChildSkUnhardened
+  nameWithType: AugSchemeMPL.DeriveChildSkUnhardened
+- uid: chia.dotnet.bls.AugSchemeMPL.KeyGen(System.Byte[])
+  name: KeyGen(byte[])
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_KeyGen_System_Byte___
+  commentId: M:chia.dotnet.bls.AugSchemeMPL.KeyGen(System.Byte[])
+  name.vb: KeyGen(Byte())
+  fullName: chia.dotnet.bls.AugSchemeMPL.KeyGen(byte[])
+  fullName.vb: chia.dotnet.bls.AugSchemeMPL.KeyGen(Byte())
+  nameWithType: AugSchemeMPL.KeyGen(byte[])
+  nameWithType.vb: AugSchemeMPL.KeyGen(Byte())
+- uid: chia.dotnet.bls.AugSchemeMPL.KeyGen*
+  name: KeyGen
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_KeyGen_
+  commentId: Overload:chia.dotnet.bls.AugSchemeMPL.KeyGen
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AugSchemeMPL.KeyGen
+  nameWithType: AugSchemeMPL.KeyGen
+- uid: chia.dotnet.bls.AugSchemeMPL.Sign(chia.dotnet.bls.PrivateKey,System.Byte[])
+  name: Sign(PrivateKey, byte[])
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_Sign_chia_dotnet_bls_PrivateKey_System_Byte___
+  commentId: M:chia.dotnet.bls.AugSchemeMPL.Sign(chia.dotnet.bls.PrivateKey,System.Byte[])
+  name.vb: Sign(PrivateKey, Byte())
+  fullName: chia.dotnet.bls.AugSchemeMPL.Sign(chia.dotnet.bls.PrivateKey, byte[])
+  fullName.vb: chia.dotnet.bls.AugSchemeMPL.Sign(chia.dotnet.bls.PrivateKey, Byte())
+  nameWithType: AugSchemeMPL.Sign(PrivateKey, byte[])
+  nameWithType.vb: AugSchemeMPL.Sign(PrivateKey, Byte())
+- uid: chia.dotnet.bls.AugSchemeMPL.Sign(chia.dotnet.bls.PrivateKey,System.String)
+  name: Sign(PrivateKey, string)
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_Sign_chia_dotnet_bls_PrivateKey_System_String_
+  commentId: M:chia.dotnet.bls.AugSchemeMPL.Sign(chia.dotnet.bls.PrivateKey,System.String)
+  name.vb: Sign(PrivateKey, String)
+  fullName: chia.dotnet.bls.AugSchemeMPL.Sign(chia.dotnet.bls.PrivateKey, string)
+  fullName.vb: chia.dotnet.bls.AugSchemeMPL.Sign(chia.dotnet.bls.PrivateKey, String)
+  nameWithType: AugSchemeMPL.Sign(PrivateKey, string)
+  nameWithType.vb: AugSchemeMPL.Sign(PrivateKey, String)
+- uid: chia.dotnet.bls.AugSchemeMPL.Sign*
+  name: Sign
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_Sign_
+  commentId: Overload:chia.dotnet.bls.AugSchemeMPL.Sign
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AugSchemeMPL.Sign
+  nameWithType: AugSchemeMPL.Sign
+- uid: chia.dotnet.bls.AugSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint,System.Byte[],chia.dotnet.bls.JacobianPoint)
+  name: Verify(JacobianPoint, byte[], JacobianPoint)
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_Verify_chia_dotnet_bls_JacobianPoint_System_Byte___chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.AugSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint,System.Byte[],chia.dotnet.bls.JacobianPoint)
+  name.vb: Verify(JacobianPoint, Byte(), JacobianPoint)
+  fullName: chia.dotnet.bls.AugSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint, byte[], chia.dotnet.bls.JacobianPoint)
+  fullName.vb: chia.dotnet.bls.AugSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint, Byte(), chia.dotnet.bls.JacobianPoint)
+  nameWithType: AugSchemeMPL.Verify(JacobianPoint, byte[], JacobianPoint)
+  nameWithType.vb: AugSchemeMPL.Verify(JacobianPoint, Byte(), JacobianPoint)
+- uid: chia.dotnet.bls.AugSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint,System.String,chia.dotnet.bls.JacobianPoint)
+  name: Verify(JacobianPoint, string, JacobianPoint)
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_Verify_chia_dotnet_bls_JacobianPoint_System_String_chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.AugSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint,System.String,chia.dotnet.bls.JacobianPoint)
+  name.vb: Verify(JacobianPoint, String, JacobianPoint)
+  fullName: chia.dotnet.bls.AugSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint, string, chia.dotnet.bls.JacobianPoint)
+  fullName.vb: chia.dotnet.bls.AugSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint, String, chia.dotnet.bls.JacobianPoint)
+  nameWithType: AugSchemeMPL.Verify(JacobianPoint, string, JacobianPoint)
+  nameWithType.vb: AugSchemeMPL.Verify(JacobianPoint, String, JacobianPoint)
+- uid: chia.dotnet.bls.AugSchemeMPL.Verify*
+  name: Verify
+  href: api/chia.dotnet.bls.AugSchemeMPL.html#chia_dotnet_bls_AugSchemeMPL_Verify_
+  commentId: Overload:chia.dotnet.bls.AugSchemeMPL.Verify
+  isSpec: "True"
+  fullName: chia.dotnet.bls.AugSchemeMPL.Verify
+  nameWithType: AugSchemeMPL.Verify
+- uid: chia.dotnet.bls.BasicSchemeMPL
+  name: BasicSchemeMPL
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html
+  commentId: T:chia.dotnet.bls.BasicSchemeMPL
+  fullName: chia.dotnet.bls.BasicSchemeMPL
+  nameWithType: BasicSchemeMPL
+- uid: chia.dotnet.bls.BasicSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint[])
+  name: Aggregate(JacobianPoint[])
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_Aggregate_chia_dotnet_bls_JacobianPoint___
+  commentId: M:chia.dotnet.bls.BasicSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint[])
+  name.vb: Aggregate(JacobianPoint())
+  fullName: chia.dotnet.bls.BasicSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint[])
+  fullName.vb: chia.dotnet.bls.BasicSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint())
+  nameWithType: BasicSchemeMPL.Aggregate(JacobianPoint[])
+  nameWithType.vb: BasicSchemeMPL.Aggregate(JacobianPoint())
+- uid: chia.dotnet.bls.BasicSchemeMPL.Aggregate*
+  name: Aggregate
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_Aggregate_
+  commentId: Overload:chia.dotnet.bls.BasicSchemeMPL.Aggregate
+  isSpec: "True"
+  fullName: chia.dotnet.bls.BasicSchemeMPL.Aggregate
+  nameWithType: BasicSchemeMPL.Aggregate
+- uid: chia.dotnet.bls.BasicSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint[],System.Byte[][],chia.dotnet.bls.JacobianPoint)
+  name: AggregateVerify(JacobianPoint[], byte[][], JacobianPoint)
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_AggregateVerify_chia_dotnet_bls_JacobianPoint___System_Byte_____chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.BasicSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint[],System.Byte[][],chia.dotnet.bls.JacobianPoint)
+  name.vb: AggregateVerify(JacobianPoint(), Byte()(), JacobianPoint)
+  fullName: chia.dotnet.bls.BasicSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint[], byte[][], chia.dotnet.bls.JacobianPoint)
+  fullName.vb: chia.dotnet.bls.BasicSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint(), Byte()(), chia.dotnet.bls.JacobianPoint)
+  nameWithType: BasicSchemeMPL.AggregateVerify(JacobianPoint[], byte[][], JacobianPoint)
+  nameWithType.vb: BasicSchemeMPL.AggregateVerify(JacobianPoint(), Byte()(), JacobianPoint)
+- uid: chia.dotnet.bls.BasicSchemeMPL.AggregateVerify*
+  name: AggregateVerify
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_AggregateVerify_
+  commentId: Overload:chia.dotnet.bls.BasicSchemeMPL.AggregateVerify
+  isSpec: "True"
+  fullName: chia.dotnet.bls.BasicSchemeMPL.AggregateVerify
+  nameWithType: BasicSchemeMPL.AggregateVerify
+- uid: chia.dotnet.bls.BasicSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint,System.Int64)
+  name: DeriveChildPkUnhardened(JacobianPoint, long)
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_DeriveChildPkUnhardened_chia_dotnet_bls_JacobianPoint_System_Int64_
+  commentId: M:chia.dotnet.bls.BasicSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint,System.Int64)
+  name.vb: DeriveChildPkUnhardened(JacobianPoint, Long)
+  fullName: chia.dotnet.bls.BasicSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint, long)
+  fullName.vb: chia.dotnet.bls.BasicSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint, Long)
+  nameWithType: BasicSchemeMPL.DeriveChildPkUnhardened(JacobianPoint, long)
+  nameWithType.vb: BasicSchemeMPL.DeriveChildPkUnhardened(JacobianPoint, Long)
+- uid: chia.dotnet.bls.BasicSchemeMPL.DeriveChildPkUnhardened*
+  name: DeriveChildPkUnhardened
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_DeriveChildPkUnhardened_
+  commentId: Overload:chia.dotnet.bls.BasicSchemeMPL.DeriveChildPkUnhardened
+  isSpec: "True"
+  fullName: chia.dotnet.bls.BasicSchemeMPL.DeriveChildPkUnhardened
+  nameWithType: BasicSchemeMPL.DeriveChildPkUnhardened
+- uid: chia.dotnet.bls.BasicSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey,System.Int64)
+  name: DeriveChildSk(PrivateKey, long)
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_DeriveChildSk_chia_dotnet_bls_PrivateKey_System_Int64_
+  commentId: M:chia.dotnet.bls.BasicSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey,System.Int64)
+  name.vb: DeriveChildSk(PrivateKey, Long)
+  fullName: chia.dotnet.bls.BasicSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey, long)
+  fullName.vb: chia.dotnet.bls.BasicSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey, Long)
+  nameWithType: BasicSchemeMPL.DeriveChildSk(PrivateKey, long)
+  nameWithType.vb: BasicSchemeMPL.DeriveChildSk(PrivateKey, Long)
+- uid: chia.dotnet.bls.BasicSchemeMPL.DeriveChildSk*
+  name: DeriveChildSk
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_DeriveChildSk_
+  commentId: Overload:chia.dotnet.bls.BasicSchemeMPL.DeriveChildSk
+  isSpec: "True"
+  fullName: chia.dotnet.bls.BasicSchemeMPL.DeriveChildSk
+  nameWithType: BasicSchemeMPL.DeriveChildSk
+- uid: chia.dotnet.bls.BasicSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey,System.Int64)
+  name: DeriveChildSkUnhardened(PrivateKey, long)
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_DeriveChildSkUnhardened_chia_dotnet_bls_PrivateKey_System_Int64_
+  commentId: M:chia.dotnet.bls.BasicSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey,System.Int64)
+  name.vb: DeriveChildSkUnhardened(PrivateKey, Long)
+  fullName: chia.dotnet.bls.BasicSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey, long)
+  fullName.vb: chia.dotnet.bls.BasicSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey, Long)
+  nameWithType: BasicSchemeMPL.DeriveChildSkUnhardened(PrivateKey, long)
+  nameWithType.vb: BasicSchemeMPL.DeriveChildSkUnhardened(PrivateKey, Long)
+- uid: chia.dotnet.bls.BasicSchemeMPL.DeriveChildSkUnhardened*
+  name: DeriveChildSkUnhardened
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_DeriveChildSkUnhardened_
+  commentId: Overload:chia.dotnet.bls.BasicSchemeMPL.DeriveChildSkUnhardened
+  isSpec: "True"
+  fullName: chia.dotnet.bls.BasicSchemeMPL.DeriveChildSkUnhardened
+  nameWithType: BasicSchemeMPL.DeriveChildSkUnhardened
+- uid: chia.dotnet.bls.BasicSchemeMPL.KeyGen(System.Byte[])
+  name: KeyGen(byte[])
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_KeyGen_System_Byte___
+  commentId: M:chia.dotnet.bls.BasicSchemeMPL.KeyGen(System.Byte[])
+  name.vb: KeyGen(Byte())
+  fullName: chia.dotnet.bls.BasicSchemeMPL.KeyGen(byte[])
+  fullName.vb: chia.dotnet.bls.BasicSchemeMPL.KeyGen(Byte())
+  nameWithType: BasicSchemeMPL.KeyGen(byte[])
+  nameWithType.vb: BasicSchemeMPL.KeyGen(Byte())
+- uid: chia.dotnet.bls.BasicSchemeMPL.KeyGen*
+  name: KeyGen
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_KeyGen_
+  commentId: Overload:chia.dotnet.bls.BasicSchemeMPL.KeyGen
+  isSpec: "True"
+  fullName: chia.dotnet.bls.BasicSchemeMPL.KeyGen
+  nameWithType: BasicSchemeMPL.KeyGen
+- uid: chia.dotnet.bls.BasicSchemeMPL.Sign(chia.dotnet.bls.PrivateKey,System.Byte[])
+  name: Sign(PrivateKey, byte[])
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_Sign_chia_dotnet_bls_PrivateKey_System_Byte___
+  commentId: M:chia.dotnet.bls.BasicSchemeMPL.Sign(chia.dotnet.bls.PrivateKey,System.Byte[])
+  name.vb: Sign(PrivateKey, Byte())
+  fullName: chia.dotnet.bls.BasicSchemeMPL.Sign(chia.dotnet.bls.PrivateKey, byte[])
+  fullName.vb: chia.dotnet.bls.BasicSchemeMPL.Sign(chia.dotnet.bls.PrivateKey, Byte())
+  nameWithType: BasicSchemeMPL.Sign(PrivateKey, byte[])
+  nameWithType.vb: BasicSchemeMPL.Sign(PrivateKey, Byte())
+- uid: chia.dotnet.bls.BasicSchemeMPL.Sign*
+  name: Sign
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_Sign_
+  commentId: Overload:chia.dotnet.bls.BasicSchemeMPL.Sign
+  isSpec: "True"
+  fullName: chia.dotnet.bls.BasicSchemeMPL.Sign
+  nameWithType: BasicSchemeMPL.Sign
+- uid: chia.dotnet.bls.BasicSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint,System.Byte[],chia.dotnet.bls.JacobianPoint)
+  name: Verify(JacobianPoint, byte[], JacobianPoint)
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_Verify_chia_dotnet_bls_JacobianPoint_System_Byte___chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.BasicSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint,System.Byte[],chia.dotnet.bls.JacobianPoint)
+  name.vb: Verify(JacobianPoint, Byte(), JacobianPoint)
+  fullName: chia.dotnet.bls.BasicSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint, byte[], chia.dotnet.bls.JacobianPoint)
+  fullName.vb: chia.dotnet.bls.BasicSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint, Byte(), chia.dotnet.bls.JacobianPoint)
+  nameWithType: BasicSchemeMPL.Verify(JacobianPoint, byte[], JacobianPoint)
+  nameWithType.vb: BasicSchemeMPL.Verify(JacobianPoint, Byte(), JacobianPoint)
+- uid: chia.dotnet.bls.BasicSchemeMPL.Verify*
+  name: Verify
+  href: api/chia.dotnet.bls.BasicSchemeMPL.html#chia_dotnet_bls_BasicSchemeMPL_Verify_
+  commentId: Overload:chia.dotnet.bls.BasicSchemeMPL.Verify
+  isSpec: "True"
+  fullName: chia.dotnet.bls.BasicSchemeMPL.Verify
+  nameWithType: BasicSchemeMPL.Verify
+- uid: chia.dotnet.bls.ByteUtils
+  name: ByteUtils
+  href: api/chia.dotnet.bls.ByteUtils.html
+  commentId: T:chia.dotnet.bls.ByteUtils
+  fullName: chia.dotnet.bls.ByteUtils
+  nameWithType: ByteUtils
+- uid: chia.dotnet.bls.ByteUtils.BigIntToBits(System.Numerics.BigInteger)
+  name: BigIntToBits(BigInteger)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BigIntToBits_System_Numerics_BigInteger_
+  commentId: M:chia.dotnet.bls.ByteUtils.BigIntToBits(System.Numerics.BigInteger)
+  fullName: chia.dotnet.bls.ByteUtils.BigIntToBits(System.Numerics.BigInteger)
+  nameWithType: ByteUtils.BigIntToBits(BigInteger)
+- uid: chia.dotnet.bls.ByteUtils.BigIntToBits*
+  name: BigIntToBits
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BigIntToBits_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.BigIntToBits
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.BigIntToBits
+  nameWithType: ByteUtils.BigIntToBits
+- uid: chia.dotnet.bls.ByteUtils.BigIntToBytes(System.Numerics.BigInteger,System.Int32,chia.dotnet.bls.Endian,System.Boolean)
+  name: BigIntToBytes(BigInteger, int, Endian, bool)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BigIntToBytes_System_Numerics_BigInteger_System_Int32_chia_dotnet_bls_Endian_System_Boolean_
+  commentId: M:chia.dotnet.bls.ByteUtils.BigIntToBytes(System.Numerics.BigInteger,System.Int32,chia.dotnet.bls.Endian,System.Boolean)
+  name.vb: BigIntToBytes(BigInteger, Integer, Endian, Boolean)
+  fullName: chia.dotnet.bls.ByteUtils.BigIntToBytes(System.Numerics.BigInteger, int, chia.dotnet.bls.Endian, bool)
+  fullName.vb: chia.dotnet.bls.ByteUtils.BigIntToBytes(System.Numerics.BigInteger, Integer, chia.dotnet.bls.Endian, Boolean)
+  nameWithType: ByteUtils.BigIntToBytes(BigInteger, int, Endian, bool)
+  nameWithType.vb: ByteUtils.BigIntToBytes(BigInteger, Integer, Endian, Boolean)
+- uid: chia.dotnet.bls.ByteUtils.BigIntToBytes*
+  name: BigIntToBytes
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BigIntToBytes_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.BigIntToBytes
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.BigIntToBytes
+  nameWithType: ByteUtils.BigIntToBytes
+- uid: chia.dotnet.bls.ByteUtils.BytesEqual(System.Byte[],System.Byte[])
+  name: BytesEqual(byte[], byte[])
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BytesEqual_System_Byte___System_Byte___
+  commentId: M:chia.dotnet.bls.ByteUtils.BytesEqual(System.Byte[],System.Byte[])
+  name.vb: BytesEqual(Byte(), Byte())
+  fullName: chia.dotnet.bls.ByteUtils.BytesEqual(byte[], byte[])
+  fullName.vb: chia.dotnet.bls.ByteUtils.BytesEqual(Byte(), Byte())
+  nameWithType: ByteUtils.BytesEqual(byte[], byte[])
+  nameWithType.vb: ByteUtils.BytesEqual(Byte(), Byte())
+- uid: chia.dotnet.bls.ByteUtils.BytesEqual*
+  name: BytesEqual
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BytesEqual_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.BytesEqual
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.BytesEqual
+  nameWithType: ByteUtils.BytesEqual
+- uid: chia.dotnet.bls.ByteUtils.BytesToBigInt(System.Byte[],chia.dotnet.bls.Endian,System.Boolean)
+  name: BytesToBigInt(byte[], Endian, bool)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BytesToBigInt_System_Byte___chia_dotnet_bls_Endian_System_Boolean_
+  commentId: M:chia.dotnet.bls.ByteUtils.BytesToBigInt(System.Byte[],chia.dotnet.bls.Endian,System.Boolean)
+  name.vb: BytesToBigInt(Byte(), Endian, Boolean)
+  fullName: chia.dotnet.bls.ByteUtils.BytesToBigInt(byte[], chia.dotnet.bls.Endian, bool)
+  fullName.vb: chia.dotnet.bls.ByteUtils.BytesToBigInt(Byte(), chia.dotnet.bls.Endian, Boolean)
+  nameWithType: ByteUtils.BytesToBigInt(byte[], Endian, bool)
+  nameWithType.vb: ByteUtils.BytesToBigInt(Byte(), Endian, Boolean)
+- uid: chia.dotnet.bls.ByteUtils.BytesToBigInt*
+  name: BytesToBigInt
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BytesToBigInt_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.BytesToBigInt
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.BytesToBigInt
+  nameWithType: ByteUtils.BytesToBigInt
+- uid: chia.dotnet.bls.ByteUtils.BytesToInt(System.Byte[],chia.dotnet.bls.Endian,System.Boolean)
+  name: BytesToInt(byte[], Endian, bool)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BytesToInt_System_Byte___chia_dotnet_bls_Endian_System_Boolean_
+  commentId: M:chia.dotnet.bls.ByteUtils.BytesToInt(System.Byte[],chia.dotnet.bls.Endian,System.Boolean)
+  name.vb: BytesToInt(Byte(), Endian, Boolean)
+  fullName: chia.dotnet.bls.ByteUtils.BytesToInt(byte[], chia.dotnet.bls.Endian, bool)
+  fullName.vb: chia.dotnet.bls.ByteUtils.BytesToInt(Byte(), chia.dotnet.bls.Endian, Boolean)
+  nameWithType: ByteUtils.BytesToInt(byte[], Endian, bool)
+  nameWithType.vb: ByteUtils.BytesToInt(Byte(), Endian, Boolean)
+- uid: chia.dotnet.bls.ByteUtils.BytesToInt*
+  name: BytesToInt
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BytesToInt_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.BytesToInt
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.BytesToInt
+  nameWithType: ByteUtils.BytesToInt
+- uid: chia.dotnet.bls.ByteUtils.ConcatenateArrays(System.Byte[][])
+  name: ConcatenateArrays(params byte[][])
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_ConcatenateArrays_System_Byte_____
+  commentId: M:chia.dotnet.bls.ByteUtils.ConcatenateArrays(System.Byte[][])
+  name.vb: ConcatenateArrays(ParamArray Byte()())
+  fullName: chia.dotnet.bls.ByteUtils.ConcatenateArrays(params byte[][])
+  fullName.vb: chia.dotnet.bls.ByteUtils.ConcatenateArrays(ParamArray Byte()())
+  nameWithType: ByteUtils.ConcatenateArrays(params byte[][])
+  nameWithType.vb: ByteUtils.ConcatenateArrays(ParamArray Byte()())
+- uid: chia.dotnet.bls.ByteUtils.ConcatenateArrays*
+  name: ConcatenateArrays
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_ConcatenateArrays_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.ConcatenateArrays
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.ConcatenateArrays
+  nameWithType: ByteUtils.ConcatenateArrays
+- uid: chia.dotnet.bls.ByteUtils.FromHex(System.String)
+  name: FromHex(string)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_FromHex_System_String_
+  commentId: M:chia.dotnet.bls.ByteUtils.FromHex(System.String)
+  name.vb: FromHex(String)
+  fullName: chia.dotnet.bls.ByteUtils.FromHex(string)
+  fullName.vb: chia.dotnet.bls.ByteUtils.FromHex(String)
+  nameWithType: ByteUtils.FromHex(string)
+  nameWithType.vb: ByteUtils.FromHex(String)
+- uid: chia.dotnet.bls.ByteUtils.FromHex*
+  name: FromHex
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_FromHex_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.FromHex
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.FromHex
+  nameWithType: ByteUtils.FromHex
+- uid: chia.dotnet.bls.ByteUtils.HexStringToByteArray(System.String)
+  name: HexStringToByteArray(string)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_HexStringToByteArray_System_String_
+  commentId: M:chia.dotnet.bls.ByteUtils.HexStringToByteArray(System.String)
+  name.vb: HexStringToByteArray(String)
+  fullName: chia.dotnet.bls.ByteUtils.HexStringToByteArray(string)
+  fullName.vb: chia.dotnet.bls.ByteUtils.HexStringToByteArray(String)
+  nameWithType: ByteUtils.HexStringToByteArray(string)
+  nameWithType.vb: ByteUtils.HexStringToByteArray(String)
+- uid: chia.dotnet.bls.ByteUtils.HexStringToByteArray*
+  name: HexStringToByteArray
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_HexStringToByteArray_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.HexStringToByteArray
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.HexStringToByteArray
+  nameWithType: ByteUtils.HexStringToByteArray
+- uid: chia.dotnet.bls.ByteUtils.IntToBytes(System.Int64,System.Int32,chia.dotnet.bls.Endian,System.Boolean)
+  name: IntToBytes(long, int, Endian, bool)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_IntToBytes_System_Int64_System_Int32_chia_dotnet_bls_Endian_System_Boolean_
+  commentId: M:chia.dotnet.bls.ByteUtils.IntToBytes(System.Int64,System.Int32,chia.dotnet.bls.Endian,System.Boolean)
+  name.vb: IntToBytes(Long, Integer, Endian, Boolean)
+  fullName: chia.dotnet.bls.ByteUtils.IntToBytes(long, int, chia.dotnet.bls.Endian, bool)
+  fullName.vb: chia.dotnet.bls.ByteUtils.IntToBytes(Long, Integer, chia.dotnet.bls.Endian, Boolean)
+  nameWithType: ByteUtils.IntToBytes(long, int, Endian, bool)
+  nameWithType.vb: ByteUtils.IntToBytes(Long, Integer, Endian, Boolean)
+- uid: chia.dotnet.bls.ByteUtils.IntToBytes*
+  name: IntToBytes
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_IntToBytes_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.IntToBytes
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.IntToBytes
+  nameWithType: ByteUtils.IntToBytes
+- uid: chia.dotnet.bls.ByteUtils.ToBytes(System.String)
+  name: ToBytes(string)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_ToBytes_System_String_
+  commentId: M:chia.dotnet.bls.ByteUtils.ToBytes(System.String)
+  name.vb: ToBytes(String)
+  fullName: chia.dotnet.bls.ByteUtils.ToBytes(string)
+  fullName.vb: chia.dotnet.bls.ByteUtils.ToBytes(String)
+  nameWithType: ByteUtils.ToBytes(string)
+  nameWithType.vb: ByteUtils.ToBytes(String)
+- uid: chia.dotnet.bls.ByteUtils.ToBytes*
+  name: ToBytes
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_ToBytes_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.ToBytes
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.ToBytes
+  nameWithType: ByteUtils.ToBytes
+- uid: chia.dotnet.bls.ByteUtils.ToHex(System.Byte[])
+  name: ToHex(byte[])
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_ToHex_System_Byte___
+  commentId: M:chia.dotnet.bls.ByteUtils.ToHex(System.Byte[])
+  name.vb: ToHex(Byte())
+  fullName: chia.dotnet.bls.ByteUtils.ToHex(byte[])
+  fullName.vb: chia.dotnet.bls.ByteUtils.ToHex(Byte())
+  nameWithType: ByteUtils.ToHex(byte[])
+  nameWithType.vb: ByteUtils.ToHex(Byte())
+- uid: chia.dotnet.bls.ByteUtils.ToHex*
+  name: ToHex
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_ToHex_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.ToHex
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.ToHex
+  nameWithType: ByteUtils.ToHex
+- uid: chia.dotnet.bls.Endian
+  name: Endian
+  href: api/chia.dotnet.bls.Endian.html
+  commentId: T:chia.dotnet.bls.Endian
+  fullName: chia.dotnet.bls.Endian
+  nameWithType: Endian
+- uid: chia.dotnet.bls.Endian.Big
+  name: Big
+  href: api/chia.dotnet.bls.Endian.html#chia_dotnet_bls_Endian_Big
+  commentId: F:chia.dotnet.bls.Endian.Big
+  fullName: chia.dotnet.bls.Endian.Big
+  nameWithType: Endian.Big
+- uid: chia.dotnet.bls.Endian.Little
+  name: Little
+  href: api/chia.dotnet.bls.Endian.html#chia_dotnet_bls_Endian_Little
+  commentId: F:chia.dotnet.bls.Endian.Little
+  fullName: chia.dotnet.bls.Endian.Little
+  nameWithType: Endian.Little
+- uid: chia.dotnet.bls.JacobianPoint
+  name: JacobianPoint
+  href: api/chia.dotnet.bls.JacobianPoint.html
+  commentId: T:chia.dotnet.bls.JacobianPoint
+  fullName: chia.dotnet.bls.JacobianPoint
+  nameWithType: JacobianPoint
+- uid: chia.dotnet.bls.JacobianPoint.Add(chia.dotnet.bls.JacobianPoint)
+  name: Add(JacobianPoint)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Add_chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.JacobianPoint.Add(chia.dotnet.bls.JacobianPoint)
+  fullName: chia.dotnet.bls.JacobianPoint.Add(chia.dotnet.bls.JacobianPoint)
+  nameWithType: JacobianPoint.Add(JacobianPoint)
+- uid: chia.dotnet.bls.JacobianPoint.Add*
+  name: Add
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Add_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.Add
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.Add
+  nameWithType: JacobianPoint.Add
+- uid: chia.dotnet.bls.JacobianPoint.Clone
+  name: Clone()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Clone
+  commentId: M:chia.dotnet.bls.JacobianPoint.Clone
+  fullName: chia.dotnet.bls.JacobianPoint.Clone()
+  nameWithType: JacobianPoint.Clone()
+- uid: chia.dotnet.bls.JacobianPoint.Clone*
+  name: Clone
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Clone_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.Clone
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.Clone
+  nameWithType: JacobianPoint.Clone
+- uid: chia.dotnet.bls.JacobianPoint.Double
+  name: Double()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Double
+  commentId: M:chia.dotnet.bls.JacobianPoint.Double
+  fullName: chia.dotnet.bls.JacobianPoint.Double()
+  nameWithType: JacobianPoint.Double()
+- uid: chia.dotnet.bls.JacobianPoint.Double*
+  name: Double
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Double_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.Double
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.Double
+  nameWithType: JacobianPoint.Double
+- uid: chia.dotnet.bls.JacobianPoint.Equals(chia.dotnet.bls.JacobianPoint)
+  name: Equals(JacobianPoint)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Equals_chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.JacobianPoint.Equals(chia.dotnet.bls.JacobianPoint)
+  fullName: chia.dotnet.bls.JacobianPoint.Equals(chia.dotnet.bls.JacobianPoint)
+  nameWithType: JacobianPoint.Equals(JacobianPoint)
+- uid: chia.dotnet.bls.JacobianPoint.Equals*
+  name: Equals
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Equals_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.Equals
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.Equals
+  nameWithType: JacobianPoint.Equals
+- uid: chia.dotnet.bls.JacobianPoint.FromBytes(System.Byte[],System.Boolean)
+  name: FromBytes(byte[], bool)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromBytes_System_Byte___System_Boolean_
+  commentId: M:chia.dotnet.bls.JacobianPoint.FromBytes(System.Byte[],System.Boolean)
+  name.vb: FromBytes(Byte(), Boolean)
+  fullName: chia.dotnet.bls.JacobianPoint.FromBytes(byte[], bool)
+  fullName.vb: chia.dotnet.bls.JacobianPoint.FromBytes(Byte(), Boolean)
+  nameWithType: JacobianPoint.FromBytes(byte[], bool)
+  nameWithType.vb: JacobianPoint.FromBytes(Byte(), Boolean)
+- uid: chia.dotnet.bls.JacobianPoint.FromBytes*
+  name: FromBytes
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromBytes_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.FromBytes
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.FromBytes
+  nameWithType: JacobianPoint.FromBytes
+- uid: chia.dotnet.bls.JacobianPoint.FromBytesG1(System.Byte[],System.Boolean)
+  name: FromBytesG1(byte[], bool)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromBytesG1_System_Byte___System_Boolean_
+  commentId: M:chia.dotnet.bls.JacobianPoint.FromBytesG1(System.Byte[],System.Boolean)
+  name.vb: FromBytesG1(Byte(), Boolean)
+  fullName: chia.dotnet.bls.JacobianPoint.FromBytesG1(byte[], bool)
+  fullName.vb: chia.dotnet.bls.JacobianPoint.FromBytesG1(Byte(), Boolean)
+  nameWithType: JacobianPoint.FromBytesG1(byte[], bool)
+  nameWithType.vb: JacobianPoint.FromBytesG1(Byte(), Boolean)
+- uid: chia.dotnet.bls.JacobianPoint.FromBytesG1*
+  name: FromBytesG1
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromBytesG1_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.FromBytesG1
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.FromBytesG1
+  nameWithType: JacobianPoint.FromBytesG1
+- uid: chia.dotnet.bls.JacobianPoint.FromBytesG2(System.Byte[],System.Boolean)
+  name: FromBytesG2(byte[], bool)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromBytesG2_System_Byte___System_Boolean_
+  commentId: M:chia.dotnet.bls.JacobianPoint.FromBytesG2(System.Byte[],System.Boolean)
+  name.vb: FromBytesG2(Byte(), Boolean)
+  fullName: chia.dotnet.bls.JacobianPoint.FromBytesG2(byte[], bool)
+  fullName.vb: chia.dotnet.bls.JacobianPoint.FromBytesG2(Byte(), Boolean)
+  nameWithType: JacobianPoint.FromBytesG2(byte[], bool)
+  nameWithType.vb: JacobianPoint.FromBytesG2(Byte(), Boolean)
+- uid: chia.dotnet.bls.JacobianPoint.FromBytesG2*
+  name: FromBytesG2
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromBytesG2_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.FromBytesG2
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.FromBytesG2
+  nameWithType: JacobianPoint.FromBytesG2
+- uid: chia.dotnet.bls.JacobianPoint.FromHex(System.String,System.Boolean)
+  name: FromHex(string, bool)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromHex_System_String_System_Boolean_
+  commentId: M:chia.dotnet.bls.JacobianPoint.FromHex(System.String,System.Boolean)
+  name.vb: FromHex(String, Boolean)
+  fullName: chia.dotnet.bls.JacobianPoint.FromHex(string, bool)
+  fullName.vb: chia.dotnet.bls.JacobianPoint.FromHex(String, Boolean)
+  nameWithType: JacobianPoint.FromHex(string, bool)
+  nameWithType.vb: JacobianPoint.FromHex(String, Boolean)
+- uid: chia.dotnet.bls.JacobianPoint.FromHex*
+  name: FromHex
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromHex_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.FromHex
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.FromHex
+  nameWithType: JacobianPoint.FromHex
+- uid: chia.dotnet.bls.JacobianPoint.FromHexG1(System.String,System.Boolean)
+  name: FromHexG1(string, bool)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromHexG1_System_String_System_Boolean_
+  commentId: M:chia.dotnet.bls.JacobianPoint.FromHexG1(System.String,System.Boolean)
+  name.vb: FromHexG1(String, Boolean)
+  fullName: chia.dotnet.bls.JacobianPoint.FromHexG1(string, bool)
+  fullName.vb: chia.dotnet.bls.JacobianPoint.FromHexG1(String, Boolean)
+  nameWithType: JacobianPoint.FromHexG1(string, bool)
+  nameWithType.vb: JacobianPoint.FromHexG1(String, Boolean)
+- uid: chia.dotnet.bls.JacobianPoint.FromHexG1*
+  name: FromHexG1
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromHexG1_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.FromHexG1
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.FromHexG1
+  nameWithType: JacobianPoint.FromHexG1
+- uid: chia.dotnet.bls.JacobianPoint.FromHexG2(System.String,System.Boolean)
+  name: FromHexG2(string, bool)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromHexG2_System_String_System_Boolean_
+  commentId: M:chia.dotnet.bls.JacobianPoint.FromHexG2(System.String,System.Boolean)
+  name.vb: FromHexG2(String, Boolean)
+  fullName: chia.dotnet.bls.JacobianPoint.FromHexG2(string, bool)
+  fullName.vb: chia.dotnet.bls.JacobianPoint.FromHexG2(String, Boolean)
+  nameWithType: JacobianPoint.FromHexG2(string, bool)
+  nameWithType.vb: JacobianPoint.FromHexG2(String, Boolean)
+- uid: chia.dotnet.bls.JacobianPoint.FromHexG2*
+  name: FromHexG2
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_FromHexG2_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.FromHexG2
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.FromHexG2
+  nameWithType: JacobianPoint.FromHexG2
+- uid: chia.dotnet.bls.JacobianPoint.GenerateG1
+  name: GenerateG1()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_GenerateG1
+  commentId: M:chia.dotnet.bls.JacobianPoint.GenerateG1
+  fullName: chia.dotnet.bls.JacobianPoint.GenerateG1()
+  nameWithType: JacobianPoint.GenerateG1()
+- uid: chia.dotnet.bls.JacobianPoint.GenerateG1*
+  name: GenerateG1
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_GenerateG1_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.GenerateG1
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.GenerateG1
+  nameWithType: JacobianPoint.GenerateG1
+- uid: chia.dotnet.bls.JacobianPoint.GenerateG2
+  name: GenerateG2()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_GenerateG2
+  commentId: M:chia.dotnet.bls.JacobianPoint.GenerateG2
+  fullName: chia.dotnet.bls.JacobianPoint.GenerateG2()
+  nameWithType: JacobianPoint.GenerateG2()
+- uid: chia.dotnet.bls.JacobianPoint.GenerateG2*
+  name: GenerateG2
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_GenerateG2_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.GenerateG2
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.GenerateG2
+  nameWithType: JacobianPoint.GenerateG2
+- uid: chia.dotnet.bls.JacobianPoint.GetFingerprint
+  name: GetFingerprint()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_GetFingerprint
+  commentId: M:chia.dotnet.bls.JacobianPoint.GetFingerprint
+  fullName: chia.dotnet.bls.JacobianPoint.GetFingerprint()
+  nameWithType: JacobianPoint.GetFingerprint()
+- uid: chia.dotnet.bls.JacobianPoint.GetFingerprint*
+  name: GetFingerprint
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_GetFingerprint_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.GetFingerprint
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.GetFingerprint
+  nameWithType: JacobianPoint.GetFingerprint
+- uid: chia.dotnet.bls.JacobianPoint.InfinityG1(System.Boolean)
+  name: InfinityG1(bool)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_InfinityG1_System_Boolean_
+  commentId: M:chia.dotnet.bls.JacobianPoint.InfinityG1(System.Boolean)
+  name.vb: InfinityG1(Boolean)
+  fullName: chia.dotnet.bls.JacobianPoint.InfinityG1(bool)
+  fullName.vb: chia.dotnet.bls.JacobianPoint.InfinityG1(Boolean)
+  nameWithType: JacobianPoint.InfinityG1(bool)
+  nameWithType.vb: JacobianPoint.InfinityG1(Boolean)
+- uid: chia.dotnet.bls.JacobianPoint.InfinityG1*
+  name: InfinityG1
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_InfinityG1_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.InfinityG1
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.InfinityG1
+  nameWithType: JacobianPoint.InfinityG1
+- uid: chia.dotnet.bls.JacobianPoint.InfinityG2(System.Boolean)
+  name: InfinityG2(bool)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_InfinityG2_System_Boolean_
+  commentId: M:chia.dotnet.bls.JacobianPoint.InfinityG2(System.Boolean)
+  name.vb: InfinityG2(Boolean)
+  fullName: chia.dotnet.bls.JacobianPoint.InfinityG2(bool)
+  fullName.vb: chia.dotnet.bls.JacobianPoint.InfinityG2(Boolean)
+  nameWithType: JacobianPoint.InfinityG2(bool)
+  nameWithType.vb: JacobianPoint.InfinityG2(Boolean)
+- uid: chia.dotnet.bls.JacobianPoint.InfinityG2*
+  name: InfinityG2
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_InfinityG2_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.InfinityG2
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.InfinityG2
+  nameWithType: JacobianPoint.InfinityG2
+- uid: chia.dotnet.bls.JacobianPoint.IsInfinity
+  name: IsInfinity
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_IsInfinity
+  commentId: P:chia.dotnet.bls.JacobianPoint.IsInfinity
+  fullName: chia.dotnet.bls.JacobianPoint.IsInfinity
+  nameWithType: JacobianPoint.IsInfinity
+- uid: chia.dotnet.bls.JacobianPoint.IsInfinity*
+  name: IsInfinity
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_IsInfinity_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.IsInfinity
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.IsInfinity
+  nameWithType: JacobianPoint.IsInfinity
+- uid: chia.dotnet.bls.JacobianPoint.IsOnCurve
+  name: IsOnCurve()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_IsOnCurve
+  commentId: M:chia.dotnet.bls.JacobianPoint.IsOnCurve
+  fullName: chia.dotnet.bls.JacobianPoint.IsOnCurve()
+  nameWithType: JacobianPoint.IsOnCurve()
+- uid: chia.dotnet.bls.JacobianPoint.IsOnCurve*
+  name: IsOnCurve
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_IsOnCurve_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.IsOnCurve
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.IsOnCurve
+  nameWithType: JacobianPoint.IsOnCurve
+- uid: chia.dotnet.bls.JacobianPoint.IsValid
+  name: IsValid()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_IsValid
+  commentId: M:chia.dotnet.bls.JacobianPoint.IsValid
+  fullName: chia.dotnet.bls.JacobianPoint.IsValid()
+  nameWithType: JacobianPoint.IsValid()
+- uid: chia.dotnet.bls.JacobianPoint.IsValid*
+  name: IsValid
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_IsValid_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.IsValid
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.IsValid
+  nameWithType: JacobianPoint.IsValid
+- uid: chia.dotnet.bls.JacobianPoint.Multiply(System.Numerics.BigInteger)
+  name: Multiply(BigInteger)
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Multiply_System_Numerics_BigInteger_
+  commentId: M:chia.dotnet.bls.JacobianPoint.Multiply(System.Numerics.BigInteger)
+  fullName: chia.dotnet.bls.JacobianPoint.Multiply(System.Numerics.BigInteger)
+  nameWithType: JacobianPoint.Multiply(BigInteger)
+- uid: chia.dotnet.bls.JacobianPoint.Multiply*
+  name: Multiply
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Multiply_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.Multiply
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.Multiply
+  nameWithType: JacobianPoint.Multiply
+- uid: chia.dotnet.bls.JacobianPoint.Negate
+  name: Negate()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Negate
+  commentId: M:chia.dotnet.bls.JacobianPoint.Negate
+  fullName: chia.dotnet.bls.JacobianPoint.Negate()
+  nameWithType: JacobianPoint.Negate()
+- uid: chia.dotnet.bls.JacobianPoint.Negate*
+  name: Negate
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_Negate_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.Negate
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.Negate
+  nameWithType: JacobianPoint.Negate
+- uid: chia.dotnet.bls.JacobianPoint.ToAffine
+  name: ToAffine()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_ToAffine
+  commentId: M:chia.dotnet.bls.JacobianPoint.ToAffine
+  fullName: chia.dotnet.bls.JacobianPoint.ToAffine()
+  nameWithType: JacobianPoint.ToAffine()
+- uid: chia.dotnet.bls.JacobianPoint.ToAffine*
+  name: ToAffine
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_ToAffine_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.ToAffine
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.ToAffine
+  nameWithType: JacobianPoint.ToAffine
+- uid: chia.dotnet.bls.JacobianPoint.ToBytes
+  name: ToBytes()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_ToBytes
+  commentId: M:chia.dotnet.bls.JacobianPoint.ToBytes
+  fullName: chia.dotnet.bls.JacobianPoint.ToBytes()
+  nameWithType: JacobianPoint.ToBytes()
+- uid: chia.dotnet.bls.JacobianPoint.ToBytes*
+  name: ToBytes
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_ToBytes_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.ToBytes
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.ToBytes
+  nameWithType: JacobianPoint.ToBytes
+- uid: chia.dotnet.bls.JacobianPoint.ToHex
+  name: ToHex()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_ToHex
+  commentId: M:chia.dotnet.bls.JacobianPoint.ToHex
+  fullName: chia.dotnet.bls.JacobianPoint.ToHex()
+  nameWithType: JacobianPoint.ToHex()
+- uid: chia.dotnet.bls.JacobianPoint.ToHex*
+  name: ToHex
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_ToHex_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.ToHex
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.ToHex
+  nameWithType: JacobianPoint.ToHex
+- uid: chia.dotnet.bls.JacobianPoint.ToString
+  name: ToString()
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_ToString
+  commentId: M:chia.dotnet.bls.JacobianPoint.ToString
+  fullName: chia.dotnet.bls.JacobianPoint.ToString()
+  nameWithType: JacobianPoint.ToString()
+- uid: chia.dotnet.bls.JacobianPoint.ToString*
+  name: ToString
+  href: api/chia.dotnet.bls.JacobianPoint.html#chia_dotnet_bls_JacobianPoint_ToString_
+  commentId: Overload:chia.dotnet.bls.JacobianPoint.ToString
+  isSpec: "True"
+  fullName: chia.dotnet.bls.JacobianPoint.ToString
+  nameWithType: JacobianPoint.ToString
+- uid: chia.dotnet.bls.KeyDerivation
+  name: KeyDerivation
+  href: api/chia.dotnet.bls.KeyDerivation.html
+  commentId: T:chia.dotnet.bls.KeyDerivation
+  fullName: chia.dotnet.bls.KeyDerivation
+  nameWithType: KeyDerivation
+- uid: chia.dotnet.bls.KeyDerivation.CalculateSyntheticOffset(chia.dotnet.bls.JacobianPoint,System.Byte[])
+  name: CalculateSyntheticOffset(JacobianPoint, byte[])
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_CalculateSyntheticOffset_chia_dotnet_bls_JacobianPoint_System_Byte___
+  commentId: M:chia.dotnet.bls.KeyDerivation.CalculateSyntheticOffset(chia.dotnet.bls.JacobianPoint,System.Byte[])
+  name.vb: CalculateSyntheticOffset(JacobianPoint, Byte())
+  fullName: chia.dotnet.bls.KeyDerivation.CalculateSyntheticOffset(chia.dotnet.bls.JacobianPoint, byte[])
+  fullName.vb: chia.dotnet.bls.KeyDerivation.CalculateSyntheticOffset(chia.dotnet.bls.JacobianPoint, Byte())
+  nameWithType: KeyDerivation.CalculateSyntheticOffset(JacobianPoint, byte[])
+  nameWithType.vb: KeyDerivation.CalculateSyntheticOffset(JacobianPoint, Byte())
+- uid: chia.dotnet.bls.KeyDerivation.CalculateSyntheticOffset*
+  name: CalculateSyntheticOffset
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_CalculateSyntheticOffset_
+  commentId: Overload:chia.dotnet.bls.KeyDerivation.CalculateSyntheticOffset
+  isSpec: "True"
+  fullName: chia.dotnet.bls.KeyDerivation.CalculateSyntheticOffset
+  nameWithType: KeyDerivation.CalculateSyntheticOffset
+- uid: chia.dotnet.bls.KeyDerivation.CalculateSyntheticPrivateKey(chia.dotnet.bls.PrivateKey,System.Byte[])
+  name: CalculateSyntheticPrivateKey(PrivateKey, byte[])
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_CalculateSyntheticPrivateKey_chia_dotnet_bls_PrivateKey_System_Byte___
+  commentId: M:chia.dotnet.bls.KeyDerivation.CalculateSyntheticPrivateKey(chia.dotnet.bls.PrivateKey,System.Byte[])
+  name.vb: CalculateSyntheticPrivateKey(PrivateKey, Byte())
+  fullName: chia.dotnet.bls.KeyDerivation.CalculateSyntheticPrivateKey(chia.dotnet.bls.PrivateKey, byte[])
+  fullName.vb: chia.dotnet.bls.KeyDerivation.CalculateSyntheticPrivateKey(chia.dotnet.bls.PrivateKey, Byte())
+  nameWithType: KeyDerivation.CalculateSyntheticPrivateKey(PrivateKey, byte[])
+  nameWithType.vb: KeyDerivation.CalculateSyntheticPrivateKey(PrivateKey, Byte())
+- uid: chia.dotnet.bls.KeyDerivation.CalculateSyntheticPrivateKey*
+  name: CalculateSyntheticPrivateKey
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_CalculateSyntheticPrivateKey_
+  commentId: Overload:chia.dotnet.bls.KeyDerivation.CalculateSyntheticPrivateKey
+  isSpec: "True"
+  fullName: chia.dotnet.bls.KeyDerivation.CalculateSyntheticPrivateKey
+  nameWithType: KeyDerivation.CalculateSyntheticPrivateKey
+- uid: chia.dotnet.bls.KeyDerivation.CalculateSyntheticPublicKey(chia.dotnet.bls.JacobianPoint,System.Byte[])
+  name: CalculateSyntheticPublicKey(JacobianPoint, byte[])
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_CalculateSyntheticPublicKey_chia_dotnet_bls_JacobianPoint_System_Byte___
+  commentId: M:chia.dotnet.bls.KeyDerivation.CalculateSyntheticPublicKey(chia.dotnet.bls.JacobianPoint,System.Byte[])
+  name.vb: CalculateSyntheticPublicKey(JacobianPoint, Byte())
+  fullName: chia.dotnet.bls.KeyDerivation.CalculateSyntheticPublicKey(chia.dotnet.bls.JacobianPoint, byte[])
+  fullName.vb: chia.dotnet.bls.KeyDerivation.CalculateSyntheticPublicKey(chia.dotnet.bls.JacobianPoint, Byte())
+  nameWithType: KeyDerivation.CalculateSyntheticPublicKey(JacobianPoint, byte[])
+  nameWithType.vb: KeyDerivation.CalculateSyntheticPublicKey(JacobianPoint, Byte())
+- uid: chia.dotnet.bls.KeyDerivation.CalculateSyntheticPublicKey*
+  name: CalculateSyntheticPublicKey
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_CalculateSyntheticPublicKey_
+  commentId: Overload:chia.dotnet.bls.KeyDerivation.CalculateSyntheticPublicKey
+  isSpec: "True"
+  fullName: chia.dotnet.bls.KeyDerivation.CalculateSyntheticPublicKey
+  nameWithType: KeyDerivation.CalculateSyntheticPublicKey
+- uid: chia.dotnet.bls.KeyDerivation.DEFAULT_HIDDEN_PUZZLE_HASH
+  name: DEFAULT_HIDDEN_PUZZLE_HASH
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DEFAULT_HIDDEN_PUZZLE_HASH
+  commentId: F:chia.dotnet.bls.KeyDerivation.DEFAULT_HIDDEN_PUZZLE_HASH
+  fullName: chia.dotnet.bls.KeyDerivation.DEFAULT_HIDDEN_PUZZLE_HASH
+  nameWithType: KeyDerivation.DEFAULT_HIDDEN_PUZZLE_HASH
+- uid: chia.dotnet.bls.KeyDerivation.DerivePrivateKey(chia.dotnet.bls.PrivateKey,System.Int32,System.Boolean)
+  name: DerivePrivateKey(PrivateKey, int, bool)
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DerivePrivateKey_chia_dotnet_bls_PrivateKey_System_Int32_System_Boolean_
+  commentId: M:chia.dotnet.bls.KeyDerivation.DerivePrivateKey(chia.dotnet.bls.PrivateKey,System.Int32,System.Boolean)
+  name.vb: DerivePrivateKey(PrivateKey, Integer, Boolean)
+  fullName: chia.dotnet.bls.KeyDerivation.DerivePrivateKey(chia.dotnet.bls.PrivateKey, int, bool)
+  fullName.vb: chia.dotnet.bls.KeyDerivation.DerivePrivateKey(chia.dotnet.bls.PrivateKey, Integer, Boolean)
+  nameWithType: KeyDerivation.DerivePrivateKey(PrivateKey, int, bool)
+  nameWithType.vb: KeyDerivation.DerivePrivateKey(PrivateKey, Integer, Boolean)
+- uid: chia.dotnet.bls.KeyDerivation.DerivePrivateKey*
+  name: DerivePrivateKey
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DerivePrivateKey_
+  commentId: Overload:chia.dotnet.bls.KeyDerivation.DerivePrivateKey
+  isSpec: "True"
+  fullName: chia.dotnet.bls.KeyDerivation.DerivePrivateKey
+  nameWithType: KeyDerivation.DerivePrivateKey
+- uid: chia.dotnet.bls.KeyDerivation.DerivePrivateKeyPath(chia.dotnet.bls.PrivateKey,System.Int32[],System.Boolean)
+  name: DerivePrivateKeyPath(PrivateKey, int[], bool)
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DerivePrivateKeyPath_chia_dotnet_bls_PrivateKey_System_Int32___System_Boolean_
+  commentId: M:chia.dotnet.bls.KeyDerivation.DerivePrivateKeyPath(chia.dotnet.bls.PrivateKey,System.Int32[],System.Boolean)
+  name.vb: DerivePrivateKeyPath(PrivateKey, Integer(), Boolean)
+  fullName: chia.dotnet.bls.KeyDerivation.DerivePrivateKeyPath(chia.dotnet.bls.PrivateKey, int[], bool)
+  fullName.vb: chia.dotnet.bls.KeyDerivation.DerivePrivateKeyPath(chia.dotnet.bls.PrivateKey, Integer(), Boolean)
+  nameWithType: KeyDerivation.DerivePrivateKeyPath(PrivateKey, int[], bool)
+  nameWithType.vb: KeyDerivation.DerivePrivateKeyPath(PrivateKey, Integer(), Boolean)
+- uid: chia.dotnet.bls.KeyDerivation.DerivePrivateKeyPath*
+  name: DerivePrivateKeyPath
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DerivePrivateKeyPath_
+  commentId: Overload:chia.dotnet.bls.KeyDerivation.DerivePrivateKeyPath
+  isSpec: "True"
+  fullName: chia.dotnet.bls.KeyDerivation.DerivePrivateKeyPath
+  nameWithType: KeyDerivation.DerivePrivateKeyPath
+- uid: chia.dotnet.bls.KeyDerivation.DerivePublicKeyPath(chia.dotnet.bls.JacobianPoint,System.Int32[])
+  name: DerivePublicKeyPath(JacobianPoint, int[])
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DerivePublicKeyPath_chia_dotnet_bls_JacobianPoint_System_Int32___
+  commentId: M:chia.dotnet.bls.KeyDerivation.DerivePublicKeyPath(chia.dotnet.bls.JacobianPoint,System.Int32[])
+  name.vb: DerivePublicKeyPath(JacobianPoint, Integer())
+  fullName: chia.dotnet.bls.KeyDerivation.DerivePublicKeyPath(chia.dotnet.bls.JacobianPoint, int[])
+  fullName.vb: chia.dotnet.bls.KeyDerivation.DerivePublicKeyPath(chia.dotnet.bls.JacobianPoint, Integer())
+  nameWithType: KeyDerivation.DerivePublicKeyPath(JacobianPoint, int[])
+  nameWithType.vb: KeyDerivation.DerivePublicKeyPath(JacobianPoint, Integer())
+- uid: chia.dotnet.bls.KeyDerivation.DerivePublicKeyPath*
+  name: DerivePublicKeyPath
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DerivePublicKeyPath_
+  commentId: Overload:chia.dotnet.bls.KeyDerivation.DerivePublicKeyPath
+  isSpec: "True"
+  fullName: chia.dotnet.bls.KeyDerivation.DerivePublicKeyPath
+  nameWithType: KeyDerivation.DerivePublicKeyPath
+- uid: chia.dotnet.bls.KeyDerivation.DerivePublicKeyWallet(chia.dotnet.bls.JacobianPoint,System.Int32)
+  name: DerivePublicKeyWallet(JacobianPoint, int)
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DerivePublicKeyWallet_chia_dotnet_bls_JacobianPoint_System_Int32_
+  commentId: M:chia.dotnet.bls.KeyDerivation.DerivePublicKeyWallet(chia.dotnet.bls.JacobianPoint,System.Int32)
+  name.vb: DerivePublicKeyWallet(JacobianPoint, Integer)
+  fullName: chia.dotnet.bls.KeyDerivation.DerivePublicKeyWallet(chia.dotnet.bls.JacobianPoint, int)
+  fullName.vb: chia.dotnet.bls.KeyDerivation.DerivePublicKeyWallet(chia.dotnet.bls.JacobianPoint, Integer)
+  nameWithType: KeyDerivation.DerivePublicKeyWallet(JacobianPoint, int)
+  nameWithType.vb: KeyDerivation.DerivePublicKeyWallet(JacobianPoint, Integer)
+- uid: chia.dotnet.bls.KeyDerivation.DerivePublicKeyWallet*
+  name: DerivePublicKeyWallet
+  href: api/chia.dotnet.bls.KeyDerivation.html#chia_dotnet_bls_KeyDerivation_DerivePublicKeyWallet_
+  commentId: Overload:chia.dotnet.bls.KeyDerivation.DerivePublicKeyWallet
+  isSpec: "True"
+  fullName: chia.dotnet.bls.KeyDerivation.DerivePublicKeyWallet
+  nameWithType: KeyDerivation.DerivePublicKeyWallet
+- uid: chia.dotnet.bls.PopSchemeMPL
+  name: PopSchemeMPL
+  href: api/chia.dotnet.bls.PopSchemeMPL.html
+  commentId: T:chia.dotnet.bls.PopSchemeMPL
+  fullName: chia.dotnet.bls.PopSchemeMPL
+  nameWithType: PopSchemeMPL
+- uid: chia.dotnet.bls.PopSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint[])
+  name: Aggregate(JacobianPoint[])
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_Aggregate_chia_dotnet_bls_JacobianPoint___
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint[])
+  name.vb: Aggregate(JacobianPoint())
+  fullName: chia.dotnet.bls.PopSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint[])
+  fullName.vb: chia.dotnet.bls.PopSchemeMPL.Aggregate(chia.dotnet.bls.JacobianPoint())
+  nameWithType: PopSchemeMPL.Aggregate(JacobianPoint[])
+  nameWithType.vb: PopSchemeMPL.Aggregate(JacobianPoint())
+- uid: chia.dotnet.bls.PopSchemeMPL.Aggregate*
+  name: Aggregate
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_Aggregate_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.Aggregate
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.Aggregate
+  nameWithType: PopSchemeMPL.Aggregate
+- uid: chia.dotnet.bls.PopSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint[],System.Byte[][],chia.dotnet.bls.JacobianPoint)
+  name: AggregateVerify(JacobianPoint[], byte[][], JacobianPoint)
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_AggregateVerify_chia_dotnet_bls_JacobianPoint___System_Byte_____chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint[],System.Byte[][],chia.dotnet.bls.JacobianPoint)
+  name.vb: AggregateVerify(JacobianPoint(), Byte()(), JacobianPoint)
+  fullName: chia.dotnet.bls.PopSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint[], byte[][], chia.dotnet.bls.JacobianPoint)
+  fullName.vb: chia.dotnet.bls.PopSchemeMPL.AggregateVerify(chia.dotnet.bls.JacobianPoint(), Byte()(), chia.dotnet.bls.JacobianPoint)
+  nameWithType: PopSchemeMPL.AggregateVerify(JacobianPoint[], byte[][], JacobianPoint)
+  nameWithType.vb: PopSchemeMPL.AggregateVerify(JacobianPoint(), Byte()(), JacobianPoint)
+- uid: chia.dotnet.bls.PopSchemeMPL.AggregateVerify*
+  name: AggregateVerify
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_AggregateVerify_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.AggregateVerify
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.AggregateVerify
+  nameWithType: PopSchemeMPL.AggregateVerify
+- uid: chia.dotnet.bls.PopSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint,System.Int64)
+  name: DeriveChildPkUnhardened(JacobianPoint, long)
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_DeriveChildPkUnhardened_chia_dotnet_bls_JacobianPoint_System_Int64_
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint,System.Int64)
+  name.vb: DeriveChildPkUnhardened(JacobianPoint, Long)
+  fullName: chia.dotnet.bls.PopSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint, long)
+  fullName.vb: chia.dotnet.bls.PopSchemeMPL.DeriveChildPkUnhardened(chia.dotnet.bls.JacobianPoint, Long)
+  nameWithType: PopSchemeMPL.DeriveChildPkUnhardened(JacobianPoint, long)
+  nameWithType.vb: PopSchemeMPL.DeriveChildPkUnhardened(JacobianPoint, Long)
+- uid: chia.dotnet.bls.PopSchemeMPL.DeriveChildPkUnhardened*
+  name: DeriveChildPkUnhardened
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_DeriveChildPkUnhardened_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.DeriveChildPkUnhardened
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.DeriveChildPkUnhardened
+  nameWithType: PopSchemeMPL.DeriveChildPkUnhardened
+- uid: chia.dotnet.bls.PopSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey,System.Int64)
+  name: DeriveChildSk(PrivateKey, long)
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_DeriveChildSk_chia_dotnet_bls_PrivateKey_System_Int64_
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey,System.Int64)
+  name.vb: DeriveChildSk(PrivateKey, Long)
+  fullName: chia.dotnet.bls.PopSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey, long)
+  fullName.vb: chia.dotnet.bls.PopSchemeMPL.DeriveChildSk(chia.dotnet.bls.PrivateKey, Long)
+  nameWithType: PopSchemeMPL.DeriveChildSk(PrivateKey, long)
+  nameWithType.vb: PopSchemeMPL.DeriveChildSk(PrivateKey, Long)
+- uid: chia.dotnet.bls.PopSchemeMPL.DeriveChildSk*
+  name: DeriveChildSk
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_DeriveChildSk_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.DeriveChildSk
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.DeriveChildSk
+  nameWithType: PopSchemeMPL.DeriveChildSk
+- uid: chia.dotnet.bls.PopSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey,System.Int64)
+  name: DeriveChildSkUnhardened(PrivateKey, long)
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_DeriveChildSkUnhardened_chia_dotnet_bls_PrivateKey_System_Int64_
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey,System.Int64)
+  name.vb: DeriveChildSkUnhardened(PrivateKey, Long)
+  fullName: chia.dotnet.bls.PopSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey, long)
+  fullName.vb: chia.dotnet.bls.PopSchemeMPL.DeriveChildSkUnhardened(chia.dotnet.bls.PrivateKey, Long)
+  nameWithType: PopSchemeMPL.DeriveChildSkUnhardened(PrivateKey, long)
+  nameWithType.vb: PopSchemeMPL.DeriveChildSkUnhardened(PrivateKey, Long)
+- uid: chia.dotnet.bls.PopSchemeMPL.DeriveChildSkUnhardened*
+  name: DeriveChildSkUnhardened
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_DeriveChildSkUnhardened_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.DeriveChildSkUnhardened
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.DeriveChildSkUnhardened
+  nameWithType: PopSchemeMPL.DeriveChildSkUnhardened
+- uid: chia.dotnet.bls.PopSchemeMPL.FastAggregateVerify(chia.dotnet.bls.JacobianPoint[],System.Byte[],chia.dotnet.bls.JacobianPoint)
+  name: FastAggregateVerify(JacobianPoint[], byte[], JacobianPoint)
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_FastAggregateVerify_chia_dotnet_bls_JacobianPoint___System_Byte___chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.FastAggregateVerify(chia.dotnet.bls.JacobianPoint[],System.Byte[],chia.dotnet.bls.JacobianPoint)
+  name.vb: FastAggregateVerify(JacobianPoint(), Byte(), JacobianPoint)
+  fullName: chia.dotnet.bls.PopSchemeMPL.FastAggregateVerify(chia.dotnet.bls.JacobianPoint[], byte[], chia.dotnet.bls.JacobianPoint)
+  fullName.vb: chia.dotnet.bls.PopSchemeMPL.FastAggregateVerify(chia.dotnet.bls.JacobianPoint(), Byte(), chia.dotnet.bls.JacobianPoint)
+  nameWithType: PopSchemeMPL.FastAggregateVerify(JacobianPoint[], byte[], JacobianPoint)
+  nameWithType.vb: PopSchemeMPL.FastAggregateVerify(JacobianPoint(), Byte(), JacobianPoint)
+- uid: chia.dotnet.bls.PopSchemeMPL.FastAggregateVerify*
+  name: FastAggregateVerify
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_FastAggregateVerify_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.FastAggregateVerify
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.FastAggregateVerify
+  nameWithType: PopSchemeMPL.FastAggregateVerify
+- uid: chia.dotnet.bls.PopSchemeMPL.KeyGen(System.Byte[])
+  name: KeyGen(byte[])
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_KeyGen_System_Byte___
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.KeyGen(System.Byte[])
+  name.vb: KeyGen(Byte())
+  fullName: chia.dotnet.bls.PopSchemeMPL.KeyGen(byte[])
+  fullName.vb: chia.dotnet.bls.PopSchemeMPL.KeyGen(Byte())
+  nameWithType: PopSchemeMPL.KeyGen(byte[])
+  nameWithType.vb: PopSchemeMPL.KeyGen(Byte())
+- uid: chia.dotnet.bls.PopSchemeMPL.KeyGen*
+  name: KeyGen
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_KeyGen_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.KeyGen
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.KeyGen
+  nameWithType: PopSchemeMPL.KeyGen
+- uid: chia.dotnet.bls.PopSchemeMPL.PopProve(chia.dotnet.bls.PrivateKey)
+  name: PopProve(PrivateKey)
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_PopProve_chia_dotnet_bls_PrivateKey_
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.PopProve(chia.dotnet.bls.PrivateKey)
+  fullName: chia.dotnet.bls.PopSchemeMPL.PopProve(chia.dotnet.bls.PrivateKey)
+  nameWithType: PopSchemeMPL.PopProve(PrivateKey)
+- uid: chia.dotnet.bls.PopSchemeMPL.PopProve*
+  name: PopProve
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_PopProve_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.PopProve
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.PopProve
+  nameWithType: PopSchemeMPL.PopProve
+- uid: chia.dotnet.bls.PopSchemeMPL.PopVerify(chia.dotnet.bls.JacobianPoint,chia.dotnet.bls.JacobianPoint)
+  name: PopVerify(JacobianPoint, JacobianPoint)
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_PopVerify_chia_dotnet_bls_JacobianPoint_chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.PopVerify(chia.dotnet.bls.JacobianPoint,chia.dotnet.bls.JacobianPoint)
+  fullName: chia.dotnet.bls.PopSchemeMPL.PopVerify(chia.dotnet.bls.JacobianPoint, chia.dotnet.bls.JacobianPoint)
+  nameWithType: PopSchemeMPL.PopVerify(JacobianPoint, JacobianPoint)
+- uid: chia.dotnet.bls.PopSchemeMPL.PopVerify*
+  name: PopVerify
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_PopVerify_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.PopVerify
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.PopVerify
+  nameWithType: PopSchemeMPL.PopVerify
+- uid: chia.dotnet.bls.PopSchemeMPL.Sign(chia.dotnet.bls.PrivateKey,System.Byte[])
+  name: Sign(PrivateKey, byte[])
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_Sign_chia_dotnet_bls_PrivateKey_System_Byte___
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.Sign(chia.dotnet.bls.PrivateKey,System.Byte[])
+  name.vb: Sign(PrivateKey, Byte())
+  fullName: chia.dotnet.bls.PopSchemeMPL.Sign(chia.dotnet.bls.PrivateKey, byte[])
+  fullName.vb: chia.dotnet.bls.PopSchemeMPL.Sign(chia.dotnet.bls.PrivateKey, Byte())
+  nameWithType: PopSchemeMPL.Sign(PrivateKey, byte[])
+  nameWithType.vb: PopSchemeMPL.Sign(PrivateKey, Byte())
+- uid: chia.dotnet.bls.PopSchemeMPL.Sign*
+  name: Sign
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_Sign_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.Sign
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.Sign
+  nameWithType: PopSchemeMPL.Sign
+- uid: chia.dotnet.bls.PopSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint,System.Byte[],chia.dotnet.bls.JacobianPoint)
+  name: Verify(JacobianPoint, byte[], JacobianPoint)
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_Verify_chia_dotnet_bls_JacobianPoint_System_Byte___chia_dotnet_bls_JacobianPoint_
+  commentId: M:chia.dotnet.bls.PopSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint,System.Byte[],chia.dotnet.bls.JacobianPoint)
+  name.vb: Verify(JacobianPoint, Byte(), JacobianPoint)
+  fullName: chia.dotnet.bls.PopSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint, byte[], chia.dotnet.bls.JacobianPoint)
+  fullName.vb: chia.dotnet.bls.PopSchemeMPL.Verify(chia.dotnet.bls.JacobianPoint, Byte(), chia.dotnet.bls.JacobianPoint)
+  nameWithType: PopSchemeMPL.Verify(JacobianPoint, byte[], JacobianPoint)
+  nameWithType.vb: PopSchemeMPL.Verify(JacobianPoint, Byte(), JacobianPoint)
+- uid: chia.dotnet.bls.PopSchemeMPL.Verify*
+  name: Verify
+  href: api/chia.dotnet.bls.PopSchemeMPL.html#chia_dotnet_bls_PopSchemeMPL_Verify_
+  commentId: Overload:chia.dotnet.bls.PopSchemeMPL.Verify
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PopSchemeMPL.Verify
+  nameWithType: PopSchemeMPL.Verify
+- uid: chia.dotnet.bls.PrivateKey
+  name: PrivateKey
+  href: api/chia.dotnet.bls.PrivateKey.html
+  commentId: T:chia.dotnet.bls.PrivateKey
+  fullName: chia.dotnet.bls.PrivateKey
+  nameWithType: PrivateKey
+- uid: chia.dotnet.bls.PrivateKey.#ctor(System.Numerics.BigInteger)
+  name: PrivateKey(BigInteger)
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey__ctor_System_Numerics_BigInteger_
+  commentId: M:chia.dotnet.bls.PrivateKey.#ctor(System.Numerics.BigInteger)
+  name.vb: New(BigInteger)
+  fullName: chia.dotnet.bls.PrivateKey.PrivateKey(System.Numerics.BigInteger)
+  fullName.vb: chia.dotnet.bls.PrivateKey.New(System.Numerics.BigInteger)
+  nameWithType: PrivateKey.PrivateKey(BigInteger)
+  nameWithType.vb: PrivateKey.New(BigInteger)
+- uid: chia.dotnet.bls.PrivateKey.#ctor*
+  name: PrivateKey
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey__ctor_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: chia.dotnet.bls.PrivateKey.PrivateKey
+  fullName.vb: chia.dotnet.bls.PrivateKey.New
+  nameWithType: PrivateKey.PrivateKey
+  nameWithType.vb: PrivateKey.New
+- uid: chia.dotnet.bls.PrivateKey.Aggregate(chia.dotnet.bls.PrivateKey[])
+  name: Aggregate(PrivateKey[])
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_Aggregate_chia_dotnet_bls_PrivateKey___
+  commentId: M:chia.dotnet.bls.PrivateKey.Aggregate(chia.dotnet.bls.PrivateKey[])
+  name.vb: Aggregate(PrivateKey())
+  fullName: chia.dotnet.bls.PrivateKey.Aggregate(chia.dotnet.bls.PrivateKey[])
+  fullName.vb: chia.dotnet.bls.PrivateKey.Aggregate(chia.dotnet.bls.PrivateKey())
+  nameWithType: PrivateKey.Aggregate(PrivateKey[])
+  nameWithType.vb: PrivateKey.Aggregate(PrivateKey())
+- uid: chia.dotnet.bls.PrivateKey.Aggregate*
+  name: Aggregate
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_Aggregate_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.Aggregate
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PrivateKey.Aggregate
+  nameWithType: PrivateKey.Aggregate
+- uid: chia.dotnet.bls.PrivateKey.Equals(chia.dotnet.bls.PrivateKey)
+  name: Equals(PrivateKey)
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_Equals_chia_dotnet_bls_PrivateKey_
+  commentId: M:chia.dotnet.bls.PrivateKey.Equals(chia.dotnet.bls.PrivateKey)
+  fullName: chia.dotnet.bls.PrivateKey.Equals(chia.dotnet.bls.PrivateKey)
+  nameWithType: PrivateKey.Equals(PrivateKey)
+- uid: chia.dotnet.bls.PrivateKey.Equals*
+  name: Equals
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_Equals_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.Equals
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PrivateKey.Equals
+  nameWithType: PrivateKey.Equals
+- uid: chia.dotnet.bls.PrivateKey.FromBigInt(System.Numerics.BigInteger)
+  name: FromBigInt(BigInteger)
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_FromBigInt_System_Numerics_BigInteger_
+  commentId: M:chia.dotnet.bls.PrivateKey.FromBigInt(System.Numerics.BigInteger)
+  fullName: chia.dotnet.bls.PrivateKey.FromBigInt(System.Numerics.BigInteger)
+  nameWithType: PrivateKey.FromBigInt(BigInteger)
+- uid: chia.dotnet.bls.PrivateKey.FromBigInt*
+  name: FromBigInt
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_FromBigInt_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.FromBigInt
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PrivateKey.FromBigInt
+  nameWithType: PrivateKey.FromBigInt
+- uid: chia.dotnet.bls.PrivateKey.FromBytes(System.Byte[])
+  name: FromBytes(byte[])
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_FromBytes_System_Byte___
+  commentId: M:chia.dotnet.bls.PrivateKey.FromBytes(System.Byte[])
+  name.vb: FromBytes(Byte())
+  fullName: chia.dotnet.bls.PrivateKey.FromBytes(byte[])
+  fullName.vb: chia.dotnet.bls.PrivateKey.FromBytes(Byte())
+  nameWithType: PrivateKey.FromBytes(byte[])
+  nameWithType.vb: PrivateKey.FromBytes(Byte())
+- uid: chia.dotnet.bls.PrivateKey.FromBytes*
+  name: FromBytes
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_FromBytes_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.FromBytes
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PrivateKey.FromBytes
+  nameWithType: PrivateKey.FromBytes
+- uid: chia.dotnet.bls.PrivateKey.FromHex(System.String)
+  name: FromHex(string)
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_FromHex_System_String_
+  commentId: M:chia.dotnet.bls.PrivateKey.FromHex(System.String)
+  name.vb: FromHex(String)
+  fullName: chia.dotnet.bls.PrivateKey.FromHex(string)
+  fullName.vb: chia.dotnet.bls.PrivateKey.FromHex(String)
+  nameWithType: PrivateKey.FromHex(string)
+  nameWithType.vb: PrivateKey.FromHex(String)
+- uid: chia.dotnet.bls.PrivateKey.FromHex*
+  name: FromHex
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_FromHex_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.FromHex
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PrivateKey.FromHex
+  nameWithType: PrivateKey.FromHex
+- uid: chia.dotnet.bls.PrivateKey.FromSeed(System.Byte[])
+  name: FromSeed(byte[])
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_FromSeed_System_Byte___
+  commentId: M:chia.dotnet.bls.PrivateKey.FromSeed(System.Byte[])
+  name.vb: FromSeed(Byte())
+  fullName: chia.dotnet.bls.PrivateKey.FromSeed(byte[])
+  fullName.vb: chia.dotnet.bls.PrivateKey.FromSeed(Byte())
+  nameWithType: PrivateKey.FromSeed(byte[])
+  nameWithType.vb: PrivateKey.FromSeed(Byte())
+- uid: chia.dotnet.bls.PrivateKey.FromSeed*
+  name: FromSeed
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_FromSeed_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.FromSeed
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PrivateKey.FromSeed
+  nameWithType: PrivateKey.FromSeed
+- uid: chia.dotnet.bls.PrivateKey.GetG1
+  name: GetG1()
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_GetG1
+  commentId: M:chia.dotnet.bls.PrivateKey.GetG1
+  fullName: chia.dotnet.bls.PrivateKey.GetG1()
+  nameWithType: PrivateKey.GetG1()
+- uid: chia.dotnet.bls.PrivateKey.GetG1*
+  name: GetG1
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_GetG1_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.GetG1
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PrivateKey.GetG1
+  nameWithType: PrivateKey.GetG1
+- uid: chia.dotnet.bls.PrivateKey.Length
+  name: Length
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_Length
+  commentId: F:chia.dotnet.bls.PrivateKey.Length
+  fullName: chia.dotnet.bls.PrivateKey.Length
+  nameWithType: PrivateKey.Length
+- uid: chia.dotnet.bls.PrivateKey.Size
+  name: Size
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_Size
+  commentId: F:chia.dotnet.bls.PrivateKey.Size
+  fullName: chia.dotnet.bls.PrivateKey.Size
+  nameWithType: PrivateKey.Size
+- uid: chia.dotnet.bls.PrivateKey.ToBytes
+  name: ToBytes()
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_ToBytes
+  commentId: M:chia.dotnet.bls.PrivateKey.ToBytes
+  fullName: chia.dotnet.bls.PrivateKey.ToBytes()
+  nameWithType: PrivateKey.ToBytes()
+- uid: chia.dotnet.bls.PrivateKey.ToBytes*
+  name: ToBytes
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_ToBytes_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.ToBytes
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PrivateKey.ToBytes
+  nameWithType: PrivateKey.ToBytes
+- uid: chia.dotnet.bls.PrivateKey.ToHex
+  name: ToHex()
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_ToHex
+  commentId: M:chia.dotnet.bls.PrivateKey.ToHex
+  fullName: chia.dotnet.bls.PrivateKey.ToHex()
+  nameWithType: PrivateKey.ToHex()
+- uid: chia.dotnet.bls.PrivateKey.ToHex*
+  name: ToHex
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_ToHex_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.ToHex
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PrivateKey.ToHex
+  nameWithType: PrivateKey.ToHex
+- uid: chia.dotnet.bls.PrivateKey.ToString
+  name: ToString()
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_ToString
+  commentId: M:chia.dotnet.bls.PrivateKey.ToString
+  fullName: chia.dotnet.bls.PrivateKey.ToString()
+  nameWithType: PrivateKey.ToString()
+- uid: chia.dotnet.bls.PrivateKey.ToString*
+  name: ToString
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_ToString_
+  commentId: Overload:chia.dotnet.bls.PrivateKey.ToString
+  isSpec: "True"
+  fullName: chia.dotnet.bls.PrivateKey.ToString
+  nameWithType: PrivateKey.ToString
+- uid: chia.dotnet.bls.PrivateKey.Value
+  name: Value
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_Value
+  commentId: F:chia.dotnet.bls.PrivateKey.Value
+  fullName: chia.dotnet.bls.PrivateKey.Value
+  nameWithType: PrivateKey.Value

@@ -1,0 +1,188 @@
+{
+  "source_base_path": "C:/Users/don/src/github/dkackman/chia-dotnet-bls/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.bls.AffinePoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.bls.AffinePoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.bls.AugSchemeMPL.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.bls.AugSchemeMPL.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.bls.BasicSchemeMPL.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.bls.BasicSchemeMPL.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.bls.ByteUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.bls.ByteUtils.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.bls.Endian.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.bls.Endian.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.bls.JacobianPoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.bls.JacobianPoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.bls.KeyDerivation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.bls.KeyDerivation.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.bls.PopSchemeMPL.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.bls.PopSchemeMPL.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.bls.PrivateKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.bls.PrivateKey.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/chia.dotnet.bls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/chia.dotnet.bls.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

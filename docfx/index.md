@@ -2,10 +2,11 @@
 _layout: landing
 ---
 
-# This is the **HOMEPAGE**.
+# Welcome to **chia-dotnet-bls**
 
-Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
+This is a native .NET implementation of the [BLS signature library](https://github.com/Chia-Network/node-chia-bls) and also
+includes key derivation from the [node chia wallet library](https://github.com/Chia-Network/node-chia-wallet-lib).
 
-## Quick Start Notes:
+___
 
-1. Add images to the *images* folder if the file is referencing an image.
+_chia and its logo are the registered trademark or trademark of Chia Network, Inc. in the United States and worldwide._

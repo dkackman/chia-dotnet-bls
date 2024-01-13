@@ -1,8 +1,5 @@
 using System.Numerics;
 
-/// <summary>
-/// Represents an element in the finite field Fq.
-/// </summary>
 namespace chia.dotnet.bls;
 
 internal class Fq(BigInteger q, BigInteger value)

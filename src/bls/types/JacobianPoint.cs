@@ -12,6 +12,10 @@ public class JacobianPoint
     internal Fq X { get; }
     internal Fq Y { get; }
     internal Fq Z { get; }
+
+    /// <summary>
+    /// A flag indicating whether the point is at infinity.
+    /// </summary>
     public bool IsInfinity { get; }
     internal EC Ec { get; }
 
@@ -38,6 +42,12 @@ public class JacobianPoint
         Ec = ec;
     }
 
+    /// <summary>
+    /// Creates a JacobianPoint from a byte array.
+    /// </summary>
+    /// <param name="bytes"></param>
+    /// <param name="isExtension"></param>
+    /// <returns><see cref="JacobianPoint"/></returns>
     public static JacobianPoint FromBytes(byte[] bytes, bool isExtension) => FromBytes(bytes, isExtension, Constants.DefaultEc);
 
     internal static JacobianPoint FromBytes(byte[] bytes, bool isExtension, EC ec)
@@ -90,13 +100,32 @@ public class JacobianPoint
         return new AffinePoint(x, y, false, ec).ToJacobian();
     }
 
+    /// <summary>
+    /// Creates a JacobianPoint from a hexadecimal string.
+    /// </summary>
+    /// <param name="hex"></param>
+    /// <param name="isExtension"></param>
+    /// <returns></returns>
     public static JacobianPoint FromHex(string hex, bool isExtension) => FromHex(hex, isExtension, Constants.DefaultEc);
     internal static JacobianPoint FromHex(string hex, bool isExtension, EC ec) => FromBytes(hex.FromHex(), isExtension, ec);
 
+    /// <summary>
+    /// Creates a JacobianPoint 
+    /// </summary>
+    /// <returns></returns>
     public static JacobianPoint GenerateG1() => new AffinePoint(Constants.DefaultEc.Gx, Constants.DefaultEc.Gy, false, Constants.DefaultEc).ToJacobian();
 
+    /// <summary>
+    /// Creates a JacobianPoint 
+    /// </summary>
+    /// <returns></returns>
     public static JacobianPoint GenerateG2() => new AffinePoint(Constants.DefaultEcTwist.G2x, Constants.DefaultEcTwist.G2y, false, Constants.DefaultEcTwist).ToJacobian();
 
+    /// <summary>
+    /// Creates a JacobianPoint at the G1 Infinity point.
+    /// </summary>
+    /// <param name="isExtension"></param>
+    /// <returns></returns>
     public static JacobianPoint InfinityG1(bool isExtension = false)
     {
         var nil = isExtension ? Fq2.Nil : Fq.Nil;
@@ -111,6 +140,11 @@ public class JacobianPoint
         );
     }
 
+    /// <summary>
+    /// Creates a JacobianPoint at the G2 Infinity point.
+    /// </summary>
+    /// <param name="isExtension"></param>
+    /// <returns></returns>
     public static JacobianPoint InfinityG2(bool isExtension = true)
     {
         var nil = isExtension ? Fq2.Nil : Fq.Nil;
@@ -125,20 +159,60 @@ public class JacobianPoint
         );
     }
 
+    /// <summary>
+    /// Creates a JacobianPoint from a byte array. 
+    /// </summary>
+    /// <param name="bytes"></param>
+    /// <param name="isExtension"></param>
+    /// <returns></returns>
     public static JacobianPoint FromBytesG1(byte[] bytes, bool isExtension = false) => FromBytes(bytes, isExtension, Constants.DefaultEc);
 
+    /// <summary>
+    /// Creates a JacobianPoint from a byte array.
+    /// </summary>
+    /// <param name="bytes"></param>
+    /// <param name="isExtension"></param>
+    /// <returns></returns>
     public static JacobianPoint FromBytesG2(byte[] bytes, bool isExtension = true) => FromBytes(bytes, isExtension, Constants.DefaultEcTwist);
 
+    /// <summary>
+    /// Creates a JacobianPoint from a hexadecimal string.
+    /// </summary>
+    /// <param name="hex"></param>
+    /// <param name="isExtension"></param>
+    /// <returns></returns>
     public static JacobianPoint FromHexG1(string hex, bool isExtension = false) => FromBytesG1(hex.FromHex(), isExtension);
 
+    /// <summary>
+    /// Creates a JacobianPoint from a hexadecimal string.
+    /// </summary>
+    /// <param name="hex"></param>
+    /// <param name="isExtension"></param>
+    /// <returns></returns>
     public static JacobianPoint FromHexG2(string hex, bool isExtension = true) => FromBytesG2(hex.FromHex(), isExtension);
 
+    /// <summary>
+    /// Checks if the point is on the curve.
+    /// </summary>
+    /// <returns></returns>
     public bool IsOnCurve() => IsInfinity || ToAffine().IsOnCurve;
 
+    /// <summary>
+    /// Checks if the point is valid.`
+    /// </summary>
+    /// <returns></returns>
     public bool IsValid() => IsOnCurve() && Multiply(Ec.N).Equals(X is Fq ? InfinityG1() : InfinityG2());
 
+    /// <summary>
+    /// Gets the fingerprint of the point.
+    /// </summary>
+    /// <returns></returns>
     public long GetFingerprint() => Hmac.Hash256(ToBytes()).Take(4).ToArray().BytesToInt(Endian.Big);
 
+    /// <summary>
+    /// Converts the point to an AffinePoint.
+    /// </summary>
+    /// <returns><see cref="AffinePoint"/> </returns>
     public AffinePoint ToAffine()
     {
         return IsInfinity
@@ -157,6 +231,10 @@ public class JacobianPoint
     }
 
     private byte[]? bytes;
+    /// <summary>
+    /// Converts the point to a byte array.
+    /// </summary>
+    /// <returns>The byte array</returns>
     public byte[] ToBytes() => bytes ??= ToBytesInternal();
 
     private byte[] ToBytesInternal()
@@ -177,10 +255,22 @@ public class JacobianPoint
     }
 
     private string? hex;
+    /// <summary>
+    /// Converts the point to a hexadecimal string.
+    /// </summary>
+    /// <returns>Hex string</returns>
     public string ToHex() => hex ??= ToBytes().ToHex();
 
+    /// <summary>
+    /// Converts the point to a string. This is an alias for <see cref="ToHex"/>.
+    /// </summary>
+    /// <returns></returns>
     public override string ToString() => ToHex();
 
+    /// <summary>
+    /// Doubles the point.
+    /// </summary>
+    /// <returns><see cref="JacobianPoint"/> </returns>
     public JacobianPoint Double()
     {
         var zero = X.Zero(Ec.Q);
@@ -216,8 +306,17 @@ public class JacobianPoint
         return new JacobianPoint(X_p, Y_p, Z_p, false, Ec);
     }
 
+    /// <summary>
+    /// Negates the point.
+    /// </summary>
+    /// <returns><see cref="JacobianPoint"/></returns>
     public JacobianPoint Negate() => ToAffine().Negate().ToJacobian();
 
+    /// <summary>
+    /// Adds the point to another point.
+    /// </summary>
+    /// <param name="value">The other point</param>
+    /// <returns>The resulting point</returns>
     public JacobianPoint Add(JacobianPoint value)
     {
         if (IsInfinity)
@@ -270,11 +369,26 @@ public class JacobianPoint
         return new JacobianPoint(X3, Y3, Z3, false, Ec);
     }
 
-
     internal JacobianPoint Multiply(Fq value) => EcMethods.ScalarMultJacobian(value.Value, this, Ec);
+
+    /// <summary>
+    /// Multiplies the point by a scalar.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public JacobianPoint Multiply(BigInteger value) => EcMethods.ScalarMultJacobian(value, this, Ec);
+
+    /// <summary>
+    /// Compares the point to another point.
+    /// </summary>
+    /// <param name="value">The other point</param>
+    /// <returns>True if they are equal</returns>
     public bool Equals(JacobianPoint value) => ToAffine().Equals(value.ToAffine());
 
+    /// <summary>
+    /// Clones the point.
+    /// </summary>
+    /// <returns>The cloned point</returns>
     public JacobianPoint Clone() => new(
             X.Clone(),
             Y.Clone(),

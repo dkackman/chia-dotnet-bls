@@ -21,6 +21,13 @@ public static class AugSchemeMPL
     public static JacobianPoint Sign(this PrivateKey privateKey, byte[] message) =>
         Signing.CoreSignMpl(privateKey, ByteUtils.ConcatenateArrays(privateKey.GetG1().ToBytes(), message), Constants.AugSchemeDst);
 
+    /// <summary>
+    /// Signs a message using the specified private key.
+    /// </summary>
+    /// <param name="privateKey">The private key used for signing.</param>
+    /// <param name="message">The message to be signed.</param>
+    /// <returns>The signature as a JacobianPoint.</returns>
+    public static JacobianPoint Sign(this PrivateKey privateKey, string message) => Sign(privateKey, message.ToBytes());
 
     /// <summary>
     /// Verifies the signature of a message using the specified public key.
@@ -31,6 +38,15 @@ public static class AugSchemeMPL
     /// <returns>True if the signature is valid, false otherwise.</returns>
     public static bool Verify(this JacobianPoint publicKey, byte[] message, JacobianPoint signature) =>
         Signing.CoreVerifyMpl(publicKey, ByteUtils.ConcatenateArrays(publicKey.ToBytes(), message), signature, Constants.AugSchemeDst);
+
+    /// <summary>
+    /// Verifies the signature of a message using the specified public key.
+    /// </summary>
+    /// <param name="publicKey">The public key used for verification.</param>
+    /// <param name="message">The message to be verified.</param>
+    /// <param name="signature">The signature to be verified.</param>
+    /// <returns>True if the signature is valid, false otherwise.</returns>
+    public static bool Verify(this JacobianPoint publicKey, string message, JacobianPoint signature) => Verify(publicKey, message.ToBytes(), signature);
 
     /// <summary>
     /// Aggregates multiple signatures into a single signature.

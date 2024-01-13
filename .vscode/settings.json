@@ -4,6 +4,7 @@
     "coeff",
     "coeffs",
     "dotnetstandard",
+    "endianness",
     "Frob",
     "Frobenius",
     "Hkdf",

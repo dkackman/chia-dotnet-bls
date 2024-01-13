@@ -18,12 +18,11 @@ public class Examples
         var sk = PrivateKey.FromSeed(byteArray);
 
         // sign a message
-        var messageBytes = MESSAGE.ToBytes();
-        var signature = sk.Sign(messageBytes);
+        var signature = sk.Sign(MESSAGE);
 
         // verify the signature
         var pk = sk.GetG1();
-        var result = pk.Verify(messageBytes, signature);
+        var result = pk.Verify(MESSAGE, signature);
         Assert.True(result);
     }
 }

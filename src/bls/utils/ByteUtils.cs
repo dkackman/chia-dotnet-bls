@@ -4,16 +4,39 @@ using System.Text;
 
 namespace chia.dotnet.bls;
 
+/// <summary>
+/// Enum representing the endianness of byte arrays.
+/// </summary>
 public enum Endian
 {
+    /// <summary>
+    /// Little endian byte order.
+    /// </summary>
     Little,
+
+    /// <summary>
+    /// Big endian byte order.
+    /// </summary>
     Big
 }
 
+/// <summary>
+/// Extension methods for working with byte arrays and conversions.
+/// </summary>
 public static partial class ByteUtils
 {
+    /// <summary>
+    /// Converts a string to a byte array using UTF-8 encoding.
+    /// </summary>
+    /// <param name="value">The string to convert.</param>
+    /// <returns>The byte array representation of the string.</returns>
     public static byte[] ToBytes(this string value) => Encoding.UTF8.GetBytes(value);
 
+    /// <summary>
+    /// Converts a BigInteger to a byte array representing its binary representation.
+    /// </summary>
+    /// <param name="i">The BigInteger to convert.</param>
+    /// <returns>The byte array representing the binary representation of the BigInteger.</returns>
     public static byte[] BigIntToBits(this BigInteger i)
     {
         Debug.Assert(i.Sign >= 0);
@@ -32,6 +55,11 @@ public static partial class ByteUtils
         return bits;
     }
 
+    /// <summary>
+    /// Converts a hexadecimal string to a byte array.
+    /// </summary>
+    /// <param name="hex">The hexadecimal string to convert.</param>
+    /// <returns>The byte array representation of the hexadecimal string.</returns>
     public static byte[] HexStringToByteArray(this string hex)
     {
         var length = hex.Length;
@@ -44,7 +72,15 @@ public static partial class ByteUtils
         return bytes;
     }
 
-    public static byte[] IntToBytes(this long value, int size, Endian endian, bool signed = false)
+    /// <summary>
+    /// Converts a long integer to a byte array.
+    /// </summary>
+    /// <param name="value">The long integer to convert.</param>
+    /// <param name="size">The size of the resulting byte array.</param>
+    /// <param name="endian">The endianness of the byte array.</param>
+    /// <param name="signed">Indicates whether the value is signed or unsigned.</param>
+    /// <returns>The byte array representation of the long integer.</returns>
+    public static byte[] IntToBytes(this long value, int size, Endian endian = Endian.Big, bool signed = false)
     {
         Debug.Assert(!(value < 0 && !signed));
         Debug.Assert(value == Math.Floor((double)value));
@@ -65,7 +101,14 @@ public static partial class ByteUtils
         return bytes;
     }
 
-    public static long BytesToInt(this byte[] bytes, Endian endian, bool signed = false)
+    /// <summary>
+    /// Converts a byte array to a long integer.
+    /// </summary>
+    /// <param name="bytes">The byte array to convert.</param>
+    /// <param name="endian">The endianness of the byte array.</param>
+    /// <param name="signed">Indicates whether the value is signed or unsigned.</param>
+    /// <returns>The long integer representation of the byte array.</returns>
+    public static long BytesToInt(this byte[] bytes, Endian endian = Endian.Big, bool signed = false)
     {
         if (bytes.Length == 0)
         {
@@ -98,7 +141,15 @@ public static partial class ByteUtils
         return result;
     }
 
-    public static byte[] BigIntToBytes(this BigInteger value, int size, Endian endian, bool signed = false)
+    /// <summary>
+    /// Converts a BigInteger to a byte array.
+    /// </summary>
+    /// <param name="value">The BigInteger to convert.</param>
+    /// <param name="size">The size of the resulting byte array.</param>
+    /// <param name="endian">The endianness of the byte array.</param>
+    /// <param name="signed">Indicates whether the value is signed or unsigned.</param>
+    /// <returns>The byte array representation of the BigInteger.</returns>
+    public static byte[] BigIntToBytes(this BigInteger value, int size, Endian endian = Endian.Big, bool signed = false)
     {
         Debug.Assert(!(value < 0 && !signed));
 
@@ -124,9 +175,22 @@ public static partial class ByteUtils
         return result;
     }
 
-    public static BigInteger BytesToBigInt(this byte[] bytes, Endian endian, bool signed = false) => new(bytes, !signed, endian == Endian.Big);
+    /// <summary>
+    /// Converts a byte array to a BigInteger.
+    /// </summary>
+    /// <param name="bytes">The byte array to convert.</param>
+    /// <param name="endian">The endianness of the byte array.</param>
+    /// <param name="signed">Indicates whether the value is signed or unsigned.</param>
+    /// <returns>The BigInteger representation of the byte array.</returns>
+    public static BigInteger BytesToBigInt(this byte[] bytes, Endian endian = Endian.Big, bool signed = false) => new(bytes, !signed, endian == Endian.Big);
 
-    public static bool BytesEqual(byte[] a, byte[] b)
+    /// <summary>
+    /// Checks if two byte arrays are equal.
+    /// </summary>
+    /// <param name="a">The first byte array.</param>
+    /// <param name="b">The second byte array.</param>
+    /// <returns>True if the byte arrays are equal, false otherwise.</returns>
+    public static bool BytesEqual(this byte[] a, byte[] b)
     {
         if (a.Length != b.Length)
         {
@@ -144,6 +208,11 @@ public static partial class ByteUtils
         return true;
     }
 
+    /// <summary>
+    /// Converts a byte array to a hexadecimal string.
+    /// </summary>
+    /// <param name="bytes">The byte array to convert.</param>
+    /// <returns>The hexadecimal string representation of the byte array.</returns>
     public static string ToHex(this byte[] bytes)
     {
         var hex = new StringBuilder(bytes.Length * 2);
@@ -154,6 +223,11 @@ public static partial class ByteUtils
         return hex.ToString();
     }
 
+    /// <summary>
+    /// Converts a hexadecimal string to a byte array.
+    /// </summary>
+    /// <param name="hex">The hexadecimal string to convert.</param>
+    /// <returns>The byte array representation of the hexadecimal string.</returns>
     public static byte[] FromHex(this string hex)
     {
         Debug.Assert(hex.Length % 2 == 0);
@@ -169,6 +243,11 @@ public static partial class ByteUtils
 
     private static int GetHexVal(int val) => val - (val < 58 ? 48 : (val < 97 ? 55 : 87));
 
+    /// <summary>
+    /// Concatenates multiple byte arrays into a single byte array.
+    /// </summary>
+    /// <param name="arrays">The byte arrays to concatenate.</param>
+    /// <returns>The concatenated byte array.</returns>
     public static byte[] ConcatenateArrays(params byte[][] arrays)
     {
         // Preallocate a buffer for the concatenated data
