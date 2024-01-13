@@ -316,7 +316,7 @@
 
   <h3 id="chia_dotnet_bls_PrivateKey_Aggregate_chia_dotnet_bls_PrivateKey___" data-uid="chia.dotnet.bls.PrivateKey.Aggregate(chia.dotnet.bls.PrivateKey[])">
   Aggregate(PrivateKey[])
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L81"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Aggregates an array of private keys into a single private key.</p>
@@ -355,7 +355,7 @@
 
   <h3 id="chia_dotnet_bls_PrivateKey_Equals_chia_dotnet_bls_PrivateKey_" data-uid="chia.dotnet.bls.PrivateKey.Equals(chia.dotnet.bls.PrivateKey)">
   Equals(PrivateKey)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L113"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L121"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Determines whether the specified <a class="xref" href="chia.dotnet.bls.PrivateKey.html">PrivateKey</a> object is equal to the current <a class="xref" href="chia.dotnet.bls.PrivateKey.html">PrivateKey</a>.</p>
@@ -394,7 +394,7 @@
 
   <h3 id="chia_dotnet_bls_PrivateKey_FromBigInt_System_Numerics_BigInteger_" data-uid="chia.dotnet.bls.PrivateKey.FromBigInt(System.Numerics.BigInteger)">
   FromBigInt(BigInteger)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L74"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Creates a <a class="xref" href="chia.dotnet.bls.PrivateKey.html">PrivateKey</a> instance from the specified BigInteger value.</p>
@@ -511,7 +511,7 @@
 
   <h3 id="chia_dotnet_bls_PrivateKey_FromSeed_System_Byte___" data-uid="chia.dotnet.bls.PrivateKey.FromSeed(System.Byte[])">
   FromSeed(byte[])
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L63"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Creates a <a class="xref" href="chia.dotnet.bls.PrivateKey.html">PrivateKey</a> instance from the specified seed.</p>
@@ -546,11 +546,50 @@
 
 
 
+  <a id="chia_dotnet_bls_PrivateKey_FromSeed_" data-uid="chia.dotnet.bls.PrivateKey.FromSeed*"></a>
+
+  <h3 id="chia_dotnet_bls_PrivateKey_FromSeed_System_String_" data-uid="chia.dotnet.bls.PrivateKey.FromSeed(System.String)">
+  FromSeed(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="chia.dotnet.bls.PrivateKey.html">PrivateKey</a> instance from the specified seed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static PrivateKey FromSeed(string seed)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>seed</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The seed used to generate the private key.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="chia.dotnet.bls.PrivateKey.html">PrivateKey</a></dt>
+    <dd><p>A new <a class="xref" href="chia.dotnet.bls.PrivateKey.html">PrivateKey</a> instance.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="chia_dotnet_bls_PrivateKey_GetG1_" data-uid="chia.dotnet.bls.PrivateKey.GetG1*"></a>
 
   <h3 id="chia_dotnet_bls_PrivateKey_GetG1" data-uid="chia.dotnet.bls.PrivateKey.GetG1">
   GetG1()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L92"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Gets the corresponding G1 point on the elliptic curve.
@@ -584,7 +623,7 @@ The G1 point is the PublicKey.</p>
 
   <h3 id="chia_dotnet_bls_PrivateKey_ToBytes" data-uid="chia.dotnet.bls.PrivateKey.ToBytes">
   ToBytes()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L100"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Converts the private key to a byte array.</p>
@@ -617,7 +656,7 @@ The G1 point is the PublicKey.</p>
 
   <h3 id="chia_dotnet_bls_PrivateKey_ToHex" data-uid="chia.dotnet.bls.PrivateKey.ToHex">
   ToHex()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L108"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Converts the private key to a hexadecimal string.</p>
@@ -650,7 +689,7 @@ The G1 point is the PublicKey.</p>
 
   <h3 id="chia_dotnet_bls_PrivateKey_ToString" data-uid="chia.dotnet.bls.PrivateKey.ToString">
   ToString()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dkackman/chia-dotnet-bls/blob/main/src/bls/types/PrivateKey.cs/#L114"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns a string that represents the current private key.</p>

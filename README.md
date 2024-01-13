@@ -30,7 +30,7 @@ const string MESSAGE = "hello world";
 
 // create a secret key from a mnemonic
 var bip39 = new BIP39();
-var seed = bip39.MnemonicToSeedHex(MNEMONIC, "").HexStringToByteArray();
+var seed = bip39.MnemonicToSeedHex(MNEMONIC, "");
 var sk = PrivateKey.FromSeed(seed);
 
 // sign the message

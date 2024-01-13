@@ -1415,6 +1415,15 @@ references:
   fullName.vb: chia.dotnet.bls.PrivateKey.FromSeed(Byte())
   nameWithType: PrivateKey.FromSeed(byte[])
   nameWithType.vb: PrivateKey.FromSeed(Byte())
+- uid: chia.dotnet.bls.PrivateKey.FromSeed(System.String)
+  name: FromSeed(string)
+  href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_FromSeed_System_String_
+  commentId: M:chia.dotnet.bls.PrivateKey.FromSeed(System.String)
+  name.vb: FromSeed(String)
+  fullName: chia.dotnet.bls.PrivateKey.FromSeed(string)
+  fullName.vb: chia.dotnet.bls.PrivateKey.FromSeed(String)
+  nameWithType: PrivateKey.FromSeed(string)
+  nameWithType.vb: PrivateKey.FromSeed(String)
 - uid: chia.dotnet.bls.PrivateKey.FromSeed*
   name: FromSeed
   href: api/chia.dotnet.bls.PrivateKey.html#chia_dotnet_bls_PrivateKey_FromSeed_
