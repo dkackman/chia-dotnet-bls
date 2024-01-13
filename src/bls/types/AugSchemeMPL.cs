@@ -1,21 +1,52 @@
 namespace chia.dotnet.bls;
 
+/// <summary>
+/// Provides extension methods for the AugSchemeMPL signature scheme. This is the scheme Chia uses for its signatures.
+/// </summary>
 public static class AugSchemeMPL
 {
-    public static PrivateKey KeyGen(byte[] seed) => HdKeysClass.KeyGen(seed);
+    /// <summary>
+    /// Generates a private key from the given seed.
+    /// </summary>
+    /// <param name="seed">The seed used to generate the private key.</param>
+    /// <returns>The generated private key.</returns>
+    public static PrivateKey KeyGen(this byte[] seed) => HdKeysClass.KeyGen(seed);
 
-    public static JacobianPoint Sign(PrivateKey privateKey, byte[] message)
-    {
-        var publicKey = privateKey.GetG1();
-        return Signing.CoreSignMpl(privateKey, ByteUtils.ConcatenateArrays(publicKey.ToBytes(), message), Constants.AugSchemeDst);
-    }
+    /// <summary>
+    /// Signs a message using the specified private key.
+    /// </summary>
+    /// <param name="privateKey">The private key used for signing.</param>
+    /// <param name="message">The message to be signed.</param>
+    /// <returns>The signature as a JacobianPoint.</returns>
+    public static JacobianPoint Sign(this PrivateKey privateKey, byte[] message) =>
+        Signing.CoreSignMpl(privateKey, ByteUtils.ConcatenateArrays(privateKey.GetG1().ToBytes(), message), Constants.AugSchemeDst);
 
-    public static bool Verify(JacobianPoint publicKey, byte[] message, JacobianPoint signature)
-        => Signing.CoreVerifyMpl(publicKey, ByteUtils.ConcatenateArrays(publicKey.ToBytes(), message), signature, Constants.AugSchemeDst);
 
+    /// <summary>
+    /// Verifies the signature of a message using the specified public key.
+    /// </summary>
+    /// <param name="publicKey">The public key used for verification.</param>
+    /// <param name="message">The message to be verified.</param>
+    /// <param name="signature">The signature to be verified.</param>
+    /// <returns>True if the signature is valid, false otherwise.</returns>
+    public static bool Verify(this JacobianPoint publicKey, byte[] message, JacobianPoint signature) =>
+        Signing.CoreVerifyMpl(publicKey, ByteUtils.ConcatenateArrays(publicKey.ToBytes(), message), signature, Constants.AugSchemeDst);
+
+    /// <summary>
+    /// Aggregates multiple signatures into a single signature.
+    /// </summary>
+    /// <param name="signatures">The array of signatures to be aggregated.</param>
+    /// <returns>The aggregated signature as a JacobianPoint.</returns>
     public static JacobianPoint Aggregate(JacobianPoint[] signatures) => Signing.CoreAggregateMpl(signatures);
 
-    public static bool AggregateVerify(JacobianPoint[] publicKeys, byte[][] messages, JacobianPoint signature)
+    /// <summary>
+    /// Verifies an aggregated signature against multiple public keys and messages.
+    /// </summary>
+    /// <param name="publicKeys">The array of public keys used for verification.</param>
+    /// <param name="messages">The array of messages to be verified.</param>
+    /// <param name="signature">The aggregated signature to be verified.</param>
+    /// <returns>True if the aggregated signature is valid, false otherwise.</returns>
+    public static bool AggregateVerify(this JacobianPoint[] publicKeys, byte[][] messages, JacobianPoint signature)
     {
         int length = publicKeys.Length;
         if (length != messages.Length || length == 0)
@@ -32,9 +63,27 @@ public static class AugSchemeMPL
         return Signing.CoreAggregateVerify(publicKeys, mPrimes, signature, Constants.AugSchemeDst);
     }
 
-    public static PrivateKey DeriveChildSk(PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSk(privateKey, index);
+    /// <summary>
+    /// Derives a child private key from the specified private key and index.
+    /// </summary>
+    /// <param name="privateKey">The parent private key.</param>
+    /// <param name="index">The index of the child private key.</param>
+    /// <returns>The derived child private key.</returns>
+    public static PrivateKey DeriveChildSk(this PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSk(privateKey, index);
 
-    public static PrivateKey DeriveChildSkUnhardened(PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSkUnhardened(privateKey, index);
+    /// <summary>
+    /// Derives a child unhardened private key from the specified private key and index.
+    /// </summary>
+    /// <param name="privateKey">The parent private key.</param>
+    /// <param name="index">The index of the child private key.</param>
+    /// <returns>The derived child unhardened private key.</returns>
+    public static PrivateKey DeriveChildSkUnhardened(this PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSkUnhardened(privateKey, index);
 
-    public static JacobianPoint DeriveChildPkUnhardened(JacobianPoint publicKey, long index) => HdKeysClass.DeriveChildG1Unhardened(publicKey, index);
+    /// <summary>
+    /// Derives a child unhardened public key from the specified public key and index.
+    /// </summary>
+    /// <param name="publicKey">The parent public key.</param>
+    /// <param name="index">The index of the child public key.</param>
+    /// <returns>The derived child unhardened public key.</returns>
+    public static JacobianPoint DeriveChildPkUnhardened(this JacobianPoint publicKey, long index) => HdKeysClass.DeriveChildG1Unhardened(publicKey, index);
 }

@@ -5,14 +5,15 @@ namespace chia.dotnet.bls;
 
 /// <summary>
 /// Represents a point in Jacobian coordinates on an elliptic curve.
+/// It can represent both a PublicKey and a Signature.
 /// </summary>
 public class JacobianPoint
 {
-    public Fq X { get; }
-    public Fq Y { get; }
-    public Fq Z { get; }
+    internal Fq X { get; }
+    internal Fq Y { get; }
+    internal Fq Z { get; }
     public bool IsInfinity { get; }
-    public EC Ec { get; }
+    internal EC Ec { get; }
 
     private static readonly int[] sourceArray = [0x20, 0x60, 0xe0];
 
@@ -24,7 +25,7 @@ public class JacobianPoint
     /// <param name="z">The z-coordinate of the point.</param>
     /// <param name="isInfinity">A flag indicating whether the point is at infinity.</param>
     /// <param name="ec">The elliptic curve associated with the point (optional).</param>
-    public JacobianPoint(Fq x, Fq y, Fq z, bool isInfinity, EC? ec = null)
+    internal JacobianPoint(Fq x, Fq y, Fq z, bool isInfinity, EC? ec = null)
     {
         ec ??= Constants.DefaultEc;
 
@@ -37,10 +38,10 @@ public class JacobianPoint
         Ec = ec;
     }
 
-    public static JacobianPoint FromBytes(byte[] bytes, bool isExtension, EC? ec = null)
-    {
-        ec ??= Constants.DefaultEc;
+    public static JacobianPoint FromBytes(byte[] bytes, bool isExtension) => FromBytes(bytes, isExtension, Constants.DefaultEc);
 
+    internal static JacobianPoint FromBytes(byte[] bytes, bool isExtension, EC ec)
+    {
         if (isExtension)
         {
             if (bytes.Length != 96)
@@ -89,12 +90,8 @@ public class JacobianPoint
         return new AffinePoint(x, y, false, ec).ToJacobian();
     }
 
-    public static JacobianPoint FromHex(string hex, bool isExtension, EC? ec = null)
-    {
-        ec ??= Constants.DefaultEc;
-
-        return FromBytes(hex.FromHex(), isExtension, ec);
-    }
+    public static JacobianPoint FromHex(string hex, bool isExtension) => FromHex(hex, isExtension, Constants.DefaultEc);
+    internal static JacobianPoint FromHex(string hex, bool isExtension, EC ec) => FromBytes(hex.FromHex(), isExtension, ec);
 
     public static JacobianPoint GenerateG1() => new AffinePoint(Constants.DefaultEc.Gx, Constants.DefaultEc.Gy, false, Constants.DefaultEc).ToJacobian();
 
@@ -274,7 +271,7 @@ public class JacobianPoint
     }
 
 
-    public JacobianPoint Multiply(Fq value) => EcMethods.ScalarMultJacobian(value.Value, this, Ec);
+    internal JacobianPoint Multiply(Fq value) => EcMethods.ScalarMultJacobian(value.Value, this, Ec);
     public JacobianPoint Multiply(BigInteger value) => EcMethods.ScalarMultJacobian(value, this, Ec);
     public bool Equals(JacobianPoint value) => ToAffine().Equals(value.ToAffine());
 

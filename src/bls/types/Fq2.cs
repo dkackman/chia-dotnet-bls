@@ -2,7 +2,10 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public class Fq2 : Fq
+/// <summary>
+/// Represents an extension field Fq2, which is an extension of the base field Fq.
+/// </summary>
+internal class Fq2 : Fq
 {
     public static readonly new Fq2 Nil = new(BigInteger.One, [Fq.Nil, Fq.Nil]);
 

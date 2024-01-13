@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public static partial class Constants
+internal static partial class Constants
 {
     private static readonly IReadOnlyDictionary<string, Fq> FrobCoeffs = new Dictionary<string, Fq>
     {

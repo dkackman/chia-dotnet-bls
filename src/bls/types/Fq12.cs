@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public class Fq12 : Fq6
+internal class Fq12 : Fq6
 {
     public static readonly new Fq12 Nil = new(1, Fq6.Nil, Fq6.Nil);
 

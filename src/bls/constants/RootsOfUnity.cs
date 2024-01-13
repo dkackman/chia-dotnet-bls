@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public static partial class Constants
+internal static partial class Constants
 {
     public static readonly BigInteger rv1 =
         BigInteger.Parse("06af0e0437ff400b6831e36d6bd17ffe48395dabc2d3435e77f76e17009241c5ee67992f72ec05f4c81084fbede3cc09", NumberStyles.HexNumber);

@@ -1,8 +1,11 @@
 using System.Numerics;
 
+/// <summary>
+/// Represents an element in the finite field Fq.
+/// </summary>
 namespace chia.dotnet.bls;
 
-public class Fq(BigInteger q, BigInteger value)
+internal class Fq(BigInteger q, BigInteger value)
 {
     public static readonly Fq Nil = new(1, 0);
 

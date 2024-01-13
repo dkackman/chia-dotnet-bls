@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-public static partial class Constants
+internal static partial class Constants
 {
     public static readonly Fq2 xi_2 = new(Q, new Fq(Q, -2), new Fq(Q, -1));
     public static readonly Fq2 Ell2p_a = new(Q, new Fq(Q, 0), new Fq(Q, 240));
