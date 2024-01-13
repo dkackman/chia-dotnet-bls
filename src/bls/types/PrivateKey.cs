@@ -52,6 +52,14 @@ public class PrivateKey
     /// </summary>
     /// <param name="seed">The seed used to generate the private key.</param>
     /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
+    public static PrivateKey FromSeed(string seed) => FromSeed(seed.HexStringToByteArray());
+    
+    /// <summary>
+    /// Creates a <see cref="PrivateKey"/> instance from the specified seed.
+    /// </summary>
+    /// <param name="seed">The seed used to generate the private key.</param>
+    /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
+    /// 
     public static PrivateKey FromSeed(byte[] seed)
     {
         var okm = Hkdf.ExtractExpand(Length, ByteUtils.ConcatenateArrays(seed, [0]), Constants.SignatureKeygenSalt, [0, Length]);

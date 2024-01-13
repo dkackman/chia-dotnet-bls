@@ -14,8 +14,7 @@ public class Examples
         // create a secret key from a mnemonic
         var bip39 = new BIP39();
         var seed = bip39.MnemonicToSeedHex(MNEMONIC, "");
-        var byteArray = seed.HexStringToByteArray();
-        var sk = PrivateKey.FromSeed(byteArray);
+        var sk = PrivateKey.FromSeed(seed);
 
         // sign a message
         var signature = sk.Sign(MESSAGE);
