@@ -30,8 +30,12 @@ public class PrivateKey
         return new PrivateKey(ModMath.Mod(aggregate, Constants.DefaultEc.N));
     }
     public JacobianPoint GetG1() => JacobianPoint.GenerateG1().Multiply(Value);
-    public byte[] ToBytes() => Value.BigIntToBytes(Size, Endian.Big);
-    public string ToHex() => ToBytes().ToHex();
+
+    private byte[]? bytes;
+    public byte[] ToBytes() => bytes ??= Value.BigIntToBytes(Size, Endian.Big);
+
+    private string? hex;
+    public string ToHex() => hex ??= ToBytes().ToHex();
     public override string ToString() => ToHex();
     public bool Equals(PrivateKey value) => Value == value.Value;
 }
