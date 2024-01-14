@@ -2,12 +2,28 @@ using System.Security.Cryptography;
 
 namespace chia.dotnet.bls;
 
-internal static class Hmac
+/// <summary>
+/// Provides methods for HMAC (Hash-based Message Authentication Code) operations.
+/// </summary>
+public static class Hmac
 {
+    /// <summary>
+    /// The block size used in HMAC operations.
+    /// </summary>
     public const int HmacBlockSize = 64;
 
-    public static byte[] Hash256(byte[] message) => SHA256.HashData(message);
+    /// <summary>
+    /// Computes the SHA-256 hash of the specified message.
+    /// </summary>
+    /// <param name="message">The message to hash.</param>
+    /// <returns>The SHA-256 hash of the message.</returns>
+    public static byte[] Hash256(this byte[] message) => SHA256.HashData(message);
 
+    /// <summary>
+    /// Computes the SHA-256 hash of the specified message segment.
+    /// </summary>
+    /// <param name="messageSegment">The segment of the message to hash.</param>
+    /// <returns>The SHA-256 hash of the message segment.</returns>
     public static byte[] Hash256(ArraySegment<byte> messageSegment)
     {
         // Convert the ArraySegment to a ReadOnlySpan
@@ -17,7 +33,12 @@ internal static class Hmac
         return SHA256.HashData(messageSpan);
     }
 
-    public static byte[] Hash512(byte[] message)
+    /// <summary>
+    /// Computes the SHA-512 hash of the specified message.
+    /// </summary>
+    /// <param name="message">The message to hash.</param>
+    /// <returns>The SHA-512 hash of the message.</returns>
+    public static byte[] Hash512(this byte[] message)
     {
         var messageWithZero = new byte[message.Length + 1];
         Array.Copy(message, messageWithZero, message.Length);
@@ -30,6 +51,12 @@ internal static class Hmac
         return ByteUtils.ConcatenateArrays(Hash256(messageWithZero), Hash256(messageWithOne));
     }
 
+    /// <summary>
+    /// Computes the HMAC-SHA-256 of the specified message using the specified key.
+    /// </summary>
+    /// <param name="message">The message to compute the HMAC for.</param>
+    /// <param name="k">The key to use for HMAC computation.</param>
+    /// <returns>The HMAC-SHA-256 of the message.</returns>
     public static byte[] Hmac256(byte[] message, byte[] k)
     {
         if (k.Length > HmacBlockSize)

@@ -5,6 +5,7 @@ namespace chia.dotnet.bls;
 
 internal static class OptSwu2MapClass
 {
+    private static readonly BigInteger sqrtCandidateExponent = (BigInteger.Pow(Constants.Q, 2) - 9) / 16;
     public static BigInteger Sgn0(Fq2 x)
     {
         var sign0 = ModMath.Mod(x.Elements[0].Value, 2) == 1;
@@ -16,7 +17,9 @@ internal static class OptSwu2MapClass
 
     public static JacobianPoint Osswu2Help(Fq2 t)
     {
-        var numDenCommon = Constants.xi_2.Pow(2).Multiply(t.Pow(4)).Add(Constants.xi_2.Multiply(t.Pow(2)));
+        var t_pow_2 = t.Pow(2);
+        var xi_2_mult_t_pow_2 = Constants.xi_2.Multiply(t_pow_2);
+        var numDenCommon = Constants.xi_2.Pow(2).Multiply(t_pow_2.Multiply(t_pow_2)).Add(xi_2_mult_t_pow_2);
         var x0_num = Constants.Ell2p_b.Multiply(numDenCommon.Add(new Fq(Constants.Q, 1)));
         var x0_den = Constants.Ell2p_a.Negate().Multiply(numDenCommon);
         x0_den = x0_den.Equals(0) ? Constants.Ell2p_a.Multiply(Constants.xi_2) : x0_den;
@@ -27,7 +30,7 @@ internal static class OptSwu2MapClass
         var temp1 = gx0_den.Pow(7);
         var temp2 = gx0_num.Multiply(temp1);
         temp1 = temp1.Multiply(temp2).Multiply(gx0_den);
-        var sqrtCandidate = temp2.Multiply(temp1.Pow((BigInteger.Pow(Constants.Q, 2) - 9) / 16));
+        var sqrtCandidate = temp2.Multiply(temp1.Pow(sqrtCandidateExponent));
 
         foreach (var root in Constants.rootsOfUnity)
         {
@@ -50,7 +53,7 @@ internal static class OptSwu2MapClass
             }
         }
 
-        var x1_num = Constants.xi_2.Multiply(t.Pow(2)).Multiply(x0_num);
+        var x1_num = xi_2_mult_t_pow_2.Multiply(x0_num);
         var x1_den = x0_den;
         var gx1_num = Constants.xi_2.Pow(3).Multiply(t.Pow(6)).Multiply(gx0_num);
         var gx1_den = gx0_den;
