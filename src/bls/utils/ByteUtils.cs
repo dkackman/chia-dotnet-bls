@@ -26,6 +26,34 @@ public enum Endian
 public static partial class ByteUtils
 {
     /// <summary>
+    /// Calculates the number of bits required to represent a BigInteger.
+    /// </summary>
+    /// <param name="value">The BigInteger value.</param>
+    /// <returns>The number of bits required to represent the BigInteger.</returns>
+    public static int IntBitLength(long value)
+    {
+        if (value == 0)
+        {
+            return 0;
+        }
+        value = Math.Abs(value);
+        int bits = 0;
+        while (value > 0)
+        {
+            bits++;
+            value >>= 1;
+        }
+        return bits;
+    }
+
+    /// <summary>
+    /// Calculates the number of bits required to represent a BigInteger.
+    /// </summary>
+    /// <param name="value">The BigInteger value.</param>
+    /// <returns>The number of bits required to represent the BigInteger.</returns>
+    public static long BigIntBitLength(BigInteger value) => value == 0 ? 0 : value.GetBitLength();
+
+    /// <summary>
     /// Converts a string to a byte array using UTF-8 encoding.
     /// </summary>
     /// <param name="value">The string to convert.</param>

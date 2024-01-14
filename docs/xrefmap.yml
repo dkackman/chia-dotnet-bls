@@ -474,6 +474,19 @@ references:
   commentId: T:chia.dotnet.bls.ByteUtils
   fullName: chia.dotnet.bls.ByteUtils
   nameWithType: ByteUtils
+- uid: chia.dotnet.bls.ByteUtils.BigIntBitLength(System.Numerics.BigInteger)
+  name: BigIntBitLength(BigInteger)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BigIntBitLength_System_Numerics_BigInteger_
+  commentId: M:chia.dotnet.bls.ByteUtils.BigIntBitLength(System.Numerics.BigInteger)
+  fullName: chia.dotnet.bls.ByteUtils.BigIntBitLength(System.Numerics.BigInteger)
+  nameWithType: ByteUtils.BigIntBitLength(BigInteger)
+- uid: chia.dotnet.bls.ByteUtils.BigIntBitLength*
+  name: BigIntBitLength
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BigIntBitLength_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.BigIntBitLength
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.BigIntBitLength
+  nameWithType: ByteUtils.BigIntBitLength
 - uid: chia.dotnet.bls.ByteUtils.BigIntToBits(System.Numerics.BigInteger)
   name: BigIntToBits(BigInteger)
   href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_BigIntToBits_System_Numerics_BigInteger_
@@ -599,6 +612,22 @@ references:
   isSpec: "True"
   fullName: chia.dotnet.bls.ByteUtils.HexStringToByteArray
   nameWithType: ByteUtils.HexStringToByteArray
+- uid: chia.dotnet.bls.ByteUtils.IntBitLength(System.Int64)
+  name: IntBitLength(long)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_IntBitLength_System_Int64_
+  commentId: M:chia.dotnet.bls.ByteUtils.IntBitLength(System.Int64)
+  name.vb: IntBitLength(Long)
+  fullName: chia.dotnet.bls.ByteUtils.IntBitLength(long)
+  fullName.vb: chia.dotnet.bls.ByteUtils.IntBitLength(Long)
+  nameWithType: ByteUtils.IntBitLength(long)
+  nameWithType.vb: ByteUtils.IntBitLength(Long)
+- uid: chia.dotnet.bls.ByteUtils.IntBitLength*
+  name: IntBitLength
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_IntBitLength_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.IntBitLength
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.IntBitLength
+  nameWithType: ByteUtils.IntBitLength
 - uid: chia.dotnet.bls.ByteUtils.IntToBytes(System.Int64,System.Int32,chia.dotnet.bls.Endian,System.Boolean)
   name: IntToBytes(long, int, Endian, bool)
   href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_IntToBytes_System_Int64_System_Int32_chia_dotnet_bls_Endian_System_Boolean_
