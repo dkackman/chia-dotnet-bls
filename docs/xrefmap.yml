@@ -694,6 +694,75 @@ references:
   commentId: F:chia.dotnet.bls.Endian.Little
   fullName: chia.dotnet.bls.Endian.Little
   nameWithType: Endian.Little
+- uid: chia.dotnet.bls.Hmac
+  name: Hmac
+  href: api/chia.dotnet.bls.Hmac.html
+  commentId: T:chia.dotnet.bls.Hmac
+  fullName: chia.dotnet.bls.Hmac
+  nameWithType: Hmac
+- uid: chia.dotnet.bls.Hmac.Hash256(System.ArraySegment{System.Byte})
+  name: Hash256(ArraySegment<byte>)
+  href: api/chia.dotnet.bls.Hmac.html#chia_dotnet_bls_Hmac_Hash256_System_ArraySegment_System_Byte__
+  commentId: M:chia.dotnet.bls.Hmac.Hash256(System.ArraySegment{System.Byte})
+  name.vb: Hash256(ArraySegment(Of Byte))
+  fullName: chia.dotnet.bls.Hmac.Hash256(System.ArraySegment<byte>)
+  fullName.vb: chia.dotnet.bls.Hmac.Hash256(System.ArraySegment(Of Byte))
+  nameWithType: Hmac.Hash256(ArraySegment<byte>)
+  nameWithType.vb: Hmac.Hash256(ArraySegment(Of Byte))
+- uid: chia.dotnet.bls.Hmac.Hash256(System.Byte[])
+  name: Hash256(byte[])
+  href: api/chia.dotnet.bls.Hmac.html#chia_dotnet_bls_Hmac_Hash256_System_Byte___
+  commentId: M:chia.dotnet.bls.Hmac.Hash256(System.Byte[])
+  name.vb: Hash256(Byte())
+  fullName: chia.dotnet.bls.Hmac.Hash256(byte[])
+  fullName.vb: chia.dotnet.bls.Hmac.Hash256(Byte())
+  nameWithType: Hmac.Hash256(byte[])
+  nameWithType.vb: Hmac.Hash256(Byte())
+- uid: chia.dotnet.bls.Hmac.Hash256*
+  name: Hash256
+  href: api/chia.dotnet.bls.Hmac.html#chia_dotnet_bls_Hmac_Hash256_
+  commentId: Overload:chia.dotnet.bls.Hmac.Hash256
+  isSpec: "True"
+  fullName: chia.dotnet.bls.Hmac.Hash256
+  nameWithType: Hmac.Hash256
+- uid: chia.dotnet.bls.Hmac.Hash512(System.Byte[])
+  name: Hash512(byte[])
+  href: api/chia.dotnet.bls.Hmac.html#chia_dotnet_bls_Hmac_Hash512_System_Byte___
+  commentId: M:chia.dotnet.bls.Hmac.Hash512(System.Byte[])
+  name.vb: Hash512(Byte())
+  fullName: chia.dotnet.bls.Hmac.Hash512(byte[])
+  fullName.vb: chia.dotnet.bls.Hmac.Hash512(Byte())
+  nameWithType: Hmac.Hash512(byte[])
+  nameWithType.vb: Hmac.Hash512(Byte())
+- uid: chia.dotnet.bls.Hmac.Hash512*
+  name: Hash512
+  href: api/chia.dotnet.bls.Hmac.html#chia_dotnet_bls_Hmac_Hash512_
+  commentId: Overload:chia.dotnet.bls.Hmac.Hash512
+  isSpec: "True"
+  fullName: chia.dotnet.bls.Hmac.Hash512
+  nameWithType: Hmac.Hash512
+- uid: chia.dotnet.bls.Hmac.Hmac256(System.Byte[],System.Byte[])
+  name: Hmac256(byte[], byte[])
+  href: api/chia.dotnet.bls.Hmac.html#chia_dotnet_bls_Hmac_Hmac256_System_Byte___System_Byte___
+  commentId: M:chia.dotnet.bls.Hmac.Hmac256(System.Byte[],System.Byte[])
+  name.vb: Hmac256(Byte(), Byte())
+  fullName: chia.dotnet.bls.Hmac.Hmac256(byte[], byte[])
+  fullName.vb: chia.dotnet.bls.Hmac.Hmac256(Byte(), Byte())
+  nameWithType: Hmac.Hmac256(byte[], byte[])
+  nameWithType.vb: Hmac.Hmac256(Byte(), Byte())
+- uid: chia.dotnet.bls.Hmac.Hmac256*
+  name: Hmac256
+  href: api/chia.dotnet.bls.Hmac.html#chia_dotnet_bls_Hmac_Hmac256_
+  commentId: Overload:chia.dotnet.bls.Hmac.Hmac256
+  isSpec: "True"
+  fullName: chia.dotnet.bls.Hmac.Hmac256
+  nameWithType: Hmac.Hmac256
+- uid: chia.dotnet.bls.Hmac.HmacBlockSize
+  name: HmacBlockSize
+  href: api/chia.dotnet.bls.Hmac.html#chia_dotnet_bls_Hmac_HmacBlockSize
+  commentId: F:chia.dotnet.bls.Hmac.HmacBlockSize
+  fullName: chia.dotnet.bls.Hmac.HmacBlockSize
+  nameWithType: Hmac.HmacBlockSize
 - uid: chia.dotnet.bls.JacobianPoint
   name: JacobianPoint
   href: api/chia.dotnet.bls.JacobianPoint.html

@@ -24,6 +24,11 @@
     "title": "Enum Endian | chia-dotnet-bls",
     "keywords": "Enum Endian Namespace chia.dotnet.bls Assembly chia-dotnet-bls.dll Enum representing the endianness of byte arrays. public enum Endian Fields Big = 1 Big endian byte order. Little = 0 Little endian byte order."
   },
+  "api/chia.dotnet.bls.Hmac.html": {
+    "href": "api/chia.dotnet.bls.Hmac.html",
+    "title": "Class Hmac | chia-dotnet-bls",
+    "keywords": "Class Hmac Namespace chia.dotnet.bls Assembly chia-dotnet-bls.dll Provides methods for HMAC (Hash-based Message Authentication Code) operations. public static class Hmac Inheritance object Hmac Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields HmacBlockSize The block size used in HMAC operations. public const int HmacBlockSize = 64 Field Value int Provides methods for HMAC (Hash-based Message Authentication Code) operations. Methods Hash256(ArraySegment<byte>) Computes the SHA-256 hash of the specified message segment. public static byte[] Hash256(ArraySegment<byte> messageSegment) Parameters messageSegment ArraySegment<byte> The segment of the message to hash. Returns byte[] The SHA-256 hash of the message segment. Hash256(byte[]) Computes the SHA-256 hash of the specified message. public static byte[] Hash256(this byte[] message) Parameters message byte[] The message to hash. Returns byte[] The SHA-256 hash of the message. Hash512(byte[]) Computes the SHA-512 hash of the specified message. public static byte[] Hash512(this byte[] message) Parameters message byte[] The message to hash. Returns byte[] The SHA-512 hash of the message. Hmac256(byte[], byte[]) Computes the HMAC-SHA-256 of the specified message using the specified key. public static byte[] Hmac256(byte[] message, byte[] k) Parameters message byte[] The message to compute the HMAC for. k byte[] The key to use for HMAC computation. Returns byte[] The HMAC-SHA-256 of the message."
+  },
   "api/chia.dotnet.bls.JacobianPoint.html": {
     "href": "api/chia.dotnet.bls.JacobianPoint.html",
     "title": "Class JacobianPoint | chia-dotnet-bls",
@@ -47,7 +52,7 @@
   "api/chia.dotnet.bls.html": {
     "href": "api/chia.dotnet.bls.html",
     "title": "Namespace chia.dotnet.bls | chia-dotnet-bls",
-    "keywords": "Namespace chia.dotnet.bls Classes AffinePoint Represents an affine point on an elliptic curve. AugSchemeMPL Provides extension methods for the AugSchemeMPL signature scheme. This is the scheme Chia uses for its signatures. ByteUtils Extension methods for working with byte arrays and conversions. JacobianPoint Represents a point in Jacobian coordinates on an elliptic curve. It can represent both a PublicKey and a Signature. KeyDerivation Provides methods for key derivation in the BLS cryptography library. PrivateKey Represents a private key used in BLS cryptography. Enums Endian Enum representing the endianness of byte arrays."
+    "keywords": "Namespace chia.dotnet.bls Classes AffinePoint Represents an affine point on an elliptic curve. AugSchemeMPL Provides extension methods for the AugSchemeMPL signature scheme. This is the scheme Chia uses for its signatures. ByteUtils Extension methods for working with byte arrays and conversions. Hmac Provides methods for HMAC (Hash-based Message Authentication Code) operations. JacobianPoint Represents a point in Jacobian coordinates on an elliptic curve. It can represent both a PublicKey and a Signature. KeyDerivation Provides methods for key derivation in the BLS cryptography library. PrivateKey Represents a private key used in BLS cryptography. Enums Endian Enum representing the endianness of byte arrays."
   },
   "docs/getting-started.html": {
     "href": "docs/getting-started.html",
