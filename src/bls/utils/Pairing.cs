@@ -42,15 +42,15 @@ internal static class Pairing
         var T_bits = ByteUtils.BigIntToBits(T);
         var R = Q;
         var f = Fq12.Nil.One(ec.Q);
+        var FqQ2 = new Fq(ec.Q, 2);
         for (var i = 1; i < T_bits.Length; i++)
         {
             var lrr = DoubleLineEval(R, P, ec);
             f = f.Multiply(f).Multiply(lrr);
-            R = R.Multiply(new Fq(ec.Q, 2));
+            R = R.Multiply(FqQ2);
             if (T_bits[i] == 1)
             {
-                var lrq = AddLineEval(R, Q, P);
-                f = f.Multiply(lrq);
+                f = f.Multiply(AddLineEval(R, Q, P));
                 R = R.Add(Q);
             }
         }
@@ -60,13 +60,13 @@ internal static class Pairing
     public static Fq12 FinalExponentiation(Fq12 element, EC? ec = null)
     {
         ec ??= Constants.DefaultEc;
-        
+
         if (ec.K == 12)
         {
             var ans = element.Pow((BigInteger.Pow(ec.Q, 4) - BigInteger.Pow(ec.Q, 2) + 1) / ec.N);
             ans = ans.QiPower(2).Multiply(ans);
             ans = ans.QiPower(6).Divide(ans);
-            
+
             return (Fq12)ans;
         }
 

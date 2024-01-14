@@ -16,7 +16,7 @@ internal static class Hmac
         // Hash the span
         return SHA256.HashData(messageSpan);
     }
-    
+
     public static byte[] Hash512(byte[] message)
     {
         var messageWithZero = new byte[message.Length + 1];
@@ -36,6 +36,7 @@ internal static class Hmac
         {
             k = Hash256(k);
         }
+
         while (k.Length < HmacBlockSize)
         {
             Array.Resize(ref k, k.Length + 1);

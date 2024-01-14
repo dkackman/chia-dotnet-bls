@@ -4,6 +4,7 @@ namespace chia.dotnet.bls;
 
 internal static class Signing
 {
+    private static readonly Fq one = Fq12.Nil.One(Constants.DefaultEc.Q);
     public static JacobianPoint CoreSignMpl(PrivateKey sk, byte[] message, byte[] dst) => OptSwu2MapClass.G2Map(message, dst).Multiply(sk.Value);
 
     public static bool CoreVerifyMpl(JacobianPoint pk, byte[] message, JacobianPoint signature, byte[] dst)
@@ -14,7 +15,6 @@ internal static class Signing
         }
 
         var q = OptSwu2MapClass.G2Map(message, dst);
-        var one = Fq12.Nil.One(Constants.DefaultEc.Q);
         var pairingResult = Pairing.AtePairingMulti(
             [pk, JacobianPoint.GenerateG1().Negate()],
             [q, signature]
@@ -71,6 +71,6 @@ internal static class Signing
             ps[i + 1] = pks[i];
         }
 
-        return Fq12.Nil.One(Constants.DefaultEc.Q).Equals(Pairing.AtePairingMulti(ps, qs));
+        return one.Equals(Pairing.AtePairingMulti(ps, qs));
     }
 }

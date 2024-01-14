@@ -30,7 +30,7 @@ internal static class Hkdf
             {
                 toWrite = BlockSize;
             }
-            
+
             Array.Copy(temp, 0, okm, bytesWritten, toWrite);
             bytesWritten += toWrite;
         }

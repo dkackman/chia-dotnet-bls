@@ -1,2 +1,2 @@
 
-docfx build docfx.json
+docfx docfx.json
