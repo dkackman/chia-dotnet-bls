@@ -3,14 +3,21 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-internal static partial class Constants
+internal static class Constants
 {
-    public static readonly BigInteger X = -1 * BigInteger.Parse("0d201000000010000", NumberStyles.AllowHexSpecifier);
     public static readonly BigInteger Q = BigInteger.Parse("01a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab", NumberStyles.AllowHexSpecifier);
-    public static readonly Fq A = new(Q, 0);
-    public static readonly Fq B = new(Q, 4);
-    public static readonly Fq2 ATwist = new(Q, new Fq(Q, 0), new Fq(Q, 0));
-    public static readonly Fq2 BTwist = new(Q, new Fq(Q, 4), new Fq(Q, 4));
+    public static readonly byte[] SignatureKeygenSalt = "BLS-SIG-KEYGEN-SALT-".ToBytes();
+
+    public static readonly Fq FqNegativeOne = new(Q, -1);
+    public static readonly Fq FqZero = new(Q, 0);
+    public static readonly Fq FqOne = new(Q, 1);
+    public static readonly Fq FqFour = new(Q, 4);
+    public static Fq2 Fq2Zero = new(Q, FqZero, FqZero);
+    public static readonly BigInteger X = -1 * BigInteger.Parse("0d201000000010000", NumberStyles.AllowHexSpecifier);
+    public static readonly Fq A = FqZero;
+    public static readonly Fq B = FqFour;
+    public static readonly Fq2 ATwist = new(Q, FqZero, FqZero);
+    public static readonly Fq2 BTwist = new(Q, FqFour, FqFour);
 
     public static readonly Fq Gx = new(Q, BigInteger.Parse("017f1d3a73197d7942695638c4fa9ac0fc3688c4f9774b905a14e3a3f171bac586c55e83ff97a1aeffb3af00adb22c6bb", NumberStyles.AllowHexSpecifier));
     public static readonly Fq Gy = new(Q, BigInteger.Parse("08b3f481e3aaa0f1a09e30ed741d8ae4fcf5e095d5d00af600db18cb2c04b3edd03cc744a2888ae40caa232946c5e7e1", NumberStyles.AllowHexSpecifier));

@@ -3,11 +3,12 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-internal static partial class Constants
+internal static class OpSquG2
 {
-    public static readonly Fq2 xi_2 = new(Q, new Fq(Q, -2), new Fq(Q, -1));
-    public static readonly Fq2 Ell2p_a = new(Q, new Fq(Q, 0), new Fq(Q, 240));
-    public static readonly Fq2 Ell2p_b = new(Q, new Fq(Q, 1012), new Fq(Q, 1012));
+    private static readonly Fq FqTenTwelve = new(Constants.Q, 1012);
+    public static readonly Fq2 xi_2 = new(Constants.Q, new Fq(Constants.Q, -2), Constants.FqNegativeOne);
+    public static readonly Fq2 Ell2p_a = new(Constants.Q, Constants.FqZero, new Fq(Constants.Q, 240));
+    public static readonly Fq2 Ell2p_b = new(Constants.Q, FqTenTwelve, FqTenTwelve);
 
     public static readonly BigInteger ev1 =
         BigInteger.Parse("0699be3b8c6870965e5bf892ad5d2cc7b0e85a117402dfd83b7f4a947e02d978498255a2aaec0ac627b5afbdf1bf1c90", NumberStyles.HexNumber);
@@ -20,9 +21,9 @@ internal static partial class Constants
 
     public static readonly IEnumerable<Fq2> etas =
     [
-        new Fq2(Q, new Fq(Q, ev1), new Fq(Q, ev2)),
-        new Fq2(Q, new Fq(Q, Q - ev2), new Fq(Q, ev1)),
-        new Fq2(Q, new Fq(Q, ev3), new Fq(Q, ev4)),
-        new Fq2(Q, new Fq(Q, Q - ev4), new Fq(Q, ev3)),
+        new Fq2(Constants.Q, new Fq(Constants.Q, ev1), new Fq(Constants.Q, ev2)),
+        new Fq2(Constants.Q, new Fq(Constants.Q, Constants.Q - ev2), new Fq(Constants.Q, ev1)),
+        new Fq2(Constants.Q, new Fq(Constants.Q, ev3), new Fq(Constants.Q, ev4)),
+        new Fq2(Constants.Q, new Fq(Constants.Q, Constants.Q - ev4), new Fq(Constants.Q, ev3)),
     ];
 }

@@ -4,9 +4,9 @@ internal static class PopSchemeMPL
 {
     public static PrivateKey KeyGen(byte[] seed) => HdKeysClass.KeyGen(seed);
 
-    public static JacobianPoint Sign(PrivateKey privateKey, byte[] message) => Signing.CoreSignMpl(privateKey, message, Constants.PopSchemeDst);
+    public static JacobianPoint Sign(PrivateKey privateKey, byte[] message) => Signing.CoreSignMpl(privateKey, message, Schemes.PopSchemeDst);
 
-    public static bool Verify(JacobianPoint publicKey, byte[] message, JacobianPoint signature) => Signing.CoreVerifyMpl(publicKey, message, signature, Constants.PopSchemeDst);
+    public static bool Verify(JacobianPoint publicKey, byte[] message, JacobianPoint signature) => Signing.CoreVerifyMpl(publicKey, message, signature, Schemes.PopSchemeDst);
 
     public static JacobianPoint Aggregate(JacobianPoint[] signatures) => Signing.CoreAggregateMpl(signatures);
 
@@ -26,13 +26,13 @@ internal static class PopSchemeMPL
             }
         }
 
-        return Signing.CoreAggregateVerify(publicKeys, messages, signature, Constants.PopSchemeDst);
+        return Signing.CoreAggregateVerify(publicKeys, messages, signature, Schemes.PopSchemeDst);
     }
 
     public static JacobianPoint PopProve(PrivateKey privateKey)
     {
         var publicKey = privateKey.GetG1();
-        return OptSwu2MapClass.G2Map(publicKey.ToBytes(), Constants.PopSchemePopDst).Multiply(privateKey.Value);
+        return OptSwu2MapClass.G2Map(publicKey.ToBytes(), Schemes.PopSchemePopDst).Multiply(privateKey.Value);
     }
 
     public static bool PopVerify(JacobianPoint publicKey, JacobianPoint proof)
@@ -47,7 +47,7 @@ internal static class PopSchemeMPL
             return false;
         }
 
-        var q = OptSwu2MapClass.G2Map(publicKey.ToBytes(), Constants.PopSchemePopDst);
+        var q = OptSwu2MapClass.G2Map(publicKey.ToBytes(), Schemes.PopSchemePopDst);
         var one = Fq12.Nil.One(Constants.DefaultEc.Q);
         var pairingResult = Pairing.AtePairingMulti(
             [publicKey, JacobianPoint.GenerateG1().Negate()],
@@ -70,7 +70,7 @@ internal static class PopSchemeMPL
             aggregate = aggregate.Add(publicKey);
         }
 
-        return Signing.CoreVerifyMpl(aggregate, message, signature, Constants.PopSchemeDst);
+        return Signing.CoreVerifyMpl(aggregate, message, signature, Schemes.PopSchemeDst);
     }
 
     public static PrivateKey DeriveChildSk(PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSk(privateKey, index);

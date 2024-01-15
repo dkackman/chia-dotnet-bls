@@ -205,7 +205,7 @@ internal class Fq2 : Fq
             }
             else
             {
-                var frobCoeff = Constants.GetFrobCoeff(Extension, i, index) ?? throw new InvalidOperationException("Frobenius coefficient not found.");
+                var frobCoeff = FrobCoefficients.GetCoefficient(Extension, i, index) ?? throw new InvalidOperationException("Frobenius coefficient not found.");
                 newElements[index] = Elements[index].QiPower(i).Multiply(frobCoeff);
             }
         }
@@ -229,7 +229,7 @@ internal class Fq2 : Fq
             baseField = (Fq2)baseField.Multiply(baseField);
             exponent >>= 1;
         }
-        
+
         return result;
     }
 

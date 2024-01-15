@@ -74,7 +74,7 @@ internal class Fq(BigInteger q, BigInteger value)
             return this;
         }
 
-        Fq result = new Fq(Q, 1);
+        Fq result = new(Q, 1);
         Fq baseValue = this;
 
         while (exponent > 0)

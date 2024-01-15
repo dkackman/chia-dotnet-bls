@@ -15,7 +15,11 @@
     "Mult",
     "Osswu",
     "Pyecc",
-    "ress"
+    "ress",
+    "Xden",
+    "Xnum",
+    "Yden",
+    "Ynum"
   ],
   "dotnet-test-explorer.testProjectPath": "**/*tests.@(csproj|vbproj|fsproj)"
 }

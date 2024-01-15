@@ -4,9 +4,9 @@ internal static class BasicSchemeMPL
 {
     public static PrivateKey KeyGen(byte[] seed) => HdKeysClass.KeyGen(seed);
 
-    public static JacobianPoint Sign(PrivateKey privateKey, byte[] message) => Signing.CoreSignMpl(privateKey, message, Constants.BasicSchemeDst);
+    public static JacobianPoint Sign(PrivateKey privateKey, byte[] message) => Signing.CoreSignMpl(privateKey, message, Schemes.BasicSchemeDst);
 
-    public static bool Verify(JacobianPoint publicKey, byte[] message, JacobianPoint signature) => Signing.CoreVerifyMpl(publicKey, message, signature, Constants.BasicSchemeDst);
+    public static bool Verify(JacobianPoint publicKey, byte[] message, JacobianPoint signature) => Signing.CoreVerifyMpl(publicKey, message, signature, Schemes.BasicSchemeDst);
 
     public static JacobianPoint Aggregate(JacobianPoint[] signatures) => Signing.CoreAggregateMpl(signatures);
 
@@ -26,7 +26,7 @@ internal static class BasicSchemeMPL
             }
         }
 
-        return Signing.CoreAggregateVerify(publicKeys, messages, signature, Constants.BasicSchemeDst);
+        return Signing.CoreAggregateVerify(publicKeys, messages, signature, Schemes.BasicSchemeDst);
     }
 
     public static PrivateKey DeriveChildSk(PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSk(privateKey, index);

@@ -18,21 +18,21 @@ internal static class OptSwu2MapClass
     public static JacobianPoint Osswu2Help(Fq2 t)
     {
         var t_pow_2 = t.Pow(2);
-        var xi_2_mult_t_pow_2 = Constants.xi_2.Multiply(t_pow_2);
-        var numDenCommon = Constants.xi_2.Pow(2).Multiply(t_pow_2.Multiply(t_pow_2)).Add(xi_2_mult_t_pow_2);
-        var x0_num = Constants.Ell2p_b.Multiply(numDenCommon.Add(new Fq(Constants.Q, 1)));
-        var x0_den = Constants.Ell2p_a.Negate().Multiply(numDenCommon);
-        x0_den = x0_den.Equals(0) ? Constants.Ell2p_a.Multiply(Constants.xi_2) : x0_den;
+        var xi_2_mult_t_pow_2 = OpSquG2.xi_2.Multiply(t_pow_2);
+        var numDenCommon = OpSquG2.xi_2.Pow(2).Multiply(t_pow_2.Multiply(t_pow_2)).Add(xi_2_mult_t_pow_2);
+        var x0_num = OpSquG2.Ell2p_b.Multiply(numDenCommon.Add(Constants.FqOne));
+        var x0_den = OpSquG2.Ell2p_a.Negate().Multiply(numDenCommon);
+        x0_den = x0_den.Equals(0) ? OpSquG2.Ell2p_a.Multiply(OpSquG2.xi_2) : x0_den;
         var gx0_den = x0_den.Pow(3);
-        var gx0_num = Constants.Ell2p_b.Multiply(gx0_den)
-            .Add(Constants.Ell2p_a.Multiply(x0_num).Multiply(x0_den.Pow(2)))
+        var gx0_num = OpSquG2.Ell2p_b.Multiply(gx0_den)
+            .Add(OpSquG2.Ell2p_a.Multiply(x0_num).Multiply(x0_den.Pow(2)))
             .Add(x0_num.Pow(3));
         var temp1 = gx0_den.Pow(7);
         var temp2 = gx0_num.Multiply(temp1);
         temp1 = temp1.Multiply(temp2).Multiply(gx0_den);
         var sqrtCandidate = temp2.Multiply(temp1.Pow(sqrtCandidateExponent));
 
-        foreach (var root in Constants.rootsOfUnity)
+        foreach (var root in UnityRoots.RootsOfUnity)
         {
             var y0 = (Fq2)sqrtCandidate.Multiply(root);
             if (y0.Pow(2).Multiply(gx0_den).Equals(gx0_num))
@@ -55,10 +55,10 @@ internal static class OptSwu2MapClass
 
         var x1_num = xi_2_mult_t_pow_2.Multiply(x0_num);
         var x1_den = x0_den;
-        var gx1_num = Constants.xi_2.Pow(3).Multiply(t.Pow(6)).Multiply(gx0_num);
+        var gx1_num = OpSquG2.xi_2.Pow(3).Multiply(t.Pow(6)).Multiply(gx0_num);
         var gx1_den = gx0_den;
         sqrtCandidate = sqrtCandidate.Multiply(t.Pow(3));
-        foreach (var eta in Constants.etas)
+        foreach (var eta in OpSquG2.etas)
         {
             var y1 = (Fq2)eta.Multiply(sqrtCandidate);
             if (y1.Pow(2).Multiply(gx1_den).Equals(gx1_num))
@@ -82,7 +82,7 @@ internal static class OptSwu2MapClass
         throw new Exception("Bad osswu2Help.");
     }
 
-    public static JacobianPoint Iso3(JacobianPoint P) => EcMethods.EvalIso(P, [Constants.Xnum, Constants.Xden, Constants.Ynum, Constants.Yden], Constants.DefaultEcTwist);
+    public static JacobianPoint Iso3(JacobianPoint P) => EcMethods.EvalIso(P, [Iso.Xnum, Iso.Xden, Iso.Ynum, Iso.Yden], Constants.DefaultEcTwist);
 
     public static JacobianPoint OptSwu2Map(Fq2 t, Fq2? t2 = null)
     {
