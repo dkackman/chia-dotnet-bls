@@ -112,7 +112,6 @@ public static partial class ByteUtils
     {
         Debug.Assert(!(value < 0 && !signed));
         Debug.Assert(value == Math.Floor((double)value));
-
         var bytes = new byte[size];
 
         for (var i = size - 1; i >= 0; i--)
@@ -124,6 +123,32 @@ public static partial class ByteUtils
         if (endian == Endian.Little)
         {
             Array.Reverse(bytes);
+        }
+
+        return bytes;
+    }
+
+    /// <summary>
+    /// Converts a long integer to a byte array, as signed and big endian,
+    /// with a special case for zero returning an empty array.
+    /// </summary>
+    /// <param name="value">The long integer to convert.</param>
+    /// <returns>The byte array representation of the long integer.</returns>
+    public static byte[] EncodeInt(this long value)
+    {
+        if (value == 0)
+        {
+            return [];
+        }
+
+        int length = (IntBitLength(value) + 8) >> 3;
+        byte[] bytes = value.IntToBytes(length, Endian.Big, true);
+        while (
+            bytes.Length > 1 &&
+            bytes[0] == ((bytes[1] & 0x80) != 0 ? (byte)0xff : (byte)0)
+        )
+        {
+            bytes = bytes.Skip(1).ToArray();
         }
 
         return bytes;

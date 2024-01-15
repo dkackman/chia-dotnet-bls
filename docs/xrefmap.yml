@@ -580,6 +580,22 @@ references:
   isSpec: "True"
   fullName: chia.dotnet.bls.ByteUtils.ConcatenateArrays
   nameWithType: ByteUtils.ConcatenateArrays
+- uid: chia.dotnet.bls.ByteUtils.EncodeInt(System.Int64)
+  name: EncodeInt(long)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_EncodeInt_System_Int64_
+  commentId: M:chia.dotnet.bls.ByteUtils.EncodeInt(System.Int64)
+  name.vb: EncodeInt(Long)
+  fullName: chia.dotnet.bls.ByteUtils.EncodeInt(long)
+  fullName.vb: chia.dotnet.bls.ByteUtils.EncodeInt(Long)
+  nameWithType: ByteUtils.EncodeInt(long)
+  nameWithType.vb: ByteUtils.EncodeInt(Long)
+- uid: chia.dotnet.bls.ByteUtils.EncodeInt*
+  name: EncodeInt
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_EncodeInt_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.EncodeInt
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.EncodeInt
+  nameWithType: ByteUtils.EncodeInt
 - uid: chia.dotnet.bls.ByteUtils.FromHex(System.String)
   name: FromHex(string)
   href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_FromHex_System_String_
