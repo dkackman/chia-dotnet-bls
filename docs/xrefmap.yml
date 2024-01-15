@@ -580,6 +580,19 @@ references:
   isSpec: "True"
   fullName: chia.dotnet.bls.ByteUtils.ConcatenateArrays
   nameWithType: ByteUtils.ConcatenateArrays
+- uid: chia.dotnet.bls.ByteUtils.EncodeBigInt(System.Numerics.BigInteger)
+  name: EncodeBigInt(BigInteger)
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_EncodeBigInt_System_Numerics_BigInteger_
+  commentId: M:chia.dotnet.bls.ByteUtils.EncodeBigInt(System.Numerics.BigInteger)
+  fullName: chia.dotnet.bls.ByteUtils.EncodeBigInt(System.Numerics.BigInteger)
+  nameWithType: ByteUtils.EncodeBigInt(BigInteger)
+- uid: chia.dotnet.bls.ByteUtils.EncodeBigInt*
+  name: EncodeBigInt
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_EncodeBigInt_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.EncodeBigInt
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.EncodeBigInt
+  nameWithType: ByteUtils.EncodeBigInt
 - uid: chia.dotnet.bls.ByteUtils.EncodeInt(System.Int64)
   name: EncodeInt(long)
   href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_EncodeInt_System_Int64_

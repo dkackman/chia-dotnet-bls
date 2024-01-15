@@ -155,6 +155,32 @@ public static partial class ByteUtils
     }
 
     /// <summary>
+    /// Converts a <see cref="BigInteger"/> to a byte array, as signed and big endian,
+    /// with a special case for zero returning an empty array.
+    /// </summary>
+    /// <param name="value">The <see cref="BigInteger"/> to convert.</param>
+    /// <returns>The byte array representation of the <see cref="BigInteger"/>.</returns>
+    public static byte[] EncodeBigInt(BigInteger value)
+    {
+        if (value == 0)
+        {
+            return [];
+        }
+        
+        int length = (int)(BigIntBitLength(value) + 8) >> 3;
+        byte[] bytes = value.BigIntToBytes(length, Endian.Big, true);
+        while (
+            bytes.Length > 1 &&
+            bytes[0] == ((bytes[1] & 0x80) != 0 ? (byte)0xff : (byte)0)
+        )
+        {
+            bytes = bytes.Skip(1).ToArray();
+        }
+
+        return bytes;
+    }
+
+    /// <summary>
     /// Converts a byte array to a long integer.
     /// </summary>
     /// <param name="bytes">The byte array to convert.</param>
