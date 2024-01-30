@@ -226,9 +226,9 @@ public static partial class ByteUtils
             }
         }
 
-        if (signed && (bytes[^1] & 0x80) != 0)
+        if (signed && bytes.Length == 8 && (bytes[^1] & 0x80) != 0)
         {
-            result -= 1L << (bytes.Length * 8);
+            result |= -1L ^ ((1L << (bytes.Length * 8)) - 1);
         }
 
         return result;
