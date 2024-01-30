@@ -160,13 +160,13 @@ public static partial class ByteUtils
     /// </summary>
     /// <param name="value">The <see cref="BigInteger"/> to convert.</param>
     /// <returns>The byte array representation of the <see cref="BigInteger"/>.</returns>
-    public static byte[] EncodeBigInt(BigInteger value)
+    public static byte[] EncodeBigInt(this BigInteger value)
     {
         if (value == 0)
         {
             return [];
         }
-        
+
         int length = (int)(BigIntBitLength(value) + 8) >> 3;
         byte[] bytes = value.BigIntToBytes(length, Endian.Big, true);
         while (
@@ -179,6 +179,20 @@ public static partial class ByteUtils
 
         return bytes;
     }
+
+    /// <summary>
+    /// Converts a byte array to a long integer, assuming signed and big endian
+    /// </summary>
+    /// <param name="bytes">The byte array to convert.</param>
+    /// <returns>The long integer representation of the byte array.</returns>
+    public static long DecodeInt(this byte[] bytes) => bytes.BytesToInt(Endian.Big, true);
+
+    /// <summary>
+    /// Converts a byte array to a big integer, assuming signed and big endian
+    /// </summary>
+    /// <param name="bytes">The byte array to convert.</param>
+    /// <returns>The big integer representation of the byte array.</returns>
+    public static BigInteger DecodeBigInt(this byte[] bytes) => bytes.BytesToBigInt(Endian.Big, true);
 
     /// <summary>
     /// Converts a byte array to a long integer.

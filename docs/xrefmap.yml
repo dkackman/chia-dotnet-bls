@@ -580,6 +580,38 @@ references:
   isSpec: "True"
   fullName: chia.dotnet.bls.ByteUtils.ConcatenateArrays
   nameWithType: ByteUtils.ConcatenateArrays
+- uid: chia.dotnet.bls.ByteUtils.DecodeBigInt(System.Byte[])
+  name: DecodeBigInt(byte[])
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_DecodeBigInt_System_Byte___
+  commentId: M:chia.dotnet.bls.ByteUtils.DecodeBigInt(System.Byte[])
+  name.vb: DecodeBigInt(Byte())
+  fullName: chia.dotnet.bls.ByteUtils.DecodeBigInt(byte[])
+  fullName.vb: chia.dotnet.bls.ByteUtils.DecodeBigInt(Byte())
+  nameWithType: ByteUtils.DecodeBigInt(byte[])
+  nameWithType.vb: ByteUtils.DecodeBigInt(Byte())
+- uid: chia.dotnet.bls.ByteUtils.DecodeBigInt*
+  name: DecodeBigInt
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_DecodeBigInt_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.DecodeBigInt
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.DecodeBigInt
+  nameWithType: ByteUtils.DecodeBigInt
+- uid: chia.dotnet.bls.ByteUtils.DecodeInt(System.Byte[])
+  name: DecodeInt(byte[])
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_DecodeInt_System_Byte___
+  commentId: M:chia.dotnet.bls.ByteUtils.DecodeInt(System.Byte[])
+  name.vb: DecodeInt(Byte())
+  fullName: chia.dotnet.bls.ByteUtils.DecodeInt(byte[])
+  fullName.vb: chia.dotnet.bls.ByteUtils.DecodeInt(Byte())
+  nameWithType: ByteUtils.DecodeInt(byte[])
+  nameWithType.vb: ByteUtils.DecodeInt(Byte())
+- uid: chia.dotnet.bls.ByteUtils.DecodeInt*
+  name: DecodeInt
+  href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_DecodeInt_
+  commentId: Overload:chia.dotnet.bls.ByteUtils.DecodeInt
+  isSpec: "True"
+  fullName: chia.dotnet.bls.ByteUtils.DecodeInt
+  nameWithType: ByteUtils.DecodeInt
 - uid: chia.dotnet.bls.ByteUtils.EncodeBigInt(System.Numerics.BigInteger)
   name: EncodeBigInt(BigInteger)
   href: api/chia.dotnet.bls.ByteUtils.html#chia_dotnet_bls_ByteUtils_EncodeBigInt_System_Numerics_BigInteger_
