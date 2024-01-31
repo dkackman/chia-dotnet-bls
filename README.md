@@ -15,8 +15,9 @@ This is a direct port of the [chia bls typescript library](https://github.com/Ch
 ## See Also
 
 - [Documentation](https://dkackman.github.io/chia-dotnet-bls/)
-- [chia-blockchain](https://chia.net)
 - [chia-dotnet](https://www.nuget.org/packages/chia-dotnet/)
+- [chia-dotnet-clvm](https://www.nuget.org/packages/chia-dotnet-clvm/)
+- [chia-blockchain](https://chia.net)
 - [dotnetstandard-bip39](https://www.nuget.org/packages/dotnetstandard-bip39/)
 
 ## Example Usage
