@@ -226,13 +226,16 @@ public static partial class ByteUtils
             }
         }
 
-        if (signed && bytes.Length == 8 && (bytes[^1] & 0x80) != 0)
+        // Check if the number should be treated as signed and adjust accordingly
+        if (signed && (bytes[0] & 0x80) != 0)
         {
-            result |= -1L ^ ((1L << (bytes.Length * 8)) - 1);
+            // Apply sign extension
+            result |= -1L << (bytes.Length * 8);
         }
 
         return result;
     }
+
 
     /// <summary>
     /// Converts a BigInteger to a byte array.

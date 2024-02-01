@@ -30,4 +30,11 @@ public class ByteUtilsTests
         var i300 = ByteUtils.DecodeInt([1, 44]);
         Assert.Equal(300, i300);
     }
+
+    [Fact]
+    public void TwoFiftyFour()
+    {
+        var result = ByteUtils.DecodeInt([254]);
+        Assert.Equal(-2, result);
+    }
 }
