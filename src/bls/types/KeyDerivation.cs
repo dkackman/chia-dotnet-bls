@@ -3,7 +3,6 @@ using System.Globalization;
 
 namespace chia.dotnet.bls;
 
-
 /// <summary>
 /// Provides methods for key derivation in the BLS cryptography library.
 /// </summary>
@@ -96,7 +95,7 @@ public static class KeyDerivation
     /// <param name="index">The index of the derived key.</param>
     /// <param name="hardened">Indicates if the derivation should be hardened.</param>
     /// <returns>The derived private key.</returns>
-    public static PrivateKey DerivePrivateKey(this PrivateKey masterPrivateKey, int index, bool hardened) => DerivePrivateKeyPath(masterPrivateKey, new int[] { 12381, 8444, 2, index }, hardened);
+    public static PrivateKey DerivePrivateKey(this PrivateKey masterPrivateKey, int index, bool hardened) => DerivePrivateKeyPath(masterPrivateKey, [12381, 8444, 2, index], hardened);
 
     /// <summary>
     /// Derives a public key from the given master public key.
@@ -104,5 +103,5 @@ public static class KeyDerivation
     /// <param name="masterPublicKey">The master public key.</param>
     /// <param name="index">The index of the derived key.</param>
     /// <returns>The derived public key.</returns>
-    public static JacobianPoint DerivePublicKeyWallet(this JacobianPoint masterPublicKey, int index) => DerivePublicKeyPath(masterPublicKey, new int[] { 12381, 8444, 2, index });
+    public static JacobianPoint DerivePublicKeyWallet(this JacobianPoint masterPublicKey, int index) => DerivePublicKeyPath(masterPublicKey, [12381, 8444, 2, index]);
 }

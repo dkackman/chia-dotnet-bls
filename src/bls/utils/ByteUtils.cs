@@ -30,7 +30,7 @@ public static partial class ByteUtils
     /// </summary>
     /// <param name="value">The BigInteger value.</param>
     /// <returns>The number of bits required to represent the BigInteger.</returns>
-    public static int IntBitLength(long value)
+    public static int IntBitLength(this long value)
     {
         if (value == 0)
         {
@@ -51,7 +51,7 @@ public static partial class ByteUtils
     /// </summary>
     /// <param name="value">The BigInteger value.</param>
     /// <returns>The number of bits required to represent the BigInteger.</returns>
-    public static long BigIntBitLength(BigInteger value) => value == 0 ? 0 : value.GetBitLength();
+    public static long BigIntBitLength(this BigInteger value) => value == 0 ? 0 : value.GetBitLength();
 
     /// <summary>
     /// Converts a string to a byte array using UTF-8 encoding.
