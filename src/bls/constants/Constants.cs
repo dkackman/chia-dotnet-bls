@@ -8,12 +8,12 @@ internal static class Constants
     public static readonly BigInteger Q = BigInteger.Parse("01a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab", NumberStyles.AllowHexSpecifier);
     public static readonly byte[] SignatureKeygenSalt = "BLS-SIG-KEYGEN-SALT-".ToBytes();
 
-    public static readonly Fq FqNegativeOne = new(Q, -1);
-    public static readonly Fq FqZero = new(Q, 0);
-    public static readonly Fq FqOne = new(Q, 1);
+    public static readonly Fq FqNegativeOne = new(Q, BigInteger.MinusOne);
+    public static readonly Fq FqZero = new(Q, BigInteger.Zero);
+    public static readonly Fq FqOne = new(Q, BigInteger.One);
     public static readonly Fq FqFour = new(Q, 4);
     public static Fq2 Fq2Zero = new(Q, FqZero, FqZero);
-    public static readonly BigInteger X = -1 * BigInteger.Parse("0d201000000010000", NumberStyles.AllowHexSpecifier);
+    public static readonly BigInteger X = BigInteger.MinusOne * BigInteger.Parse("0d201000000010000", NumberStyles.AllowHexSpecifier);
     public static readonly Fq A = FqZero;
     public static readonly Fq B = FqFour;
     public static readonly Fq2 ATwist = new(Q, FqZero, FqZero);

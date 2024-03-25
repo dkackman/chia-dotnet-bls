@@ -34,7 +34,7 @@ public class ElementsTests
         x2 = g1.Multiply(b2);
         y1 = g2.Multiply(b1);
         y2 = g2.Multiply(b2);
-        pair = Pairing.AtePairing(x1, y1);
+        pair = Pairing.AtePairing(x1, y1, Constants.DefaultEc);
         sk = BigInteger.Parse("728934712938472938472398074");
         pk = g1.Multiply(sk);
         Hm = y2
@@ -102,13 +102,13 @@ public class ElementsTests
     [Fact]
     public void AteInequalityX()
     {
-        Assert.False(pair.Equals(Pairing.AtePairing(x2, y1)));
+        Assert.False(pair.Equals(Pairing.AtePairing(x2, y1, Constants.DefaultEc)));
     }
 
     [Fact]
     public void AteInequalityY()
     {
-        Assert.False(pair.Equals(Pairing.AtePairing(x1, y2)));
+        Assert.False(pair.Equals(Pairing.AtePairing(x1, y2, Constants.DefaultEc)));
     }
 
     [Fact]
@@ -121,6 +121,6 @@ public class ElementsTests
     [Fact]
     public void AteEquality()
     {
-        Assert.True(Pairing.AtePairing(g1, sig).Equals(Pairing.AtePairing(pk, Hm)));
+        Assert.True(Pairing.AtePairing(g1, sig, Constants.DefaultEc).Equals(Pairing.AtePairing(pk, Hm, Constants.DefaultEc)));
     }
 }

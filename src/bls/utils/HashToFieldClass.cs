@@ -6,7 +6,7 @@ internal static class HashToFieldClass
 {
     public static byte[] I2OSP(BigInteger value, int length)
     {
-        if (value < 0 || value >= BigInteger.One << (8 * length))
+        if (value < BigInteger.Zero || value >= BigInteger.One << (8 * length))
         {
             throw new Exception($"Bad I2OSP call: value={value}, length={length}.");
         }
@@ -46,7 +46,7 @@ internal static class HashToFieldClass
         }
     }
 
-    // this method is a performance hotspot so it has optimizations
+    // this method is a performance hot spot so it has optimizations
     public static byte[] ExpandMessageXmd(byte[] message, byte[] dst, int length, HashInfo hash)
     {
         var ell = (length + hash.ByteSize - 1) / hash.ByteSize;
@@ -61,9 +61,9 @@ internal static class HashToFieldClass
         dst_prime[dst.Length] = (byte)dst.Length; // Assuming I2OSP returns a single byte for length
 
         // Preallocate buffer for Z_pad, lib_str, and single byte values
-        byte[] Z_pad = I2OSP(0, hash.BlockSize);
+        byte[] Z_pad = I2OSP(BigInteger.Zero, hash.BlockSize);
         byte[] lib_str = I2OSP(length, 2);
-        byte[] zeroByte = I2OSP(0, 1);
+        byte[] zeroByte = I2OSP(BigInteger.Zero, 1);
 
         // Calculate the total size needed for the concatenated data
         int totalSize = Z_pad.Length + message.Length + lib_str.Length + zeroByte.Length + dst_prime.Length;
@@ -86,7 +86,7 @@ internal static class HashToFieldClass
 
         byte[] bValues = new byte[ell * hash.ByteSize];
 
-        byte[] concatBuffer = ByteUtils.ConcatenateArrays(b_0, I2OSP(1, 1), dst_prime);
+        byte[] concatBuffer = ByteUtils.ConcatenateArrays(b_0, I2OSP(BigInteger.One, 1), dst_prime);
 
         // Use the concatenated array for hash conversion
         var firstHash = hash.Convert(concatBuffer);

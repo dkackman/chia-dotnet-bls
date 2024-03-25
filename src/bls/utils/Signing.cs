@@ -17,7 +17,8 @@ internal static class Signing
         var q = OptSwu2MapClass.G2Map(message, dst);
         var pairingResult = Pairing.AtePairingMulti(
             [pk, JacobianPoint.GenerateG1().Negate()],
-            [q, signature]
+            [q, signature],
+            Constants.DefaultEc
         );
 
         return pairingResult.Equals(one);
@@ -71,6 +72,6 @@ internal static class Signing
             ps[i + 1] = pks[i];
         }
 
-        return one.Equals(Pairing.AtePairingMulti(ps, qs));
+        return one.Equals(Pairing.AtePairingMulti(ps, qs, Constants.DefaultEc));
     }
 }

@@ -6,7 +6,7 @@ namespace chia.dotnet.bls;
 /// <summary>
 /// Represents a private key used in BLS cryptography.
 /// </summary>
-public class PrivateKey
+public readonly struct PrivateKey
 {
     /// <summary>
     /// The length of the private key in bytes.
@@ -91,21 +91,17 @@ public class PrivateKey
     /// <returns>The G1 point.</returns>
     public JacobianPoint GetG1() => JacobianPoint.GenerateG1().Multiply(Value);
 
-    private byte[]? bytes;
-
     /// <summary>
     /// Converts the private key to a byte array.
     /// </summary>
     /// <returns>The byte array representation of the private key.</returns>
-    public byte[] ToBytes() => bytes ??= Value.BigIntToBytes(Size, Endian.Big);
-
-    private string? hex;
+    public byte[] ToBytes() => Value.BigIntToBytes(Size, Endian.Big);
 
     /// <summary>
     /// Converts the private key to a hexadecimal string.
     /// </summary>
     /// <returns>The hexadecimal string representation of the private key.</returns>
-    public string ToHex() => hex ??= ToBytes().ToHex();
+    public string ToHex() => ToBytes().ToHex();
 
     /// <summary>
     /// Returns a string that represents the current private key.

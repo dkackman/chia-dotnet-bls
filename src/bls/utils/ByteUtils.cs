@@ -143,15 +143,16 @@ public static partial class ByteUtils
 
         int length = (IntBitLength(value) + 8) >> 3;
         byte[] bytes = value.IntToBytes(length, Endian.Big, true);
+        int start = 0;
         while (
-            bytes.Length > 1 &&
-            bytes[0] == ((bytes[1] & 0x80) != 0 ? (byte)0xff : (byte)0)
+            bytes.Length - start > 1 &&
+            bytes[start] == ((bytes[start + 1] & 0x80) != 0 ? (byte)0xff : (byte)0)
         )
         {
-            bytes = bytes.Skip(1).ToArray();
+            start++;
         }
 
-        return bytes;
+        return bytes.AsSpan(start).ToArray();
     }
 
     /// <summary>
@@ -164,20 +165,21 @@ public static partial class ByteUtils
     {
         if (value == BigInteger.Zero)
         {
-            return [];
+            return Array.Empty<byte>();
         }
 
         int length = (int)(BigIntBitLength(value) + 8) >> 3;
         byte[] bytes = value.BigIntToBytes(length, Endian.Big, true);
+        int start = 0;
         while (
-            bytes.Length > 1 &&
-            bytes[0] == ((bytes[1] & 0x80) != 0 ? (byte)0xff : (byte)0)
+            bytes.Length - start > 1 &&
+            bytes[start] == ((bytes[start + 1] & 0x80) != 0 ? (byte)0xff : (byte)0)
         )
         {
-            bytes = bytes.Skip(1).ToArray();
+            start++;
         }
 
-        return bytes;
+        return bytes.AsSpan(start).ToArray();
     }
 
     /// <summary>
@@ -286,23 +288,7 @@ public static partial class ByteUtils
     /// <param name="a">The first byte array.</param>
     /// <param name="b">The second byte array.</param>
     /// <returns>True if the byte arrays are equal, false otherwise.</returns>
-    public static bool BytesEqual(this byte[] a, byte[] b)
-    {
-        if (a.Length != b.Length)
-        {
-            return false;
-        }
-
-        for (int i = 0; i < a.Length; i++)
-        {
-            if (a[i] != b[i])
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
+    public static bool BytesEqual(this byte[] a, byte[] b) => a.AsSpan().SequenceEqual(b.AsSpan());
 
     /// <summary>
     /// Converts a byte array to a hexadecimal string.

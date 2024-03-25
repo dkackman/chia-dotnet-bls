@@ -7,7 +7,7 @@ namespace chia.dotnet.bls;
 /// Represents a point in Jacobian coordinates on an elliptic curve.
 /// It can represent both a PublicKey and a Signature.
 /// </summary>
-public class JacobianPoint
+public readonly struct JacobianPoint
 {
     internal Fq X { get; }
     internal Fq Y { get; }
@@ -29,10 +29,8 @@ public class JacobianPoint
     /// <param name="z">The z-coordinate of the point.</param>
     /// <param name="isInfinity">A flag indicating whether the point is at infinity.</param>
     /// <param name="ec">The elliptic curve associated with the point (optional).</param>
-    internal JacobianPoint(Fq x, Fq y, Fq z, bool isInfinity, EC? ec = null)
+    internal JacobianPoint(Fq x, Fq y, Fq z, bool isInfinity, EC ec)
     {
-        ec ??= Constants.DefaultEc;
-
         Debug.Assert(x.GetType() == y.GetType());
         Debug.Assert(y.GetType() == z.GetType());
         X = x;
@@ -230,12 +228,11 @@ public class JacobianPoint
             );
     }
 
-    private byte[]? bytes;
     /// <summary>
     /// Converts the point to a byte array.
     /// </summary>
     /// <returns>The byte array</returns>
-    public byte[] ToBytes() => bytes ??= ToBytesInternal();
+    public byte[] ToBytes() => ToBytesInternal();
 
     private byte[] ToBytesInternal()
     {
@@ -254,12 +251,11 @@ public class JacobianPoint
         return output;
     }
 
-    private string? hex;
     /// <summary>
     /// Converts the point to a hexadecimal string.
     /// </summary>
     /// <returns>Hex string</returns>
-    public string ToHex() => hex ??= ToBytes().ToHex();
+    public string ToHex() => ToBytes().ToHex();
 
     /// <summary>
     /// Converts the point to a string. This is an alias for <see cref="ToHex"/>.

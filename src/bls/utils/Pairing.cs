@@ -4,10 +4,8 @@ namespace chia.dotnet.bls;
 
 internal static class Pairing
 {
-    public static Fq DoubleLineEval(AffinePoint R, AffinePoint P, EC? ec = null)
+    public static Fq DoubleLineEval(AffinePoint R, AffinePoint P, EC ec)
     {
-        ec ??= Constants.DefaultEc;
-
         var R12 = R.Untwist();
         var slope = new Fq(ec.Q, 3)
             .Multiply(R12.X.Pow(2).Add(ec.A))
@@ -35,10 +33,8 @@ internal static class Pairing
         return P.Y.Subtract(P.X.Multiply(slope)).Subtract(v);
     }
 
-    public static Fq12 MillerLoop(BigInteger T, AffinePoint P, AffinePoint Q, EC? ec = null)
+    public static Fq12 MillerLoop(BigInteger T, AffinePoint P, AffinePoint Q, EC ec)
     {
-        ec ??= Constants.DefaultEc;
-
         var T_bits = ByteUtils.BigIntToBits(T);
         var R = Q;
         var f = Fq12.Nil.One(ec.Q);
@@ -57,10 +53,8 @@ internal static class Pairing
         return (Fq12)f;
     }
 
-    public static Fq12 FinalExponentiation(Fq12 element, EC? ec = null)
+    public static Fq12 FinalExponentiation(Fq12 element, EC ec)
     {
-        ec ??= Constants.DefaultEc;
-
         if (ec.K == 12)
         {
             var ans = element.Pow((BigInteger.Pow(ec.Q, 4) - BigInteger.Pow(ec.Q, 2) + BigInteger.One) / ec.N);
@@ -73,21 +67,17 @@ internal static class Pairing
         return (Fq12)element.Pow((BigInteger.Pow(ec.Q, (int)ec.K) - BigInteger.One) / ec.N);
     }
 
-    public static Fq12 AtePairing(JacobianPoint P, JacobianPoint Q, EC? ec = null)
+    public static Fq12 AtePairing(JacobianPoint P, JacobianPoint Q, EC ec)
     {
-        ec ??= Constants.DefaultEc;
-
         var t = Constants.DefaultEc.X + BigInteger.One;
         var T = t - BigInteger.One;
         T = T < BigInteger.Zero ? -T : T;
 
-        return FinalExponentiation(MillerLoop(T, P.ToAffine(), Q.ToAffine()), ec);
+        return FinalExponentiation(MillerLoop(T, P.ToAffine(), Q.ToAffine(), ec), ec);
     }
 
-    public static Fq12 AtePairingMulti(JacobianPoint[] Ps, JacobianPoint[] Qs, EC? ec = null)
+    public static Fq12 AtePairingMulti(JacobianPoint[] Ps, JacobianPoint[] Qs, EC ec)
     {
-        ec ??= Constants.DefaultEc;
-
         var t = Constants.DefaultEc.X + BigInteger.One;
         var T = t - BigInteger.One;
         T = T < BigInteger.Zero ? -T : T;

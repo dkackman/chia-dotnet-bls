@@ -51,7 +51,8 @@ internal static class PopSchemeMPL
         var one = Fq12.Nil.One(Constants.DefaultEc.Q);
         var pairingResult = Pairing.AtePairingMulti(
             [publicKey, JacobianPoint.GenerateG1().Negate()],
-            [q, proof]
+            [q, proof],
+            Constants.DefaultEc
         );
 
         return pairingResult.Equals(one);

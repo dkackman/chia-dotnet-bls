@@ -4,7 +4,7 @@ namespace chia.dotnet.bls;
 
 internal class Fq(BigInteger q, BigInteger value)
 {
-    public static readonly Fq Nil = new(1, BigInteger.Zero);
+    public static readonly Fq Nil = new(BigInteger.One, BigInteger.Zero);
 
     public virtual int Extension { get; } = 1;
     public BigInteger Value { get; } = ModMath.Mod(value, q);

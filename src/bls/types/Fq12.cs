@@ -4,7 +4,7 @@ namespace chia.dotnet.bls;
 
 internal class Fq12 : Fq6
 {
-    public static readonly new Fq12 Nil = new(1, Fq6.Nil, Fq6.Nil);
+    public static readonly new Fq12 Nil = new(BigInteger.One, Fq6.Nil, Fq6.Nil);
 
     public override int Extension { get; } = 12;
 

@@ -5,8 +5,12 @@ namespace chia.dotnet.bls;
 /// <summary>
 /// Represents an elliptic curve.
 /// </summary>
-internal record EC
+internal readonly struct EC
 {
+    public EC()
+    {
+    }
+
     /// <summary>
     /// Gets or sets the prime order of the curve.
     /// </summary>

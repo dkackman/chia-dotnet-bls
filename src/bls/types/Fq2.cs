@@ -16,11 +16,11 @@ internal class Fq2 : Fq
 
     // used by derived classes that have more than 2 elements
     protected Fq2(BigInteger q, Fq[] elements)
-        : base(q, 0)
+        : base(q, BigInteger.Zero)
     {
         Elements = elements;
         Basefield = Elements.Length > 0 ? Elements[0] : throw new InvalidOperationException("Elements must not be empty.");
-        Root = new Fq(q, -1);
+        Root = new Fq(q, BigInteger.MinusOne);
     }
 
     public Fq2(BigInteger q, Fq x, Fq y)

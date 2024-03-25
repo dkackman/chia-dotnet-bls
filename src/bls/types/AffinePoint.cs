@@ -6,7 +6,7 @@ namespace chia.dotnet.bls;
 /// <summary>
 /// Represents an affine point on an elliptic curve.
 /// </summary>
-public class AffinePoint
+public readonly struct AffinePoint
 {
     /// <summary>
     /// Gets the X-coordinate of the affine point.
@@ -35,9 +35,9 @@ public class AffinePoint
     /// <param name="y">The Y-coordinate of the affine point.</param>
     /// <param name="isInfinity">A value indicating whether the affine point is at infinity.</param>
     /// <param name="ec">The elliptic curve associated with the affine point.</param>
-    internal AffinePoint(Fq x, Fq y, bool isInfinity, EC? ec = null)
+    internal AffinePoint(Fq x, Fq y, bool isInfinity, EC ec)
     {
-        Ec = ec ?? Constants.DefaultEc;
+        Ec = ec;
 
         Debug.Assert(x.GetType() == y.GetType());
         X = x;
@@ -84,6 +84,7 @@ public class AffinePoint
         return new AffinePoint(X.Divide(wsq), Y.Divide(wcu), false, Ec);
     }
 
+
     /// <summary>
     /// Doubles the affine point.
     /// </summary>
@@ -112,7 +113,7 @@ public class AffinePoint
         {
             return value;
         }
-        
+
         if (value.IsInfinity)
         {
             return this;

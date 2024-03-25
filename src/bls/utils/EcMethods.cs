@@ -5,10 +5,8 @@ namespace chia.dotnet.bls;
 
 internal static class EcMethods
 {
-    public static Fq YForX(Fq x, EC? ec = null)
+    public static Fq YForX(Fq x, EC ec)
     {
-        ec ??= Constants.DefaultEc;
-
         var u = x.Multiply(x).Multiply(x).Add(ec.A.Multiply(x)).Add(ec.B);
         var y = u.ModSqrt();
         if (y.Equals(BigInteger.Zero) || !new AffinePoint(x, y, false, ec).IsOnCurve)
@@ -19,10 +17,8 @@ internal static class EcMethods
         return y;
     }
 
-    public static JacobianPoint ScalarMultJacobian(BigInteger value, JacobianPoint point, EC? ec = null)
+    public static JacobianPoint ScalarMultJacobian(BigInteger value, JacobianPoint point, EC ec)
     {
-        ec ??= Constants.DefaultEc;
-
         var pointXOne = point.X.One(ec.Q);
         var result = new JacobianPoint(pointXOne, pointXOne, point.X.Zero(ec.Q), true, ec);
         if (point.IsInfinity || ModMath.Mod(value, ec.Q) == BigInteger.Zero)
@@ -33,7 +29,7 @@ internal static class EcMethods
         var addend = point;
         while (value > BigInteger.Zero)
         {
-            if ((value & 1) == BigInteger.One)
+            if ((value & BigInteger.One) == BigInteger.One)
             {
                 result = result.Add(addend);
             }
@@ -100,20 +96,13 @@ internal static class EcMethods
         return new JacobianPoint(X, Y, Z, P.IsInfinity, ec);
     }
 
-    public static bool SignFq(Fq element, EC? ec = null)
+    public static bool SignFq(Fq element, EC ec) => element.GreaterThan(new Fq(ec.Q, (ec.Q - BigInteger.One) / 2));
+
+    public static bool SignFq2(Fq2 element, EC ec)
     {
-        ec ??= Constants.DefaultEc;
-
-        return element.GreaterThan(new Fq(ec.Q, (ec.Q - BigInteger.One) / 2));
-    }
-
-    public static bool SignFq2(Fq2 element, EC? ec = null)
-    {
-        ec ??= Constants.DefaultEcTwist;
-
         if (element.Elements[1].Equals(new Fq(ec.Q, BigInteger.Zero)))
         {
-            return SignFq(element.Elements[0]);
+            return SignFq(element.Elements[0], ec);
         }
 
         return element.Elements[1].GreaterThan(new Fq(ec.Q, (ec.Q - BigInteger.One) / 2));
