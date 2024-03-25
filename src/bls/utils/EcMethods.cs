@@ -11,7 +11,7 @@ internal static class EcMethods
 
         var u = x.Multiply(x).Multiply(x).Add(ec.A.Multiply(x)).Add(ec.B);
         var y = u.ModSqrt();
-        if (y.Equals(0) || !new AffinePoint(x, y, false, ec).IsOnCurve)
+        if (y.Equals(BigInteger.Zero) || !new AffinePoint(x, y, false, ec).IsOnCurve)
         {
             throw new Exception("No y for point x.");
         }
@@ -25,15 +25,15 @@ internal static class EcMethods
 
         var pointXOne = point.X.One(ec.Q);
         var result = new JacobianPoint(pointXOne, pointXOne, point.X.Zero(ec.Q), true, ec);
-        if (point.IsInfinity || ModMath.Mod(value, ec.Q) == 0)
+        if (point.IsInfinity || ModMath.Mod(value, ec.Q) == BigInteger.Zero)
         {
             return result;
         }
 
         var addend = point;
-        while (value > 0)
+        while (value > BigInteger.Zero)
         {
-            if ((value & 1) == 1)
+            if ((value & 1) == BigInteger.One)
             {
                 result = result.Add(addend);
             }
@@ -58,7 +58,7 @@ internal static class EcMethods
         }
 
         var zPows = new Fq2[maxOrd];
-        zPows[0] = (Fq2)z.Pow(0);
+        zPows[0] = (Fq2)z.Pow(BigInteger.Zero);
         zPows[1] = (Fq2)z.Pow(2);
         for (var i = 2; i < zPows.Length; i++)
         {
@@ -104,18 +104,18 @@ internal static class EcMethods
     {
         ec ??= Constants.DefaultEc;
 
-        return element.GreaterThan(new Fq(ec.Q, (ec.Q - 1) / 2));
+        return element.GreaterThan(new Fq(ec.Q, (ec.Q - BigInteger.One) / 2));
     }
 
     public static bool SignFq2(Fq2 element, EC? ec = null)
     {
         ec ??= Constants.DefaultEcTwist;
 
-        if (element.Elements[1].Equals(new Fq(ec.Q, 0)))
+        if (element.Elements[1].Equals(new Fq(ec.Q, BigInteger.Zero)))
         {
             return SignFq(element.Elements[0]);
         }
 
-        return element.Elements[1].GreaterThan(new Fq(ec.Q, (ec.Q - 1) / 2));
+        return element.Elements[1].GreaterThan(new Fq(ec.Q, (ec.Q - BigInteger.One) / 2));
     }
 }

@@ -79,9 +79,9 @@ internal class Fq2 : Fq
         }
 
         var alpha = a0.Pow(2).Add(a1.Pow(2));
-        var qMinusOneDivideTwo = (Q - 1) / 2;
+        var qMinusOneDivideTwo = (Q - BigInteger.One) / 2;
         var gamma = alpha.Pow(qMinusOneDivideTwo);
-        var FqMinus1 = new Fq(Q, -1);
+        var FqMinus1 = new Fq(Q, BigInteger.MinusOne);
         if (FqMinus1.Equals(gamma))
         {
             throw new Exception("No sqrt exists.");
@@ -128,8 +128,8 @@ internal class Fq2 : Fq
         return result;
     }
 
-    public override Fq Zero(BigInteger q) => FromFq(q, new Fq(q, 0));
-    public override Fq One(BigInteger q) => FromFq(q, new Fq(q, 1));
+    public override Fq Zero(BigInteger q) => FromFq(q, new Fq(q, BigInteger.Zero));
+    public override Fq One(BigInteger q) => FromFq(q, new Fq(q, BigInteger.One));
 
     public override Fq Clone()
     {
@@ -219,9 +219,9 @@ internal class Fq2 : Fq
 
         var result = ((Fq2)One(Q)).WithRoot(Root);
         var baseField = this;
-        while (exponent != 0)
+        while (exponent != BigInteger.Zero)
         {
-            if ((exponent & 1) == 1)
+            if ((exponent & 1) == BigInteger.One)
             {
                 result = result.Multiply(baseField);
             }
@@ -245,10 +245,10 @@ internal class Fq2 : Fq
 
         if (value is Fq2 ext)
         {
-            var basefieldZero = Basefield.Zero(Q);
+            var baseFieldZero = Basefield.Zero(Q);
             for (var i = 0; i < Elements.Length; i++)
             {
-                newElements[i] = Elements[i].Add(i < ext.Elements.Length ? ext.Elements[i] : basefieldZero);
+                newElements[i] = Elements[i].Add(i < ext.Elements.Length ? ext.Elements[i] : baseFieldZero);
             }
         }
         else

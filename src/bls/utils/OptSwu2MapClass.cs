@@ -8,11 +8,11 @@ internal static class OptSwu2MapClass
     private static readonly BigInteger sqrtCandidateExponent = (BigInteger.Pow(Constants.Q, 2) - 9) / 16;
     public static BigInteger Sgn0(Fq2 x)
     {
-        var sign0 = ModMath.Mod(x.Elements[0].Value, 2) == 1;
-        var zero0 = x.Elements[0].Value == 0;
-        var sign1 = ModMath.Mod(x.Elements[1].Value, 2) == 1;
+        var sign0 = ModMath.Mod(x.Elements[0].Value, 2) == BigInteger.One;
+        var zero0 = x.Elements[0].Value == BigInteger.Zero;
+        var sign1 = ModMath.Mod(x.Elements[1].Value, 2) == BigInteger.One;
 
-        return sign0 || (zero0 && sign1) ? 1 : 0;
+        return sign0 || (zero0 && sign1) ? BigInteger.One : BigInteger.Zero;
     }
 
     public static JacobianPoint Osswu2Help(Fq2 t)
@@ -22,7 +22,7 @@ internal static class OptSwu2MapClass
         var numDenCommon = OpSquG2.xi_2.Pow(2).Multiply(t_pow_2.Multiply(t_pow_2)).Add(xi_2_mult_t_pow_2);
         var x0_num = OpSquG2.Ell2p_b.Multiply(numDenCommon.Add(Constants.FqOne));
         var x0_den = OpSquG2.Ell2p_a.Negate().Multiply(numDenCommon);
-        x0_den = x0_den.Equals(0) ? OpSquG2.Ell2p_a.Multiply(OpSquG2.xi_2) : x0_den;
+        x0_den = x0_den.Equals(BigInteger.Zero) ? OpSquG2.Ell2p_a.Multiply(OpSquG2.xi_2) : x0_den;
         var gx0_den = x0_den.Pow(3);
         var gx0_num = OpSquG2.Ell2p_b.Multiply(gx0_den)
             .Add(OpSquG2.Ell2p_a.Multiply(x0_num).Multiply(x0_den.Pow(2)))

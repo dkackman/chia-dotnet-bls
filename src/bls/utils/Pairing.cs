@@ -48,7 +48,7 @@ internal static class Pairing
             var lrr = DoubleLineEval(R, P, ec);
             f = f.Multiply(f).Multiply(lrr);
             R = R.Multiply(FqQ2);
-            if (T_bits[i] == 1)
+            if (T_bits[i] == BigInteger.One)
             {
                 f = f.Multiply(AddLineEval(R, Q, P));
                 R = R.Add(Q);
@@ -63,23 +63,23 @@ internal static class Pairing
 
         if (ec.K == 12)
         {
-            var ans = element.Pow((BigInteger.Pow(ec.Q, 4) - BigInteger.Pow(ec.Q, 2) + 1) / ec.N);
+            var ans = element.Pow((BigInteger.Pow(ec.Q, 4) - BigInteger.Pow(ec.Q, 2) + BigInteger.One) / ec.N);
             ans = ans.QiPower(2).Multiply(ans);
             ans = ans.QiPower(6).Divide(ans);
 
             return (Fq12)ans;
         }
 
-        return (Fq12)element.Pow((BigInteger.Pow(ec.Q, (int)ec.K) - 1) / ec.N);
+        return (Fq12)element.Pow((BigInteger.Pow(ec.Q, (int)ec.K) - BigInteger.One) / ec.N);
     }
 
     public static Fq12 AtePairing(JacobianPoint P, JacobianPoint Q, EC? ec = null)
     {
         ec ??= Constants.DefaultEc;
 
-        var t = Constants.DefaultEc.X + 1;
-        var T = t - 1;
-        T = T < 0 ? -T : T;
+        var t = Constants.DefaultEc.X + BigInteger.One;
+        var T = t - BigInteger.One;
+        T = T < BigInteger.Zero ? -T : T;
 
         return FinalExponentiation(MillerLoop(T, P.ToAffine(), Q.ToAffine()), ec);
     }
@@ -88,9 +88,9 @@ internal static class Pairing
     {
         ec ??= Constants.DefaultEc;
 
-        var t = Constants.DefaultEc.X + 1;
-        var T = t - 1;
-        T = T < 0 ? -T : T;
+        var t = Constants.DefaultEc.X + BigInteger.One;
+        var T = t - BigInteger.One;
+        T = T < BigInteger.Zero ? -T : T;
         var prod = Fq12.Nil.One(ec.Q);
         for (var i = 0; i < Qs.Length; i++)
         {

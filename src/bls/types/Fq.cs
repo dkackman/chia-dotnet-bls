@@ -4,14 +4,14 @@ namespace chia.dotnet.bls;
 
 internal class Fq(BigInteger q, BigInteger value)
 {
-    public static readonly Fq Nil = new(1, 0);
+    public static readonly Fq Nil = new(1, BigInteger.Zero);
 
     public virtual int Extension { get; } = 1;
     public BigInteger Value { get; } = ModMath.Mod(value, q);
     public BigInteger Q { get; } = q;
 
-    public virtual Fq Zero(BigInteger q) => new(q, 0);
-    public virtual Fq One(BigInteger q) => new(q, 1);
+    public virtual Fq Zero(BigInteger q) => new(q, BigInteger.Zero);
+    public virtual Fq One(BigInteger q) => new(q, BigInteger.One);
     public virtual Fq FromBytes(BigInteger q, byte[] bytes)
     {
         if (bytes.Length != 48)
@@ -36,14 +36,14 @@ internal class Fq(BigInteger q, BigInteger value)
 
     public virtual Fq Inverse()
     {
-        BigInteger x0 = 1,
-                   x1 = 0,
-                   y0 = 0,
-                   y1 = 1;
+        BigInteger x0 = BigInteger.One,
+                   x1 = BigInteger.Zero,
+                   y0 = BigInteger.Zero,
+                   y1 = BigInteger.One;
         var a = Q;
         var b = Value;
 
-        while (a != 0)
+        while (a != BigInteger.Zero)
         {
             var q = b / a;
             var tempB = b;
@@ -64,22 +64,22 @@ internal class Fq(BigInteger q, BigInteger value)
 
     public virtual Fq Pow(BigInteger exponent)
     {
-        if (exponent == 0)
+        if (exponent == BigInteger.Zero)
         {
-            return new Fq(Q, 1);
+            return new Fq(Q, BigInteger.One);
         }
 
-        if (exponent == 1)
+        if (exponent == BigInteger.One)
         {
             return this;
         }
 
-        Fq result = new(Q, 1);
+        Fq result = new(Q, BigInteger.One);
         Fq baseValue = this;
 
-        while (exponent > 0)
+        while (exponent > BigInteger.Zero)
         {
-            if (ModMath.Mod(exponent, 2) == 1)
+            if (ModMath.Mod(exponent, 2) == BigInteger.One)
             {
                 result = result.Multiply(baseValue);
             }
@@ -93,13 +93,13 @@ internal class Fq(BigInteger q, BigInteger value)
 
     public virtual Fq ModSqrt()
     {
-        if (Value == 0)
+        if (Value == BigInteger.Zero)
         {
-            return new Fq(Q, 0);
+            return new Fq(Q, BigInteger.Zero);
         }
 
-        var qMinusOneDivideTwo = (Q - 1) / 2;
-        if (BigInteger.ModPow(Value, qMinusOneDivideTwo, Q) != 1)
+        var qMinusOneDivideTwo = (Q - BigInteger.One) / 2;
+        if (BigInteger.ModPow(Value, qMinusOneDivideTwo, Q) != BigInteger.One)
         {
             throw new Exception("No sqrt exists.");
         }
@@ -108,7 +108,7 @@ internal class Fq(BigInteger q, BigInteger value)
         {
             return new Fq(
                 Q,
-                BigInteger.ModPow(Value, (Q + 1) / 4, Q)
+                BigInteger.ModPow(Value, (Q + BigInteger.One) / 4, Q)
             );
         }
 
@@ -121,16 +121,16 @@ internal class Fq(BigInteger q, BigInteger value)
         }
 
         var S = BigInteger.Zero;
-        var q = Q - 1;
-        while (ModMath.Mod(q, 2) == 0)
+        var q = Q - BigInteger.One;
+        while (ModMath.Mod(q, 2) == BigInteger.Zero)
         {
             q /= 2;
             S++;
         }
 
-        BigInteger z = 0;
-        var minusOneModQ = ModMath.Mod(-1, Q);
-        for (BigInteger i = 0; i < Q; i++)
+        BigInteger z = BigInteger.Zero;
+        var minusOneModQ = ModMath.Mod(BigInteger.MinusOne, Q);
+        for (BigInteger i = BigInteger.Zero; i < Q; i++)
         {
             var euler = BigInteger.ModPow(i, qMinusOneDivideTwo, Q);
             if (euler == minusOneModQ)
@@ -143,28 +143,28 @@ internal class Fq(BigInteger q, BigInteger value)
         var M = S;
         var c = BigInteger.ModPow(z, q, Q);
         var t = BigInteger.ModPow(Value, q, Q);
-        var R = BigInteger.ModPow(Value, (q + 1) / 2, Q);
+        var R = BigInteger.ModPow(Value, (q + BigInteger.One) / 2, Q);
         while (true)
         {
-            if (t == 0)
+            if (t == BigInteger.Zero)
             {
-                return new Fq(Q, 0);
+                return new Fq(Q, BigInteger.Zero);
             }
 
-            if (t == 1)
+            if (t == BigInteger.One)
             {
                 return new Fq(Q, R);
             }
 
-            BigInteger i = 0;
+            BigInteger i = BigInteger.Zero;
             var f = t;
-            while (f != 1)
+            while (f != BigInteger.One)
             {
                 f = ModMath.Mod(f * f, Q);
                 i++;
             }
 
-            var b = BigInteger.ModPow(c, BigInteger.ModPow(2, M - i - 1, Q), Q);
+            var b = BigInteger.ModPow(c, BigInteger.ModPow(2, M - i - BigInteger.One, Q), Q);
             M = i;
             c = ModMath.Mod(b * b, Q);
             t = ModMath.Mod(t * c, Q);

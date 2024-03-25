@@ -23,7 +23,7 @@ internal static class HashToFieldClass
 
     private static BigInteger OS2IP(IEnumerable<byte> octets)
     {
-        BigInteger result = 0;
+        BigInteger result = BigInteger.Zero;
         foreach (var octet in octets)
         {
             result <<= 8;

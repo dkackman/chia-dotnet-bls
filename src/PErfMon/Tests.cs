@@ -1,5 +1,6 @@
 ﻿using chia.dotnet.bls;
 using dotnetstandard_bip39;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace PerfMon;
@@ -25,6 +26,20 @@ internal class Tests
         }
     }
 
+    public static void GenerateKeyPairs(int count)
+    {
+        const string MNEMONIC = "flip advice pumpkin price wreck simple lucky bicycle fun lesson warm couple hover legend pass bachelor curve primary hurt wrist pigeon menu order injury";
+        var bip39 = new BIP39();
+        var seed = bip39.MnemonicToSeedHex(MNEMONIC, "");
+        var byteArray = seed.HexStringToByteArray();
+        var privateKey = PrivateKey.FromSeed(byteArray);
+
+        for (var i = 0; i < count; i++)
+        {
+            GenerateKeyPair(privateKey, i);
+        }
+    }
+
     public static void GenerateAndSign(int count)
     {
         for (var i = 0; i < count; i++)
@@ -33,6 +48,15 @@ internal class Tests
         }
         //var signature = AugSchemeMPL.Sign(sk, message);
     }
+
+    private static void GenerateKeyPair(PrivateKey rootPrivateKey, int index)
+    {
+
+        PrivateKey privateKey = KeyDerivation.DerivePrivateKey(rootPrivateKey, index, false);
+        JacobianPoint publicKey = privateKey.GetG1();
+
+    }
+
 
     private static readonly byte[] message = [1, 2, 3, 4, 5];
     private static readonly byte[] seed =
