@@ -19,6 +19,8 @@ public readonly struct JacobianPoint
     public bool IsInfinity { get; }
     internal EC Ec { get; }
 
+    private readonly Fq x_zero;
+    private readonly Fq x_one;
     private static readonly int[] sourceArray = [0x20, 0x60, 0xe0];
 
     /// <summary>
@@ -38,6 +40,8 @@ public readonly struct JacobianPoint
         Z = z;
         IsInfinity = isInfinity;
         Ec = ec;
+        x_zero = X.Zero(Ec.Q);
+        x_one = X.One(Ec.Q);
     }
 
     /// <summary>
@@ -80,9 +84,10 @@ public readonly struct JacobianPoint
             if (bytes.Any(b => b != 0))
                 throw new Exception("Point at infinity, but found non-zero byte.");
 
+            var nilZero = nil.Zero(ec.Q);
             return new AffinePoint(
-                nil.Zero(ec.Q),
-                nil.Zero(ec.Q),
+                nilZero,
+                nilZero,
                 true,
                 ec
             ).ToJacobian();
@@ -104,8 +109,7 @@ public readonly struct JacobianPoint
     /// <param name="hex"></param>
     /// <param name="isExtension"></param>
     /// <returns></returns>
-    public static JacobianPoint FromHex(string hex, bool isExtension) => FromHex(hex, isExtension, Constants.DefaultEc);
-    internal static JacobianPoint FromHex(string hex, bool isExtension, EC ec) => FromBytes(hex.FromHex(), isExtension, ec);
+    public static JacobianPoint FromHex(string hex, bool isExtension) => FromBytes(hex.FromHex(), isExtension, Constants.DefaultEc);
 
     /// <summary>
     /// Creates a JacobianPoint 
@@ -215,7 +219,7 @@ public readonly struct JacobianPoint
     {
         return IsInfinity
             ? new AffinePoint(
-                X.Zero(Ec.Q),
+                x_zero,
                 Y.Zero(Ec.Q),
                 true,
                 Ec
@@ -232,9 +236,7 @@ public readonly struct JacobianPoint
     /// Converts the point to a byte array.
     /// </summary>
     /// <returns>The byte array</returns>
-    public byte[] ToBytes() => ToBytesInternal();
-
-    private byte[] ToBytesInternal()
+    public byte[] ToBytes()
     {
         var point = ToAffine();
         var output = point.X.ToBytes();
@@ -269,21 +271,17 @@ public readonly struct JacobianPoint
     /// <returns><see cref="JacobianPoint"/> </returns>
     public JacobianPoint Double()
     {
-        var zero = X.Zero(Ec.Q);
-        var one = X.One(Ec.Q);
-        if (IsInfinity || Y.Equals(zero))
+        if (IsInfinity || Y.Equals(x_zero))
         {
             return new JacobianPoint(
-                      one,
-                      one,
-                      zero,
+                      x_one,
+                      x_one,
+                      x_zero,
                       true,
                       Ec
                   );
         }
-
-        var two = new Fq(Ec.Q, 2);
-        var three = new Fq(Ec.Q, 3);
+        
         var four = new Fq(Ec.Q, 4);
         var eight = new Fq(Ec.Q, 8);
 
@@ -292,12 +290,12 @@ public readonly struct JacobianPoint
         var Z_4th = Z_sq.Multiply(Z_sq);
         var Y_sq = Y.Multiply(Y);
         var Y_4th = Y_sq.Multiply(Y_sq);
-        var threeXsq = X.Multiply(X).Multiply(three);
+        var threeXsq = X.Multiply(X).Multiply(Ec.Three);
         var M = threeXsq.Add(Ec.A.Multiply(Z_4th));
-        var twoS = S.Multiply(two);
+        var twoS = S.Multiply(Ec.Two);
         var X_p = M.Multiply(M).Subtract(twoS);
         var Y_p = M.Multiply(S.Subtract(X_p)).Subtract(Y_4th.Multiply(eight));
-        var Z_p = Y.Multiply(Z).Multiply(two);
+        var Z_p = Y.Multiply(Z).Multiply(Ec.Two);
 
         return new JacobianPoint(X_p, Y_p, Z_p, false, Ec);
     }
@@ -337,13 +335,10 @@ public readonly struct JacobianPoint
         {
             if (!S1.Equals(S2))
             {
-                var zero = X.Zero(Ec.Q);
-                var one = X.One(Ec.Q);
-
                 return new JacobianPoint(
-                    one,
-                    one,
-                    zero,
+                    x_one,
+                    x_one,
+                    x_zero,
                     true,
                     Ec
                 );
@@ -352,13 +347,13 @@ public readonly struct JacobianPoint
             return Double();
         }
 
-        var two = new Fq(Ec.Q, 2);
         var H = U2.Subtract(U1);
         var R = S2.Subtract(S1);
         var H_sq = H.Multiply(H);
         var U1H_sq = U1.Multiply(H_sq);
         var H_cu = H.Multiply(H_sq);
-        var X3 = R.Multiply(R).Subtract(H_cu).Subtract(U1H_sq.Multiply(two));
+
+        var X3 = R.Multiply(R).Subtract(H_cu).Subtract(U1H_sq.Multiply(Ec.Two));
         var Y3 = R.Multiply(U1H_sq.Subtract(X3)).Subtract(S1.Multiply(H_cu));
         var Z3 = H.Multiply(Z).Multiply(value.Z);
 

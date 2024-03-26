@@ -75,4 +75,7 @@ internal readonly struct EC
     /// Gets or sets the square root of (N^3 - 1) / 2.
     /// </summary>
     public BigInteger SqrtN3m1o2 { get; init; }
+
+    public Fq Two { get; init; } = Fq.Nil;
+    public Fq Three { get; init; } = Fq.Nil;
 }

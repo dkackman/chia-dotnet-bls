@@ -51,6 +51,8 @@ internal static class Constants
         K = K,
         SqrtN3 = SqrtN3,
         SqrtN3m1o2 = SqrtN3m1o2,
+        Two = new Fq(Q, 2),
+        Three = new Fq(Q, 3)
     };
 
     public static readonly EC DefaultEcTwist = new()
@@ -68,5 +70,7 @@ internal static class Constants
         K = K,
         SqrtN3 = SqrtN3,
         SqrtN3m1o2 = SqrtN3m1o2,
+        Two = new Fq(Q, 2),
+        Three = new Fq(Q, 3)
     };
 }

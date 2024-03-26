@@ -91,8 +91,8 @@ public readonly struct AffinePoint
     /// <returns>The doubled affine point.</returns>
     public AffinePoint Double()
     {
-        var left = X.Multiply(X).Multiply(new Fq(Ec.Q, 3)).Add(Ec.A);
-        var s = left.Divide(Y.Multiply(new Fq(Ec.Q, 2)));
+        var left = X.Multiply(X).Multiply(Ec.Three).Add(Ec.A);
+        var s = left.Divide(Y.Multiply(Ec.Two));
         var newX = s.Multiply(s).Subtract(X).Subtract(X);
         var newY = s.Multiply(X.Subtract(newX)).Subtract(Y);
 
