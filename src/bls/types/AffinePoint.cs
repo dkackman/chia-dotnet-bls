@@ -61,25 +61,14 @@ public readonly struct AffinePoint
     /// Twists the affine point.
     /// </summary>
     /// <returns>The twisted affine point.</returns>
-    public AffinePoint Twist()
-    {
-        var wcu = new Fq12(Ec.Q, Ec.NilZero, (Fq6)Ec.NilOne.Root);
-
-        return new AffinePoint(X.Multiply(Ec.Wsq), Y.Multiply(wcu), false, Ec);
-    }
+    public AffinePoint Twist() => new(X.Multiply(Ec.Wsq), Y.Multiply(Ec.Wcu), false, Ec);
 
     /// <summary>
     /// Untwists the affine point.
     /// </summary>
     /// <returns>The untwisted affine point.</returns>
-    public AffinePoint Untwist()
-    {
-        var wcu = new Fq12(Ec.Q, Ec.NilZero, (Fq6)Ec.NilOne.Root);
-
-        return new AffinePoint(X.Divide(Ec.Wsq), Y.Divide(wcu), false, Ec);
-    }
-
-
+    public AffinePoint Untwist() => new(X.Divide(Ec.Wsq), Y.Divide(Ec.Wcu), false, Ec);
+    
     /// <summary>
     /// Doubles the affine point.
     /// </summary>

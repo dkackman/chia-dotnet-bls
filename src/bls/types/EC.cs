@@ -85,4 +85,5 @@ internal readonly struct EC
     public Fq12 NilOne { get; init; } = Fq12.Nil;
     public Fq6 NilZero { get; init; } = Fq6.Nil;
     public Fq12 Wsq { get; init; } = Fq12.Nil;
+    public Fq12 Wcu { get; init; } = Fq12.Nil;
 }

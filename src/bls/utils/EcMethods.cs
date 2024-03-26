@@ -84,9 +84,11 @@ internal static class EcMethods
         Debug.Assert(mapCoeffs[1].Length + 1 == mapCoeffs[0].Length);
         Debug.Assert(zPows[1] != null);
         Debug.Assert(mapValues[1] != null);
+
         mapValues[1] = (Fq2)mapValues[1].Multiply(zPows[1]);
         Debug.Assert(mapValues[2] != null);
         Debug.Assert(mapValues[3] != null);
+
         mapValues[2] = (Fq2)mapValues[2].Multiply(y);
         mapValues[3] = (Fq2)mapValues[3].Multiply(z.Pow(3));
         var Z = mapValues[1].Multiply(mapValues[3]);
@@ -96,7 +98,21 @@ internal static class EcMethods
         return new JacobianPoint(X, Y, Z, P.IsInfinity, ec);
     }
 
+    private readonly static IFq signFq = new Fq(Constants.Q, (Constants.Q - BigInteger.One) / 2);
+
+    public static bool SignFq(IFq element) => element.GreaterThan(signFq);
+
     public static bool SignFq(IFq element, EC ec) => element.GreaterThan(new Fq(ec.Q, (ec.Q - BigInteger.One) / 2));
+
+    public static bool SignFq2(Fq2 element)
+    {
+        if (element.Elements[1].Equals(new Fq(Constants.Q, BigInteger.Zero)))
+        {
+            return SignFq(element.Elements[0]);
+        }
+
+        return element.Elements[1].GreaterThan(signFq);
+    }
 
     public static bool SignFq2(Fq2 element, EC ec)
     {

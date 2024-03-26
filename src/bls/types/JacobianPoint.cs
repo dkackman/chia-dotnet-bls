@@ -99,7 +99,7 @@ public readonly struct JacobianPoint
         var x = nil.FromBytes(ec.Q, bytes);
         var yValue = EcMethods.YForX(x, ec);
         var sign = isExtension
-            ? EcMethods.SignFq2((Fq2)yValue, ec)
+            ? EcMethods.SignFq2((Fq2)yValue)
             : EcMethods.SignFq(yValue, ec);
         var y = sign == signed ? yValue : yValue.Negate();
 
@@ -251,21 +251,18 @@ public readonly struct JacobianPoint
     /// </summary>
     /// <returns><see cref="AffinePoint"/> </returns>
     ///     
-    public AffinePoint ToAffine() => IsInfinity
-            ? new AffinePoint(
-                x_zero,
-                Y.Zero(Ec.Q),
-                true,
-                Ec
-            )
-            : new AffinePoint(
-                X.Divide(Z.Pow(2)),
-                Y.Divide(Z.Pow(3)),
-                false,
-                Ec
-            );
-
-
+    public AffinePoint ToAffine() => IsInfinity ? new AffinePoint(
+                                                        x_zero,
+                                                        Y.Zero(Ec.Q),
+                                                        true,
+                                                        Ec
+                                                    )
+                                                    : new AffinePoint(
+                                                        X.Divide(Z.Pow(2)),
+                                                        Y.Divide(Z.Pow(3)),
+                                                        false,
+                                                        Ec
+                                                    );
 
     /// <summary>
     /// Converts the point to a byte array.
@@ -282,7 +279,7 @@ public readonly struct JacobianPoint
             return bytes;
         }
 
-        var sign = point.Y is Fq2 fq ? EcMethods.SignFq2(fq, Ec) : EcMethods.SignFq(point.Y, Ec);
+        var sign = point.Y is Fq2 fq ? EcMethods.SignFq2(fq, Ec) : EcMethods.SignFq(point.Y);
         output[0] |= (byte)(sign ? 0xa0 : 0x80);
 
         return output;
@@ -316,11 +313,11 @@ public readonly struct JacobianPoint
                       Ec
                   );
         }
-
-        var S = X.Multiply(Y).Multiply(Y).Multiply(four);
+        var Y_sq = Y.Multiply(Y);
+        var S = X.Multiply(Y_sq).Multiply(four);
         var Z_sq = Z.Multiply(Z);
         var Z_4th = Z_sq.Multiply(Z_sq);
-        var Y_sq = Y.Multiply(Y);
+
         var Y_4th = Y_sq.Multiply(Y_sq);
         var threeXsq = X.Multiply(X).Multiply(Ec.Three);
         var M = threeXsq.Add(Ec.A.Multiply(Z_4th));
