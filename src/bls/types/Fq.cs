@@ -24,11 +24,8 @@ internal class Fq(BigInteger q, BigInteger value)
     public virtual Fq FromHex(BigInteger q, string hex) => Nil.FromBytes(q, hex.FromHex());
     public virtual Fq FromFq(BigInteger q, Fq fq) => fq;
     public virtual Fq Clone() => new(Q, Value);
-
-    private byte[]? bytes;
-    public virtual byte[] ToBytes() => bytes ??= Value.BigIntToBytes(48, Endian.Big);
-    private string? hex;
-    public virtual string ToHex() => hex ??= ToBytes().ToHex();
+    public virtual byte[] ToBytes() => Value.BigIntToBytes(48, Endian.Big);
+    public virtual string ToHex() => ToBytes().ToHex();
     public override string ToString() => ToHex();
     public virtual bool ToBool() => true;
 

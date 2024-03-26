@@ -43,12 +43,13 @@ public readonly struct AffinePoint
         X = x;
         Y = y;
         IsInfinity = isInfinity;
+        IsOnCurve = IsInfinity || Y.Multiply(Y).Equals(X.Multiply(X).Multiply(X).Add(Ec.A.Multiply(X)).Add(Ec.B));
     }
 
     /// <summary>
     /// Gets a value indicating whether the affine point is on the curve.
     /// </summary>
-    public bool IsOnCurve => IsInfinity || Y.Multiply(Y).Equals(X.Multiply(X).Multiply(X).Add(Ec.A.Multiply(X)).Add(Ec.B));
+    public bool IsOnCurve { get; init; } //=> IsInfinity || Y.Multiply(Y).Equals(X.Multiply(X).Multiply(X).Add(Ec.A.Multiply(X)).Add(Ec.B));
 
     /// <summary>
     /// Converts the affine point to its Jacobian representation.
@@ -62,12 +63,9 @@ public readonly struct AffinePoint
     /// <returns>The twisted affine point.</returns>
     public AffinePoint Twist()
     {
-        var one = (Fq12)Fq12.Nil.One(Ec.Q);
-        var zero = (Fq6)Fq6.Nil.Zero(Ec.Q);
-        var wsq = new Fq12(Ec.Q, (Fq6)one.Root, zero);
-        var wcu = new Fq12(Ec.Q, zero, (Fq6)one.Root);
+        var wcu = new Fq12(Ec.Q, Ec.NilZero, (Fq6)Ec.NilOne.Root);
 
-        return new AffinePoint(X.Multiply(wsq), Y.Multiply(wcu), false, Ec);
+        return new AffinePoint(X.Multiply(Ec.Wsq), Y.Multiply(wcu), false, Ec);
     }
 
     /// <summary>
@@ -76,12 +74,9 @@ public readonly struct AffinePoint
     /// <returns>The untwisted affine point.</returns>
     public AffinePoint Untwist()
     {
-        var one = (Fq12)Fq12.Nil.One(Ec.Q);
-        var zero = (Fq6)Fq6.Nil.Zero(Ec.Q);
-        var wsq = new Fq12(Ec.Q, (Fq6)one.Root, zero);
-        var wcu = new Fq12(Ec.Q, zero, (Fq6)one.Root);
+        var wcu = new Fq12(Ec.Q, Ec.NilZero, (Fq6)Ec.NilOne.Root);
 
-        return new AffinePoint(X.Divide(wsq), Y.Divide(wcu), false, Ec);
+        return new AffinePoint(X.Divide(Ec.Wsq), Y.Divide(wcu), false, Ec);
     }
 
 

@@ -76,6 +76,13 @@ internal readonly struct EC
     /// </summary>
     public BigInteger SqrtN3m1o2 { get; init; }
 
+    //
+    // These are all precomputed in the constants file.
+    //
     public Fq Two { get; init; } = Fq.Nil;
     public Fq Three { get; init; } = Fq.Nil;
+
+    public Fq12 NilOne { get; init; } = Fq12.Nil;
+    public Fq6 NilZero { get; init; } = Fq6.Nil;
+    public Fq12 Wsq { get; init; } = Fq12.Nil;
 }

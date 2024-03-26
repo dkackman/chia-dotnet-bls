@@ -143,7 +143,9 @@ internal class Fq2 : Fq
         return ConstructWithRoot(Q, clonedElements);
     }
 
-    private byte[] ToBytesInternal()
+    public override bool ToBool() => Elements.All(element => element.ToBool());
+
+    public override byte[] ToBytes()
     {
         var totalSize = Elements.Sum(element => element.ToBytes().Length);
         var bytes = new byte[totalSize];
@@ -160,13 +162,7 @@ internal class Fq2 : Fq
         return bytes;
     }
 
-    public override bool ToBool() => Elements.All(element => element.ToBool());
-
-    private byte[]? _bytes;
-    public override byte[] ToBytes() => _bytes ??= ToBytesInternal();
-
-    private string? _hex;
-    public override string ToHex() => _hex ??= ToBytes().ToHex();
+    public override string ToHex() => ToBytes().ToHex();
 
     public override string ToString() => ToHex();
 
@@ -263,7 +259,6 @@ internal class Fq2 : Fq
 
         return ConstructWithRoot(Q, newElements);
     }
-
 
     public override Fq Add(BigInteger value)
     {
@@ -401,7 +396,6 @@ internal class Fq2 : Fq
         return value.Equals(this);
     }
 
-
     public override bool Equals(BigInteger value)
     {
         // Check if the first element is equal to the value
@@ -422,6 +416,7 @@ internal class Fq2 : Fq
 
         return true;
     }
+
     public override bool LessThan(Fq value)
     {
         var valueElements = ((Fq2)value).Elements;

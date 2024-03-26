@@ -52,7 +52,10 @@ internal static class Constants
         SqrtN3 = SqrtN3,
         SqrtN3m1o2 = SqrtN3m1o2,
         Two = new Fq(Q, 2),
-        Three = new Fq(Q, 3)
+        Three = new Fq(Q, 3),
+        NilOne = (Fq12)Fq12.Nil.One(Q),
+        NilZero = (Fq6)Fq6.Nil.Zero(Q),
+        Wsq = new Fq12(Q, (Fq6)((Fq12)Fq12.Nil.One(Q)).Root, (Fq6)Fq6.Nil.Zero(Q)),
     };
 
     public static readonly EC DefaultEcTwist = new()
@@ -71,6 +74,9 @@ internal static class Constants
         SqrtN3 = SqrtN3,
         SqrtN3m1o2 = SqrtN3m1o2,
         Two = new Fq(Q, 2),
-        Three = new Fq(Q, 3)
+        Three = new Fq(Q, 3),
+        NilOne = (Fq12)Fq12.Nil.One(Q),
+        NilZero = (Fq6)Fq6.Nil.Zero(Q),
+        Wsq = new Fq12(Q, (Fq6)((Fq12)Fq12.Nil.One(Q)).Root, (Fq6)Fq6.Nil.Zero(Q)),
     };
 }
