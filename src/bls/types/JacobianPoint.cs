@@ -128,7 +128,7 @@ public readonly struct JacobianPoint
     /// </summary>
     /// <param name="isExtension"></param>
     /// <returns></returns>
-    public static JacobianPoint InfinityG1(bool isExtension = false)
+    public static JacobianPoint InfinityG1(bool isExtension)
     {
         var nil = isExtension ? Fq2.Nil : Fq.Nil;
 
@@ -143,14 +143,46 @@ public readonly struct JacobianPoint
     }
 
     /// <summary>
+    /// Creates a JacobianPoint at the G1 Infinity point.
+    /// </summary>
+    /// <returns></returns>
+    public static JacobianPoint InfinityG1()
+    {
+        var x = Fq.Nil.Zero(Constants.DefaultEc.Q);
+        return new JacobianPoint(
+            x,
+            x,
+            x,
+            true,
+            Constants.DefaultEc
+        );
+    }
+    /// <summary>
     /// Creates a JacobianPoint at the G2 Infinity point.
     /// </summary>
     /// <param name="isExtension"></param>
     /// <returns></returns>
-    public static JacobianPoint InfinityG2(bool isExtension = true)
+    public static JacobianPoint InfinityG2(bool isExtension)
     {
         var nil = isExtension ? Fq2.Nil : Fq.Nil;
         var x = nil.Zero(Constants.DefaultEcTwist.Q);
+
+        return new JacobianPoint(
+            x,
+            x,
+            x,
+            true,
+            Constants.DefaultEcTwist
+        );
+    }
+
+    /// <summary>
+    /// Creates a JacobianPoint at the G2 Infinity point.
+    /// </summary>
+    /// <returns></returns>
+    public static JacobianPoint InfinityG2()
+    {
+        var x = Fq2.Nil.Zero(Constants.DefaultEcTwist.Q);
 
         return new JacobianPoint(
             x,

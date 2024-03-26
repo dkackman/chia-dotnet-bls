@@ -17,21 +17,21 @@ internal static class HdKeysClass
 
     public static byte[] ParentSkToLamportPk(PrivateKey parentSk, long index)
     {
-        byte[] salt = ByteUtils.IntToBytes(index, 4, Endian.Big);
-        byte[] ikm = parentSk.ToBytes();
+        var salt = ByteUtils.IntToBytes(index, 4, Endian.Big);
+        var ikm = parentSk.ToBytes();
 
         // Optimized notIkm calculation
-        byte[] notIkm = new byte[ikm.Length];
+        var notIkm = new byte[ikm.Length];
         for (var i = 0; i < ikm.Length; i++)
         {
             notIkm[i] = (byte)(ikm[i] ^ 0xff);
         }
 
-        byte[] lamport0 = IkmToLamportSk(ikm, salt);
-        byte[] lamport1 = IkmToLamportSk(notIkm, salt);
+        var lamport0 = IkmToLamportSk(ikm, salt);
+        var lamport1 = IkmToLamportSk(notIkm, salt);
 
         // Preallocate lamportPk array
-        byte[] lamportPk = new byte[255 * 32 * 2]; // Assuming Hmac.Hash256 returns 32 bytes
+        var lamportPk = new byte[255 * 32 * 2]; // Assuming Hmac.Hash256 returns 32 bytes
 
         // Use Span<byte> for slicing
         for (var i = 0; i < 255; i++)
@@ -54,7 +54,7 @@ internal static class HdKeysClass
     public static PrivateKey DeriveChildSkUnhardened(PrivateKey parentSk, long index)
     {
         var bytes = ByteUtils.ConcatenateArrays(parentSk.GetG1().ToBytes(), ByteUtils.IntToBytes(index, 4, Endian.Big));
-        byte[] hash = Hmac.Hash256(bytes);
+        var hash = Hmac.Hash256(bytes);
 
         return PrivateKey.Aggregate([PrivateKey.FromBytes(hash), parentSk]);
     }
@@ -62,7 +62,7 @@ internal static class HdKeysClass
     public static JacobianPoint DeriveChildG1Unhardened(JacobianPoint parentPk, long index)
     {
         var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), ByteUtils.IntToBytes(index, 4, Endian.Big));
-        byte[] hash = Hmac.Hash256(bytes);
+        var hash = Hmac.Hash256(bytes);
 
         return parentPk.Add(JacobianPoint.GenerateG1().Multiply(PrivateKey.FromBytes(hash).Value));
     }
@@ -70,7 +70,7 @@ internal static class HdKeysClass
     public static JacobianPoint DeriveChildG2Unhardened(JacobianPoint parentPk, long index)
     {
         var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), ByteUtils.IntToBytes(index, 4, Endian.Big));
-        byte[] hash = Hmac.Hash256(bytes);
+        var hash = Hmac.Hash256(bytes);
         
         return parentPk.Add(JacobianPoint.GenerateG2().Multiply(PrivateKey.FromBytes(hash).Value));
     }
