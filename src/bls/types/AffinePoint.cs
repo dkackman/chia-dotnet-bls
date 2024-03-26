@@ -145,7 +145,7 @@ public readonly struct AffinePoint
     /// </summary>
     /// <param name="value">The field element.</param>
     /// <returns>The result of the scalar multiplication.</returns>
-    internal AffinePoint Multiply(Fq value) => EcMethods.ScalarMultJacobian(value.Value, ToJacobian(), Ec).ToAffine();
+    internal AffinePoint Multiply(IFq value) => EcMethods.ScalarMultJacobian(value.Value, ToJacobian(), Ec).ToAffine();
 
     /// <summary>
     /// Negates the affine point.
@@ -158,7 +158,7 @@ public readonly struct AffinePoint
     /// </summary>
     /// <param name="value">The object to compare with the current affine point.</param>
     /// <returns><c>true</c> if the specified object is equal to the current affine point; otherwise, <c>false</c>.</returns>
-    public bool Equals(AffinePoint value) => X.Equals(value.X) && Y.Equals(value.Y) && IsInfinity == value.IsInfinity;
+    public bool Equals(AffinePoint value) => IsInfinity == value.IsInfinity && X.Equals(value.X) && Y.Equals(value.Y);
 
     /// <summary>
     /// Creates a new instance that is a copy of the current affine point.

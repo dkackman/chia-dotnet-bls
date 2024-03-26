@@ -9,6 +9,9 @@ namespace chia.dotnet.bls;
 /// </summary>
 public readonly struct JacobianPoint
 {
+    private readonly static IFq four = new Fq(Constants.Q, 4);
+    private readonly static IFq eight = new Fq(Constants.Q, 8);
+
     internal IFq X { get; }
     internal IFq Y { get; }
     internal IFq Z { get; }
@@ -247,9 +250,8 @@ public readonly struct JacobianPoint
     /// Converts the point to an AffinePoint.
     /// </summary>
     /// <returns><see cref="AffinePoint"/> </returns>
-    public AffinePoint ToAffine()
-    {
-        return IsInfinity
+    ///     
+    public AffinePoint ToAffine() => IsInfinity
             ? new AffinePoint(
                 x_zero,
                 Y.Zero(Ec.Q),
@@ -262,7 +264,8 @@ public readonly struct JacobianPoint
                 false,
                 Ec
             );
-    }
+
+
 
     /// <summary>
     /// Converts the point to a byte array.
@@ -313,9 +316,6 @@ public readonly struct JacobianPoint
                       Ec
                   );
         }
-        
-        var four = new Fq(Ec.Q, 4);
-        var eight = new Fq(Ec.Q, 8);
 
         var S = X.Multiply(Y).Multiply(Y).Multiply(four);
         var Z_sq = Z.Multiply(Z);

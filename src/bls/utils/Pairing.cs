@@ -4,12 +4,15 @@ namespace chia.dotnet.bls;
 
 internal static class Pairing
 {
+    private readonly static IFq q_2 = new Fq(Constants.Q, 2);
+    private readonly static IFq Fq12NilOne = Fq12.Nil.One(Constants.Q);
+
     public static IFq DoubleLineEval(AffinePoint R, AffinePoint P, EC ec)
     {
         var R12 = R.Untwist();
         var slope = new Fq(ec.Q, 3)
             .Multiply(R12.X.Pow(2).Add(ec.A))
-            .Divide(R12.Y.Multiply(new Fq(ec.Q, 2)));
+            .Divide(R12.Y.Multiply(q_2));
         var v = R12.Y.Subtract(R12.X.Multiply(slope));
 
         return P.Y.Subtract(P.X.Multiply(slope)).Subtract(v);
@@ -37,13 +40,13 @@ internal static class Pairing
     {
         var T_bits = ByteUtils.BigIntToBits(T);
         var R = Q;
-        var f = Fq12.Nil.One(ec.Q);
-        var FqQ2 = new Fq(ec.Q, 2);
+        var f = Fq12NilOne; //Fq12.Nil.One(ec.Q);
+        //var FqQ2 = new Fq(ec.Q, 2);
         for (var i = 1; i < T_bits.Length; i++)
         {
             var lrr = DoubleLineEval(R, P, ec);
             f = f.Multiply(f).Multiply(lrr);
-            R = R.Multiply(FqQ2);
+            R = R.Multiply(q_2);
             if (T_bits[i] == 1)
             {
                 f = f.Multiply(AddLineEval(R, Q, P));
@@ -81,7 +84,7 @@ internal static class Pairing
         var t = Constants.DefaultEc.X + BigInteger.One;
         var T = t - BigInteger.One;
         T = T < BigInteger.Zero ? -T : T;
-        var prod = Fq12.Nil.One(ec.Q);
+        var prod = Fq12NilOne; //Fq12.Nil.One(ec.Q);
         for (var i = 0; i < Qs.Length; i++)
         {
             prod = prod.Multiply(MillerLoop(T, Ps[i].ToAffine(), Qs[i].ToAffine(), ec));

@@ -48,12 +48,5 @@ internal class Fq6 : Fq2
         );
     }
 
-    public override IFq MulByNonResidue()
-    {
-        var a = Elements[0];
-        var b = Elements[1];
-        var c = Elements[2];
-
-        return new Fq6(Q, (Fq2)c.Multiply(Root), (Fq2)a, (Fq2)b);
-    }
+    public override IFq MulByNonResidue() => new Fq6(Q, (Fq2)Elements[2].Multiply(Root), (Fq2)Elements[0], (Fq2)Elements[1]);    
 }
