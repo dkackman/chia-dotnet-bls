@@ -13,12 +13,12 @@ internal class Fq6 : Fq2
     {
     }
 
-    protected Fq6(BigInteger q, Fq[] elements)
+    protected Fq6(BigInteger q, IFq[] elements)
         : base(q, elements) => Root = new Fq2(q, Fq.Nil.One(q), Fq.Nil.One(q));
 
-    public override Fq Construct(BigInteger q, Fq[] elements) => new Fq6(q, elements);
+    public override IFq Construct(BigInteger q, IFq[] elements) => new Fq6(q, elements);
 
-    public override Fq FromFq(BigInteger q, Fq fq)
+    public override IFq FromFq(BigInteger q, IFq fq)
     {
         var result = base.FromFq(q, fq);
         ((Fq6)result).Root = new Fq2(q, Fq.Nil.One(q), Fq.Nil.One(q));
@@ -26,7 +26,7 @@ internal class Fq6 : Fq2
         return result;
     }
 
-    public override Fq Inverse()
+    public override IFq Inverse()
     {
         var a = Elements[0];
         var b = Elements[1];
@@ -48,7 +48,7 @@ internal class Fq6 : Fq2
         );
     }
 
-    public override Fq MulByNonResidue()
+    public override IFq MulByNonResidue()
     {
         var a = Elements[0];
         var b = Elements[1];

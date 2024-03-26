@@ -9,8 +9,8 @@ public class FieldsTests
     private readonly Fq b;
     private readonly Fq2 c;
     private readonly Fq2 d;
-    private readonly Fq e;
-    private readonly Fq f;
+    private readonly IFq e;
+    private readonly IFq f;
     private readonly Fq6 g;
     private readonly Fq6 h;
     private readonly Fq12 i;

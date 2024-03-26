@@ -11,12 +11,12 @@ public readonly struct AffinePoint
     /// <summary>
     /// Gets the X-coordinate of the affine point.
     /// </summary>
-    internal Fq X { get; }
+    internal IFq X { get; }
 
     /// <summary>
     /// Gets the Y-coordinate of the affine point.
     /// </summary>
-    internal Fq Y { get; }
+    internal IFq Y { get; }
 
     /// <summary>
     /// Gets a value indicating whether the affine point is at infinity.
@@ -35,7 +35,7 @@ public readonly struct AffinePoint
     /// <param name="y">The Y-coordinate of the affine point.</param>
     /// <param name="isInfinity">A value indicating whether the affine point is at infinity.</param>
     /// <param name="ec">The elliptic curve associated with the affine point.</param>
-    internal AffinePoint(Fq x, Fq y, bool isInfinity, EC ec)
+    internal AffinePoint(IFq x, IFq y, bool isInfinity, EC ec)
     {
         Ec = ec;
 

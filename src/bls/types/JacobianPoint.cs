@@ -9,9 +9,9 @@ namespace chia.dotnet.bls;
 /// </summary>
 public readonly struct JacobianPoint
 {
-    internal Fq X { get; }
-    internal Fq Y { get; }
-    internal Fq Z { get; }
+    internal IFq X { get; }
+    internal IFq Y { get; }
+    internal IFq Z { get; }
 
     /// <summary>
     /// A flag indicating whether the point is at infinity.
@@ -19,8 +19,8 @@ public readonly struct JacobianPoint
     public bool IsInfinity { get; }
     internal EC Ec { get; }
 
-    private readonly Fq x_zero;
-    private readonly Fq x_one;
+    private readonly IFq x_zero;
+    private readonly IFq x_one;
     private static readonly int[] sourceArray = [0x20, 0x60, 0xe0];
 
     /// <summary>
@@ -31,7 +31,7 @@ public readonly struct JacobianPoint
     /// <param name="z">The z-coordinate of the point.</param>
     /// <param name="isInfinity">A flag indicating whether the point is at infinity.</param>
     /// <param name="ec">The elliptic curve associated with the point (optional).</param>
-    internal JacobianPoint(Fq x, Fq y, Fq z, bool isInfinity, EC ec)
+    internal JacobianPoint(IFq x, IFq y, IFq z, bool isInfinity, EC ec)
     {
         Debug.Assert(x.GetType() == y.GetType());
         Debug.Assert(y.GetType() == z.GetType());
@@ -132,7 +132,7 @@ public readonly struct JacobianPoint
     {
         var nil = isExtension ? Fq2.Nil : Fq.Nil;
 
-        Fq x = nil.Zero(Constants.DefaultEc.Q);
+        var x = nil.Zero(Constants.DefaultEc.Q);
         return new JacobianPoint(
             x,
             x,

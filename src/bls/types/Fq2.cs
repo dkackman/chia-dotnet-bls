@@ -3,41 +3,43 @@ using System.Numerics;
 namespace chia.dotnet.bls;
 
 /// <summary>
-/// Represents an extension field Fq2, which is an extension of the base field Fq.
+/// Represents an extension field Fq2, which is an extension of the base field IFq.
 /// </summary>
-internal class Fq2 : Fq
+internal class Fq2 : IFq
 {
-    public static readonly new Fq2 Nil = new(BigInteger.One, [Fq.Nil, Fq.Nil]);
+    public static readonly Fq2 Nil = new(BigInteger.One, [Fq.Nil, Fq.Nil]);
 
-    public Fq Root { get; protected set; }
-    public Fq[] Elements { get; }
-    public Fq Basefield { get; }
-    public override int Extension { get; } = 2;
-
+    public IFq Root { get; protected set; }
+    public IFq[] Elements { get; }
+    public IFq Basefield { get; }
+    public virtual int Extension { get; } = 2;
+    public BigInteger Value { get; }
+    public BigInteger Q { get; }
     // used by derived classes that have more than 2 elements
-    protected Fq2(BigInteger q, Fq[] elements)
-        : base(q, BigInteger.Zero)
+    protected Fq2(BigInteger q, IFq[] elements)
     {
+        Q = q;
+        Value = ModMath.Mod(BigInteger.Zero, q);
         Elements = elements;
         Basefield = Elements.Length > 0 ? Elements[0] : throw new InvalidOperationException("Elements must not be empty.");
         Root = new Fq(q, BigInteger.MinusOne);
     }
 
-    public Fq2(BigInteger q, Fq x, Fq y)
+    public Fq2(BigInteger q, IFq x, IFq y)
         : this(q, [x, y])
     {
     }
 
-    public virtual Fq Construct(BigInteger q, Fq[] elements) => new Fq2(q, elements);
-    public Fq ConstructWithRoot(BigInteger q, Fq[] elements) => ((Fq2)Construct(q, elements)).WithRoot(Root);
+    public virtual IFq Construct(BigInteger q, IFq[] elements) => new Fq2(q, elements);
+    public IFq ConstructWithRoot(BigInteger q, IFq[] elements) => ((Fq2)Construct(q, elements)).WithRoot(Root);
 
-    public Fq WithRoot(Fq root)
+    public IFq WithRoot(IFq root)
     {
         Root = root;
         return this;
     }
 
-    public override Fq FromBytes(BigInteger q, byte[] bytes)
+    public IFq FromBytes(BigInteger q, byte[] bytes)
     {
         var length = Extension * 48;
         if (bytes.Length != length)
@@ -46,7 +48,7 @@ internal class Fq2 : Fq
         }
 
         var embeddedSize = 48 * (Extension / Elements.Length);
-        var constructedElements = new Fq[Elements.Length];
+        var constructedElements = new IFq[Elements.Length];
 
         for (var i = 0; i < Elements.Length; i++)
         {
@@ -59,7 +61,7 @@ internal class Fq2 : Fq
         return Construct(q, constructedElements);
     }
 
-    public override Fq Inverse()
+    public virtual IFq Inverse()
     {
         var a = Elements[0];
         var b = Elements[1];
@@ -68,7 +70,7 @@ internal class Fq2 : Fq
         return new Fq2(Q, [a.Multiply(factor), b.Negate().Multiply(factor)]);
     }
 
-    public override Fq ModSqrt()
+    public IFq ModSqrt()
     {
         var a0 = Elements[0];
         var a1 = Elements[1];
@@ -104,14 +106,14 @@ internal class Fq2 : Fq
         return new Fq2(Q, x0, x1);
     }
 
-    public override Fq FromHex(BigInteger q, string hex) => FromBytes(q, hex.FromHex());
+    public IFq FromHex(BigInteger q, string hex) => FromBytes(q, hex.FromHex());
 
-    public override Fq FromFq(BigInteger q, Fq fq)
+    public virtual IFq FromFq(BigInteger q, IFq fq)
     {
         var y = Basefield.FromFq(q, fq);
         var z = Basefield.Zero(q);
 
-        var elements = new Fq[Elements.Length];
+        var elements = new IFq[Elements.Length];
 
         // Directly assign the first element
         elements[0] = y;
@@ -128,12 +130,12 @@ internal class Fq2 : Fq
         return result;
     }
 
-    public override Fq Zero(BigInteger q) => FromFq(q, new Fq(q, BigInteger.Zero));
-    public override Fq One(BigInteger q) => FromFq(q, new Fq(q, BigInteger.One));
+    public IFq Zero(BigInteger q) => FromFq(q, new Fq(q, BigInteger.Zero));
+    public IFq One(BigInteger q) => FromFq(q, new Fq(q, BigInteger.One));
 
-    public override Fq Clone()
+    public IFq Clone()
     {
-        var clonedElements = new Fq[Elements.Length];
+        var clonedElements = new IFq[Elements.Length];
 
         for (var i = 0; i < Elements.Length; i++)
         {
@@ -143,9 +145,9 @@ internal class Fq2 : Fq
         return ConstructWithRoot(Q, clonedElements);
     }
 
-    public override bool ToBool() => Elements.All(element => element.ToBool());
+    public bool ToBool() => Elements.All(element => element.ToBool());
 
-    public override byte[] ToBytes()
+    public byte[] ToBytes()
     {
         var totalSize = Elements.Sum(element => element.ToBytes().Length);
         var bytes = new byte[totalSize];
@@ -162,13 +164,13 @@ internal class Fq2 : Fq
         return bytes;
     }
 
-    public override string ToHex() => ToBytes().ToHex();
+    public string ToHex() => ToBytes().ToHex();
 
     public override string ToString() => ToHex();
 
-    public override Fq Negate()
+    public IFq Negate()
     {
-        var negatedElements = new Fq[Elements.Length];
+        var negatedElements = new IFq[Elements.Length];
 
         for (var i = 0; i < Elements.Length; i++)
         {
@@ -178,7 +180,7 @@ internal class Fq2 : Fq
         return ConstructWithRoot(Q, negatedElements);
     }
 
-    public override Fq QiPower(int i)
+    public IFq QiPower(int i)
     {
         if (Q != Constants.Q)
         {
@@ -192,7 +194,7 @@ internal class Fq2 : Fq
             return this;
         }
 
-        var newElements = new Fq[Elements.Length];
+        var newElements = new IFq[Elements.Length];
         for (var index = 0; index < Elements.Length; index++)
         {
             if (index == 0)
@@ -209,7 +211,7 @@ internal class Fq2 : Fq
         return ConstructWithRoot(Q, newElements);
     }
 
-    public override Fq Pow(BigInteger exponent)
+    public IFq Pow(BigInteger exponent)
     {
         ArgumentOutOfRangeException.ThrowIfNegative(exponent);
 
@@ -222,14 +224,14 @@ internal class Fq2 : Fq
                 result = result.Multiply(baseField);
             }
 
-            baseField = (Fq2)baseField.Multiply(baseField);
+            baseField = (Fq2)baseField.Multiply((IFq)baseField);
             exponent >>= 1;
         }
 
         return result;
     }
 
-    public override Fq Add(Fq value)
+    public IFq Add(IFq value)
     {
         // Use the wider type to do the math
         if (value.Extension > Extension)
@@ -237,7 +239,7 @@ internal class Fq2 : Fq
             return value.Add(this);
         }
 
-        var newElements = new Fq[Elements.Length];
+        var newElements = new IFq[Elements.Length];
 
         if (value is Fq2 ext)
         {
@@ -260,10 +262,10 @@ internal class Fq2 : Fq
         return ConstructWithRoot(Q, newElements);
     }
 
-    public override Fq Add(BigInteger value)
+    public IFq Add(BigInteger value)
     {
         // Assuming Elements array is not empty and its length is known.
-        var newElements = new Fq[Elements.Length];
+        var newElements = new IFq[Elements.Length];
 
         // Directly add value to the first element
         newElements[0] = Elements[0].Add(value);
@@ -277,7 +279,7 @@ internal class Fq2 : Fq
         return ConstructWithRoot(Q, newElements);
     }
 
-    public override Fq Multiply(Fq value)
+    public IFq Multiply(IFq value)
     {
         // use the wider type to do the math
         if (value.Extension > Extension)
@@ -285,7 +287,7 @@ internal class Fq2 : Fq
             return value.Multiply(this);
         }
 
-        var elements = new Fq[Elements.Length];
+        var elements = new IFq[Elements.Length];
         var zfq = Basefield.Zero(Q);
         for (var i = 0; i < Elements.Length; i++)
         {
@@ -327,7 +329,7 @@ internal class Fq2 : Fq
         return ConstructWithRoot(Q, elements);
     }
 
-    public virtual Fq MulByNonResidue()
+    public virtual IFq MulByNonResidue()
     {
         var a = Elements[0];
         var b = Elements[1];
@@ -335,9 +337,9 @@ internal class Fq2 : Fq
         return new Fq2(Q, a.Subtract(b), a.Add(b));
     }
 
-    public override Fq Multiply(BigInteger value)
+    public IFq Multiply(BigInteger value)
     {
-        var newElements = new Fq[Elements.Length];
+        var newElements = new IFq[Elements.Length];
         for (int i = 0; i < Elements.Length; i++)
         {
             newElements[i] = Elements[i].Multiply(value);
@@ -346,16 +348,16 @@ internal class Fq2 : Fq
         return ConstructWithRoot(Q, newElements);
     }
 
-    public override Fq Subtract(BigInteger value) => Add(-value);
-    public override Fq Subtract(Fq value) => Add(value.Negate());
-    public override Fq Divide(BigInteger value) => Multiply(~value);
-    public override Fq Divide(Fq value) => Multiply(value.Inverse());
+    public IFq Subtract(BigInteger value) => Add(-value);
+    public IFq Subtract(IFq value) => Add(value.Negate());
+    public IFq Divide(BigInteger value) => Multiply(~value);
+    public IFq Divide(IFq value) => Multiply(value.Inverse());
 
-    public override bool Equals(Fq value)
+    public bool Equals(IFq value)
     {
         if (value is Fq2 fieldExtValue)
         {
-            if (value.GetType() == GetType())
+            if (value.GetType() == this.GetType())
             {
                 if (Q != value.Q)
                 {
@@ -396,7 +398,7 @@ internal class Fq2 : Fq
         return value.Equals(this);
     }
 
-    public override bool Equals(BigInteger value)
+    public bool Equals(BigInteger value)
     {
         // Check if the first element is equal to the value
         if (!Elements[0].Equals(value))
@@ -417,7 +419,7 @@ internal class Fq2 : Fq
         return true;
     }
 
-    public override bool LessThan(Fq value)
+    public bool LessThan(IFq value)
     {
         var valueElements = ((Fq2)value).Elements;
         for (var i = Elements.Length - 1; i >= 0; i--)
@@ -438,7 +440,7 @@ internal class Fq2 : Fq
         return false;
     }
 
-    public override bool GreaterThan(Fq value)
+    public bool GreaterThan(IFq value)
     {
         var valueElements = ((Fq2)value).Elements;
         for (var i = Elements.Length - 1; i >= 0; i--)
@@ -459,6 +461,6 @@ internal class Fq2 : Fq
         return false;
     }
 
-    public override bool LessThanOrEqual(Fq value) => LessThan(value) || Equals(value);
-    public override bool GreaterThanOrEqual(Fq value) => GreaterThan(value) || Equals(value);
+    public bool LessThanOrEqual(IFq value) => LessThan(value) || Equals(value);
+    public bool GreaterThanOrEqual(IFq value) => GreaterThan(value) || Equals(value);
 }

@@ -7,7 +7,7 @@ public class FrobCoeffsTests
 {
     private readonly BigInteger q = Constants.Q;
     private readonly Fq one;
-    private readonly Fq two;
+    private readonly IFq two;
     private readonly Fq2 a3;
     private readonly Fq6 b3;
     private readonly Fq12 c3;

@@ -4,7 +4,7 @@ namespace chia.dotnet.bls;
 
 internal static class Signing
 {
-    private static readonly Fq one = Fq12.Nil.One(Constants.DefaultEc.Q);
+    private static readonly IFq one = Fq12.Nil.One(Constants.DefaultEc.Q);
     public static JacobianPoint CoreSignMpl(PrivateKey sk, byte[] message, byte[] dst) => OptSwu2MapClass.G2Map(message, dst).Multiply(sk.Value);
 
     public static bool CoreVerifyMpl(JacobianPoint pk, byte[] message, JacobianPoint signature, byte[] dst)

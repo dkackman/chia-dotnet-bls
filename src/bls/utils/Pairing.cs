@@ -4,7 +4,7 @@ namespace chia.dotnet.bls;
 
 internal static class Pairing
 {
-    public static Fq DoubleLineEval(AffinePoint R, AffinePoint P, EC ec)
+    public static IFq DoubleLineEval(AffinePoint R, AffinePoint P, EC ec)
     {
         var R12 = R.Untwist();
         var slope = new Fq(ec.Q, 3)
@@ -15,7 +15,7 @@ internal static class Pairing
         return P.Y.Subtract(P.X.Multiply(slope)).Subtract(v);
     }
 
-    public static Fq AddLineEval(AffinePoint R, AffinePoint Q, AffinePoint P)
+    public static IFq AddLineEval(AffinePoint R, AffinePoint Q, AffinePoint P)
     {
         var R12 = R.Untwist();
         var Q12 = Q.Untwist();

@@ -2,17 +2,17 @@ using System.Numerics;
 
 namespace chia.dotnet.bls;
 
-internal class Fq(BigInteger q, BigInteger value)
+internal class Fq(BigInteger q, BigInteger value) : IFq
 {
-    public static readonly Fq Nil = new(BigInteger.One, BigInteger.Zero);
+    public static readonly IFq Nil = new Fq(BigInteger.One, BigInteger.Zero);
 
-    public virtual int Extension { get; } = 1;
+    public int Extension { get; } = 1;
     public BigInteger Value { get; } = ModMath.Mod(value, q);
     public BigInteger Q { get; } = q;
 
-    public virtual Fq Zero(BigInteger q) => new(q, BigInteger.Zero);
-    public virtual Fq One(BigInteger q) => new(q, BigInteger.One);
-    public virtual Fq FromBytes(BigInteger q, byte[] bytes)
+    public IFq Zero(BigInteger q) => new Fq(q, BigInteger.Zero);
+    public IFq One(BigInteger q) => new Fq(q, BigInteger.One);
+    public IFq FromBytes(BigInteger q, byte[] bytes)
     {
         if (bytes.Length != 48)
         {
@@ -21,17 +21,17 @@ internal class Fq(BigInteger q, BigInteger value)
 
         return new Fq(q, bytes.BytesToBigInt(Endian.Big));
     }
-    public virtual Fq FromHex(BigInteger q, string hex) => Nil.FromBytes(q, hex.FromHex());
-    public virtual Fq FromFq(BigInteger q, Fq fq) => fq;
-    public virtual Fq Clone() => new(Q, Value);
-    public virtual byte[] ToBytes() => Value.BigIntToBytes(48, Endian.Big);
-    public virtual string ToHex() => ToBytes().ToHex();
+    public IFq FromHex(BigInteger q, string hex) => Nil.FromBytes(q, hex.FromHex());
+    public IFq FromFq(BigInteger q, IFq fq) => fq;
+    public IFq Clone() => new Fq(Q, Value);
+    public byte[] ToBytes() => Value.BigIntToBytes(48, Endian.Big);
+    public string ToHex() => ToBytes().ToHex();
     public override string ToString() => ToHex();
-    public virtual bool ToBool() => true;
+    public bool ToBool() => true;
 
-    public virtual Fq Negate() => new(Q, -Value);
+    public IFq Negate() => new Fq(Q, -Value);
 
-    public virtual Fq Inverse()
+    public IFq Inverse()
     {
         BigInteger x0 = BigInteger.One,
                    x1 = BigInteger.Zero,
@@ -57,9 +57,9 @@ internal class Fq(BigInteger q, BigInteger value)
         return new Fq(Q, x0);
     }
 
-    public virtual Fq QiPower(int _i) => this;
+    public IFq QiPower(int _i) => this;
 
-    public virtual Fq Pow(BigInteger exponent)
+    public IFq Pow(BigInteger exponent)
     {
         if (exponent == BigInteger.Zero)
         {
@@ -71,8 +71,8 @@ internal class Fq(BigInteger q, BigInteger value)
             return this;
         }
 
-        Fq result = new(Q, BigInteger.One);
-        Fq baseValue = this;
+        IFq result = new Fq(Q, BigInteger.One);
+        IFq baseValue = this;
 
         while (exponent > BigInteger.Zero)
         {
@@ -88,7 +88,7 @@ internal class Fq(BigInteger q, BigInteger value)
         return result;
     }
 
-    public virtual Fq ModSqrt()
+    public IFq ModSqrt()
     {
         if (Value == BigInteger.Zero)
         {
@@ -169,46 +169,46 @@ internal class Fq(BigInteger q, BigInteger value)
         }
     }
 
-    public virtual Fq Add(BigInteger value) => new(Q, Value + value);
-    public virtual Fq Add(Fq value)
+    public IFq Add(BigInteger value) => new Fq(Q, Value + value);
+    public IFq Add(IFq value)
     {
         // if value is Fq2 or derived from Fq2, then we need to use the Fq2 add
         // which works since addition is transitive
         // this has the effect of also ensuring that the return is the wider type
-        if (value is Fq2) // this works for Fq2 derived types
+        if (value.Extension > Extension)
         {
             return value.Add(this);
         }
 
-        return new(Q, Value + value.Value);
+        return new Fq(Q, Value + value.Value);
     }
 
-    public virtual Fq Multiply(BigInteger value) => new(Q, Value * value);
-    public virtual Fq Multiply(Fq value)
+    public IFq Multiply(BigInteger value) => new Fq(Q, Value * value);
+    public IFq Multiply(IFq value)
     {
         // if value is Fq2 or derived from Fq2, then we need to use the Fq2 multiply
         // which works since multiplication is transitive
         // this has the effect of also ensuring that the return is the wider type
-        if (value is Fq2) // this works for Fq2 derived types
+        if (value.Extension > Extension)
         {
             return value.Multiply(this);
         }
 
-        return new(Q, Value * value.Value);
+        return new Fq(Q, Value * value.Value);
     }
 
-    public virtual bool Equals(BigInteger value) => false;  // the typescript returns false if value is a bigint
-    public virtual bool Equals(Fq value) => Value == value.Value && Q == value.Q;
+    public bool Equals(BigInteger value) => false;  // the typescript returns false if value is a bigint
+    public bool Equals(IFq value) => Value == value.Value && Q == value.Q;
 
-    public virtual Fq Subtract(BigInteger value) => Add(-value);
-    public virtual Fq Subtract(Fq value) => Add(value.Negate());
+    public IFq Subtract(BigInteger value) => Add(-value);
+    public IFq Subtract(IFq value) => Add(value.Negate());
 
-    public virtual Fq Divide(BigInteger value) => Multiply(new Fq(Q, value).Inverse());
-    public virtual Fq Divide(Fq value) => Multiply(value.Inverse());
+    public IFq Divide(BigInteger value) => Multiply(new Fq(Q, value).Inverse());
+    public IFq Divide(IFq value) => Multiply(value.Inverse());
 
-    public virtual bool LessThan(Fq value) => Value < value.Value;
-    public virtual bool GreaterThan(Fq value) => Value > value.Value;
+    public bool LessThan(IFq value) => Value < value.Value;
+    public bool GreaterThan(IFq value) => Value > value.Value;
 
-    public virtual bool LessThanOrEqual(Fq value) => LessThan(value) || Equals(value);
-    public virtual bool GreaterThanOrEqual(Fq value) => GreaterThan(value) || Equals(value);
+    public bool LessThanOrEqual(IFq value) => LessThan(value) || Equals(value);
+    public bool GreaterThanOrEqual(IFq value) => GreaterThan(value) || Equals(value);
 }

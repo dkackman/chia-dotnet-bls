@@ -13,12 +13,12 @@ internal class Fq12 : Fq6
     {
     }
 
-    protected Fq12(BigInteger q, Fq[] elements)
+    protected Fq12(BigInteger q, IFq[] elements)
         : base(q, elements) => Root = new Fq6(q, (Fq2)Fq2.Nil.Zero(q), (Fq2)Fq2.Nil.One(q), (Fq2)Fq2.Nil.Zero(q));
 
-    public override Fq Construct(BigInteger q, Fq[] elements) => new Fq12(q, elements);
+    public override IFq Construct(BigInteger q, IFq[] elements) => new Fq12(q, elements);
 
-    public override Fq FromFq(BigInteger q, Fq fq)
+    public override IFq FromFq(BigInteger q, IFq fq)
     {
         var result = base.FromFq(q, fq);
         ((Fq12)result).Root = new Fq6(q, (Fq2)Fq2.Nil.Zero(q), (Fq2)Fq2.Nil.One(q), (Fq2)Fq2.Nil.Zero(q));
@@ -26,7 +26,7 @@ internal class Fq12 : Fq6
         return result;
     }
 
-    public override Fq Inverse()
+    public override IFq Inverse()
     {
         var a = Elements[0];
         var b = Elements[1];

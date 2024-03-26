@@ -19,22 +19,22 @@ internal readonly struct EC
     /// <summary>
     /// Gets or sets the coefficient 'A' of the curve equation.
     /// </summary>
-    public Fq A { get; init; } = Fq.Nil;
+    public IFq A { get; init; } = Fq.Nil;
 
     /// <summary>
     /// Gets or sets the coefficient 'B' of the curve equation.
     /// </summary>
-    public Fq B { get; init; } = Fq.Nil;
+    public IFq B { get; init; } = Fq.Nil;
 
     /// <summary>
     /// Gets or sets the x-coordinate of the generator point on the curve.
     /// </summary>
-    public Fq Gx { get; init; } = Fq.Nil;
+    public IFq Gx { get; init; } = Fq.Nil;
 
     /// <summary>
     /// Gets or sets the y-coordinate of the generator point on the curve.
     /// </summary>
-    public Fq Gy { get; init; } = Fq.Nil;
+    public IFq Gy { get; init; } = Fq.Nil;
 
     /// <summary>
     /// Gets or sets the x-coordinate of the generator point on the twisted curve.
@@ -79,8 +79,8 @@ internal readonly struct EC
     //
     // These are all precomputed in the constants file.
     //
-    public Fq Two { get; init; } = Fq.Nil;
-    public Fq Three { get; init; } = Fq.Nil;
+    public IFq Two { get; init; } = Fq.Nil;
+    public IFq Three { get; init; } = Fq.Nil;
 
     public Fq12 NilOne { get; init; } = Fq12.Nil;
     public Fq6 NilZero { get; init; } = Fq6.Nil;

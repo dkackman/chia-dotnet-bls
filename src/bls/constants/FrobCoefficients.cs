@@ -5,7 +5,7 @@ namespace chia.dotnet.bls;
 
 internal static class FrobCoefficients
 {
-    private static readonly IReadOnlyDictionary<string, Fq> FrobCoeffs = new Dictionary<string, Fq>
+    private static readonly IReadOnlyDictionary<string, IFq> FrobCoeffs = new Dictionary<string, IFq>
     {
         ["2,1,1"] = Constants.FqNegativeOne,
         ["6,1,1"] = new Fq2(
@@ -244,9 +244,9 @@ internal static class FrobCoefficients
         )
     };
 
-    public static Fq? GetCoefficient(int extension, int i, int index)
+    public static IFq? GetCoefficient(int extension, int i, int index)
     {
-        if (FrobCoeffs.TryGetValue($"{extension},{i},{index}", out Fq? value))
+        if (FrobCoeffs.TryGetValue($"{extension},{i},{index}", out IFq? value))
         {
             return value;
         }

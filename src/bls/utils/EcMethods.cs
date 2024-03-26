@@ -5,7 +5,7 @@ namespace chia.dotnet.bls;
 
 internal static class EcMethods
 {
-    public static Fq YForX(Fq x, EC ec)
+    public static IFq YForX(IFq x, EC ec)
     {
         var u = x.Multiply(x).Multiply(x).Add(ec.A.Multiply(x)).Add(ec.B);
         var y = u.ModSqrt();
@@ -96,7 +96,7 @@ internal static class EcMethods
         return new JacobianPoint(X, Y, Z, P.IsInfinity, ec);
     }
 
-    public static bool SignFq(Fq element, EC ec) => element.GreaterThan(new Fq(ec.Q, (ec.Q - BigInteger.One) / 2));
+    public static bool SignFq(IFq element, EC ec) => element.GreaterThan(new Fq(ec.Q, (ec.Q - BigInteger.One) / 2));
 
     public static bool SignFq2(Fq2 element, EC ec)
     {
