@@ -44,7 +44,7 @@ internal static class Pairing
             var lrr = DoubleLineEval(R, P, ec);
             f = f.Multiply(f).Multiply(lrr);
             R = R.Multiply(FqQ2);
-            if (T_bits[i] == BigInteger.One)
+            if (T_bits[i] == 1)
             {
                 f = f.Multiply(AddLineEval(R, Q, P));
                 R = R.Add(Q);

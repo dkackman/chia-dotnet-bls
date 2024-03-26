@@ -40,7 +40,7 @@ internal class Fq(BigInteger q, BigInteger value) : IFq
         var a = Q;
         var b = Value;
 
-        while (a != BigInteger.Zero)
+        while (!a.IsZero)
         {
             var q = b / a;
             var tempB = b;
@@ -61,22 +61,23 @@ internal class Fq(BigInteger q, BigInteger value) : IFq
 
     public IFq Pow(BigInteger exponent)
     {
-        if (exponent == BigInteger.Zero)
+        if (exponent.IsZero)
         {
             return new Fq(Q, BigInteger.One);
         }
 
-        if (exponent == BigInteger.One)
+        if (exponent.IsOne)
         {
             return this;
         }
 
         IFq result = new Fq(Q, BigInteger.One);
-        IFq baseValue = this;
+        var baseValue = this;
 
         while (exponent > BigInteger.Zero)
         {
-            if (ModMath.Mod(exponent, 2) == BigInteger.One)
+            // don't need the ModMath.Mod here since the exponent is positive(??)
+            if ((exponent % 2).IsOne)
             {
                 result = result.Multiply(baseValue);
             }
@@ -90,13 +91,13 @@ internal class Fq(BigInteger q, BigInteger value) : IFq
 
     public IFq ModSqrt()
     {
-        if (Value == BigInteger.Zero)
+        if (Value.IsZero)
         {
             return new Fq(Q, BigInteger.Zero);
         }
 
         var qMinusOneDivideTwo = (Q - BigInteger.One) / 2;
-        if (BigInteger.ModPow(Value, qMinusOneDivideTwo, Q) != BigInteger.One)
+        if (!BigInteger.ModPow(Value, qMinusOneDivideTwo, Q).IsOne)
         {
             throw new Exception("No sqrt exists.");
         }
@@ -119,15 +120,15 @@ internal class Fq(BigInteger q, BigInteger value) : IFq
 
         var S = BigInteger.Zero;
         var q = Q - BigInteger.One;
-        while (ModMath.Mod(q, 2) == BigInteger.Zero)
+        while (ModMath.Mod(q, 2).IsZero)
         {
             q /= 2;
             S++;
         }
 
-        BigInteger z = BigInteger.Zero;
+        var z = BigInteger.Zero;
         var minusOneModQ = ModMath.Mod(BigInteger.MinusOne, Q);
-        for (BigInteger i = BigInteger.Zero; i < Q; i++)
+        for (var i = BigInteger.Zero; i < Q; i++)
         {
             var euler = BigInteger.ModPow(i, qMinusOneDivideTwo, Q);
             if (euler == minusOneModQ)
@@ -143,19 +144,19 @@ internal class Fq(BigInteger q, BigInteger value) : IFq
         var R = BigInteger.ModPow(Value, (q + BigInteger.One) / 2, Q);
         while (true)
         {
-            if (t == BigInteger.Zero)
+            if (t.IsZero)
             {
                 return new Fq(Q, BigInteger.Zero);
             }
 
-            if (t == BigInteger.One)
+            if (t.IsOne)
             {
                 return new Fq(Q, R);
             }
 
-            BigInteger i = BigInteger.Zero;
+            var i = BigInteger.Zero;
             var f = t;
-            while (f != BigInteger.One)
+            while (!f.IsOne)
             {
                 f = ModMath.Mod(f * f, Q);
                 i++;

@@ -21,7 +21,7 @@ internal static class EcMethods
     {
         var pointXOne = point.X.One(ec.Q);
         var result = new JacobianPoint(pointXOne, pointXOne, point.X.Zero(ec.Q), true, ec);
-        if (point.IsInfinity || ModMath.Mod(value, ec.Q) == BigInteger.Zero)
+        if (point.IsInfinity || ModMath.Mod(value, ec.Q).IsZero)
         {
             return result;
         }
@@ -29,7 +29,7 @@ internal static class EcMethods
         var addend = point;
         while (value > BigInteger.Zero)
         {
-            if ((value & BigInteger.One) == BigInteger.One)
+            if ((value & BigInteger.One).IsOne)
             {
                 result = result.Add(addend);
             }

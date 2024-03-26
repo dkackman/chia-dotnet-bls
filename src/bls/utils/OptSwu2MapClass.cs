@@ -8,9 +8,9 @@ internal static class OptSwu2MapClass
     private static readonly BigInteger sqrtCandidateExponent = (BigInteger.Pow(Constants.Q, 2) - 9) / 16;
     public static BigInteger Sgn0(Fq2 x)
     {
-        var sign0 = ModMath.Mod(x.Elements[0].Value, 2) == BigInteger.One;
-        var zero0 = x.Elements[0].Value == BigInteger.Zero;
-        var sign1 = ModMath.Mod(x.Elements[1].Value, 2) == BigInteger.One;
+        var sign0 = ModMath.Mod(x.Elements[0].Value, 2).IsOne;
+        var zero0 = x.Elements[0].Value.IsZero;
+        var sign1 = ModMath.Mod(x.Elements[1].Value, 2).IsOne;
 
         return sign0 || (zero0 && sign1) ? BigInteger.One : BigInteger.Zero;
     }

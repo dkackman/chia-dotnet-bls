@@ -219,7 +219,7 @@ internal class Fq2 : IFq
         var baseField = this;
         while (exponent != BigInteger.Zero)
         {
-            if ((exponent & 1) == BigInteger.One)
+            if ((exponent & 1).IsOne)
             {
                 result = result.Multiply(baseField);
             }

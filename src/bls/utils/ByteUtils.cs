@@ -51,7 +51,7 @@ public static partial class ByteUtils
     /// </summary>
     /// <param name="value">The BigInteger value.</param>
     /// <returns>The number of bits required to represent the BigInteger.</returns>
-    public static long BigIntBitLength(this BigInteger value) => value == BigInteger.Zero ? 0 : value.GetBitLength();
+    public static long BigIntBitLength(this BigInteger value) => value.IsZero ? 0 : value.GetBitLength();
 
     /// <summary>
     /// Converts a string to a byte array using UTF-8 encoding.
@@ -163,9 +163,9 @@ public static partial class ByteUtils
     /// <returns>The byte array representation of the <see cref="BigInteger"/>.</returns>
     public static byte[] EncodeBigInt(this BigInteger value)
     {
-        if (value == BigInteger.Zero)
+        if (value.IsZero)
         {
-            return Array.Empty<byte>();
+            return [];
         }
 
         int length = (int)(BigIntBitLength(value) + 8) >> 3;
