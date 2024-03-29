@@ -5,8 +5,8 @@ namespace bls.tests;
 
 public class ElementsTests
 {
-    private readonly BigInteger i1 = new byte[] { 1, 2 }.BytesToBigInt(Endian.Big);
-    private readonly BigInteger i2 = new byte[] { 3, 1, 4, 1, 5, 9 }.BytesToBigInt(Endian.Big);
+    private readonly BigInteger i1 = new byte[] { 1, 2 }.ToBigInt(Endian.Big);
+    private readonly BigInteger i2 = new byte[] { 3, 1, 4, 1, 5, 9 }.ToBigInt(Endian.Big);
     private readonly BigInteger b1;
     private readonly BigInteger b2;
     private readonly JacobianPoint g1 = JacobianPoint.GenerateG1();

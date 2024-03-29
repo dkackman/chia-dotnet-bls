@@ -17,20 +17,20 @@ public class ByteUtilsTests
     [InlineData(new byte[] { 0xFF }, Endian.Big, false, 255)] // Positive number, edge case, unsigned
     public void BytesToInt_ShouldCorrectlyConvert(byte[] input, Endian endian, bool signed, long expected)
     {
-        var result = input.BytesToInt(endian, signed);
+        var result = input.ToInt(endian, signed);
         Assert.Equal(expected, result);
     }
 
     [Fact]
     public void EncodeInt()
     {
-        var bytes100 = ByteUtils.EncodeInt(100);
+        var bytes100 = ByteUtils.Encode(100);
         Assert.Equal([100], bytes100);
 
-        var bytes200 = ByteUtils.EncodeInt(200);
+        var bytes200 = ByteUtils.Encode(200);
         Assert.Equal([0, 200], bytes200);
 
-        var bytes300 = ByteUtils.EncodeInt(300);
+        var bytes300 = ByteUtils.Encode(300);
         Assert.Equal([1, 44], bytes300);
     }
 
@@ -57,14 +57,14 @@ public class ByteUtilsTests
     [Fact]
     public void IntBitLength_Zero_ReturnsZero()
     {
-        int result = ByteUtils.IntBitLength(0);
+        int result = ByteUtils.BitLength(0);
         Assert.Equal(0, result);
     }
 
     [Fact]
     public void IntBitLength_PositiveValue_ReturnsCorrectBitLength()
     {
-        int result = ByteUtils.IntBitLength(10);
+        int result = ByteUtils.BitLength(10);
         Assert.Equal(4, result);
     }
 
@@ -72,7 +72,7 @@ public class ByteUtilsTests
     public void BigIntBitLength_Zero_ReturnsZero()
     {
         BigInteger value = BigInteger.Zero;
-        var result = ByteUtils.BigIntBitLength(value);
+        var result = ByteUtils.BitLength(value);
         Assert.Equal(0, result);
     }
 
@@ -81,7 +81,7 @@ public class ByteUtilsTests
     public void BigIntBitLength_PositiveValue_ReturnsCorrectBitLength()
     {
         BigInteger value = new BigInteger(123456789);
-        var result = ByteUtils.BigIntBitLength(value);
+        var result = ByteUtils.BitLength(value);
         Assert.Equal(27, result);
     }
 

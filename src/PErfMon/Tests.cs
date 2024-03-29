@@ -7,6 +7,24 @@ namespace PerfMon;
 
 internal class Tests
 {
+    public static void CalculateSyntheticPublicKey(int count)
+    {
+        const string MNEMONIC = "flip advice pumpkin price wreck simple lucky bicycle fun lesson warm couple hover legend pass bachelor curve primary hurt wrist pigeon menu order injury";
+        var bip39 = new BIP39();
+        var seed = bip39.MnemonicToSeedHex(MNEMONIC, "");
+        var byteArray = seed.HexStringToByteArray();
+        var privateKey = PrivateKey.FromSeed(byteArray);
+        var publicKey = privateKey.GetG1();
+        byte[] hiddenPuzzleHash = "711d6c4e32c92e53179b199484cf8c897542bc57f2b22582799f9d657eec4699".ToHexBytes();
+
+        for (var i = 0; i < count; i++)
+        {
+            publicKey.CalculateSyntheticPublicKey(hiddenPuzzleHash);
+
+        }
+    }
+
+
     public static void Derive(int count)
     {
         const string MNEMONIC = "flip advice pumpkin price wreck simple lucky bicycle fun lesson warm couple hover legend pass bachelor curve primary hurt wrist pigeon menu order injury";
@@ -18,7 +36,6 @@ internal class Tests
         var intermediateKey = AugSchemeMPL.DeriveChildSkUnhardened(privateKey, 8444);
         intermediateKey = AugSchemeMPL.DeriveChildSkUnhardened(privateKey, 12381);
         intermediateKey = AugSchemeMPL.DeriveChildSkUnhardened(privateKey, 2);
-
 
         for (var i = 0; i < count; i++)
         {
@@ -36,7 +53,7 @@ internal class Tests
 
         for (var i = 0; i < count; i++)
         {
-            GenerateKeyPair(privateKey, i);
+            GenerateKeyPair(privateKey, 1);
         }
     }
 
@@ -54,9 +71,7 @@ internal class Tests
 
         PrivateKey privateKey = KeyDerivation.DerivePrivateKey(rootPrivateKey, index, false);
         JacobianPoint publicKey = privateKey.GetG1();
-
     }
-
 
     private static readonly byte[] message = [1, 2, 3, 4, 5];
     private static readonly byte[] seed =

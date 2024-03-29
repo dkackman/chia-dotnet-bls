@@ -17,13 +17,13 @@ public class Eip2333Tests
     [MemberData(nameof(TestData))]
     public void TestEip2333(string seed, string masterSk, string childSk, long childIndex)
     {
-        var seedBytes = ByteUtils.FromHex(seed);
+        var seedBytes = ByteUtils.ToHexBytes(seed);
         var master = BasicSchemeMPL.KeyGen(seedBytes);
         var child = BasicSchemeMPL.DeriveChildSk(master, childIndex);
 
         Assert.Equal(32, master.ToBytes().Length);
         Assert.Equal(32, child.ToBytes().Length);
-        Assert.Equal(ByteUtils.FromHex(masterSk), master.ToBytes());
-        Assert.Equal(ByteUtils.FromHex(childSk), child.ToBytes());
+        Assert.Equal(ByteUtils.ToHexBytes(masterSk), master.ToBytes());
+        Assert.Equal(ByteUtils.ToHexBytes(childSk), child.ToBytes());
     }
 }

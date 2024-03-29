@@ -45,7 +45,7 @@ public class InvalidVectorsTests
     public void TestG1Element(int i)
     {
         var input = invalidInputs1[i];
-        var bytes = input.FromHex();
+        var bytes = input.ToHexBytes();
         Assert.ThrowsAny<Exception>(() =>
         {
             var point = JacobianPoint.FromBytesG1(bytes);
@@ -68,7 +68,7 @@ public class InvalidVectorsTests
     public void TestG2Element(int i)
     {
         var input = invalidInputs2[i];
-        var bytes = input.FromHex();
+        var bytes = input.ToHexBytes();
         Assert.ThrowsAny<Exception>(() =>
         {
             var point = JacobianPoint.FromBytesG2(bytes);

@@ -11,7 +11,7 @@ public static class KeyDerivation
     /// <summary>
     /// Default hidden puzzle hash used in key derivation.
     /// </summary>
-    public static readonly byte[] DEFAULT_HIDDEN_PUZZLE_HASH = "711d6c4e32c92e53179b199484cf8c897542bc57f2b22582799f9d657eec4699".FromHex();
+    public static readonly byte[] DEFAULT_HIDDEN_PUZZLE_HASH = "711d6c4e32c92e53179b199484cf8c897542bc57f2b22582799f9d657eec4699".ToHexBytes();
 
     private static readonly BigInteger groupOrder = BigInteger.Parse("073eda753299d7d483339d80809a1d80553bda402fffe5bfeffffffff00000001", NumberStyles.AllowHexSpecifier);
 
@@ -24,7 +24,7 @@ public static class KeyDerivation
     public static JacobianPoint CalculateSyntheticPublicKey(this JacobianPoint publicKey, byte[] hiddenPuzzleHash)
     {
         var syntheticOffset = CalculateSyntheticOffset(publicKey, hiddenPuzzleHash);
-        var privateKeyToAdd = PrivateKey.FromBytes(syntheticOffset.BigIntToBytes(32, Endian.Big));
+        var privateKeyToAdd = PrivateKey.FromBytes(syntheticOffset.ToBytes(32, Endian.Big));
         return publicKey.Add(privateKeyToAdd.GetG1());
     }
 
@@ -38,7 +38,7 @@ public static class KeyDerivation
     {
         var syntheticOffset = CalculateSyntheticOffset(privateKey.GetG1(), hiddenPuzzleHash);
         var syntheticPrivateExponent = ModMath.Mod(privateKey.Value + syntheticOffset, groupOrder);
-        var blob = syntheticPrivateExponent.BigIntToBytes(32, Endian.Big);
+        var blob = syntheticPrivateExponent.ToBytes(32, Endian.Big);
 
         return PrivateKey.FromBytes(blob);
     }
@@ -52,7 +52,7 @@ public static class KeyDerivation
     public static BigInteger CalculateSyntheticOffset(this JacobianPoint publicKey, byte[] hiddenPuzzleHash)
     {
         var blob = Hmac.Hash256(ByteUtils.ConcatenateArrays(publicKey.ToBytes(), hiddenPuzzleHash));
-        return ModMath.Mod(blob.BytesToBigInt(Endian.Big, true), groupOrder);
+        return ModMath.Mod(blob.ToBigInt(Endian.Big, true), groupOrder);
     }
 
     /// <summary>

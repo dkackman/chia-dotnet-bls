@@ -38,7 +38,7 @@ internal static class Pairing
 
     public static Fq12 MillerLoop(BigInteger T, AffinePoint P, AffinePoint Q, EC ec)
     {
-        var T_bits = ByteUtils.BigIntToBits(T);
+        var T_bits = ByteUtils.ToBits(T);
         var R = Q;
         var f = Fq12NilOne; //Fq12.Nil.One(ec.Q);
         //var FqQ2 = new Fq(ec.Q, 2);

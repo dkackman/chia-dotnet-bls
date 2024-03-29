@@ -106,7 +106,7 @@ internal class Fq2 : IFq
         return new Fq2(Q, x0, x1);
     }
 
-    public IFq FromHex(BigInteger q, string hex) => FromBytes(q, hex.FromHex());
+    public IFq FromHex(BigInteger q, string hex) => FromBytes(q, hex.ToHexBytes());
 
     public virtual IFq FromFq(BigInteger q, IFq fq)
     {

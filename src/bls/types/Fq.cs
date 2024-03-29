@@ -19,12 +19,12 @@ internal class Fq(BigInteger q, BigInteger value) : IFq
             throw new ArgumentOutOfRangeException(nameof(bytes));
         }
 
-        return new Fq(q, bytes.BytesToBigInt(Endian.Big));
+        return new Fq(q, bytes.ToBigInt(Endian.Big));
     }
-    public IFq FromHex(BigInteger q, string hex) => Nil.FromBytes(q, hex.FromHex());
+    public IFq FromHex(BigInteger q, string hex) => Nil.FromBytes(q, hex.ToHexBytes());
     public IFq FromFq(BigInteger q, IFq fq) => fq;
     public IFq Clone() => new Fq(Q, Value);
-    public byte[] ToBytes() => Value.BigIntToBytes(48, Endian.Big);
+    public byte[] ToBytes() => Value.ToBytes(48, Endian.Big);
     public string ToHex() => ToBytes().ToHex();
     public override string ToString() => ToHex();
     public bool ToBool() => true;

@@ -38,14 +38,14 @@ public readonly struct PrivateKey
     /// </summary>
     /// <param name="bytes">The byte array representing the private key.</param>
     /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
-    public static PrivateKey FromBytes(byte[] bytes) => new(ModMath.Mod(bytes.BytesToBigInt(Endian.Big), Constants.DefaultEc.N));
+    public static PrivateKey FromBytes(byte[] bytes) => new(ModMath.Mod(bytes.ToBigInt(Endian.Big), Constants.DefaultEc.N));
 
     /// <summary>
     /// Creates a <see cref="PrivateKey"/> instance from the specified hexadecimal string.
     /// </summary>
     /// <param name="hex">The hexadecimal string representing the private key.</param>
     /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
-    public static PrivateKey FromHex(string hex) => FromBytes(hex.FromHex());
+    public static PrivateKey FromHex(string hex) => FromBytes(hex.ToHexBytes());
 
     /// <summary>
     /// Creates a <see cref="PrivateKey"/> instance from the specified seed.
@@ -53,7 +53,7 @@ public readonly struct PrivateKey
     /// <param name="seed">The seed used to generate the private key.</param>
     /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
     public static PrivateKey FromSeed(string seed) => FromSeed(seed.HexStringToByteArray());
-    
+
     /// <summary>
     /// Creates a <see cref="PrivateKey"/> instance from the specified seed.
     /// </summary>
@@ -63,7 +63,7 @@ public readonly struct PrivateKey
     public static PrivateKey FromSeed(byte[] seed)
     {
         var okm = Hkdf.ExtractExpand(Length, ByteUtils.ConcatenateArrays(seed, [0]), Constants.SignatureKeygenSalt, [0, Length]);
-        return new PrivateKey(ModMath.Mod(okm.BytesToBigInt(Endian.Big), Constants.DefaultEc.N));
+        return new PrivateKey(ModMath.Mod(okm.ToBigInt(Endian.Big), Constants.DefaultEc.N));
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ public readonly struct PrivateKey
     /// Converts the private key to a byte array.
     /// </summary>
     /// <returns>The byte array representation of the private key.</returns>
-    public byte[] ToBytes() => Value.BigIntToBytes(Size, Endian.Big);
+    public byte[] ToBytes() => Value.ToBytes(Size, Endian.Big);
 
     /// <summary>
     /// Converts the private key to a hexadecimal string.

@@ -112,7 +112,7 @@ public readonly struct JacobianPoint
     /// <param name="hex"></param>
     /// <param name="isExtension"></param>
     /// <returns></returns>
-    public static JacobianPoint FromHex(string hex, bool isExtension) => FromBytes(hex.FromHex(), isExtension, Constants.DefaultEc);
+    public static JacobianPoint FromHex(string hex, bool isExtension) => FromBytes(hex.ToHexBytes(), isExtension, Constants.DefaultEc);
 
     /// <summary>
     /// Creates a JacobianPoint 
@@ -218,7 +218,7 @@ public readonly struct JacobianPoint
     /// <param name="hex"></param>
     /// <param name="isExtension"></param>
     /// <returns></returns>
-    public static JacobianPoint FromHexG1(string hex, bool isExtension = false) => FromBytesG1(hex.FromHex(), isExtension);
+    public static JacobianPoint FromHexG1(string hex, bool isExtension = false) => FromBytesG1(hex.ToHexBytes(), isExtension);
 
     /// <summary>
     /// Creates a JacobianPoint from a hexadecimal string.
@@ -226,7 +226,7 @@ public readonly struct JacobianPoint
     /// <param name="hex"></param>
     /// <param name="isExtension"></param>
     /// <returns></returns>
-    public static JacobianPoint FromHexG2(string hex, bool isExtension = true) => FromBytesG2(hex.FromHex(), isExtension);
+    public static JacobianPoint FromHexG2(string hex, bool isExtension = true) => FromBytesG2(hex.ToHexBytes(), isExtension);
 
     /// <summary>
     /// Checks if the point is on the curve.
@@ -244,7 +244,7 @@ public readonly struct JacobianPoint
     /// Gets the fingerprint of the point.
     /// </summary>
     /// <returns></returns>
-    public long GetFingerprint() => Hmac.Hash256(ToBytes()).Take(4).ToArray().BytesToInt(Endian.Big);
+    public long GetFingerprint() => Hmac.Hash256(ToBytes()).Take(4).ToArray().ToInt(Endian.Big);
 
     /// <summary>
     /// Converts the point to an AffinePoint.
