@@ -1,3 +1,12 @@
 ﻿Time to generate 1000 keys
+
+C#
 - straight port 6592ms
 - optimized port 5575ms
+
+TS 
+- 11300ms
+
+RUST 
+- 826ms
+
