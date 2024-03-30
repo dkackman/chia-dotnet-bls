@@ -34,22 +34,19 @@ public readonly struct PrivateKey
     {
         Debug.Assert(value < Constants.DefaultEc.N);
         Value = value;
+        secretKey.key = value.ToBytes(Size, Endian.Big);
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PrivateKey"/> class with the specified value.
-    /// </summary>
-    /// <param name="key">The value of the private key.</param>
-    internal PrivateKey(byte[] key)
-    {
-        secretKey.key = key;
-        Value = key.ToBigInt(Endian.Little, true);
-    }
-
-    internal void KeyGen(byte[] seed)
+    private PrivateKey(byte[] seed)
     {
         secretKey.keygen_v3(seed);
-        //Value = secretKey.key!.ToBigInt(Endian.Little, true);
+        Value = secretKey.key!.ToBigInt(Endian.Little, true);
+    }
+
+    private PrivateKey(byte[] key, BigInteger value)
+    {
+        secretKey.key = key;
+        Value = value;
     }
 
     /// <summary>
@@ -57,7 +54,7 @@ public readonly struct PrivateKey
     /// </summary>
     /// <param name="bytes">The byte array representing the private key.</param>
     /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
-    public static PrivateKey FromBytes(byte[] bytes) => new(bytes);
+    public static PrivateKey FromBytes(byte[] bytes) => new(bytes, ModMath.Mod(bytes.ToBigInt(Endian.Big), Constants.DefaultEc.N));
 
     /// <summary>
     /// Creates a <see cref="PrivateKey"/> instance from the specified hexadecimal string.
@@ -79,12 +76,7 @@ public readonly struct PrivateKey
     /// <param name="seed">The seed used to generate the private key.</param>
     /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
     /// 
-    public static PrivateKey FromSeed(byte[] seed)
-    {
-        var pk = new PrivateKey();
-        pk.KeyGen(seed);
-        return pk;
-    }
+    public static PrivateKey FromSeed(byte[] seed) => new(seed);
 
     /// <summary>
     /// Creates a <see cref="PrivateKey"/> instance from the specified BigInteger value.

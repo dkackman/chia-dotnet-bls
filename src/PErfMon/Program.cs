@@ -11,7 +11,7 @@ public static class Program
         var stopwatch = Stopwatch.StartNew();
 
         //Tests.Derive(iterations);
-        Tests.Derive(iterations);
+        Tests.GenerateKeyPairs(iterations);
 
         stopwatch.Stop();
         Console.WriteLine($"GenerateKeyPairs {iterations} times in {stopwatch.ElapsedMilliseconds} ms");

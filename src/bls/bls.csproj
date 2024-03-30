@@ -25,6 +25,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="blst.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="blst.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\..\chia-leaf-logo-384x384.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
