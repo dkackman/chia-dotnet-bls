@@ -34,19 +34,19 @@ public readonly struct PrivateKey
     {
         Debug.Assert(value < Constants.DefaultEc.N);
         Value = value;
-        secretKey.key = value.ToBytes(Size, Endian.Big);
+        secretKey.key = value.ToBytes(Size, Endian.Little);
+    }
+
+    public PrivateKey(byte[] key, BigInteger value)
+    {
+        secretKey.key = key;
+        Value = value;
     }
 
     private PrivateKey(byte[] seed)
     {
         secretKey.keygen_v3(seed);
-        Value = secretKey.key!.ToBigInt(Endian.Little, true);
-    }
-
-    private PrivateKey(byte[] key, BigInteger value)
-    {
-        secretKey.key = key;
-        Value = value;
+        Value = secretKey.key!.ToBigInt(Endian.Little);
     }
 
     /// <summary>
@@ -54,7 +54,11 @@ public readonly struct PrivateKey
     /// </summary>
     /// <param name="bytes">The byte array representing the private key.</param>
     /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
-    public static PrivateKey FromBytes(byte[] bytes) => new(bytes, ModMath.Mod(bytes.ToBigInt(Endian.Big), Constants.DefaultEc.N));
+    public static PrivateKey FromBytes(byte[] bytes)
+    {
+        var scalar = new blst.Scalar(bytes);
+        return new PrivateKey(scalar.val.ToBigInt(Endian.Little));
+    }
 
     /// <summary>
     /// Creates a <see cref="PrivateKey"/> instance from the specified hexadecimal string.
@@ -92,8 +96,16 @@ public readonly struct PrivateKey
     /// <returns>The aggregated private key.</returns>
     public static PrivateKey Aggregate(PrivateKey[] privateKeys)
     {
-        var aggregate = privateKeys.Aggregate(BigInteger.Zero, (acc, privateKey) => acc + privateKey.Value);
-        return new PrivateKey(ModMath.Mod(aggregate, Constants.DefaultEc.N));
+        if (privateKeys.Length == 0)
+        {
+            throw new ArgumentException("The array of private keys must not be empty.", nameof(privateKeys));
+        }
+        var scalar = new blst.Scalar([0]);
+        foreach (var privateKey in privateKeys)
+        {
+            scalar.add(privateKey.secretKey);
+        }
+        return new PrivateKey(scalar.val, scalar.val.ToBigInt(Endian.Little));
     }
 
     /// <summary>
@@ -107,13 +119,21 @@ public readonly struct PrivateKey
     /// Converts the private key to a byte array.
     /// </summary>
     /// <returns>The byte array representation of the private key.</returns>
-    public byte[] ToBytes() => Value.ToBytes(Size, Endian.Big);
+    public byte[] ToBytes(Endian endianness = Endian.Big)
+    {
+        if (secretKey.key is null)
+        {
+            return [];
+        }
+
+        return endianness == Endian.Little ? secretKey.to_lendian() : secretKey.to_bendian();
+    }
 
     /// <summary>
     /// Converts the private key to a hexadecimal string.
     /// </summary>
     /// <returns>The hexadecimal string representation of the private key.</returns>
-    public string ToHex() => ToBytes().ToHex();
+    public string ToHex(Endian endianness = Endian.Big) => ToBytes(endianness).ToHex();
 
     /// <summary>
     /// Returns a string that represents the current private key.
@@ -126,5 +146,5 @@ public readonly struct PrivateKey
     /// </summary>
     /// <param name="value">The <see cref="PrivateKey"/> object to compare with the current <see cref="PrivateKey"/>.</param>
     /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
-    public bool Equals(PrivateKey value) => Value == value.Value;
+    public bool Equals(PrivateKey value) => ByteUtils.BytesEqual(secretKey.key, value.secretKey.key);
 }

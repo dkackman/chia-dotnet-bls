@@ -291,6 +291,13 @@ public static partial class ByteUtils
     public static bool BytesEqual(this byte[] a, byte[] b) => a.AsSpan().SequenceEqual(b.AsSpan());
 
     /// <summary>
+    /// Checks if a byte array is all zeros.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <returns></returns>
+    public static bool IsAllZeros(this byte[] a) => a.All(b => b == 0);
+
+    /// <summary>
     /// Converts a byte array to a hexadecimal string.
     /// </summary>
     /// <param name="bytes">The byte array to convert.</param>
