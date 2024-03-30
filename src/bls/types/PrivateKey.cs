@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Numerics;
+using supranational;
 
 namespace chia.dotnet.bls;
 
@@ -23,6 +24,8 @@ public readonly struct PrivateKey
     /// </summary>
     public readonly BigInteger Value;
 
+    private readonly blst.SecretKey secretKey = new blst.SecretKey();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="PrivateKey"/> class with the specified value.
     /// </summary>
@@ -34,11 +37,27 @@ public readonly struct PrivateKey
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="PrivateKey"/> class with the specified value.
+    /// </summary>
+    /// <param name="key">The value of the private key.</param>
+    internal PrivateKey(byte[] key)
+    {
+        secretKey.key = key;
+        Value = key.ToBigInt(Endian.Little, true);
+    }
+
+    internal void KeyGen(byte[] seed)
+    {
+        secretKey.keygen_v3(seed);
+        //Value = secretKey.key!.ToBigInt(Endian.Little, true);
+    }
+
+    /// <summary>
     /// Creates a <see cref="PrivateKey"/> instance from the specified byte array.
     /// </summary>
     /// <param name="bytes">The byte array representing the private key.</param>
     /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
-    public static PrivateKey FromBytes(byte[] bytes) => new(ModMath.Mod(bytes.ToBigInt(Endian.Big), Constants.DefaultEc.N));
+    public static PrivateKey FromBytes(byte[] bytes) => new(bytes);
 
     /// <summary>
     /// Creates a <see cref="PrivateKey"/> instance from the specified hexadecimal string.
@@ -62,8 +81,9 @@ public readonly struct PrivateKey
     /// 
     public static PrivateKey FromSeed(byte[] seed)
     {
-        var okm = Hkdf.ExtractExpand(Length, ByteUtils.ConcatenateArrays(seed, [0]), Constants.SignatureKeygenSalt, [0, Length]);
-        return new PrivateKey(ModMath.Mod(okm.ToBigInt(Endian.Big), Constants.DefaultEc.N));
+        var pk = new PrivateKey();
+        pk.KeyGen(seed);
+        return pk;
     }
 
     /// <summary>
