@@ -24,7 +24,7 @@ public readonly struct PrivateKey
     /// </summary>
     public readonly BigInteger Value;
 
-    private readonly blst.SecretKey secretKey = new blst.SecretKey();
+    internal readonly blst.SecretKey secretKey = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PrivateKey"/> class with the specified value.
@@ -37,7 +37,7 @@ public readonly struct PrivateKey
         secretKey.key = value.ToBytes(Size, Endian.Little);
     }
 
-    public PrivateKey(byte[] key, BigInteger value)
+    private PrivateKey(byte[] key, BigInteger value)
     {
         secretKey.key = key;
         Value = value;
@@ -100,11 +100,13 @@ public readonly struct PrivateKey
         {
             throw new ArgumentException("The array of private keys must not be empty.", nameof(privateKeys));
         }
+
         var scalar = new blst.Scalar([0]);
         foreach (var privateKey in privateKeys)
         {
             scalar.add(privateKey.secretKey);
         }
+
         return new PrivateKey(scalar.val, scalar.val.ToBigInt(Endian.Little));
     }
 
@@ -114,6 +116,9 @@ public readonly struct PrivateKey
     /// </summary>
     /// <returns>The G1 point.</returns>
     public JacobianPoint GetG1() => JacobianPoint.GenerateG1().Multiply(Value);
+
+    public G1Element GetG1Element() => new(secretKey);
+    public G2Element GetG2Element() => new(secretKey);
 
     /// <summary>
     /// Converts the private key to a byte array.

@@ -20,7 +20,7 @@ using System.IO;
 
 namespace supranational
 {
-    public static class blst
+    internal static class blst
     {
 
 #if NET5_0_OR_GREATER

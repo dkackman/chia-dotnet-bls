@@ -6,8 +6,43 @@ namespace bls.tests;
 
 public class BlstTests
 {
+
     [Fact]
-    public void LoadDll()
+    public void CoreChiaDotnet()
+    {
+        var msg = Encoding.UTF8.GetBytes("assertion");
+        var DST = "MY-DST";
+
+        var SK = new blst.SecretKey();
+        var seed = Encoding.UTF8.GetBytes(new string('*', 32));
+        SK.keygen_v3(seed);
+
+        // generate public key and serialize it...
+        var pk_for_wire_blst = new blst.P1(SK).serialize();
+
+        var sk = PrivateKey.FromSeed(seed);
+        var pk = sk.GetG1Element();
+
+
+        // generate public key and serialize it...
+        var pk_for_wire = pk.ToBytes();
+
+        Assert.Equal(pk_for_wire_blst, pk_for_wire);
+
+        // sign |msg| and serialize the signature...
+        var sig_for_wire_blst = new blst.P2().hash_to(msg, DST, pk_for_wire_blst)
+                                        .sign_with(SK)
+                                        .serialize();
+
+        var g2 = G2Element.FromMessage(msg, DST, pk_for_wire);
+        var signedMessage = g2.SignWith(sk);
+        var sig_for_wire = signedMessage.ToBytes();
+
+        Assert.Equal(sig_for_wire_blst, sig_for_wire);
+    }
+
+    [Fact]
+    public void CoreBLst()
     {
         var msg = Encoding.UTF8.GetBytes("assertion");
         var DST = "MY-DST";
@@ -15,10 +50,6 @@ public class BlstTests
         var SK = new blst.SecretKey();
         var seed = Encoding.UTF8.GetBytes(new string('*', 32));
         SK.keygen(seed);
-
-        var seed1 = new string('*', 32).HexStringToByteArray();
-        var pk = PrivateKey.FromSeed(seed1);
-        var key = pk.ToBytes();
 
         // generate public key and serialize it...
         var pk_for_wire = new blst.P1(SK).serialize();

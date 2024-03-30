@@ -25,11 +25,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="blst.dll" />
+    <None Remove="x64/blst.dll" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="blst.dll">
+    <Content Include="x64/blst.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
