@@ -48,8 +48,8 @@ public class InvalidVectorsTests
         var bytes = input.ToHexBytes();
         Assert.ThrowsAny<Exception>(() =>
         {
-            var point = JacobianPoint.FromBytesG1(bytes);
-            Assert.True(point.IsValid());
+            var point = G1Element.FromBytes(bytes);
+            Assert.True(point.IsValid);
         });
     }
 
@@ -71,8 +71,8 @@ public class InvalidVectorsTests
         var bytes = input.ToHexBytes();
         Assert.ThrowsAny<Exception>(() =>
         {
-            var point = JacobianPoint.FromBytesG2(bytes);
-            Assert.True(point.IsValid());
+            var point = G2Element.FromBytes(bytes);
+            Assert.True(point.IsValid);
         });
     }
 }
