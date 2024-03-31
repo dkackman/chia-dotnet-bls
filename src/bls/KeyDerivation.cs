@@ -37,7 +37,7 @@ public static class KeyDerivation
     public static BigInteger CalculateSyntheticOffset(this G1Element publicKey, byte[] hiddenPuzzleHash)
     {
         var blob = Hmac.Hash256(ByteUtils.ConcatenateArrays(publicKey.ToBytes(), hiddenPuzzleHash));
-        return ModMath.Mod(blob.ToBigInt(Endian.Big, true), groupOrder);
+        return Mod(blob.ToBigInt(Endian.Big, true), groupOrder);
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public static class KeyDerivation
     public static PrivateKey CalculateSyntheticPrivateKey(this PrivateKey privateKey, byte[] hiddenPuzzleHash)
     {
         var syntheticOffset = CalculateSyntheticOffset(privateKey.GetG1Element(), hiddenPuzzleHash);
-        var syntheticPrivateExponent = ModMath.Mod(privateKey.Value + syntheticOffset, groupOrder);
+        var syntheticPrivateExponent = Mod(privateKey.Value + syntheticOffset, groupOrder);
         var blob = syntheticPrivateExponent.ToBytes(32, Endian.Big);
 
         return PrivateKey.FromBytes(blob);
@@ -96,4 +96,21 @@ public static class KeyDerivation
     /// <param name="hardened">Indicates if the derivation should be hardened.</param>
     /// <returns>The derived private key.</returns>
     public static PrivateKey DerivePrivateKey(this PrivateKey masterPrivateKey, int index, bool hardened) => DerivePrivateKeyPath(masterPrivateKey, [12381, 8444, 2, index], hardened);
+
+    private static BigInteger Mod(BigInteger value, BigInteger modulus)
+    {
+        // these optimizations have a pretty good impact on performance
+        // by limiting the number of modulus operations that are performed
+        if (value.Sign < 0)
+        {
+            if (modulus.IsPowerOfTwo)
+            {
+                return value & (modulus - 1);
+            }
+
+            return ((value % modulus) + modulus) % modulus;
+        }
+
+        return value % modulus;
+    }
 }
