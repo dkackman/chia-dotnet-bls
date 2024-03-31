@@ -18,16 +18,9 @@ public static class KeyDerivation
     /// <summary>
     /// Calculates the synthetic public key for the given public key and hidden puzzle hash.
     /// </summary>
-    /// <param name="publicKey">The original public key.</param>
+    /// <param name="publicKey">The public key</param>
     /// <param name="hiddenPuzzleHash">The hidden puzzle hash.</param>
-    /// <returns>The synthetic public key.</returns>
-    public static JacobianPoint CalculateSyntheticPublicKey(this JacobianPoint publicKey, byte[] hiddenPuzzleHash)
-    {
-        var syntheticOffset = CalculateSyntheticOffset(publicKey, hiddenPuzzleHash);
-        var privateKeyToAdd = PrivateKey.FromBytes(syntheticOffset.ToBytes(32, Endian.Big));
-        return publicKey.Add(privateKeyToAdd.GetG1());
-    }
-
+    /// <returns></returns>
     public static G1Element CalculateSyntheticPublicKey(this G1Element publicKey, byte[] hiddenPuzzleHash)
     {
         var syntheticOffset = CalculateSyntheticOffset(publicKey, hiddenPuzzleHash);
@@ -35,6 +28,12 @@ public static class KeyDerivation
         return publicKey + privateKeyToAdd.GetG1Element();
     }
 
+    /// <summary>
+    /// Calculates the synthetic offset for the given public key and hidden puzzle hash.
+    /// </summary>
+    /// <param name="publicKey">The public key</param>
+    /// <param name="hiddenPuzzleHash">The hidden puzzle hash.</param>
+    /// <returns></returns>
     public static BigInteger CalculateSyntheticOffset(this G1Element publicKey, byte[] hiddenPuzzleHash)
     {
         var blob = Hmac.Hash256(ByteUtils.ConcatenateArrays(publicKey.ToBytes(), hiddenPuzzleHash));
@@ -57,18 +56,6 @@ public static class KeyDerivation
     }
 
     /// <summary>
-    /// Calculates the synthetic offset for the given public key and hidden puzzle hash.
-    /// </summary>
-    /// <param name="publicKey">The public key.</param>
-    /// <param name="hiddenPuzzleHash">The hidden puzzle hash.</param>
-    /// <returns>The synthetic offset.</returns>
-    public static BigInteger CalculateSyntheticOffset(this JacobianPoint publicKey, byte[] hiddenPuzzleHash)
-    {
-        var blob = Hmac.Hash256(ByteUtils.ConcatenateArrays(publicKey.ToBytes(), hiddenPuzzleHash));
-        return ModMath.Mod(blob.ToBigInt(Endian.Big, true), groupOrder);
-    }
-
-    /// <summary>
     /// Derives a private key path from the given master private key.
     /// </summary>
     /// <param name="privateKey">The master private key.</param>
@@ -83,22 +70,6 @@ public static class KeyDerivation
         }
 
         return privateKey;
-    }
-
-    /// <summary>
-    /// Derives a public key path from the given master public key.
-    /// </summary>
-    /// <param name="publicKey">The master public key.</param>
-    /// <param name="path">The path to derive.</param>
-    /// <returns>The derived public key.</returns>
-    public static JacobianPoint DerivePublicKeyPath(this JacobianPoint publicKey, int[] path)
-    {
-        foreach (var index in path)
-        {
-            publicKey = AugSchemeMPL.DeriveChildPkUnhardened(publicKey, (uint)index);
-        }
-
-        return publicKey;
     }
 
     /// <summary>
@@ -125,12 +96,4 @@ public static class KeyDerivation
     /// <param name="hardened">Indicates if the derivation should be hardened.</param>
     /// <returns>The derived private key.</returns>
     public static PrivateKey DerivePrivateKey(this PrivateKey masterPrivateKey, int index, bool hardened) => DerivePrivateKeyPath(masterPrivateKey, [12381, 8444, 2, index], hardened);
-
-    /// <summary>
-    /// Derives a public key from the given master public key.
-    /// </summary>
-    /// <param name="masterPublicKey">The master public key.</param>
-    /// <param name="index">The index of the derived key.</param>
-    /// <returns>The derived public key.</returns>
-    public static JacobianPoint DerivePublicKeyWallet(this JacobianPoint masterPublicKey, int index) => DerivePublicKeyPath(masterPublicKey, [12381, 8444, 2, index]);
 }

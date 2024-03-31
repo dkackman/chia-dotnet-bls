@@ -25,7 +25,7 @@ public class KeyDerivationTests
     [InlineData(15, "b3b4ceea11bbc6fafb5800caa593385644a3262245357e5013be5c1cf622bf7cb0b667e586269c346459c3b5faf0eaef")]
     public void TestSyntheticPublicKeys(uint index, string hexKey)
     {
-        var pk = sk.GetG1();
+        var pk = sk.GetG1Element();
         var intermediate = pk.DerivePublicKeyPath([12381, 8444, 2]);
         var key = AugSchemeMPL.DeriveChildPkUnhardened(intermediate, index);
         var syntheticKey = key.CalculateSyntheticPublicKey(KeyDerivation.DEFAULT_HIDDEN_PUZZLE_HASH);

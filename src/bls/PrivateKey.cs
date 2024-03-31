@@ -111,25 +111,24 @@ public readonly struct PrivateKey
     }
 
     /// <summary>
-    /// Gets the corresponding G1 point on the elliptic curve.
-    /// The G1 point is the PublicKey.
+    /// Return the G1Element corresponding to the private key. (typically used as the public key)
     /// </summary>
-    /// <returns>The G1 point.</returns>
-    public JacobianPoint GetG1() => JacobianPoint.GenerateG1().Multiply(Value);
-
+    /// <returns>The public key</returns>
     public G1Element GetG1Element() => new(secretKey);
+
+    /// <summary>
+    /// Return the G1Element corresponding to the private key. (typically used as the signing key)
+    /// </summary>
+    /// <returns>The signing key</returns>
     public G2Element GetG2Element() => new(secretKey);
 
-    public G2Element SignG2(byte[] message)
-    {
-        var p2 = new blst.P2();
-        p2.hash_to(message);
-        p2.sign_with(secretKey);
-
-        return new G2Element(p2);
-    }
-
-    public G2Element SignG2(byte[] message, string dst)
+    /// <summary>
+    /// Signs the specified message using the private key.
+    /// </summary>
+    /// <param name="message">The message</param>
+    /// <param name="dst">The domain separation tag</param>
+    /// <returns>The signed message</returns>
+    public G2Element SignG2(byte[] message, string dst = "")
     {
         var p2 = new blst.P2();
         p2.hash_to(message, dst);
@@ -142,21 +141,21 @@ public readonly struct PrivateKey
     /// Converts the private key to a byte array.
     /// </summary>
     /// <returns>The byte array representation of the private key.</returns>
-    public byte[] ToBytes(Endian endianness = Endian.Big)
+    public byte[] ToBytes()
     {
         if (secretKey.key is null)
         {
             return [];
         }
 
-        return endianness == Endian.Little ? secretKey.to_lendian() : secretKey.to_bendian();
+        return secretKey.to_bendian();
     }
 
     /// <summary>
     /// Converts the private key to a hexadecimal string.
     /// </summary>
     /// <returns>The hexadecimal string representation of the private key.</returns>
-    public string ToHex(Endian endianness = Endian.Big) => ToBytes(endianness).ToHex();
+    public string ToHex() => ToBytes().ToHex();
 
     /// <summary>
     /// Returns a string that represents the current private key.
@@ -171,11 +170,32 @@ public readonly struct PrivateKey
     /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
     public bool Equals(PrivateKey value) => ByteUtils.BytesEqual(secretKey.key, value.secretKey.key);
 
+    /// <summary>
+    /// Determines whether the specified object is equal to the current <see cref="PrivateKey"/>.
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     public override bool Equals(object? obj) => obj is PrivateKey value && Equals(value);
 
+    /// <summary>
+    /// Serves as the default hash function.
+    /// </summary>
+    /// <returns></returns>
     public override int GetHashCode() => secretKey.key?.GetHashCode() ?? 0;
 
+    /// <summary>
+    /// Determines whether two specified instances of <see cref="PrivateKey"/> are equal.
+    /// </summary>
+    /// <param name="left"></param>
+    /// <param name="right"></param>
+    /// <returns></returns>
     public static bool operator ==(PrivateKey left, PrivateKey right) => left.Equals(right);
 
+    /// <summary>
+    /// Determines whether two specified instances of <see cref="PrivateKey"/> are not equal.
+    /// </summary>
+    /// <param name="left"></param>
+    /// <param name="right"></param>
+    /// <returns></returns>
     public static bool operator !=(PrivateKey left, PrivateKey right) => !left.Equals(right);
 }

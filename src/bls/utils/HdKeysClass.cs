@@ -61,14 +61,6 @@ internal static class HdKeysClass
         return PrivateKey.Aggregate([PrivateKey.FromBytes(hash), parentSk]);
     }
 
-    public static JacobianPoint DeriveChildG1Unhardened(JacobianPoint parentPk, uint index)
-    {
-        var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), index.ToBytes());
-        var hash = Hmac.Hash256(bytes);
-
-        return parentPk.Add(JacobianPoint.GenerateG1().Multiply(PrivateKey.FromBytes(hash).Value));
-    }
-
     public static G1Element DeriveChildG1Unhardened(G1Element parentPk, uint index)
     {
         var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), index.ToBytes());
@@ -87,13 +79,5 @@ internal static class HdKeysClass
         var gen = G2Element.FromAffine(blst.P2_Affine.generator());
 
         return parentPk + (gen * nonce);
-    }
-
-    public static JacobianPoint DeriveChildG2Unhardened(JacobianPoint parentPk, uint index)
-    {
-        var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), index.ToBytes());
-        var hash = Hmac.Hash256(bytes);
-
-        return parentPk.Add(JacobianPoint.GenerateG2().Multiply(PrivateKey.FromBytes(hash).Value));
     }
 }

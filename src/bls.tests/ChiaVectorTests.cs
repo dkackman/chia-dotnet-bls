@@ -26,7 +26,7 @@ public class ChiaVectorsTests
     [Fact]
     public void PublicKeyIsCorrect()
     {
-        Assert.Equal("85695fcbc06cc4c4c9451f4dce21cbf8de3e5a13bf48f44cdbb18e2038ba7b8bb1632d7911ef1e2e08749bddbf165352", sk1.GetG1().ToHex());
+        Assert.Equal("85695fcbc06cc4c4c9451f4dce21cbf8de3e5a13bf48f44cdbb18e2038ba7b8bb1632d7911ef1e2e08749bddbf165352", sk1.GetG1Element().ToHex());
     }
 
     [Fact]

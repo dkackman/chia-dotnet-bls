@@ -14,7 +14,7 @@ internal class Tests
         var seed = bip39.MnemonicToSeedHex(MNEMONIC, "");
         var byteArray = seed.HexStringToByteArray();
         var privateKey = PrivateKey.FromSeed(byteArray);
-        var publicKey = privateKey.GetG1();
+        var publicKey = privateKey.GetG1Element();
         byte[] hiddenPuzzleHash = "711d6c4e32c92e53179b199484cf8c897542bc57f2b22582799f9d657eec4699".ToHexBytes();
 
         for (var i = 0; i < count; i++)
@@ -70,7 +70,7 @@ internal class Tests
     {
 
         PrivateKey privateKey = KeyDerivation.DerivePrivateKey(rootPrivateKey, index, false);
-        JacobianPoint publicKey = privateKey.GetG1();
+        var publicKey = privateKey.GetG1Element();
     }
 
     private static readonly byte[] message = [1, 2, 3, 4, 5];

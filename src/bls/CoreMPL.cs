@@ -6,21 +6,10 @@ internal static class CoreMPL
 {
     public static PrivateKey KeyGen(byte[] seed) => PrivateKey.FromSeed(seed);
 
-    public static G2Element Sign(PrivateKey privateKey, string message) => privateKey.SignG2(message.ToBytes());
-    public static G2Element Sign(PrivateKey privateKey, byte[] message) => privateKey.SignG2(message);
+    public static G2Element Sign(PrivateKey privateKey, string message, string dst = "") => privateKey.SignG2(message.ToBytes(), dst);
+    public static G2Element Sign(PrivateKey privateKey, byte[] message, string dst = "") => privateKey.SignG2(message, dst);
 
-    public static G2Element Sign(PrivateKey privateKey, string message, string dst) => privateKey.SignG2(message.ToBytes(), dst);
-    public static G2Element Sign(PrivateKey privateKey, byte[] message, string dst) => privateKey.SignG2(message, dst);
-
-    public static bool Verify(G1Element publicKey, byte[] message, G2Element signature)
-    {
-        var pubkeyAffine = publicKey.ToAffine();
-        var sigAffine = signature.ToAffine();
-
-        return sigAffine.core_verify(pubkeyAffine, true, message) == blst.ERROR.SUCCESS;
-    }
-
-    public static bool Verify(G1Element publicKey, byte[] message, G2Element signature, string dst)
+    public static bool Verify(G1Element publicKey, byte[] message, G2Element signature, string dst = "")
     {
         var pubkeyAffine = publicKey.ToAffine();
         var sigAffine = signature.ToAffine();

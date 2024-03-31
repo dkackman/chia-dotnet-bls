@@ -5,6 +5,8 @@ namespace chia.dotnet.bls;
 /// </summary>
 public static class AugSchemeMPL
 {
+    private const string CIPHERSUITE_ID = "BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_AUG_";
+
     /// <summary>
     /// Generates a private key from the given seed.
     /// </summary>
@@ -18,8 +20,8 @@ public static class AugSchemeMPL
     /// <param name="privateKey">The private key used for signing.</param>
     /// <param name="message">The message to be signed.</param>
     /// <returns>The signature as a JacobianPoint.</returns>
-    public static JacobianPoint Sign(this PrivateKey privateKey, byte[] message) =>
-        Signing.CoreSignMpl(privateKey, ByteUtils.ConcatenateArrays(privateKey.GetG1Element().ToBytes(), message), Schemes.AugSchemeDst);
+    public static G2Element Sign(this PrivateKey privateKey, byte[] message) =>
+        CoreMPL.Sign(privateKey, ByteUtils.ConcatenateArrays(privateKey.GetG1Element().ToBytes(), message), CIPHERSUITE_ID);
 
     /// <summary>
     /// Signs a message using the specified private key.
@@ -27,7 +29,8 @@ public static class AugSchemeMPL
     /// <param name="privateKey">The private key used for signing.</param>
     /// <param name="message">The message to be signed.</param>
     /// <returns>The signature as a JacobianPoint.</returns>
-    public static JacobianPoint Sign(this PrivateKey privateKey, string message) => Sign(privateKey, message.ToBytes());
+    public static G2Element Sign(this PrivateKey privateKey, string message) =>
+        CoreMPL.Sign(privateKey, ByteUtils.ConcatenateArrays(privateKey.GetG1Element().ToBytes(), message.ToBytes()), CIPHERSUITE_ID);
 
     /// <summary>
     /// Verifies the signature of a message using the specified public key.
@@ -36,8 +39,8 @@ public static class AugSchemeMPL
     /// <param name="message">The message to be verified.</param>
     /// <param name="signature">The signature to be verified.</param>
     /// <returns>True if the signature is valid, false otherwise.</returns>
-    public static bool Verify(this JacobianPoint publicKey, byte[] message, JacobianPoint signature) =>
-        Signing.CoreVerifyMpl(publicKey, ByteUtils.ConcatenateArrays(publicKey.ToBytes(), message), signature, Schemes.AugSchemeDst);
+    public static bool Verify(this G1Element publicKey, byte[] message, G2Element signature) =>
+        CoreMPL.Verify(publicKey, ByteUtils.ConcatenateArrays(publicKey.ToBytes(), message), signature, CIPHERSUITE_ID);
 
     /// <summary>
     /// Verifies the signature of a message using the specified public key.
@@ -46,14 +49,15 @@ public static class AugSchemeMPL
     /// <param name="message">The message to be verified.</param>
     /// <param name="signature">The signature to be verified.</param>
     /// <returns>True if the signature is valid, false otherwise.</returns>
-    public static bool Verify(this JacobianPoint publicKey, string message, JacobianPoint signature) => Verify(publicKey, message.ToBytes(), signature);
+    public static bool Verify(this G1Element publicKey, string message, G2Element signature) =>
+        CoreMPL.Verify(publicKey, ByteUtils.ConcatenateArrays(publicKey.ToBytes(), message.ToBytes()), signature, CIPHERSUITE_ID);
 
     /// <summary>
     /// Aggregates multiple signatures into a single signature.
     /// </summary>
     /// <param name="signatures">The array of signatures to be aggregated.</param>
     /// <returns>The aggregated signature as a JacobianPoint.</returns>
-    public static JacobianPoint Aggregate(JacobianPoint[] signatures) => Signing.CoreAggregateMpl(signatures);
+    public static G2Element Aggregate(G2Element[] signatures) => CoreMPL.Aggregate(signatures);
 
     /// <summary>
     /// Verifies an aggregated signature against multiple public keys and messages.
@@ -62,7 +66,7 @@ public static class AugSchemeMPL
     /// <param name="messages">The array of messages to be verified.</param>
     /// <param name="signature">The aggregated signature to be verified.</param>
     /// <returns>True if the aggregated signature is valid, false otherwise.</returns>
-    public static bool AggregateVerify(this JacobianPoint[] publicKeys, byte[][] messages, JacobianPoint signature)
+    public static bool AggregateVerify(this G1Element[] publicKeys, byte[][] messages, G2Element signature)
     {
         int length = publicKeys.Length;
         if (length != messages.Length || length == 0)
@@ -70,13 +74,17 @@ public static class AugSchemeMPL
             return false;
         }
 
-        var mPrimes = new byte[length][];
+        var augMessages = new byte[length][];
         for (int i = 0; i < length; i++)
         {
-            mPrimes[i] = ByteUtils.ConcatenateArrays(publicKeys[i].ToBytes(), messages[i]);
+            var pubkey = publicKeys[i].ToBytes();
+            augMessages[i] = new byte[pubkey.Length + messages[i].Length];
+            pubkey.CopyTo(augMessages[i], 0);
+            messages[i].CopyTo(augMessages[i], pubkey.Length);
         }
 
-        return Signing.CoreAggregateVerify(publicKeys, mPrimes, signature, Schemes.AugSchemeDst);
+        return CoreMPL.AggregateVerify(publicKeys, augMessages, signature, CIPHERSUITE_ID);
+
     }
 
     /// <summary>
@@ -101,8 +109,5 @@ public static class AugSchemeMPL
     /// <param name="publicKey">The parent public key.</param>
     /// <param name="index">The index of the child public key.</param>
     /// <returns>The derived child unhardened public key.</returns>
-    public static JacobianPoint DeriveChildPkUnhardened(this JacobianPoint publicKey, uint index) => HdKeysClass.DeriveChildG1Unhardened(publicKey, index);
-
     public static G1Element DeriveChildPkUnhardened(G1Element publicKey, uint index) => CoreMPL.DeriveChildPkUnhardened(publicKey, index);
-
 }
