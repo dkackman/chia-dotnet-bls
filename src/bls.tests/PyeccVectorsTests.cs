@@ -901,9 +901,9 @@ public class PyeccVectorsTests
     private readonly PrivateKey sk1;
     private readonly PrivateKey sk2;
     private readonly byte[] msg = [3, 1, 4, 1, 5, 9];
-    private readonly JacobianPoint sig1Basic;
-    private readonly JacobianPoint sig2Basic;
-    private readonly JacobianPoint sigABasic;
+    private readonly G2Element sig1Basic;
+    private readonly G2Element sig2Basic;
+    private readonly G2Element sigABasic;
     private readonly JacobianPoint sig1Aug;
     private readonly JacobianPoint sig2Aug;
     private readonly JacobianPoint sigAAug;

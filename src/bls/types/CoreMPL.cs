@@ -50,7 +50,7 @@ internal static class CoreMPL
         return ret;
     }
 
-    public static bool AggregateVerify(this G1Element[] publicKeys, byte[][] messages, G2Element signature)
+    public static bool AggregateVerify(this G1Element[] publicKeys, byte[][] messages, G2Element signature, string dst = "")
     {
         if (publicKeys.Length != messages.Length || publicKeys.Length == 0)
         {
@@ -58,7 +58,7 @@ internal static class CoreMPL
         }
 
         var sig_affine = signature.ToAffine();
-        var pairing = new blst.Pairing(true);
+        var pairing = new blst.Pairing(true, dst);
         var pt = new blst.PT(sig_affine);
 
         for (var i = 0; i < publicKeys.Length; i++)

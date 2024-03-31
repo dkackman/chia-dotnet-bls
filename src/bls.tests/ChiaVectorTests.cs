@@ -50,7 +50,7 @@ public class ChiaVectorsTests
         var sig2 = BasicSchemeMPL.Sign(sk2, msg2);
         var aggSig1 = BasicSchemeMPL.Aggregate([sig1, sig2]);
         Assert.Equal("aee003c8cdaf3531b6b0ca354031b0819f7586b5846796615aee8108fec75ef838d181f9d244a94d195d7b0231d4afcf06f27f0cc4d3c72162545c240de7d5034a7ef3a2a03c0159de982fbc2e7790aeb455e27beae91d64e077c70b5506dea3", aggSig1.ToHex());
-        Assert.True(BasicSchemeMPL.AggregateVerify([sk1.GetG1(), sk2.GetG1()], [msg1, msg2], aggSig1));
+        Assert.True(BasicSchemeMPL.AggregateVerify([sk1.GetG1Element(), sk2.GetG1Element()], [msg1, msg2], aggSig1));
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class ChiaVectorsTests
         var sig5 = BasicSchemeMPL.Sign(sk2, msg5);
         var aggSig2 = BasicSchemeMPL.Aggregate([sig3, sig4, sig5]);
         Assert.Equal("a0b1378d518bea4d1100adbc7bdbc4ff64f2c219ed6395cd36fe5d2aa44a4b8e710b607afd965e505a5ac3283291b75413d09478ab4b5cfbafbeea366de2d0c0bcf61deddaa521f6020460fd547ab37659ae207968b545727beba0a3c5572b9c", aggSig2.ToHex());
-        Assert.True(BasicSchemeMPL.AggregateVerify([sk1.GetG1(), sk1.GetG1(), sk2.GetG1()], [msg3, msg4, msg5], aggSig2));
+        Assert.True(BasicSchemeMPL.AggregateVerify([sk1.GetG1Element(), sk1.GetG1Element(), sk2.GetG1Element()], [msg3, msg4, msg5], aggSig2));
     }
 
     [Fact]
