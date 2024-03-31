@@ -37,7 +37,7 @@ internal class Tests
         intermediateKey = AugSchemeMPL.DeriveChildSkUnhardened(privateKey, 12381);
         intermediateKey = AugSchemeMPL.DeriveChildSkUnhardened(privateKey, 2);
 
-        for (var i = 0; i < count; i++)
+        for (uint i = 0; i < count; i++)
         {
             AugSchemeMPL.DeriveChildSkUnhardened(intermediateKey, i);
         }

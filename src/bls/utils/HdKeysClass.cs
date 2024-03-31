@@ -1,3 +1,5 @@
+using supranational;
+
 namespace chia.dotnet.bls;
 
 internal static class HdKeysClass
@@ -10,14 +12,14 @@ internal static class HdKeysClass
         Array.Resize(ref seed, seed.Length + 1);
         var okm = Hkdf.ExtractExpand(keyLength, seed, Constants.SignatureKeygenSalt, info);
 
-        return new PrivateKey(ModMath.Mod(ByteUtils.ToBigInt(okm, Endian.Big), Constants.DefaultEc.N));
+        return new PrivateKey(ModMath.Mod(okm.ToBigInt(Endian.Big), Constants.DefaultEc.N));
     }
 
     public static byte[] IkmToLamportSk(byte[] ikm, byte[] salt) => Hkdf.ExtractExpand(32 * 255, ikm, salt, []);
 
-    public static byte[] ParentSkToLamportPk(PrivateKey parentSk, long index)
+    public static byte[] ParentSkToLamportPk(PrivateKey parentSk, uint index)
     {
-        var salt = ByteUtils.ToBytes(index, 4, Endian.Big);
+        var salt = index.ToFourBytes();
         var ikm = parentSk.ToBytes();
 
         // Optimized notIkm calculation
@@ -49,27 +51,51 @@ internal static class HdKeysClass
         return Hmac.Hash256(lamportPk);
     }
 
-    public static PrivateKey DeriveChildSk(PrivateKey parentSk, long index) => KeyGen(ParentSkToLamportPk(parentSk, index));
+    public static PrivateKey DeriveChildSk(PrivateKey parentSk, uint index) => KeyGen(ParentSkToLamportPk(parentSk, index));
 
-    public static PrivateKey DeriveChildSkUnhardened(PrivateKey parentSk, long index)
+    public static PrivateKey DeriveChildSkUnhardened(PrivateKey parentSk, uint index)
     {
-        var bytes = ByteUtils.ConcatenateArrays(parentSk.GetG1().ToBytes(), ByteUtils.ToBytes(index, 4, Endian.Big));
+        var bytes = ByteUtils.ConcatenateArrays(parentSk.GetG1().ToBytes(), index.ToFourBytes());
         var hash = Hmac.Hash256(bytes);
 
         return PrivateKey.Aggregate([PrivateKey.FromBytes(hash), parentSk]);
     }
 
-    public static JacobianPoint DeriveChildG1Unhardened(JacobianPoint parentPk, long index)
+    public static JacobianPoint DeriveChildG1Unhardened(JacobianPoint parentPk, uint index)
     {
-        var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), ByteUtils.ToBytes(index, 4, Endian.Big));
+        var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), index.ToFourBytes());
         var hash = Hmac.Hash256(bytes);
 
         return parentPk.Add(JacobianPoint.GenerateG1().Multiply(PrivateKey.FromBytes(hash).Value));
     }
 
-    public static JacobianPoint DeriveChildG2Unhardened(JacobianPoint parentPk, long index)
+    public static G1Element DeriveChildG1Unhardened(G1Element parentPk, uint index)
     {
-        var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), ByteUtils.ToBytes(index, 4, Endian.Big));
+        var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), index.ToFourBytes());
+        var hash = Hmac.Hash256(bytes);
+
+        var nonce = new blst.SecretKey();
+        nonce.from_lendian(hash);
+
+        var gen = G1Element.FromAffine(blst.P1_Affine.generator());
+        return parentPk + (gen * new blst.Scalar(nonce.key!));
+    }
+
+    public static G2Element DeriveChildG2Unhardened(G2Element parentPk, uint index)
+    {
+        var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), index.ToFourBytes());
+        var hash = Hmac.Hash256(bytes);
+
+        var nonce = new blst.SecretKey();
+        nonce.from_lendian(hash);
+
+        var gen = G2Element.FromAffine(blst.P2_Affine.generator());
+        return parentPk + (gen * new blst.Scalar(nonce.key!));
+    }
+
+    public static JacobianPoint DeriveChildG2Unhardened(JacobianPoint parentPk, uint index)
+    {
+        var bytes = ByteUtils.ConcatenateArrays(parentPk.ToBytes(), index.ToFourBytes());
         var hash = Hmac.Hash256(bytes);
 
         return parentPk.Add(JacobianPoint.GenerateG2().Multiply(PrivateKey.FromBytes(hash).Value));

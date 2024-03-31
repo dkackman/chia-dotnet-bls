@@ -24,7 +24,7 @@ public class KeyDerivationTests
     [InlineData(13, "b46d152384d888737aebe52bb9127314f678733c45948b00075575db79b732a2bbfa47dab0886863ade7f5fbdc4a14fa")]
     [InlineData(14, "ada6da1ce6464d22dcbc1fe4396a0d1aa8a486fc7094f89a5d11a81cf75a1209eca7bae3b1d943dcff6e39c163d29fb5")]
     [InlineData(15, "b3b4ceea11bbc6fafb5800caa593385644a3262245357e5013be5c1cf622bf7cb0b667e586269c346459c3b5faf0eaef")]
-    public void TestSyntheticPublicKeys(int index, string hexKey)
+    public void TestSyntheticPublicKeys(uint index, string hexKey)
     {
         var pk = sk.GetG1();
         var intermediate = pk.DerivePublicKeyPath([12381, 8444, 2]);
@@ -51,7 +51,7 @@ public class KeyDerivationTests
     [InlineData(13, "3d77df05a9bbda18cc23de6ac1b9744f0a07622df925ae253b3418c41709dcc8")]
     [InlineData(14, "465a7d9a106522d4111e5f35ca5ca4fb6889b884f15eba024e3826b8191cf784")]
     [InlineData(15, "68fe97fadd389f4051b6bd0c320f17d08ba7b4951b33d525b1f23d38226e5d0a")]
-    public void TestSyntheticSecretKeys(int index, string hexKey)
+    public void TestSyntheticSecretKeys(uint index, string hexKey)
     {
         var intermediate = sk.DerivePrivateKeyPath([12381, 8444, 2], false);
         var key = AugSchemeMPL.DeriveChildSkUnhardened(intermediate, index);

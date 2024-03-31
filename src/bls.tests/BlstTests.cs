@@ -8,6 +8,16 @@ public class BlstTests
 {
 
     [Fact]
+    public void KeyGen()
+    {
+        var seed = Encoding.UTF8.GetBytes("purple red yellow pink blue green");
+        var sk = PrivateKey.FromSeed(seed);
+        var sk2 = HdKeysClass.KeyGen(seed);
+
+        Assert.Equal(sk, sk2);
+    }
+
+    [Fact]
     public void CoreChiaDotnet()
     {
         var msg = Encoding.UTF8.GetBytes("assertion");

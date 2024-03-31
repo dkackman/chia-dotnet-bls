@@ -68,7 +68,7 @@ public readonly struct AffinePoint
     /// </summary>
     /// <returns>The untwisted affine point.</returns>
     public AffinePoint Untwist() => new(X.Divide(Ec.Wsq), Y.Divide(Ec.Wcu), false, Ec);
-    
+
     /// <summary>
     /// Doubles the affine point.
     /// </summary>

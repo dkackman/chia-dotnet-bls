@@ -10,7 +10,7 @@ public static class AugSchemeMPL
     /// </summary>
     /// <param name="seed">The seed used to generate the private key.</param>
     /// <returns>The generated private key.</returns>
-    public static PrivateKey KeyGen(this byte[] seed) => HdKeysClass.KeyGen(seed);
+    public static PrivateKey KeyGen(this byte[] seed) => CoreMPL.KeyGen(seed);
 
     /// <summary>
     /// Signs a message using the specified private key.
@@ -85,7 +85,7 @@ public static class AugSchemeMPL
     /// <param name="privateKey">The parent private key.</param>
     /// <param name="index">The index of the child private key.</param>
     /// <returns>The derived child private key.</returns>
-    public static PrivateKey DeriveChildSk(this PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSk(privateKey, index);
+    public static PrivateKey DeriveChildSk(this PrivateKey privateKey, uint index) => CoreMPL.DeriveChildSk(privateKey, index);
 
     /// <summary>
     /// Derives a child unhardened private key from the specified private key and index.
@@ -93,7 +93,7 @@ public static class AugSchemeMPL
     /// <param name="privateKey">The parent private key.</param>
     /// <param name="index">The index of the child private key.</param>
     /// <returns>The derived child unhardened private key.</returns>
-    public static PrivateKey DeriveChildSkUnhardened(this PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSkUnhardened(privateKey, index);
+    public static PrivateKey DeriveChildSkUnhardened(this PrivateKey privateKey, uint index) => CoreMPL.DeriveChildSkUnhardened(privateKey, index);
 
     /// <summary>
     /// Derives a child unhardened public key from the specified public key and index.
@@ -101,5 +101,8 @@ public static class AugSchemeMPL
     /// <param name="publicKey">The parent public key.</param>
     /// <param name="index">The index of the child public key.</param>
     /// <returns>The derived child unhardened public key.</returns>
-    public static JacobianPoint DeriveChildPkUnhardened(this JacobianPoint publicKey, long index) => HdKeysClass.DeriveChildG1Unhardened(publicKey, index);
+    public static JacobianPoint DeriveChildPkUnhardened(this JacobianPoint publicKey, uint index) => HdKeysClass.DeriveChildG1Unhardened(publicKey, index);
+
+    public static G1Element DeriveChildPkUnhardened(G1Element publicKey, uint index) => CoreMPL.DeriveChildPkUnhardened(publicKey, index);
+
 }

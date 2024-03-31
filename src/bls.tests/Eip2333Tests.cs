@@ -4,7 +4,7 @@ namespace bls.tests;
 
 public class Eip2333Tests
 {
-    public static TheoryData<string, string, string, long> TestData =>
+    public static TheoryData<string, string, string, uint> TestData =>
         new()
         {
             { "3141592653589793238462643383279502884197169399375105820974944592", "4ff5e145590ed7b71e577bb04032396d1619ff41cb4e350053ed2dce8d1efd1c", "5c62dcf9654481292aafa3348f1d1b0017bbfb44d6881d26d2b17836b38f204d", 3141592653 },
@@ -15,7 +15,7 @@ public class Eip2333Tests
 
     [Theory]
     [MemberData(nameof(TestData))]
-    public void TestEip2333(string seed, string masterSk, string childSk, long childIndex)
+    public void TestEip2333(string seed, string masterSk, string childSk, uint childIndex)
     {
         var seedBytes = ByteUtils.ToHexBytes(seed);
         var master = BasicSchemeMPL.KeyGen(seedBytes);

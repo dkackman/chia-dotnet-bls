@@ -66,7 +66,7 @@ public static class KeyDerivation
     {
         foreach (var index in path)
         {
-            privateKey = hardened ? AugSchemeMPL.DeriveChildSk(privateKey, index) : AugSchemeMPL.DeriveChildSkUnhardened(privateKey, index);
+            privateKey = hardened ? AugSchemeMPL.DeriveChildSk(privateKey, (uint)index) : AugSchemeMPL.DeriveChildSkUnhardened(privateKey, (uint)index);
         }
 
         return privateKey;
@@ -82,7 +82,7 @@ public static class KeyDerivation
     {
         foreach (var index in path)
         {
-            publicKey = AugSchemeMPL.DeriveChildPkUnhardened(publicKey, index);
+            publicKey = AugSchemeMPL.DeriveChildPkUnhardened(publicKey, (uint)index);
         }
 
         return publicKey;

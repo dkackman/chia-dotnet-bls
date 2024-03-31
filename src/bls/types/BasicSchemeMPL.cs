@@ -2,7 +2,7 @@ namespace chia.dotnet.bls;
 
 internal static class BasicSchemeMPL
 {
-    public static PrivateKey KeyGen(byte[] seed) => HdKeysClass.KeyGen(seed);
+    public static PrivateKey KeyGen(byte[] seed) => CoreMPL.KeyGen(seed);
 
     public static JacobianPoint Sign(PrivateKey privateKey, byte[] message) => Signing.CoreSignMpl(privateKey, message, Schemes.BasicSchemeDst);
 
@@ -29,7 +29,10 @@ internal static class BasicSchemeMPL
         return Signing.CoreAggregateVerify(publicKeys, messages, signature, Schemes.BasicSchemeDst);
     }
 
-    public static PrivateKey DeriveChildSk(PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSk(privateKey, index);
-    public static PrivateKey DeriveChildSkUnhardened(PrivateKey privateKey, long index) => HdKeysClass.DeriveChildSkUnhardened(privateKey, index);
-    public static JacobianPoint DeriveChildPkUnhardened(JacobianPoint publicKey, long index) => HdKeysClass.DeriveChildG1Unhardened(publicKey, index);
+    public static PrivateKey DeriveChildSk(PrivateKey privateKey, uint index) => CoreMPL.DeriveChildSk(privateKey, index);
+
+    public static PrivateKey DeriveChildSkUnhardened(PrivateKey privateKey, uint index) => CoreMPL.DeriveChildSkUnhardened(privateKey, index);
+
+    public static JacobianPoint DeriveChildPkUnhardened(JacobianPoint publicKey, uint index) => HdKeysClass.DeriveChildG1Unhardened(publicKey, index);
+    public static G1Element DeriveChildPkUnhardened(G1Element publicKey, uint index) => CoreMPL.DeriveChildPkUnhardened(publicKey, index);
 }

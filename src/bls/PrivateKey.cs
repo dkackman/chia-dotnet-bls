@@ -120,6 +120,15 @@ public readonly struct PrivateKey
     public G1Element GetG1Element() => new(secretKey);
     public G2Element GetG2Element() => new(secretKey);
 
+    public G2Element SignG2(byte[] message)
+    {
+        var p2 = new blst.P2();
+        p2.hash_to(message);
+        p2.sign_with(secretKey);
+
+        return new G2Element(p2);
+    }
+
     /// <summary>
     /// Converts the private key to a byte array.
     /// </summary>
@@ -152,4 +161,12 @@ public readonly struct PrivateKey
     /// <param name="value">The <see cref="PrivateKey"/> object to compare with the current <see cref="PrivateKey"/>.</param>
     /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
     public bool Equals(PrivateKey value) => ByteUtils.BytesEqual(secretKey.key, value.secretKey.key);
+
+    public override bool Equals(object? obj) => obj is PrivateKey value && Equals(value);
+
+    public override int GetHashCode() => secretKey.key?.GetHashCode() ?? 0;
+
+    public static bool operator ==(PrivateKey left, PrivateKey right) => left.Equals(right);
+
+    public static bool operator !=(PrivateKey left, PrivateKey right) => !left.Equals(right);
 }

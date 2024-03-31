@@ -20,7 +20,7 @@ using System.IO;
 
 namespace supranational
 {
-    internal static class blst
+    public static class blst
     {
 
 #if NET5_0_OR_GREATER
@@ -688,7 +688,7 @@ namespace supranational
             public bool is_equal(P2_Affine p)
             { return blst_p2_affine_is_equal(point, p.point); }
 
-            ERROR core_verify(P1_Affine pk, bool hash_or_encode,
+            public ERROR core_verify(P1_Affine pk, bool hash_or_encode,
                               byte[] msg, string DST = "", byte[] aug = null)
             {
                 byte[] dst = Encoding.UTF8.GetBytes(DST);
