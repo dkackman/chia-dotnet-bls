@@ -23,7 +23,7 @@ public enum Endian
 /// <summary>
 /// Extension methods for working with byte arrays and conversions.
 /// </summary>
-public static partial class ByteUtils
+public static class ByteUtils
 {
     /// <summary>
     /// Calculates the number of bits required to represent a BigInteger.
@@ -196,6 +196,11 @@ public static partial class ByteUtils
     /// <returns>The big integer representation of the byte array.</returns>
     public static BigInteger DecodeBigInt(this byte[] bytes) => bytes.ToBigInt(Endian.Big, true);
 
+    /// <summary>
+    /// Converts a uint to a four byte array.
+    /// </summary>
+    /// <param name="input">The uint</param>
+    /// <returns>The byte array</returns>
     public static byte[] ToBytes(this uint input)
     {
         byte[] result = new byte[4];
@@ -247,7 +252,6 @@ public static partial class ByteUtils
 
         return result;
     }
-
 
     /// <summary>
     /// Converts a BigInteger to a byte array.
