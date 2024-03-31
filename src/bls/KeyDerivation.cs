@@ -49,7 +49,7 @@ public static class KeyDerivation
     public static PrivateKey CalculateSyntheticPrivateKey(this PrivateKey privateKey, byte[] hiddenPuzzleHash)
     {
         var syntheticOffset = CalculateSyntheticOffset(privateKey.GetG1Element(), hiddenPuzzleHash);
-        var syntheticPrivateExponent = Mod(privateKey.Value + syntheticOffset, groupOrder);
+        var syntheticPrivateExponent = Mod(privateKey.ToBigInteger() + syntheticOffset, groupOrder);
         var blob = syntheticPrivateExponent.ToBytes(32, Endian.Big);
 
         return PrivateKey.FromBytes(blob);

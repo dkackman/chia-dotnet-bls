@@ -212,6 +212,13 @@ public static class ByteUtils
     }
 
     /// <summary>
+    /// Converts a uint to a four byte array.
+    /// </summary>
+    /// <param name="input">The uint</param>
+    /// <returns>The byte array</returns>
+    public static uint ToUint(this byte[] bytes) => (uint)bytes.ToInt(Endian.Big, false);
+
+    /// <summary>
     /// Converts a byte array to a long integer.
     /// </summary>
     /// <param name="bytes">The byte array to convert.</param>

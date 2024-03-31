@@ -5,8 +5,8 @@ namespace chia.dotnet.bls;
 /// <summary>
 /// Represents a key used in BLS cryptography. Typically used as a public key.
 /// </summary>
-/// <remarks>By convention G1Element is used for public keys</remarks>
-public class G1Element : Jacobian
+/// <remarks>By convention the <see cref="G1Element"> is used for public keys</remarks>
+public class G1Element : JacobianPoint
 {
     private const int _size = 48;
 
@@ -20,6 +20,10 @@ public class G1Element : Jacobian
 
     internal G1Element() => p1 = new blst.P1(true);
 
+    /// <summary>
+    /// Gets the size of the element.
+    /// </summary>
+    /// <remarks>Size is 48 bytes</remarks>
     public override int Size => _size;
 
     /// <summary>
@@ -32,31 +36,43 @@ public class G1Element : Jacobian
     /// </summary>
     /// <returns>The byte array representation of the element.</returns>
     public override byte[] ToBytes() => p1.compress();
+
+    /// <summary>
+    /// Serializes the element.
+    /// </summary>
+    /// <returns>The uncompressed serialization of the element</returns>
     public override byte[] Serialize() => p1.serialize();
 
     /// <summary>
     /// Gets the fingerprint of the element.
     /// </summary>
     /// <returns></returns>
-    public long GetFingerprint() => Hmac.Hash256(ToBytes()).Take(4).ToArray().ToInt(Endian.Big);
+    public uint GetFingerprint() => Hmac.Hash256(ToBytes()).Take(4).ToArray().ToUint();
 
     internal blst.P1_Affine ToAffine() => p1.to_affine();
+
+    internal static G1Element FromAffine(blst.P1_Affine affine) => new(affine.to_jacobian());
 
     /// <summary>
     /// Hashes a message to a G1Element.
     /// </summary>
-    /// <param name="message"></param>
-    /// <param name="dst"></param>
-    /// <param name="pk"></param>
-    /// <returns></returns>
-    public static G1Element FromMessage(byte[] message, string dst = "", byte[]? pk = null)
+    /// <param name="message">The message</param>
+    /// <param name="dst">The Domain Separation Tag</param>
+    /// <param name="aug">Extra data to include in the hash</param>
+    /// <returns>The hashed message</returns>
+    public static G1Element FromMessage(byte[] message, string dst = "", byte[]? aug = null)
     {
         var p1 = new blst.P1();
-        p1.hash_to(message, dst, pk!);
+        p1.hash_to(message, dst, aug!);
         return new G1Element(p1);
     }
 
-    internal static G1Element FromAffine(blst.P1_Affine affine) => new(affine.to_jacobian());
+    /// <summary>
+    /// Converts a byte array to a G1Element.
+    /// </summary>
+    /// <param name="bytes">The byte array</param>
+    /// <returns>The G1Element</returns>
+    /// <exception cref="ArgumentException"> if the array isn't 48 bytes long</exception>
     public static new G1Element FromBytes(byte[] bytes)
     {
         if (bytes.Length != _size)
@@ -92,6 +108,12 @@ public class G1Element : Jacobian
         return new G1Element(affine.to_jacobian());
     }
 
+    /// <summary>
+    /// Adds two G1Elements.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns>The result</returns>
     public static G1Element operator +(G1Element a, G1Element b)
     {
         var p1 = a.p1.dup();
@@ -99,7 +121,19 @@ public class G1Element : Jacobian
         return new G1Element(p1);
     }
 
+    /// <summary>
+    /// Multiplies a G1Element by a scalar.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="k"></param>
+    /// <returns>The result</returns>
     public static G1Element operator *(G1Element a, blst.Scalar k) => new(a.p1.mult(k));
 
+    /// <summary>
+    /// Multiplies a scalar by a G1Element.
+    /// </summary>
+    /// <param name="k"></param>
+    /// <param name="a"></param>
+    /// <returns>The result</returns>
     public static G1Element operator *(blst.Scalar k, G1Element a) => a * k;
 }

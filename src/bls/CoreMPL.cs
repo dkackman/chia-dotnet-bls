@@ -11,10 +11,10 @@ internal static class CoreMPL
 
     public static bool Verify(G1Element publicKey, byte[] message, G2Element signature, string dst = "")
     {
-        var pubkeyAffine = publicKey.ToAffine();
+        var publicKeyAffine = publicKey.ToAffine();
         var sigAffine = signature.ToAffine();
 
-        return sigAffine.core_verify(pubkeyAffine, true, message, dst) == blst.ERROR.SUCCESS;
+        return sigAffine.core_verify(publicKeyAffine, true, message, dst) == blst.ERROR.SUCCESS;
     }
 
     public static G1Element Aggregate(G1Element[] publicKeys)

@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Numerics;
 using supranational;
 
@@ -19,34 +18,29 @@ public readonly struct PrivateKey
     /// </summary>
     public const int Size = 32;
 
-    /// <summary>
-    /// The value of the private key as a BigInteger.
-    /// </summary>
-    public readonly BigInteger Value;
-
     internal readonly blst.SecretKey secretKey = new();
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PrivateKey"/> class with the specified value.
-    /// </summary>
-    /// <param name="value">The value of the private key.</param>
-    public PrivateKey(BigInteger value)
+    private PrivateKey(BigInteger value)
     {
-        Value = value;
         secretKey.key = value.ToBytes(Size, Endian.Little);
     }
 
     private PrivateKey(byte[] key, BigInteger value)
     {
         secretKey.key = key;
-        Value = value;
     }
 
     private PrivateKey(byte[] seed)
     {
         secretKey.keygen_v3(seed);
-        Value = secretKey.key!.ToBigInt(Endian.Little);
     }
+
+    /// <summary>
+    /// Creates a <see cref="PrivateKey"/> instance from the specified <see cref="BigInteger"/>.
+    /// </summary>
+    /// <param name="value">The <see cref="BigInteger"/> representing the private key.</param>
+    /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
+    public static PrivateKey FromBigInteger(BigInteger value) => new(value);
 
     /// <summary>
     /// Creates a <see cref="PrivateKey"/> instance from the specified byte array.
@@ -142,6 +136,12 @@ public readonly struct PrivateKey
 
         return secretKey.to_bendian();
     }
+
+    /// <summary>
+    /// Converts the private key to a <see cref="BigInteger"/>.
+    /// </summary>
+    /// <returns>The BigInteger representation of the key</returns>
+    public BigInteger ToBigInteger() => secretKey.key is null ? BigInteger.Zero : secretKey.key.ToBigInt(Endian.Little);
 
     /// <summary>
     /// Converts the private key to a hexadecimal string.

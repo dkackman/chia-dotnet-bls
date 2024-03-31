@@ -77,14 +77,15 @@ public static class AugSchemeMPL
         var augMessages = new byte[length][];
         for (int i = 0; i < length; i++)
         {
-            var pubkey = publicKeys[i].ToBytes();
-            augMessages[i] = new byte[pubkey.Length + messages[i].Length];
-            pubkey.CopyTo(augMessages[i], 0);
-            messages[i].CopyTo(augMessages[i], pubkey.Length);
+            var publicKey = publicKeys[i].ToBytes();
+            var message = messages[i];
+            var augMessage = new byte[publicKey.Length + message.Length];
+            publicKey.CopyTo(augMessage, 0);
+            message.CopyTo(augMessage, publicKey.Length);
+            augMessages[i] = augMessage;
         }
 
         return CoreMPL.AggregateVerify(publicKeys, augMessages, signature, CIPHERSUITE_ID);
-
     }
 
     /// <summary>

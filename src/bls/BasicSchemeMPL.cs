@@ -1,5 +1,8 @@
 namespace chia.dotnet.bls;
 
+/// <summary>
+/// unused reference implementation
+/// </summary>
 internal static class BasicSchemeMPL
 {
     private const string CIPHERSUITE_ID = "BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_NUL_";
