@@ -904,9 +904,9 @@ public class PyeccVectorsTests
     private readonly G2Element sig1Basic;
     private readonly G2Element sig2Basic;
     private readonly G2Element sigABasic;
-    private readonly JacobianPoint sig1Aug;
-    private readonly JacobianPoint sig2Aug;
-    private readonly JacobianPoint sigAAug;
+    private readonly G2Element sig1Aug;
+    private readonly G2Element sig2Aug;
+    private readonly G2Element sigAAug;
     private readonly G2Element sig1Pop;
     private readonly G2Element sig2Pop;
     private readonly G2Element sigAPop;

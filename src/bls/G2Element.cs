@@ -42,7 +42,7 @@ public class G2Element : Jacobian
         return new G2Element(newP2);
     }
 
-    public static G2Element FromMessage(byte[] message, string dst, byte[]? pk = null)
+    public static G2Element FromMessage(byte[] message, string dst = "", byte[]? pk = null)
     {
         var p2 = new blst.P2();
         p2.hash_to(message, dst, pk!);

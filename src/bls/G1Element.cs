@@ -49,7 +49,7 @@ public class G1Element : Jacobian
     /// <param name="dst"></param>
     /// <param name="pk"></param>
     /// <returns></returns>
-    public static G1Element FromMessage(byte[] message, string dst, byte[]? pk = null)
+    public static G1Element FromMessage(byte[] message, string dst = "", byte[]? pk = null)
     {
         var p1 = new blst.P1();
         p1.hash_to(message, dst, pk!);

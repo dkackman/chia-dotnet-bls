@@ -45,7 +45,7 @@ public class CurrentTests
     public void IsVerified()
     {
         var sk = AugSchemeMPL.KeyGen(seed);
-        var pk = sk.GetG1();
+        var pk = sk.GetG1Element();
         var signature = AugSchemeMPL.Sign(sk, message);
         Assert.True(AugSchemeMPL.Verify(pk, message, signature));
     }

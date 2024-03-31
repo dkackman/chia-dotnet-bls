@@ -120,16 +120,7 @@ public readonly struct PrivateKey
     public G1Element GetG1Element() => new(secretKey);
     public G2Element GetG2Element() => new(secretKey);
 
-    public G2Element SignG2(byte[] message)
-    {
-        var p2 = new blst.P2();
-        p2.hash_to(message);
-        p2.sign_with(secretKey);
-
-        return new G2Element(p2);
-    }
-
-    public G2Element SignG2(byte[] message, string dst)
+    public G2Element SignG2(byte[] message, string dst = "")
     {
         var p2 = new blst.P2();
         p2.hash_to(message, dst);

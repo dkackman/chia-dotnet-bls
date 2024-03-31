@@ -7,11 +7,10 @@ public class Examples
 {
     const string MNEMONIC = "abandon abandon abandon";
     const string MESSAGE = "hello world";
+
     [Fact]
     public void SignAndVerifyAMessage()
     {
-
-
         // create a secret key from a mnemonic
         var bip39 = new BIP39();
         var seed = bip39.MnemonicToSeedHex(MNEMONIC, "");
@@ -21,7 +20,7 @@ public class Examples
         var signature = sk.Sign(MESSAGE);
 
         // verify the signature
-        var pk = sk.GetG1();
+        var pk = sk.GetG1Element();
         var result = pk.Verify(MESSAGE, signature);
         Assert.True(result);
     }
