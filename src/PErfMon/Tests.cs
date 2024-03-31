@@ -1,7 +1,5 @@
 ﻿using chia.dotnet.bls;
 using dotnetstandard_bip39;
-using System.Security.Cryptography.X509Certificates;
-
 
 namespace PerfMon;
 
@@ -19,7 +17,7 @@ internal class Tests
 
         for (var i = 0; i < count; i++)
         {
-            publicKey.CalculateSyntheticPublicKey(hiddenPuzzleHash);
+            var g1 = publicKey.CalculateSyntheticPublicKey(hiddenPuzzleHash);
 
         }
     }
@@ -53,7 +51,7 @@ internal class Tests
 
         for (var i = 0; i < count; i++)
         {
-            GenerateKeyPair(privateKey, 1);
+            GenerateKeyPair(privateKey, i);
         }
     }
 

@@ -65,7 +65,7 @@ internal static class CoreMPL
         return pairing.finalverify(pt);
     }
 
-    public static PrivateKey DeriveChildSk(PrivateKey privateKey, uint index) => HdKeysClass.DeriveChildSk(privateKey, index);
-    public static PrivateKey DeriveChildSkUnhardened(PrivateKey privateKey, uint index) => HdKeysClass.DeriveChildSkUnhardened(privateKey, index);
-    public static G1Element DeriveChildPkUnhardened(G1Element publicKey, uint index) => HdKeysClass.DeriveChildG1Unhardened(publicKey, index);
+    public static PrivateKey DeriveChildSk(PrivateKey privateKey, uint index) => HdKeys.DeriveChildSk(privateKey, index);
+    public static PrivateKey DeriveChildSkUnhardened(PrivateKey privateKey, uint index) => HdKeys.DeriveChildSkUnhardened(privateKey, index);
+    public static G1Element DeriveChildPkUnhardened(G1Element publicKey, uint index) => HdKeys.DeriveChildG1Unhardened(publicKey, index);
 }

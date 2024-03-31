@@ -17,36 +17,6 @@ internal readonly struct EC
     public BigInteger Q { get; init; }
 
     /// <summary>
-    /// Gets or sets the coefficient 'A' of the curve equation.
-    /// </summary>
-    public IFq A { get; init; } = Fq.Nil;
-
-    /// <summary>
-    /// Gets or sets the coefficient 'B' of the curve equation.
-    /// </summary>
-    public IFq B { get; init; } = Fq.Nil;
-
-    /// <summary>
-    /// Gets or sets the x-coordinate of the generator point on the curve.
-    /// </summary>
-    public IFq Gx { get; init; } = Fq.Nil;
-
-    /// <summary>
-    /// Gets or sets the y-coordinate of the generator point on the curve.
-    /// </summary>
-    public IFq Gy { get; init; } = Fq.Nil;
-
-    /// <summary>
-    /// Gets or sets the x-coordinate of the generator point on the twisted curve.
-    /// </summary>
-    public Fq2 G2x { get; init; } = Fq2.Nil;
-
-    /// <summary>
-    /// Gets or sets the y-coordinate of the generator point on the twisted curve.
-    /// </summary>
-    public Fq2 G2y { get; init; } = Fq2.Nil;
-
-    /// <summary>
     /// Gets or sets the order of the generator point on the curve.
     /// </summary>
     public BigInteger N { get; init; }
@@ -75,15 +45,4 @@ internal readonly struct EC
     /// Gets or sets the square root of (N^3 - 1) / 2.
     /// </summary>
     public BigInteger SqrtN3m1o2 { get; init; }
-
-    //
-    // These are all precomputed in the constants file.
-    //
-    public IFq Two { get; init; } = Fq.Nil;
-    public IFq Three { get; init; } = Fq.Nil;
-
-    public Fq12 NilOne { get; init; } = Fq12.Nil;
-    public Fq6 NilZero { get; init; } = Fq6.Nil;
-    public Fq12 Wsq { get; init; } = Fq12.Nil;
-    public Fq12 Wcu { get; init; } = Fq12.Nil;
 }

@@ -7,6 +7,19 @@ namespace bls.tests;
 public class PrivateKeyTests
 {
     [Fact]
+    public void CheckPrivateKeyToHdKeys()
+    {
+        const string MNEMONIC = "abandon abandon abandon abandon abandon abandon";
+        var bip39 = new BIP39();
+        var seed = bip39.MnemonicToSeedHex(MNEMONIC, "").HexStringToByteArray();
+        var privateKey = PrivateKey.FromSeed(seed);
+        var hdPrivateKey = HdKeys.KeyGen(seed);
+
+        Assert.Equal(privateKey, hdPrivateKey);
+    }
+
+
+    [Fact]
     public void CheckPrivateKeyAgainstChiaBlsTs()
     {
         const string MNEMONIC = "abandon abandon abandon";

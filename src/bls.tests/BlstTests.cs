@@ -12,7 +12,7 @@ public class BlstTests
     {
         var seed = Encoding.UTF8.GetBytes("purple red yellow pink blue green");
         var sk = PrivateKey.FromSeed(seed);
-        var sk2 = HdKeysClass.KeyGen(seed);
+        var sk2 = HdKeys.KeyGen(seed);
 
         Assert.Equal(sk, sk2);
     }

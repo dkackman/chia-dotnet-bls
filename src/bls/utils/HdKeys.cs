@@ -2,18 +2,9 @@ using supranational;
 
 namespace chia.dotnet.bls;
 
-internal static class HdKeysClass
+internal static class HdKeys
 {
-    private const byte keyLength = 48;
-    private static readonly byte[] info = [0, keyLength];
-
-    public static PrivateKey KeyGen(byte[] seed)
-    {
-        Array.Resize(ref seed, seed.Length + 1);
-        var okm = Hkdf.ExtractExpand(keyLength, seed, Constants.SignatureKeygenSalt, info);
-
-        return new PrivateKey(ModMath.Mod(okm.ToBigInt(Endian.Big), Constants.DefaultEc.N));
-    }
+    public static PrivateKey KeyGen(byte[] seed) => PrivateKey.FromSeed(seed);
 
     public static byte[] IkmToLamportSk(byte[] ikm, byte[] salt) => Hkdf.ExtractExpand(32 * 255, ikm, salt, []);
 

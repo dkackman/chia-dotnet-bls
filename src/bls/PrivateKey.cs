@@ -32,7 +32,6 @@ public readonly struct PrivateKey
     /// <param name="value">The value of the private key.</param>
     public PrivateKey(BigInteger value)
     {
-        Debug.Assert(value < Constants.DefaultEc.N);
         Value = value;
         secretKey.key = value.ToBytes(Size, Endian.Little);
     }
@@ -81,13 +80,6 @@ public readonly struct PrivateKey
     /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
     /// 
     public static PrivateKey FromSeed(byte[] seed) => new(seed);
-
-    /// <summary>
-    /// Creates a <see cref="PrivateKey"/> instance from the specified BigInteger value.
-    /// </summary>
-    /// <param name="value">The BigInteger value representing the private key.</param>
-    /// <returns>A new <see cref="PrivateKey"/> instance.</returns>
-    public static PrivateKey FromBigInt(BigInteger value) => new(ModMath.Mod(value, Constants.DefaultEc.N));
 
     /// <summary>
     /// Aggregates an array of private keys into a single private key.
