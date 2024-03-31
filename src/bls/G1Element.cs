@@ -31,7 +31,8 @@ public class G1Element : Jacobian
     /// Converts the element to a byte array.
     /// </summary>
     /// <returns>The byte array representation of the element.</returns>
-    public override byte[] ToBytes() => p1.serialize();
+    public override byte[] ToBytes() => p1.compress();
+    public override byte[] Serialize() => p1.serialize();
 
     /// <summary>
     /// Gets the fingerprint of the element.

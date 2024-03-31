@@ -19,6 +19,7 @@ public abstract class Jacobian
     /// </summary>
     /// <returns>The byte array representation of the element.</returns>
     public abstract byte[] ToBytes();
+    public abstract byte[] Serialize();
 
     /// <summary>
     /// Converts the element to a hexadecimal string.

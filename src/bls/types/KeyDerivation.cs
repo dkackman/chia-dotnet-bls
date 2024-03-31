@@ -28,6 +28,19 @@ public static class KeyDerivation
         return publicKey.Add(privateKeyToAdd.GetG1());
     }
 
+    public static G1Element CalculateSyntheticPublicKey(this G1Element publicKey, byte[] hiddenPuzzleHash)
+    {
+        var syntheticOffset = CalculateSyntheticOffset(publicKey, hiddenPuzzleHash);
+        var privateKeyToAdd = PrivateKey.FromBytes(syntheticOffset.ToBytes(32, Endian.Big));
+        return publicKey + privateKeyToAdd.GetG1Element();
+    }
+
+    public static BigInteger CalculateSyntheticOffset(this G1Element publicKey, byte[] hiddenPuzzleHash)
+    {
+        var blob = Hmac.Hash256(ByteUtils.ConcatenateArrays(publicKey.ToBytes(), hiddenPuzzleHash));
+        return ModMath.Mod(blob.ToBigInt(Endian.Big, true), groupOrder);
+    }
+
     /// <summary>
     /// Calculates the synthetic private key for the given private key and hidden puzzle hash.
     /// </summary>
@@ -36,7 +49,7 @@ public static class KeyDerivation
     /// <returns>The synthetic private key.</returns>
     public static PrivateKey CalculateSyntheticPrivateKey(this PrivateKey privateKey, byte[] hiddenPuzzleHash)
     {
-        var syntheticOffset = CalculateSyntheticOffset(privateKey.GetG1(), hiddenPuzzleHash);
+        var syntheticOffset = CalculateSyntheticOffset(privateKey.GetG1Element(), hiddenPuzzleHash);
         var syntheticPrivateExponent = ModMath.Mod(privateKey.Value + syntheticOffset, groupOrder);
         var blob = syntheticPrivateExponent.ToBytes(32, Endian.Big);
 
@@ -79,6 +92,22 @@ public static class KeyDerivation
     /// <param name="path">The path to derive.</param>
     /// <returns>The derived public key.</returns>
     public static JacobianPoint DerivePublicKeyPath(this JacobianPoint publicKey, int[] path)
+    {
+        foreach (var index in path)
+        {
+            publicKey = AugSchemeMPL.DeriveChildPkUnhardened(publicKey, (uint)index);
+        }
+
+        return publicKey;
+    }
+
+    /// <summary>
+    /// Derives a public key path from the given master public key.
+    /// </summary>
+    /// <param name="publicKey">The master public key.</param>
+    /// <param name="path">The path to derive.</param>
+    /// <returns>The derived public key.</returns>
+    public static G1Element DerivePublicKeyPath(this G1Element publicKey, int[] path)
     {
         foreach (var index in path)
         {

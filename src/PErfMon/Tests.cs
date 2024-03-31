@@ -39,7 +39,7 @@ internal class Tests
 
         for (uint i = 0; i < count; i++)
         {
-            AugSchemeMPL.DeriveChildSkUnhardened(intermediateKey, i);
+            var sk = AugSchemeMPL.DeriveChildSkUnhardened(intermediateKey, i);
         }
     }
 

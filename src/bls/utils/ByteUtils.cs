@@ -195,7 +195,8 @@ public static partial class ByteUtils
     /// <param name="bytes">The byte array to convert.</param>
     /// <returns>The big integer representation of the byte array.</returns>
     public static BigInteger DecodeBigInt(this byte[] bytes) => bytes.ToBigInt(Endian.Big, true);
-    public static byte[] ToFourBytes(this uint input)
+
+    public static byte[] ToBytes(this uint input)
     {
         byte[] result = new byte[4];
         for (int i = 0; i < 4; i++)
@@ -204,6 +205,7 @@ public static partial class ByteUtils
         }
         return result;
     }
+
     /// <summary>
     /// Converts a byte array to a long integer.
     /// </summary>

@@ -19,7 +19,7 @@ public static class AugSchemeMPL
     /// <param name="message">The message to be signed.</param>
     /// <returns>The signature as a JacobianPoint.</returns>
     public static JacobianPoint Sign(this PrivateKey privateKey, byte[] message) =>
-        Signing.CoreSignMpl(privateKey, ByteUtils.ConcatenateArrays(privateKey.GetG1().ToBytes(), message), Schemes.AugSchemeDst);
+        Signing.CoreSignMpl(privateKey, ByteUtils.ConcatenateArrays(privateKey.GetG1Element().ToBytes(), message), Schemes.AugSchemeDst);
 
     /// <summary>
     /// Signs a message using the specified private key.

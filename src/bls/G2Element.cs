@@ -31,7 +31,8 @@ public class G2Element : Jacobian
     /// Converts the element to a byte array.
     /// </summary>
     /// <returns>The byte array representation of the element.</returns>
-    public override byte[] ToBytes() => p2.serialize();
+    public override byte[] ToBytes() => p2.compress();
+    public override byte[] Serialize() => p2.serialize();
 
     public G2Element SignWith(PrivateKey sk)
     {

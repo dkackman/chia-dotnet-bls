@@ -35,7 +35,7 @@ public class BlstTests
 
 
         // generate public key and serialize it...
-        var pk_for_wire = pk.ToBytes();
+        var pk_for_wire = pk.Serialize();
 
         Assert.Equal(pk_for_wire_blst, pk_for_wire);
 
@@ -46,7 +46,7 @@ public class BlstTests
 
         var g2 = G2Element.FromMessage(msg, DST, pk_for_wire);
         var signedMessage = g2.SignWith(sk);
-        var sig_for_wire = signedMessage.ToBytes();
+        var sig_for_wire = signedMessage.Serialize();
 
         Assert.Equal(sig_for_wire_blst, sig_for_wire);
     }
