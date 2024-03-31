@@ -18,7 +18,7 @@ public class G1Element : Jacobian
 
     internal G1Element(blst.P1 p1) => this.p1 = p1;
 
-    internal G1Element() => p1 = new blst.P1();
+    internal G1Element() => p1 = new blst.P1(true);
 
     public override int Size => _size;
 

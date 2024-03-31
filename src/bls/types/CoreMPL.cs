@@ -9,6 +9,9 @@ internal static class CoreMPL
     public static G2Element Sign(PrivateKey privateKey, string message) => privateKey.SignG2(message.ToBytes());
     public static G2Element Sign(PrivateKey privateKey, byte[] message) => privateKey.SignG2(message);
 
+    public static G2Element Sign(PrivateKey privateKey, string message, string dst) => privateKey.SignG2(message.ToBytes(), dst);
+    public static G2Element Sign(PrivateKey privateKey, byte[] message, string dst) => privateKey.SignG2(message, dst);
+
     public static bool Verify(G1Element publicKey, byte[] message, G2Element signature)
     {
         var pubkeyAffine = publicKey.ToAffine();
@@ -17,12 +20,31 @@ internal static class CoreMPL
         return sigAffine.core_verify(pubkeyAffine, true, message) == blst.ERROR.SUCCESS;
     }
 
+    public static bool Verify(G1Element publicKey, byte[] message, G2Element signature, string dst)
+    {
+        var pubkeyAffine = publicKey.ToAffine();
+        var sigAffine = signature.ToAffine();
+
+        return sigAffine.core_verify(pubkeyAffine, true, message, dst) == blst.ERROR.SUCCESS;
+    }
+
     public static G1Element Aggregate(G1Element[] publicKeys)
     {
         var ret = new G1Element();
         foreach (var publicKey in publicKeys)
         {
             ret += publicKey;
+        }
+
+        return ret;
+    }
+
+    public static G2Element Aggregate(G2Element[] signatures)
+    {
+        var ret = new G2Element();
+        foreach (var signature in signatures)
+        {
+            ret += signature;
         }
 
         return ret;

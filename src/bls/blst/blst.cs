@@ -481,7 +481,7 @@ namespace supranational
             private static readonly int sz = (int)blst_p1_sizeof() / sizeof(long);
 
             //public P1()           { point = new long[sz]; }
-            private P1(bool _) { point = new long[sz]; }
+            public P1(bool _) { point = new long[sz]; }
             private P1(P1 p) { point = (long[])p.point.Clone(); }
             private long[] self()
             { if (point == null) { point = new long[sz]; } return point; }
@@ -764,7 +764,7 @@ namespace supranational
             private static readonly int sz = (int)blst_p2_sizeof() / sizeof(long);
 
             //public P2()           { point = new long[sz]; }
-            private P2(bool _) { point = new long[sz]; }
+            public P2(bool _) { point = new long[sz]; }
             private P2(P2 p) { point = (long[])p.point.Clone(); }
             private long[] self()
             { if (point == null) { point = new long[sz]; } return point; }

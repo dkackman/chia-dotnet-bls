@@ -907,9 +907,9 @@ public class PyeccVectorsTests
     private readonly JacobianPoint sig1Aug;
     private readonly JacobianPoint sig2Aug;
     private readonly JacobianPoint sigAAug;
-    private readonly JacobianPoint sig1Pop;
-    private readonly JacobianPoint sig2Pop;
-    private readonly JacobianPoint sigAPop;
+    private readonly G2Element sig1Pop;
+    private readonly G2Element sig2Pop;
+    private readonly G2Element sigAPop;
 
 
     public PyeccVectorsTests()

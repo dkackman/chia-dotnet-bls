@@ -129,6 +129,15 @@ public readonly struct PrivateKey
         return new G2Element(p2);
     }
 
+    public G2Element SignG2(byte[] message, string dst)
+    {
+        var p2 = new blst.P2();
+        p2.hash_to(message, dst);
+        p2.sign_with(secretKey);
+
+        return new G2Element(p2);
+    }
+
     /// <summary>
     /// Converts the private key to a byte array.
     /// </summary>

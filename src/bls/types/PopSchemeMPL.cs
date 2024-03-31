@@ -1,84 +1,48 @@
+using supranational;
+
 namespace chia.dotnet.bls;
 
 internal static class PopSchemeMPL
 {
+    private const string CIPHERSUITE_ID = "BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_POP_";
+    private const string POP_CIPHERSUITE_ID = "BLS_POP_BLS12381G2_XMD:SHA-256_SSWU_RO_POP_";
+
     public static PrivateKey KeyGen(byte[] seed) => CoreMPL.KeyGen(seed);
 
-    public static JacobianPoint Sign(PrivateKey privateKey, byte[] message) => Signing.CoreSignMpl(privateKey, message, Schemes.PopSchemeDst);
+    public static G2Element Sign(PrivateKey privateKey, byte[] message) => CoreMPL.Sign(privateKey, message, CIPHERSUITE_ID);
 
-    public static bool Verify(JacobianPoint publicKey, byte[] message, JacobianPoint signature) => Signing.CoreVerifyMpl(publicKey, message, signature, Schemes.PopSchemeDst);
+    public static bool Verify(G1Element publicKey, byte[] message, G2Element signature) => CoreMPL.Verify(publicKey, message, signature, CIPHERSUITE_ID);
 
-    public static JacobianPoint Aggregate(JacobianPoint[] signatures) => Signing.CoreAggregateMpl(signatures);
+    public static G2Element Aggregate(G2Element[] signatures) => CoreMPL.Aggregate(signatures);
 
-    public static bool AggregateVerify(JacobianPoint[] publicKeys, byte[][] messages, JacobianPoint signature)
+    public static G2Element PopProve(PrivateKey privateKey) => privateKey.SignG2(privateKey.GetG1Element().ToBytes(), POP_CIPHERSUITE_ID);
+
+    public static bool PopVerify(G1Element publicKey, G2Element proof)
     {
-        if (publicKeys.Length != messages.Length || publicKeys.Length == 0)
+        if (!proof.IsValid || !publicKey.IsValid)
         {
             return false;
         }
 
-        for (int i = 0; i < messages.Length; i++)
-        {
-            for (int j = 0; j < messages.Length; j++)
-            {
-                if (i != j && messages[i].SequenceEqual(messages[j]))
-                    return false;
-            }
-        }
+        var pubkeyAffine = publicKey.ToAffine();
+        var sigAffine = proof.ToAffine();
+        var err = sigAffine.core_verify(pubkeyAffine, true, publicKey.ToBytes(), POP_CIPHERSUITE_ID);
 
-        return Signing.CoreAggregateVerify(publicKeys, messages, signature, Schemes.PopSchemeDst);
+        return err == blst.ERROR.SUCCESS;
     }
-
-    public static JacobianPoint PopProve(PrivateKey privateKey)
-    {
-        var publicKey = privateKey.GetG1();
-        return OptSwu2MapClass.G2Map(publicKey.ToBytes(), Schemes.PopSchemePopDst).Multiply(privateKey.Value);
-    }
-
-    public static bool PopVerify(JacobianPoint publicKey, JacobianPoint proof)
-    {
-        if (!proof.IsValid())
-        {
-            return false;
-        }
-
-        if (!publicKey.IsValid())
-        {
-            return false;
-        }
-
-        var q = OptSwu2MapClass.G2Map(publicKey.ToBytes(), Schemes.PopSchemePopDst);
-        var one = Fq12.Nil.One(Constants.DefaultEc.Q);
-        var pairingResult = Pairing.AtePairingMulti(
-            [publicKey, JacobianPoint.GenerateG1().Negate()],
-            [q, proof],
-            Constants.DefaultEc
-        );
-
-        return pairingResult.Equals(one);
-    }
-
-    public static bool FastAggregateVerify(JacobianPoint[] publicKeys, byte[] message, JacobianPoint signature)
+    public static bool FastAggregateVerify(G1Element[] publicKeys, byte[] message, G2Element signature)
     {
         if (publicKeys.Length == 0)
         {
             return false;
         }
 
-        var aggregate = publicKeys[0];
-        foreach (var publicKey in publicKeys.Skip(1))
-        {
-            aggregate = aggregate.Add(publicKey);
-        }
-
-        return Signing.CoreVerifyMpl(aggregate, message, signature, Schemes.PopSchemeDst);
+        return CoreMPL.Verify(CoreMPL.Aggregate(publicKeys), message, signature, CIPHERSUITE_ID);
     }
 
     public static PrivateKey DeriveChildSk(PrivateKey privateKey, uint index) => CoreMPL.DeriveChildSk(privateKey, index);
 
     public static PrivateKey DeriveChildSkUnhardened(PrivateKey privateKey, uint index) => CoreMPL.DeriveChildSkUnhardened(privateKey, index);
-
-    public static JacobianPoint DeriveChildPkUnhardened(JacobianPoint publicKey, uint index) => HdKeysClass.DeriveChildG1Unhardened(publicKey, index);
 
     public static G1Element DeriveChildPkUnhardened(G1Element publicKey, uint index) => CoreMPL.DeriveChildPkUnhardened(publicKey, index);
 }

@@ -17,7 +17,8 @@ public class G2Element : Jacobian
     internal G2Element(blst.SecretKey sk) => p2 = new blst.P2(sk);
 
     internal G2Element(blst.P2 p2) => this.p2 = p2;
-    
+    internal G2Element() => p2 = new blst.P2(true);
+
     public override int Size => _size;
 
     /// <summary>
