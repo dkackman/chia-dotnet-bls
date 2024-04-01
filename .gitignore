@@ -21,7 +21,7 @@ mono_crash.*
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-x64/
+# x64/   # commented so it won't ignore the x64 blst dependency folder
 x86/
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
