@@ -400,3 +400,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+.mono/registry/CurrentUser/software/microsoft/csdevkit/telemetry/persistentpropertybag/values.xml
+.mono/registry/CurrentUser/software/microsoft/sqmclient/values.xml
+.mono/registry/CurrentUser/software/microsoft/csdevkit/telemetry/persistentpropertybag/microsoft.visualstudio.code.servicehost/values.xml
