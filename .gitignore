@@ -25,7 +25,7 @@ mono_crash.*
 x86/
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
+#[Aa][Rr][Mm]64/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -403,3 +403,4 @@ FodyWeavers.xsd
 .mono/registry/CurrentUser/software/microsoft/csdevkit/telemetry/persistentpropertybag/values.xml
 .mono/registry/CurrentUser/software/microsoft/sqmclient/values.xml
 .mono/registry/CurrentUser/software/microsoft/csdevkit/telemetry/persistentpropertybag/microsoft.visualstudio.code.servicehost/values.xml
+.mono/registry/CurrentUser/software/microsoft/csdevkit/v1/pids/31681_133564078816315433/values.xml
