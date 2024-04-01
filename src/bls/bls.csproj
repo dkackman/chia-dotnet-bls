@@ -21,6 +21,7 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageIcon>chia-leaf-logo-384x384.png</PackageIcon>
+    <NoWarn>NU5100</NoWarn>
     <!-- <GenerateDocumentationFile>True</GenerateDocumentationFile> -->
   </PropertyGroup>
 
