@@ -14,7 +14,7 @@
     <Authors>dkackman</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>2.0.0</Version>
+    <Version>2.0.6</Version>
     <PackageReleaseNotes>Performance. Changed signature of ByteUtils</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <IncludeSymbols>True</IncludeSymbols>
@@ -25,24 +25,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="x64/blst.dll" />
-    <None Remove="x64/libblst.dll.so" />
-    <None Remove="arm64/libblst.dll.so" />
+    <None Remove="runtimes/win-x64/native/blst.dll" />
+    <None Remove="runtimes/linux-x64/native/libblst.dll.so" />
+    <None Remove="runtimes/linux-arm64/native/libblst.dll.so" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="x64/blst.dll">
+    <Content Include="runtimes/win-x64/native/blst.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>    
-    <Content Include="x64/libblst.dll.so">
+    </Content>
+    <Content Include="runtimes/linux-x64/native/libblst.dll.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>    
-    <Content Include="arm64/libblst.dll.so">
+    </Content>
+    <Content Include="runtimes/linux-arm64/native/libblst.dll.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="runtimes/win-x64/native/blst.dll" Pack="true" PackagePath="runtimes/win-x64/native/" />
+    <None Include="runtimes/linux-x64/native/libblst.dll.so" Pack="true" PackagePath="runtimes/linux-x64/native/" />
+    <None Include="runtimes/linux-arm64/native/libblst.dll.so" Pack="true" PackagePath="runtimes/linux-arm64/native/" />
+
     <None Include="..\..\chia-leaf-logo-384x384.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>

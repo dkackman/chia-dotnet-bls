@@ -26,7 +26,9 @@ namespace supranational
     {
 
 #if NET5_0_OR_GREATER
-        private static string dll;
+        // this prevents multiple attempts to load the native
+        // library if there is more than one AppDomain 
+        private static readonly string dll;
 
         static blst()
         {
@@ -37,15 +39,10 @@ namespace supranational
                          : "libblst.dll.so";
 
                 var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                var arch = RuntimeInformation.ProcessArchitecture switch
-                {
-                    Architecture.X64 => "x64",
-                    Architecture.Arm64 => "arm64",
-                    _ => "unsupported"
-                };
-#pragma warning disable CS8604 // Possible null reference argument.
-                dll = Path.Combine(dir, arch, name);
-#pragma warning restore CS8604 // Possible null reference argument.
+
+                // first look for the file in the standard locations for a nuget installed native lib
+                // RuntimeInformation.RuntimeIdentifier will be "win-x64", "linux-x64", "linux-arm64", "osx-x64"
+                dll = Path.Combine(dir!, "runtimes", RuntimeInformation.RuntimeIdentifier, "native", name);
 
                 if (!File.Exists(dll))
                     dll = Path.Combine(Environment.CurrentDirectory, name);
