@@ -30,6 +30,21 @@ public class G2Element : JacobianPoint
     /// </summary>
     public override bool IsValid => p2.is_inf() || p2.in_group();
 
+    /// <summary>
+    /// Gets a value indicating whether the element is the point at infinity.
+    /// </summary>
+    public override bool IsInfinity => p2.is_inf();
+
+    /// <summary>
+    /// Gets a value indicating whether the element is in the group.
+    /// </summary>
+    public override bool IsInGroup => p2.in_group();
+
+    /// <summary>
+    /// Gets a value indicating whether the element is on the curve.
+    /// </summary>
+    public override bool IsOnCurve => p2.on_curve();
+
     internal blst.P2_Affine ToAffine() => p2.to_affine();
 
     internal static G2Element FromAffine(blst.P2_Affine affine) => new(affine.to_jacobian());
@@ -87,6 +102,24 @@ public class G2Element : JacobianPoint
 
         var affine = new blst.P2_Affine(bytes);
         return new G2Element(affine.to_jacobian());
+    }
+
+    /// <summary>
+    /// Converts a hex string to a <see cref="G2Element"/>.
+    /// </summary>
+    /// <param name="hex"></param>
+    /// <returns><see cref="G2Element"/></returns>
+    public static new G2Element FromHex(string hex) => FromBytes(hex.ToHexBytes());
+
+    /// <summary>
+    /// Returns the G2Element representing the point at infinity.
+    /// </summary>
+    /// <returns>G2Element</returns>
+    public static G2Element GetInfinity()
+    {
+        var bytes = new byte[_size];
+        bytes[0] = 0xc0;
+        return new G2Element(bytes);
     }
 
     /// <summary>

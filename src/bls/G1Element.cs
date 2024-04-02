@@ -32,6 +32,21 @@ public class G1Element : JacobianPoint
     public override bool IsValid => p1.is_inf() || p1.in_group();
 
     /// <summary>
+    /// Gets a value indicating whether the element is the point at infinity.
+    /// </summary>
+    public override bool IsInfinity => p1.is_inf();
+
+    /// <summary>
+    /// Gets a value indicating whether the element is in the group.
+    /// </summary>
+    public override bool IsInGroup => p1.in_group();
+
+    /// <summary>
+    /// Gets a value indicating whether the element is on the curve.
+    /// </summary>
+    public override bool IsOnCurve => p1.on_curve();
+
+    /// <summary>
     /// Converts the element to a byte array.
     /// </summary>
     /// <returns>The byte array representation of the element.</returns>
@@ -109,6 +124,13 @@ public class G1Element : JacobianPoint
     }
 
     /// <summary>
+    /// Converts a hex string to a <see cref="G1Element"/>.
+    /// </summary>
+    /// <param name="hex"></param>
+    /// <returns><see cref="G1Element"/></returns>
+    public static new G1Element FromHex(string hex) => FromBytes(hex.ToHexBytes());
+
+    /// <summary>
     /// Adds two G1Elements.
     /// </summary>
     /// <param name="a"></param>
@@ -136,4 +158,15 @@ public class G1Element : JacobianPoint
     /// <param name="a"></param>
     /// <returns>The result</returns>
     public static G1Element operator *(blst.Scalar k, G1Element a) => a * k;
+
+    /// <summary>
+    /// Returns the G1Element representing the point at infinity.
+    /// </summary>
+    /// <returns>G1Element</returns>
+    public static G1Element GetInfinity()
+    {
+        var bytes = new byte[_size];
+        bytes[0] = 0xc0;
+        return new G1Element(bytes);
+    }
 }

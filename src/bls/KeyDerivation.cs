@@ -97,6 +97,14 @@ public static class KeyDerivation
     /// <returns>The derived private key.</returns>
     public static PrivateKey DerivePrivateKey(this PrivateKey masterPrivateKey, int index, bool hardened) => DerivePrivateKeyPath(masterPrivateKey, [12381, 8444, 2, index], hardened);
 
+    /// <summary>
+    /// Derives a public key from the given master public key.
+    /// </summary>
+    /// <param name="masterPublicKey">The master public key.</param>
+    /// <param name="index">The index of the derived key.</param>
+    /// <returns>The derived public key.</returns>
+    public static G1Element DerivePublicKeyWallet(this G1Element masterPublicKey, int index) => DerivePublicKeyPath(masterPublicKey, [12381, 8444, 2, index]);
+
     private static BigInteger Mod(BigInteger value, BigInteger modulus)
     {
         // these optimizations have a pretty good impact on performance

@@ -17,6 +17,21 @@ public abstract class JacobianPoint
     public abstract bool IsValid { get; }
 
     /// <summary>
+    /// Gets a value indicating whether the element is the point at infinity.
+    /// </summary>
+    public abstract bool IsInfinity { get; }
+
+    /// <summary>
+    /// Gets a value indicating whether the element is in the group.
+    /// </summary>
+    public abstract bool IsInGroup { get; }
+
+    /// <summary>
+    /// Gets a value indicating whether the element is on the curve.
+    /// </summary>
+    public abstract bool IsOnCurve { get; }
+
+    /// <summary>
     /// Converts the element to a byte array.
     /// </summary>
     /// <returns>The compressed byte array representation of the element.</returns>
@@ -65,8 +80,16 @@ public abstract class JacobianPoint
     /// </summary>
     /// <param name="bytes"></param>
     /// <remarks>Depending on the length of the byte array, the method will return either a <see cref="G1Element"/> or a <see cref="G2Element"/>.</remarks>
-    /// <returns>Either a <see cref="G1Element"/> or a <see cref="G2Element"/> </returns>
+    /// <returns>Either a <see cref="G1Element"/> or a <see cref="G2Element"/></returns>
     public static JacobianPoint FromBytes(byte[] bytes) => bytes.Length == 48 ? G1Element.FromBytes(bytes) : G2Element.FromBytes(bytes);
+
+    /// <summary>
+    /// Converts a hex string to a <see cref="JacobianPoint"/>.
+    /// </summary>
+    /// <param name="hex"></param>
+    /// <remarks>Depending on the length of the hex byte array, the method will return either a <see cref="G1Element"/> or a <see cref="G2Element"/>.</remarks>
+    /// <returns>Either a <see cref="G1Element"/> or a <see cref="G2Element"/></returns>
+    public static JacobianPoint FromHex(string hex) => FromBytes(hex.ToHexBytes());
 
     /// <summary>
     /// Determines whether two specified instances of <see cref="JacobianPoint"/> are equal.
