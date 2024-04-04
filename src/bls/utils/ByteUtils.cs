@@ -380,7 +380,7 @@ public static partial class ByteUtils
     /// </summary>
     /// <param name="hex">A hex string</param>
     /// <returns>The formatted string</returns>
-    public static string FormatAsHex(this string hex) => hex.Replace("0x", string.Empty).Replace("0X", string.Empty);
+    public static string Remove0x(this string hex) => hex.Replace("0x", string.Empty).Replace("0X", string.Empty);
 
     /// <summary>
     /// Formats a hexadecimal string by adding the "0x" prefix.
