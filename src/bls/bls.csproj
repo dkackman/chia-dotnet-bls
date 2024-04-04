@@ -14,7 +14,7 @@
     <Authors>dkackman</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>2.0.8-alpha.1</Version>
+    <Version>2.0.8-alpha.2</Version>
     <PackageReleaseNotes>Performance. Changed signature of ByteUtils</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <IncludeSymbols>True</IncludeSymbols>

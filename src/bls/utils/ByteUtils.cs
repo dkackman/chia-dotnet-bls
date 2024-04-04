@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Numerics;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace chia.dotnet.bls;
 
@@ -23,7 +24,7 @@ public enum Endian
 /// <summary>
 /// Extension methods for working with byte arrays and conversions.
 /// </summary>
-public static class ByteUtils
+public static partial class ByteUtils
 {
     /// <summary>
     /// Calculates the number of bits required to represent a BigInteger.
@@ -373,4 +374,21 @@ public static class ByteUtils
 
         return concatBuffer;
     }
+
+    /// <summary>
+    /// Formats a hexadecimal string by removing the "0x" prefix.
+    /// </summary>
+    /// <param name="hex">A hex string</param>
+    /// <returns>The formatted string</returns>
+    public static string FormatAsHex(this string hex) => hex.Replace("0x", string.Empty).Replace("0X", string.Empty);
+
+    /// <summary>
+    /// Formats a hexadecimal string by adding the "0x" prefix.
+    /// </summary>
+    /// <param name="hex">A hex string</param>
+    /// <returns>The formatted string</returns>
+    public static string FormatAsExplicitHex(this string hex) => MyRegex().IsMatch(hex) ? hex : $"0x{hex}";
+
+    [GeneratedRegex("^0x", RegexOptions.IgnoreCase, "en-US")]
+    private static partial Regex MyRegex();
 }
