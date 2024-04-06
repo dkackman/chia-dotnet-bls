@@ -391,4 +391,11 @@ public static partial class ByteUtils
 
     [GeneratedRegex("^0x", RegexOptions.IgnoreCase, "en-US")]
     private static partial Regex MyRegex();
+
+    /// <summary>
+    /// Adds a list of BigInteger values.
+    /// </summary>
+    /// <param name="values">The BigIntegers</param>
+    /// <returns>The result</returns>
+    public static BigInteger Sum(this IEnumerable<BigInteger> values) => values.Aggregate(BigInteger.Zero, (acc, x) => acc + x);
 }
