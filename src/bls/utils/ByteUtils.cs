@@ -387,10 +387,7 @@ public static partial class ByteUtils
     /// </summary>
     /// <param name="hex">A hex string</param>
     /// <returns>The formatted string</returns>
-    public static string FormatAsExplicitHex(this string hex) => MyRegex().IsMatch(hex) ? hex : $"0x{hex}";
-
-    [GeneratedRegex("^0x", RegexOptions.IgnoreCase, "en-US")]
-    private static partial Regex MyRegex();
+    public static string FormatAsExplicitHex(this string hex) => hex.StartsWith("0x", StringComparison.OrdinalIgnoreCase) ? hex : $"0x{hex}";
 
     /// <summary>
     /// Adds a list of BigInteger values.

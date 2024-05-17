@@ -20,9 +20,7 @@ using System.IO;
 
 namespace supranational
 {
-#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
     public static class blst
-#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
     {
 
 #if NET5_0_OR_GREATER
@@ -30,57 +28,57 @@ namespace supranational
         // library if there is more than one AppDomain 
         private static readonly string dll;
 
-static blst()
-{
-    if (String.IsNullOrEmpty(dll))
-    {
-        var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? ".";
-        var arch = RuntimeInformation.ProcessArchitecture switch
+        static blst()
         {
-            Architecture.X64 => "x64",
-            Architecture.Arm64 => "arm64",
-            _ => "unsupported"
-        };
-        var os = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "win"
-                    : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "osx"
-                    : RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD) ? "freebsd"
-                    : "linux";
-        var name = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "blst.dll"
-                    : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "libblst.dll.dylib"
-                    : "libblst.dll.so";
+            if (String.IsNullOrEmpty(dll))
+            {
+                var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? ".";
+                var arch = RuntimeInformation.ProcessArchitecture switch
+                {
+                    Architecture.X64 => "x64",
+                    Architecture.Arm64 => "arm64",
+                    _ => "unsupported"
+                };
+                var os = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "win"
+                            : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "osx"
+                            : RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD) ? "freebsd"
+                            : "linux";
+                var name = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "blst.dll"
+                            : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "libblst.dll.dylib"
+                            : "libblst.dll.so";
 
 #if NET8_0_OR_GREATER
-        // RuntimeInformation.RuntimeIdentifier changed between net 7 and 8 
-        // and only aligns to the nuget layout in 8+
-        var rid = RuntimeInformation.RuntimeIdentifier;
+                // RuntimeInformation.RuntimeIdentifier changed between net 7 and 8 
+                // and only aligns to the nuget layout in 8+
+                var rid = RuntimeInformation.RuntimeIdentifier;
 #else
         // mimic RuntimeInformation.RuntimeIdentifier on  earlier than .NET 8
         // mimic "win-x64", "linux-x64", "linux-arm64", "osx-x64" 
         var rid = $"{os}-{arch}";
 #endif
 
-        // first look for the file in the standard locations for a nuget installed native lib
-        dll = Path.Combine(dir, "runtimes", rid, "native", name);
+                // first look for the file in the standard locations for a nuget installed native lib
+                dll = Path.Combine(dir, "runtimes", rid, "native", name);
 
-        if (!File.Exists(dll))
-        {
-            // if not found in the nuget location, try a simple default
-            dll = Path.Combine(dir, arch, name);
+                if (!File.Exists(dll))
+                {
+                    // if not found in the nuget location, try a simple default
+                    dll = Path.Combine(dir, arch, name);
 
-            if (!File.Exists(dll))
-            {
-                // if not there we'll try the current directory
-                dll = Path.Combine(Environment.CurrentDirectory, name);
+                    if (!File.Exists(dll))
+                    {
+                        // if not there we'll try the current directory
+                        dll = Path.Combine(Environment.CurrentDirectory, name);
+                    }
+                }
+
+                if (File.Exists(dll))
+                {
+                    AssemblyLoadContext.Default.ResolvingUnmanagedDll += (asm, needs) =>
+                        (needs == "blst.dll" ? NativeLibrary.Load(dll) : IntPtr.Zero);
+                }
             }
         }
-
-        if (File.Exists(dll))
-        {
-            AssemblyLoadContext.Default.ResolvingUnmanagedDll += (asm, needs) =>
-                (needs == "blst.dll" ? NativeLibrary.Load(dll) : IntPtr.Zero);
-        }
-    }
-}
 #endif
 
         public enum ERROR
@@ -104,7 +102,6 @@ static blst()
             {
                 get
                 {
-#pragma warning disable CS8603 // Possible null reference return.
                     switch (code)
                     {
                         case ERROR.BAD_ENCODING: return "bad encoding";
@@ -115,7 +112,6 @@ static blst()
                         case ERROR.PK_IS_INFINITY: return "public key is infinity";
                         case ERROR.BAD_SCALAR: return "bad scalar";
                         default: return null;
-#pragma warning restore CS8603 // Possible null reference return.
                     }
                 }
             }
@@ -166,7 +162,7 @@ static blst()
 
         public struct SecretKey
         {
-            public byte[] key;
+            internal byte[] key;
 
             //public SecretKey() { key = new byte[32]; }
             public SecretKey(byte[] IKM, string info)
@@ -436,9 +432,7 @@ static blst()
             { return blst_p1_affine_is_equal(point, p.point); }
 
             ERROR core_verify(P2_Affine pk, bool hash_or_encode,
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                               byte[] msg, string DST = "", byte[] aug = null)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             {
                 byte[] dst = Encoding.UTF8.GetBytes(DST);
                 return blst_core_verify_pk_in_g2(pk.point, point,
@@ -554,9 +548,7 @@ static blst()
             public bool is_inf() { return blst_p1_is_inf(point); }
             public bool is_equal(P1 p) { return blst_p1_is_equal(point, p.point); }
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             public P1 hash_to(byte[] msg, string DST = "", byte[] aug = null)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             {
                 byte[] dst = Encoding.UTF8.GetBytes(DST);
                 blst_hash_to_g1(self(), msg, (size_t)msg.Length,
@@ -564,9 +556,7 @@ static blst()
                                         aug, (size_t)(aug != null ? aug.Length : 0));
                 return this;
             }
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             public P1 encode_to(byte[] msg, string DST = "", byte[] aug = null)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             {
                 byte[] dst = Encoding.UTF8.GetBytes(DST);
                 blst_encode_to_g1(self(), msg, (size_t)msg.Length,
@@ -725,9 +715,7 @@ static blst()
             { return blst_p2_affine_is_equal(point, p.point); }
 
             public ERROR core_verify(P1_Affine pk, bool hash_or_encode,
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                               byte[] msg, string DST = "", byte[] aug = null)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             {
                 byte[] dst = Encoding.UTF8.GetBytes(DST);
                 return blst_core_verify_pk_in_g1(pk.point, point,
@@ -843,9 +831,7 @@ static blst()
             public bool is_inf() { return blst_p2_is_inf(point); }
             public bool is_equal(P2 p) { return blst_p2_is_equal(point, p.point); }
 
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             public P2 hash_to(byte[] msg, string DST = "", byte[] aug = null)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             {
                 byte[] dst = Encoding.UTF8.GetBytes(DST);
                 blst_hash_to_g2(self(), msg, (size_t)msg.Length,
@@ -853,9 +839,7 @@ static blst()
                                         aug, (size_t)(aug != null ? aug.Length : 0));
                 return this;
             }
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             public P2 encode_to(byte[] msg, string DST = "", byte[] aug = null)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             {
                 byte[] dst = Encoding.UTF8.GetBytes(DST);
                 blst_encode_to_g2(self(), msg, (size_t)msg.Length,
@@ -1059,34 +1043,24 @@ static blst()
             }
 
             public ERROR aggregate(P1_Affine pk, Nullable<P2_Affine> sig,
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                                                  byte[] msg, byte[] aug = null)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             {
-#pragma warning disable CS8604 // Possible null reference argument.
                 return blst_pairing_aggregate_pk_in_g1(ctx, pk.point,
                                         sig.HasValue ? sig.Value.point : null,
                                         msg, (size_t)msg.Length,
                                         aug, (size_t)(aug != null ? aug.Length : 0));
-#pragma warning restore CS8604 // Possible null reference argument.
             }
             public ERROR aggregate(P2_Affine pk, Nullable<P1_Affine> sig,
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                                                  byte[] msg, byte[] aug = null)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             {
-#pragma warning disable CS8604 // Possible null reference argument.
                 return blst_pairing_aggregate_pk_in_g2(ctx, pk.point,
                                         sig.HasValue ? sig.Value.point : null,
                                         msg, (size_t)msg.Length,
                                         aug, (size_t)(aug != null ? aug.Length : 0));
-#pragma warning restore CS8604 // Possible null reference argument.
             }
             public ERROR mul_n_aggregate(P2_Affine pk, P1_Affine sig,
                                                        byte[] scalar, int nbits,
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                                                        byte[] msg, byte[] aug = null)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             {
                 return blst_pairing_mul_n_aggregate_pk_in_g2(ctx, pk.point, sig.point,
                                         scalar, (size_t)nbits,
@@ -1095,9 +1069,7 @@ static blst()
             }
             public ERROR mul_n_aggregate(P1_Affine pk, P2_Affine sig,
                                                        byte[] scalar, int nbits,
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                                                        byte[] msg, byte[] aug = null)
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             {
                 return blst_pairing_mul_n_aggregate_pk_in_g1(ctx, pk.point, sig.point,
                                         scalar, (size_t)nbits,
@@ -1113,9 +1085,7 @@ static blst()
                     throw new Exception(err);
             }
             public bool finalverify(PT sig = new PT())
-#pragma warning disable CS8604 // Possible null reference argument.
             { return blst_pairing_finalverify(ctx, sig.fp12); }
-#pragma warning restore CS8604 // Possible null reference argument.
 
             public void raw_aggregate(P2_Affine q, P1_Affine p)
             { blst_pairing_raw_aggregate(ctx, q.point, p.point); }

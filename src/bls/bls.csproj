@@ -14,7 +14,7 @@
     <Authors>dkackman</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>2.0.8-alpha.3</Version>
+    <Version>3.0.0-alpha.1</Version>
     <PackageReleaseNotes>Performance. Changed signature of ByteUtils</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <IncludeSymbols>True</IncludeSymbols>
@@ -61,5 +61,8 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
-
+  <Target Name="PostBuild" AfterTargets="Pack" Condition="'$(Configuration)'=='Debug'">
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(Version).nupkg" DestinationFolder="e:\nuget" />
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(Version).snupkg" DestinationFolder="e:\nuget" />
+  </Target>
 </Project>
